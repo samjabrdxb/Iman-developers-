@@ -332,7 +332,7 @@ const WA = "971501752771";
 const ORDER = ["113-residences","oxford-cove","sierra-by-iman","15-cascade","one-park-square","one-sky-park"];
 const T = {
  en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
-  listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · list of ${d}`,curL:"Currency",
+  listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · updated ${d}`,curL:"Currency",
   byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · Coming soon",eoiPill:"EOI AED 50,000",
   nearH:"A connected neighbourhood",plot:"Dubai Science Park · Plot 6727698",dspEye:"The next chapter by IMAN · Launching soon",
   dspLead:"A new address. An early opportunity. Launch expected early October 2026.",dspUnits:"Residential units",dspMix:"Studio · 1BR · 2BR",dspRetail:"Plus retail units",
@@ -344,7 +344,7 @@ const T = {
   r113about:"A collection of 113 residences in Al Sufouh combining fluid architecture, expansive layouts and refined finishes, facing Al Sufouh Community Park. Building: B + G + 9.",
   f1:"Hafele smart door locks and European kitchen appliances",f2:"Lagoon pool, rooftop infinity pool, fitness centre and yoga room",
   o1:"Discount from original price",o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
-  schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",all:"All",
+  schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",listOf:d=>`List of ${d}`,all:"All",
   plansFrom:"Plans offered",projNote:"Each unit is sold on the payment plan shown on its card. Confirm the latest status with Sam before booking.",
   disc113:"Prices include the 4% discount on the 40/60 plan.",
   othersH:"More IMAN projects",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
@@ -358,7 +358,7 @@ const T = {
    unit:(u,p)=>`Hi Sam, I'm interested in unit ${u} at ${p}. Is it still available?`,proj:p=>`Hi Sam, please send me details for ${p} by IMAN.`}
  },
  ar:{contactAt:"جهة اتصالك في إيمان",name:"سام جبر",role:"مدير مبيعات أول · إيمان للتطوير العقاري",exp:"3 سنوات مع إيمان",copy:"نسخ",copied:"تم النسخ",waCta:"راسلني على واتساب",waShort:"واتساب",call:"اتصال",
-  listH:"مشاريع إيمان",listSub:"اضغط على أي مشروع لتشوف تفاصيله وأسعاره والوحدات المتاحة.",listEye:(n,d)=>`${n} وحدة متاحة · قائمة ${d}`,curL:"العملة",
+  listH:"مشاريع إيمان",listSub:"اضغط على أي مشروع لتشوف تفاصيله وأسعاره والوحدات المتاحة.",listEye:(n,d)=>`${n} وحدة متاحة · آخر تحديث ${d}`,curL:"العملة",
   byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · قريباً",eoiPill:"EOI ‏50,000 درهم",
   nearH:"حيّ متصل بكل شيء",plot:"دبي ساينس بارك · قطعة 6727698",dspEye:"الفصل الجديد من إيمان · إطلاق قريب",
   dspLead:"عنوان جديد. وفرصة مبكرة. الإطلاق متوقع أوائل أكتوبر 2026.",dspUnits:"وحدة سكنية",dspMix:"استوديو · غرفة · غرفتين",dspRetail:"بالإضافة إلى وحدات تجارية",
@@ -370,7 +370,7 @@ const T = {
   r113about:"مجموعة من 113 وحدة سكنية في الصفوح، تجمع بين العمارة الانسيابية والمساحات الواسعة والتشطيبات الراقية، مقابل حديقة الصفوح المجتمعية. المبنى: قبو + أرضي + 9.",
   f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون، مسبح لا متناهٍ على السطح، نادٍ رياضي وغرفة يوغا",
   o1:"خصم من السعر الأصلي",o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
-  schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",all:"الكل",
+  schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",listOf:d=>`قائمة ${d}`,all:"الكل",
   plansFrom:"خطط الدفع",projNote:"كل وحدة تُباع بخطة الدفع المذكورة على بطاقتها. تأكد من آخر حالة مع سام قبل الحجز.",
   disc113:"الأسعار شاملة خصم 4% على خطة 40/60.",
   othersH:"مشاريع إيمان الأخرى",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
@@ -436,7 +436,7 @@ function unitsBlock(p){
   const list=us.filter(u=>f==="all"||typeKey(u)===f).sort((a,b)=>a.p-b.p);
   const chips=types.length>1?`<div class="ufilter">`+[`<button class="chip" aria-pressed="${f==="all"}" data-f="${p.id}|all">${t("all")}<span class="c">${us.length}</span></button>`]
     .concat(types.map(k=>`<button class="chip" aria-pressed="${f===k}" data-f="${p.id}|${k}">${typeName(k)}<span class="c">${us.filter(u=>typeKey(u)===k).length}</span></button>`)).join("")+`</div>`:"";
-  return `<div><h4 class="h4">${t("unitsH")}</h4>${chips}<div class="units">${list.map(u=>{
+  return `<div><h4 class="h4">${t("unitsH")}</h4>${p.listDate?`<p class="sub" style="margin:-6px 0 12px">${T[st.lang].listOf(dateName(p.listDate))}</p>`:""}${chips}<div class="units">${list.map(u=>{
     const meta=[floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · ");
     return `<article class="unit">
       <div class="u-top"><span class="u-no num">${esc(u.no)}</span><span class="tag ${u.plan==="cash"?"cash":""}">${t("plan")[u.plan]||""}</span></div>

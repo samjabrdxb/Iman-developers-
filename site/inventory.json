@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-09-30",
+ "inventoryDate": "2026-10-01",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -430,7 +430,8 @@
      "status": "Available"
     }
    ],
-   "discount": 0.04
+   "discount": 0.04,
+   "listDate": "2026-09-30"
   },
   {
    "id": "oxford-cove",
@@ -473,23 +474,9 @@
      "planImg": "assets/plans/oxford-cove-G12.webp",
      "planSrc": "https://drive.google.com/file/d/1wlA-Bs5-Hr8mLm9eR32g-8R-RtZiFpEI/view?usp=drivesdk",
      "status": "Available"
-    },
-    {
-     "no": "139",
-     "floor": "1st Floor",
-     "cat": "Apartment",
-     "type": "Two Bedroom with Study",
-     "view": "Community View",
-     "suite": 972.0,
-     "balcony": 245.0,
-     "area": 1217.0,
-     "op": 1788990.0,
-     "plan": "50-50-instalments",
-     "planImg": "assets/plans/oxford-cove-139.webp",
-     "planSrc": "https://drive.google.com/file/d/1lCtudhbD84ifeZ3xsRSIZpmj1617QU3a/view?usp=drivesdk",
-     "status": "Available"
     }
-   ]
+   ],
+   "listDate": "2026-10-01"
   },
   {
    "id": "sierra-by-iman",
@@ -578,7 +565,8 @@
      "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
      "status": "Available"
     }
-   ]
+   ],
+   "listDate": "2026-09-30"
   },
   {
    "id": "15-cascade",
@@ -652,7 +640,8 @@
      "planSrc": "https://drive.google.com/file/d/1iB5A1qPzPprvXVGYP_LbzvNJ1fRO3_4U/view?usp=drivesdk",
      "status": "Available"
     }
-   ]
+   ],
+   "listDate": "2026-09-30"
   },
   {
    "id": "one-park-square",
@@ -726,7 +715,8 @@
      "planSrc": "https://drive.google.com/file/d/1yav4hpLRW8OVWvMgbkYAur2n6Wg3Jj6A/view?usp=drivesdk",
      "status": "Available"
     }
-   ]
+   ],
+   "listDate": "2026-09-30"
   },
   {
    "id": "one-sky-park",
@@ -785,7 +775,8 @@
      "planSrc": "https://drive.google.com/file/d/1WiOZxaUaOSwukebHhBsmjNVqvfPBh31w/view?usp=drivesdk",
      "status": "Available"
     }
-   ]
+   ],
+   "listDate": "2026-09-30"
   },
   {
    "id": "one-park-central",
