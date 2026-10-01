@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="IMAN Developers projects, prices and available units with Sam Jabr, Senior Sales Manager.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Sam Jabr · IMAN Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: slim brand-green masthead (agent card), then one stacked list of projects in priority order; each project opens in place when its name is tapped. */
+:root{
+  --green:#1d3f2b; --green-2:#264f37; --copper:#c0866d; --copper-ink:#9a5f48;
+  --bg:#f3f5f1; --surface:#ffffff; --ink:#17251c; --muted:#5b6b60; --line:#dde4dc; --chip:#e9eee8;
+  --on-green:#f2f5f0; --on-green-muted:#b9c9bd;
+  --f-display:"Marcellus","IBM Plex Sans Arabic",Georgia,serif;
+  --f-body:"Figtree","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
+  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
+  --on-green:#eef3ee; --on-green-muted:#a9bcae; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
+  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
+  --on-green:#eef3ee; --on-green-muted:#a9bcae; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+[dir="rtl"]{--f-display:"IBM Plex Sans Arabic",Georgia,serif}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4{font-weight:600}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:20px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper-ink);font-weight:600}
+[dir="rtl"] .eyebrow{letter-spacing:0;font-size:13px}
+.num{font-variant-numeric:tabular-nums}
+button,select{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent;font-size:15px;white-space:nowrap}
+.btn-wa{background:var(--copper);color:#1b120d}
+.btn-ghost{border-color:currentColor;background:transparent;color:var(--ink)}
+.btn svg{width:18px;height:18px;flex:none}
+.sub{color:var(--muted);font-size:15px}
+
+/* masthead */
+.mast{background:var(--green);color:var(--on-green)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;border-bottom:1px solid rgba(255,255,255,.12)}
+.logo{display:flex;flex-direction:column;line-height:1;color:var(--copper)}
+.logo b{font-family:"Marcellus",serif;font-weight:400;font-size:24px;letter-spacing:.32em}
+.logo small{font-size:9px;letter-spacing:.5em;margin-top:6px;padding-inline-start:2px}
+.tools{display:flex;gap:8px;align-items:center}
+.tool{background:transparent;color:var(--on-green);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 13px;font-size:14px}
+.tool[aria-pressed="true"]{background:var(--on-green);color:var(--green)}
+.agent{display:flex;align-items:center;gap:20px;padding-block:22px;flex-wrap:wrap}
+.avatar{width:92px;height:92px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--copper);flex:none}
+.who{min-width:0;flex:1 1 260px}
+.who .eyebrow{color:var(--copper)}
+.who h1{font-size:clamp(30px,4vw,40px);margin-top:2px}
+.role{color:var(--on-green-muted);font-size:15px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.badge{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--on-green-muted)}
+.badge.copper{border-color:var(--copper);color:var(--copper)}
+.reach{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.phone{display:flex;align-items:center;gap:10px}
+.phone .n{font-size:20px;letter-spacing:.04em;direction:ltr;unicode-bidi:bidi-override;display:inline-block}
+.copy{background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--on-green);border-radius:8px;padding:3px 10px;font-size:13px}
+.ctas{display:flex;gap:8px;flex-wrap:wrap}
+.ctas .btn-ghost{color:var(--on-green)}
+
+/* project list */
+.list{padding-block:28px 56px;display:grid;gap:12px}
+#projects{display:grid;gap:12px}
+.listbar{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.listbar h2{font-size:clamp(26px,3.6vw,36px)}
+.listbar label{font-size:13px;color:var(--muted);margin-inline-end:6px}
+.listbar select{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:7px 10px}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.proj>summary{list-style:none;display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px;cursor:pointer}
+.proj>summary::-webkit-details-marker{display:none}
+.proj>summary:hover{background:var(--chip)}
+.thumb{width:120px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--chip)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.s-main{min-width:0;display:flex;flex-direction:column;gap:3px}
+.s-main h3{font-size:clamp(22px,2.8vw,28px)}
+.s-meta{font-size:14px;color:var(--muted)}
+.s-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
+.pill{font-size:11px;font-weight:700;border-radius:999px;padding:3px 9px;background:var(--chip);white-space:nowrap}
+.pill.hot{background:var(--copper);color:#1b120d}
+.pill.ok{background:var(--green);color:var(--on-green)}
+.s-side{text-align:end;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.s-from{font-size:12px;color:var(--muted)}
+.s-price{font-weight:700;white-space:nowrap}
+.chev{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .2s}
+.chev svg{width:16px;height:16px}
+.proj[open] .chev{transform:rotate(180deg)}
+.proj[open]>summary{border-bottom:1px solid var(--line)}
+.p-body{padding:22px 20px 26px;display:grid;gap:26px}
+.hero-img{border-radius:12px;overflow:hidden;max-width:100%}
+.hero-img img{display:block;width:100%}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start}
+.split>*{min-width:0}
+.lead{font-size:17px;color:var(--muted);max-width:62ch}
+.feat{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.feat li{display:flex;gap:10px}
+.feat li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--copper);margin-top:.6em}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links a{font-size:14px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:7px 14px;text-decoration:none;background:var(--surface)}
+.h4{font-size:22px;margin-bottom:12px}
+
+/* DSP */
+.dsp-facts{display:flex;gap:32px;flex-wrap:wrap;margin:16px 0 0}
+.dsp-facts dt{font-family:var(--f-display);font-size:26px}
+.dsp-facts dd{margin:2px 0 0;color:var(--muted);font-size:14px}
+.eoi{margin-block:18px;border:1px solid var(--line);border-inline-start:4px solid var(--copper);border-radius:var(--r);background:var(--bg);padding:16px 20px}
+.eoi-k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+[dir="rtl"] .eoi-k{letter-spacing:0}
+.eoi-v{font-family:"Marcellus",serif;font-size:clamp(34px,5vw,44px);line-height:1.1;margin-top:4px}
+.eoi-tag{display:inline-block;margin-top:6px;background:var(--chip);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600}
+.steps-list{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps-list li{display:grid;grid-template-columns:30px 1fr;gap:10px;counter-increment:s}
+.steps-list li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--green);color:var(--on-green);display:grid;place-items:center;font-size:13px;font-weight:700}
+.steps-list b{display:block}
+.steps-list span{color:var(--muted);font-size:14px}
+.landmarks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.landmarks li{background:var(--chip);border-radius:999px;padding:5px 12px;font-size:13px}
+.ctarow{display:flex;gap:10px;flex-wrap:wrap}
+.fine-s{font-size:12px;color:var(--muted)}
+
+/* 113 offer */
+.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.ot{background:var(--green);color:var(--on-green);border-radius:12px;padding:14px 16px}
+.ot b{font-family:"Marcellus",serif;font-weight:400;font-size:32px;color:var(--copper);line-height:1;display:block}
+.ot span{display:block;margin-top:6px;color:var(--on-green-muted);font-size:13px}
+.bar{display:flex;height:12px;border-radius:999px;overflow:hidden;margin-block:16px 6px;gap:3px}
+.bar i{display:block;background:var(--green-2)}
+.bar i:nth-child(odd){background:var(--copper)}
+.psteps{display:grid;grid-template-columns:2fr 1fr 1fr 6fr;gap:10px}
+.psteps div{min-width:0}
+.psteps span{display:block;font-size:12px;color:var(--muted)}
+.drive{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.drive li{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:3px 12px;align-items:center}
+.drive .nm{font-size:14px}
+.drive .mn{text-align:end;font-weight:700;font-size:14px}
+.drive .tr{grid-column:1/-1;height:5px;background:var(--chip);border-radius:999px;overflow:hidden}
+.drive .tr i{display:block;height:100%;background:var(--copper);border-radius:999px}
+
+/* units */
+.ufilter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 13px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--green);color:var(--on-green);border-color:var(--green)}
+.chip .c{opacity:.6;margin-inline-start:6px}
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.unit{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:3px;background:var(--surface)}
+.u-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.u-no{font-family:"Marcellus",serif;font-size:26px;line-height:1}
+.tag{font-size:11px;font-weight:700;background:var(--chip);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.tag.cash{background:var(--copper);color:#1b120d}
+.u-type{font-weight:600;margin-top:4px}
+.u-meta{color:var(--muted);font-size:13px}
+.u-price{font-weight:700;font-size:19px;margin-top:8px}
+.u-op{font-size:12px;color:var(--muted)}
+.u-actions{display:flex;gap:6px;margin-top:auto;padding-top:12px}
+.u-actions a,.u-actions button{flex:1;text-align:center;font-size:13px;font-weight:600;border-radius:999px;padding:7px 6px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);white-space:nowrap}
+.u-actions a{background:var(--copper);border-color:var(--copper);color:#1b120d}
+.note{font-size:13px;color:var(--muted);margin-top:12px;max-width:85ch}
+
+/* other projects */
+.others{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.oc{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.oc .oi{aspect-ratio:16/9;background:var(--chip)}
+.oc .oi img{width:100%;height:100%;object-fit:cover;display:block}
+.oc .ob{padding:12px 14px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+.oc h4{font-size:20px}
+.prog{height:5px;background:var(--chip);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--copper)}
+.ofoot{display:flex;justify-content:space-between;gap:8px;margin-top:auto;padding-top:6px;font-size:13px}
+.ofoot a{color:var(--copper-ink);font-weight:700;text-decoration:none}
+.ofoot a.m{color:var(--muted);font-weight:500;text-decoration:underline}
+
+/* footer */
+.foot{background:var(--green);color:var(--on-green);padding-block:48px 110px}
+.foot-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot h2{font-size:clamp(28px,4vw,40px)}
+.foot p{color:var(--on-green-muted);margin-top:8px}
+.fine{font-size:12px;color:var(--on-green-muted);margin-top:32px;border-top:1px solid rgba(255,255,255,.12);padding-top:16px}
+.dock{position:fixed;inset-inline:0;bottom:0;z-index:20;display:none;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
+.dock .btn{flex:1}
+
+dialog{border:0;border-radius:16px;padding:0;max-width:min(760px,calc(100vw - 32px));width:100%;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(8,16,11,.7)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.dlg-head button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px}
+.dlg-body{max-height:74vh;overflow:auto}
+.dlg-body img{display:block;width:100%;background:#f7f8f6}
+.dlg-foot{padding:12px 18px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line)}
+.pay{padding:18px}
+.pay .total{font-family:"Marcellus",serif;font-size:34px;color:var(--copper-ink)}
+.sched{display:grid;gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+.sched div{display:flex;justify-content:space-between;gap:12px;background:var(--surface);padding:12px 14px}
+.sched span{color:var(--muted);font-size:14px}
+.sched b{white-space:nowrap}
+
+@media (max-width:860px){
+  .agent{gap:14px;padding-block:16px}
+  .avatar{width:64px;height:64px}
+  .who .eyebrow,.badges{display:none}
+  .reach{align-items:stretch;width:100%}
+  .phone{justify-content:space-between}
+  .ctas{display:none}
+  .dock{display:flex}
+  .split{grid-template-columns:1fr;gap:20px}
+  .proj>summary{grid-template-columns:76px minmax(0,1fr) auto;gap:12px;padding:10px}
+  .thumb{width:76px}
+  .s-side .s-from,.s-side .s-price{display:none}
+  .p-body{padding:18px 14px 22px}
+  .psteps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){.offer{grid-template-columns:1fr}.ot{display:flex;align-items:center;gap:14px}.ot span{margin-top:0}}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="logo" aria-label="IMAN Developers"><b>IMAN</b><small>DEVELOPERS</small></div>
+      <div class="tools" role="group" aria-label="Language">
+        <button class="tool" id="lang-en" aria-pressed="true">EN</button>
+        <button class="tool" id="lang-ar" aria-pressed="false">عربي</button>
+      </div>
+    </div>
+    <div class="agent">
+      <img class="avatar" src="img/sam-jabr.jpg" alt="Sam Jabr">
+      <div class="who">
+        <div class="eyebrow" data-i="contactAt">Your contact at IMAN</div>
+        <h1 data-i="name">Sam Jabr</h1>
+        <p class="role" data-i="role">Senior Sales Manager · IMAN Developers</p>
+        <div class="badges"><span class="badge copper">OG Team</span><span class="badge" data-i="exp">3 years with IMAN</span></div>
+      </div>
+      <div class="reach">
+        <div class="phone"><span class="n num" id="phone-text">+971 50 175 2771</span><button class="copy" id="copy-phone" data-i="copy">Copy</button></div>
+        <div class="ctas">
+          <a class="btn btn-wa wa" data-msg="general" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+            <span data-i="waShort">WhatsApp</span>
+          </a>
+          <a class="btn btn-ghost" href="tel:+971501752771" data-i="call">Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap list" id="list">
+  <div class="listbar">
+    <div><div class="eyebrow" id="list-eye"></div><h2 data-i="listH">IMAN projects</h2><p class="sub" data-i="listSub">Tap a project to see its details, prices and available units.</p></div>
+    <div><label for="cur" data-i="curL">Currency</label><select id="cur"></select></div>
+  </div>
+
+  <details class="proj" id="dsp">
+    <summary>
+      <span class="thumb"><img src="img/dsp-teaser.jpg" alt=""></span>
+      <span class="s-main"><h3>The Element <span data-i="byIman">by IMAN</span></h3><span class="s-meta" data-i="dspLoc">Dubai Science Park</span>
+        <span class="s-tags"><span class="pill hot" data-i="stLaunch">New launch · Coming soon</span><span class="pill" data-i="eoiPill">EOI AED 50,000</span></span></span>
+      <span class="s-side"><span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span></span>
+    </summary>
+    <div class="p-body">
+      <div class="split">
+        <div>
+          <div class="hero-img"><img src="img/dsp-teaser.jpg" alt="Dubai Science Park at sunset, coming soon by IMAN Developers" loading="lazy"></div>
+          <h4 class="h4" style="margin-top:22px" data-i="nearH">A connected neighbourhood</h4>
+          <p class="sub" data-i="plot">Dubai Science Park · Plot 6727698</p>
+          <ul class="landmarks" id="landmarks"></ul>
+        </div>
+        <div>
+          <div class="eyebrow" data-i="dspEye">The next chapter by IMAN · Launching soon</div>
+          <p class="lead" style="margin-top:8px" data-i="dspLead">A new address. An early opportunity. Launch expected early October 2026.</p>
+          <dl class="dsp-facts">
+            <div><dt class="num">170</dt><dd data-i="dspUnits">Residential units</dd></div>
+            <div><dt data-i="dspMix">Studio · 1BR · 2BR</dt><dd data-i="dspRetail">Plus retail units</dd></div>
+          </dl>
+          <div class="eoi">
+            <div class="eoi-k" data-i="eoiK">Expression of interest</div>
+            <div class="eoi-v num">AED 50,000</div>
+            <div class="eoi-tag" data-i="eoiTag">Fully refundable</div>
+            <p class="sub" style="margin-top:8px" data-i="eoiSub">One EOI covers residential and retail. Pre-launch offer to be announced. First come, first served.</p>
+          </div>
+          <ol class="steps-list">
+            <li><div><b data-i="st1">Register your interest</b><span data-i="st1d">Tell Sam whether you prefer a studio, 1BR, 2BR or retail unit.</span></div></li>
+            <li><div><b data-i="st2">Prepare your EOI</b><span data-i="st2d">AED 50,000 and a passport copy. The EOI is fully refundable.</span></div></li>
+            <li><div><b data-i="st3">Submit when EOI opens</b><span data-i="st3d">Token numbers and priority selection follow first come, first served.</span></div></li>
+          </ol>
+          <div class="ctarow" style="margin-top:20px">
+            <a class="btn btn-wa wa" data-msg="dsp" href="#" target="_blank" rel="noopener" data-i="dspCta">Register interest on WhatsApp</a>
+            <a class="btn btn-ghost" href="https://maps.app.goo.gl/sZcS6qLsnVLauBM56" target="_blank" rel="noopener" data-i="viewLoc">View location</a>
+          </div>
+          <p class="fine-s" style="margin-top:12px" data-i="dspFine">The EOI is an expression of interest, not the property price. Unit prices, payment plans and offer terms are yet to be announced. Pre-launch information as of 1 October 2026.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <div id="projects"></div>
+
+  <div style="margin-top:30px">
+    <h2 style="font-size:clamp(24px,3.2vw,32px)" data-i="othersH">More IMAN projects</h2>
+    <p class="sub" style="margin-block:4px 16px" id="others-sub"></p>
+    <div class="others" id="others"></div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h2 data-i="footH">Let's find your unit.</h2><p data-i="footP">Viewings, floor plans and the latest availability, sent straight to your WhatsApp.</p></div>
+      <a class="btn btn-wa wa" data-msg="general" href="#" target="_blank" rel="noopener" data-i="waCta">Message on WhatsApp</a>
+    </div>
+    <p class="fine" data-i="fine">Sam Jabr · Senior Sales Manager, IMAN Developers · +971 50 175 2771. Prices, availability and offers are subject to change; images and layouts are representative.</p>
+  </div>
+</footer>
+
+<div class="dock">
+  <a class="btn btn-wa wa" data-msg="general" href="#" target="_blank" rel="noopener" data-i="waShort">WhatsApp</a>
+  <a class="btn btn-ghost" href="tel:+971501752771" data-i="call">Call</a>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg-head"><strong id="dlg-title"></strong><button id="dlg-close" data-i="close">Close</button></div>
+  <div class="dlg-body" id="dlg-body"></div>
+  <div class="dlg-foot" id="dlg-foot"></div>
+</dialog>
+
+<script>
+const INV = {"inventoryDate":"2026-09-30","plans":{"unspecified":{"label":"Payment plan on request","note":"Payment terms are not specified in the supplied inventory."},"60-40":{"label":"60% now / 40% on handover only","nowPercent":60,"handoverPercent":40,"note":"This unit and price are available only with the 60% now / 40% on handover plan.","firstPaymentLabel":"60% now"},"cash":{"label":"Full cash payment only","nowPercent":100,"handoverPercent":0,"note":"This unit and price are available for full cash payment only.","firstPaymentLabel":"Full payment"},"50-50":{"label":"50% down payment / 50% on handover","nowPercent":50,"handoverPercent":50,"note":"This unit and price are offered with 50% down payment and 50% on handover.","firstPaymentLabel":"50% down payment"},"40-60-instalments":{"label":"40% in instalments before handover / 60% on handover","beforeHandoverPercent":40,"handoverPercent":60,"firstPaymentLabel":"40% in instalments before handover","note":"The first share is paid in instalments before handover. Instalment dates and individual amounts are subject to confirmation."},"50-50-instalments":{"label":"50% in instalments before handover / 50% on handover","beforeHandoverPercent":50,"handoverPercent":50,"firstPaymentLabel":"50% in instalments before handover","note":"The first share is paid in instalments before handover. Instalment dates and individual amounts are subject to confirmation."}},"projects":[{"id":"113-residences","name":"113 Residences","area":"Al Sufouh","status":"new","handover":"Q2 2029","progress":null,"image":"assets/113-residences-main.webp","mapUrl":"https://www.google.com/maps?cid=6007820903981317149","source":"https://www.imandevelopers.com/iman-properties/113-residences","kind":"Residences","units":[{"no":"G02","floor":"Ground Floor","cat":"Apartment","type":"One Bedroom with study","view":"Community View","suite":678.0,"balcony":235.0,"area":913.0,"op":2191188.0,"plan":"113","planImg":"assets/plans/113-residences-G02.webp","planSrc":"https://drive.google.com/file/d/1ORrbfM9fBBQTNqRdIEnkAdh4dVnxTuMa/view?usp=drivesdk","status":"Available"},{"no":"108","floor":"1st Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":909.0,"balcony":210.0,"area":1119.0,"op":2720255.0,"plan":"113","planImg":"assets/plans/113-residences-108.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"},{"no":"504","floor":"5th Floor","cat":"Apartment","type":"Two Bedroom","view":"Park View","suite":931.0,"balcony":141.0,"area":1072.0,"op":2733543.0,"plan":"113","planImg":"assets/plans/113-residences-504.webp","planSrc":"https://drive.google.com/file/d/1EYFsZPRguOl-N-wlZ7K5I1C0ePpG96EI/view?usp=drivesdk","status":"Available"},{"no":"206","floor":"2nd Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":931.0,"balcony":186.0,"area":1117.0,"op":2737370.0,"plan":"113","planImg":"assets/plans/113-residences-206.webp","planSrc":"https://drive.google.com/file/d/1M4qKp7eOjtMVceUKXYRjTuWcjheJuPWb/view?usp=drivesdk","status":"Available"},{"no":"409","floor":"4th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":909.0,"balcony":190.0,"area":1099.0,"op":2748026.0,"plan":"113","planImg":"assets/plans/113-residences-409.webp","planSrc":"https://drive.google.com/file/d/14l7LBh6J6z7dndTz1h4FZbyrDH8ehJBm/view?usp=drivesdk","status":"Available"},{"no":"601","floor":"6th Floor","cat":"Apartment","type":"Two Bedroom","view":"Pool View","suite":914.0,"balcony":117.0,"area":1031.0,"op":2752395.0,"plan":"113","planImg":"assets/plans/113-residences-601.webp","planSrc":"https://drive.google.com/file/d/1WM0qyAkaZMV-u3BvdkY2nIJUwqiGTzT-/view?usp=drivesdk","status":"Available"},{"no":"105","floor":"1st Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":931.0,"balcony":205.0,"area":1136.0,"op":2761321.0,"plan":"113","planImg":"assets/plans/113-residences-105.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"},{"no":"310","floor":"3rd Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":909.0,"balcony":217.0,"area":1126.0,"op":2793579.0,"plan":"113","planImg":"assets/plans/113-residences-310.webp","planSrc":"https://drive.google.com/file/d/1nEKauOIoVFxJHwGUNO61ZDawseUEZ5vf/view?usp=drivesdk","status":"Available"},{"no":"704","floor":"7th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":930.0,"balcony":167.0,"area":1097.0,"op":2819162.0,"plan":"113","planImg":"assets/plans/113-residences-704.webp","planSrc":"https://drive.google.com/file/d/1otoRhNFp4WVMneU-zL_uM-nzX9iTX9F6/view?usp=drivesdk","status":"Available"},{"no":"708","floor":"7th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":909.0,"balcony":190.0,"area":1099.0,"op":2824694.0,"plan":"113","planImg":"assets/plans/113-residences-708.webp","planSrc":"https://drive.google.com/file/d/1otoRhNFp4WVMneU-zL_uM-nzX9iTX9F6/view?usp=drivesdk","status":"Available"},{"no":"606","floor":"6th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":930.0,"balcony":218.0,"area":1148.0,"op":2915300.0,"plan":"113","planImg":"assets/plans/113-residences-606.webp","planSrc":"https://drive.google.com/file/d/1WM0qyAkaZMV-u3BvdkY2nIJUwqiGTzT-/view?usp=drivesdk","status":"Available"},{"no":"809","floor":"8th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":909.0,"balcony":217.0,"area":1126.0,"op":2917488.0,"plan":"113","planImg":"assets/plans/113-residences-809.webp","planSrc":"https://drive.google.com/file/d/144lJd42fCeVuxHPmNKXdCYvbY85eHozo/view?usp=drivesdk","status":"Available"},{"no":"G01","floor":"Ground Floor","cat":"Apartment","type":"Two Bedroom with study","view":"Community View","suite":1016.0,"balcony":353.0,"area":1369.0,"op":3012409.0,"plan":"113","planImg":"assets/plans/113-residences-G01.webp","planSrc":"https://drive.google.com/file/d/1ORrbfM9fBBQTNqRdIEnkAdh4dVnxTuMa/view?usp=drivesdk","status":"Available"},{"no":"512","floor":"5th Floor","cat":"Apartment","type":"Two Bedroom with study","view":"Pool View","suite":996.0,"balcony":145.0,"area":1141.0,"op":3022441.0,"plan":"113","planImg":"assets/plans/113-residences-512.webp","planSrc":"https://drive.google.com/file/d/1EYFsZPRguOl-N-wlZ7K5I1C0ePpG96EI/view?usp=drivesdk","status":"Available"},{"no":"110","floor":"1st Floor","cat":"Apartment","type":"Two Bedroom with Study","view":"Pool View","suite":1019.0,"balcony":169.0,"area":1188.0,"op":3028609.0,"plan":"113","planImg":"assets/plans/113-residences-110.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"},{"no":"611","floor":"6th Floor","cat":"Apartment","type":"Two Bedroom with Study","view":"Pool View","suite":996.0,"balcony":145.0,"area":1141.0,"op":3079469.0,"plan":"113","planImg":"assets/plans/113-residences-611.webp","planSrc":"https://drive.google.com/file/d/1WM0qyAkaZMV-u3BvdkY2nIJUwqiGTzT-/view?usp=drivesdk","status":"Available"},{"no":"905","floor":"9th Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":889.0,"balcony":394.0,"area":1283.0,"op":3080114.0,"plan":"113","planImg":"assets/plans/113-residences-905.webp","planSrc":"https://drive.google.com/file/d/1pYjkLBCK5P_tHbGY7arJCrXINIkXiJvJ/view?usp=drivesdk","status":"Available"},{"no":"207","floor":"2nd Floor","cat":"Apartment","type":"Two Bedroom with Maid","view":"Community View","suite":1095.0,"balcony":183.0,"area":1278.0,"op":3132153.0,"plan":"113","planImg":"assets/plans/113-residences-207.webp","planSrc":"https://drive.google.com/file/d/1M4qKp7eOjtMVceUKXYRjTuWcjheJuPWb/view?usp=drivesdk","status":"Available"},{"no":"107","floor":"1st Floor","cat":"Apartment","type":"Two Bedroom with Maid","view":"Community View","suite":1095.0,"balcony":214.0,"area":1309.0,"op":3181129.0,"plan":"113","planImg":"assets/plans/113-residences-107.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"},{"no":"102","floor":"1st Floor","cat":"Apartment","type":"Three Bedroom with Maid","view":"Pool/Park View","suite":1403.0,"balcony":287.0,"area":1690.0,"op":3803562.0,"plan":"113","planImg":"assets/plans/113-residences-102.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"},{"no":"410","floor":"4th Floor","cat":"Apartment","type":"Three Bedroom with Study","view":"Pool/Community View","suite":1550.0,"balcony":460.0,"area":2010.0,"op":4302434.0,"plan":"113","planImg":"assets/plans/113-residences-410.webp","planSrc":"https://drive.google.com/file/d/14l7LBh6J6z7dndTz1h4FZbyrDH8ehJBm/view?usp=drivesdk","status":"Available"},{"no":"209","floor":"2nd Floor","cat":"Apartment","type":"Three Bedroom with Study","view":"Pool/Community View","suite":1551.0,"balcony":508.0,"area":2059.0,"op":4323508.0,"plan":"113","planImg":"assets/plans/113-residences-209.webp","planSrc":"https://drive.google.com/file/d/1M4qKp7eOjtMVceUKXYRjTuWcjheJuPWb/view?usp=drivesdk","status":"Available"},{"no":"709","floor":"7th Floor","cat":"Apartment","type":"Three Bedroom with Study","view":"Pool/Community View","suite":1550.0,"balcony":460.0,"area":2010.0,"op":4362515.0,"plan":"113","planImg":"assets/plans/113-residences-709.webp","planSrc":"https://drive.google.com/file/d/1otoRhNFp4WVMneU-zL_uM-nzX9iTX9F6/view?usp=drivesdk","status":"Available"},{"no":"609","floor":"6th Floor","cat":"Apartment","type":"Three Bedroom with Study","view":"Pool/Community View","suite":1551.0,"balcony":508.0,"area":2059.0,"op":4426217.0,"plan":"113","planImg":"assets/plans/113-residences-609.webp","planSrc":"https://drive.google.com/file/d/1WM0qyAkaZMV-u3BvdkY2nIJUwqiGTzT-/view?usp=drivesdk","status":"Available"},{"no":"106","floor":"1st Floor","cat":"Apartment","type":"Four Bedroom Duplex with pool","view":"Community View","suite":2074.0,"balcony":458.0,"area":2532.0,"op":5443094.0,"plan":"113","planImg":"assets/plans/113-residences-106.webp","planSrc":"https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk","status":"Available"}],"discount":0.04},{"id":"oxford-cove","name":"Oxford Cove","area":"Jumeirah Village Circle","status":"new","handover":"To be confirmed","progress":null,"image":"assets/oxford-cove-main.webp","mapUrl":"https://www.google.com/maps?cid=457684984549876349","source":"https://www.imandevelopers.com/iman-properties/oxford-cove","kind":"Residences","units":[{"no":"312","floor":"3rd Floor","cat":"Apartment","type":"Studio","view":"Pool View","suite":330.0,"balcony":82.0,"area":412.0,"op":865200.0,"plan":"50-50-instalments","planImg":"assets/plans/oxford-cove-312.webp","planSrc":"https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view?usp=drivesdk","status":"Available"},{"no":"G12","floor":"Ground Floor","cat":"Apartment","type":"Two Bedroom","view":"Community View","suite":895.0,"balcony":286.0,"area":1181.0,"op":1674068.0,"plan":"50-50-instalments","planImg":"assets/plans/oxford-cove-G12.webp","planSrc":"https://drive.google.com/file/d/1wlA-Bs5-Hr8mLm9eR32g-8R-RtZiFpEI/view?usp=drivesdk","status":"Available"},{"no":"139","floor":"1st Floor","cat":"Apartment","type":"Two Bedroom with Study","view":"Community View","suite":972.0,"balcony":245.0,"area":1217.0,"op":1788990.0,"plan":"50-50-instalments","planImg":"assets/plans/oxford-cove-139.webp","planSrc":"https://drive.google.com/file/d/1lCtudhbD84ifeZ3xsRSIZpmj1617QU3a/view?usp=drivesdk","status":"Available"}]},{"id":"sierra-by-iman","name":"Sierra","area":"Motor City","status":"new","handover":"To be confirmed","progress":null,"image":"assets/sierra-by-iman-main.webp","mapUrl":"https://www.google.com/maps?cid=2303450858755146668","source":"https://www.imandevelopers.com/iman-properties/sierra-by-iman","kind":"Residences & retail","units":[{"no":"RETAIL-2","floor":"Ground Floor","cat":"Retail","type":"Retail","view":"Roadside View","suite":2873.96,"balcony":null,"area":2873.96,"op":7919913.0,"plan":"40-60-instalments","planImg":"assets/plans/sierra-by-iman-RETAIL-2.webp","planSrc":"https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view","status":"Available"},{"no":"RETAIL-1","floor":"Ground Floor","cat":"Retail","type":"Retail","view":"Roadside View","suite":2897.97,"balcony":null,"area":2897.97,"op":7980794.0,"plan":"40-60-instalments","planImg":"assets/plans/sierra-by-iman-RETAIL-1.webp","planSrc":"https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view","status":"Available"},{"no":"RETAIL-3","floor":"Ground Floor","cat":"Retail","type":"Retail","view":"Roadside View","suite":2987.42,"balcony":null,"area":2987.42,"op":8261387.0,"plan":"40-60-instalments","planImg":"assets/plans/sierra-by-iman-RETAIL-3.webp","planSrc":"https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view","status":"Available"},{"no":"RETAIL-4","floor":"Ground Floor","cat":"Retail","type":"Retail","view":"Roadside View","suite":3075.46,"balcony":null,"area":3075.46,"op":8484112.0,"plan":"40-60-instalments","planImg":"assets/plans/sierra-by-iman-RETAIL-4.webp","planSrc":"https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view","status":"Available"},{"no":"RETAIL-5","floor":"Ground Floor","cat":"Retail","type":"Retail","view":"Roadside View","suite":3933.35,"balcony":null,"area":3933.35,"op":10079595.0,"plan":"40-60-instalments","planImg":"assets/plans/sierra-by-iman-RETAIL-5.webp","planSrc":"https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view","status":"Available"}]},{"id":"15-cascade","name":"15 Cascade","area":"Motor City","status":"construction","handover":"Q4 2028","progress":10,"image":"assets/15-cascade-main.webp","mapUrl":"https://www.google.com/maps?cid=4216481775640663356","source":"https://www.imandevelopers.com/iman-properties/15-cascade","kind":"Residences","units":[{"no":"315","floor":"","cat":"Residential","type":"Studio","view":"Community View","suite":343.91,"balcony":78.9,"area":422.81,"op":879861.81,"plan":"cash","planImg":"assets/plans/15-cascade-315.webp","planSrc":"https://drive.google.com/file/d/19GDncASta53oQcwCptb_zy4XN7QXszJZ/view?usp=drivesdk","status":"Available"},{"no":"421","floor":"","cat":"Residential","type":"Studio","view":"Community View","suite":346.81,"balcony":78.9,"area":425.71,"op":907434.5,"plan":"60-40","planImg":"assets/plans/15-cascade-421.webp","planSrc":"https://drive.google.com/file/d/19aLwGjlX0Z__ZA04qWp48TY2b6tVlW7f/view?usp=drivesdk","status":"Available"},{"no":"433","floor":"","cat":"Residential","type":"Studio","view":"Community View","suite":346.92,"balcony":89.56,"area":436.48,"op":908309.48,"plan":"60-40","planImg":"assets/plans/15-cascade-433.webp","planSrc":"https://drive.google.com/file/d/16UbvttId6FwVNmDNragF56UQKhaFMn1w/view?usp=drivesdk","status":"Available"},{"no":"431","floor":"","cat":"Residential","type":"One Bedroom with study","view":"Community View","suite":683.72,"balcony":157.69,"area":841.41,"op":1553420.14,"plan":"60-40","planImg":"assets/plans/15-cascade-431.webp","planSrc":"https://drive.google.com/file/d/1iB5A1qPzPprvXVGYP_LbzvNJ1fRO3_4U/view?usp=drivesdk","status":"Available"}]},{"id":"one-park-square","name":"One Park Square","area":"Jumeirah Village Circle","status":"construction","handover":"Q2 2028","progress":18,"image":"assets/one-park-square-main.webp","mapUrl":"https://www.google.com/maps?cid=621367401174123621","source":"https://www.imandevelopers.com/iman-properties/one-park-square","kind":"Residences","units":[{"no":"403","floor":"4th Floor","cat":"Apartment","type":"Studio","view":"Park View","suite":352.2,"balcony":74.91,"area":427.11,"op":750000.0,"plan":"50-50","planImg":"assets/plans/one-park-square-403.webp","planSrc":"https://drive.google.com/file/d/1jAjynOsDSNp6kChnqjVLogjytLJki8tq/view?usp=drivesdk","status":"Available"},{"no":"504","floor":"5th Floor","cat":"Apartment","type":"Studio","view":"Park View","suite":352.2,"balcony":74.91,"area":427.11,"op":750000.0,"plan":"50-50","planImg":"assets/plans/one-park-square-504.webp","planSrc":"https://drive.google.com/file/d/17fTlq1Rd_mlADMvSz-HAtZDcVrqAYMsg/view?usp=drivesdk","status":"Available"},{"no":"406","floor":"4th Floor","cat":"Apartment","type":"One Bedroom","view":"Community/Partial Park View","suite":647.45,"balcony":141.97,"area":789.41,"op":1233663.36,"plan":"50-50","planImg":"assets/plans/one-park-square-406.webp","planSrc":"https://drive.google.com/file/d/1Dg4yXSbqershY0ryDrYUHVbCxKdoClMS/view?usp=drivesdk","status":"Available"},{"no":"502","floor":"5th Floor","cat":"Apartment","type":"Two Bedroom","view":"Park View","suite":924.62,"balcony":291.9,"area":1216.52,"op":1850000.0,"plan":"50-50","planImg":"assets/plans/one-park-square-502.webp","planSrc":"https://drive.google.com/file/d/1yav4hpLRW8OVWvMgbkYAur2n6Wg3Jj6A/view?usp=drivesdk","status":"Available"}]},{"id":"one-sky-park","name":"One Sky Park","area":"Jumeirah Village Circle","status":"construction","handover":"Q1 2028","progress":9,"image":"assets/one-sky-park-main.webp","mapUrl":"https://www.google.com/maps?cid=2025336249436629965","source":"https://www.imandevelopers.com/iman-properties/one-sky-park","kind":"Residences","units":[{"no":"A303","floor":"","cat":"Residential","type":"One Bedroom","view":"Marina Skyline","suite":650.79,"balcony":257.15,"area":907.94,"op":1375000.0,"plan":"60-40","planImg":"assets/plans/one-sky-park-A303.webp","planSrc":"https://drive.google.com/file/d/1AzP2gMfigvpOQsuwskcl6DQVQC5YIwMZ/view?usp=drivesdk","status":"Available"},{"no":"A305","floor":"","cat":"Residential","type":"One Bedroom","view":"Marina Skyline","suite":653.69,"balcony":249.62,"area":903.31,"op":1435965.48,"plan":"60-40","planImg":"assets/plans/one-sky-park-A305.webp","planSrc":"https://drive.google.com/file/d/1eyvtz72ivRp0jcEZuPNNADWOaDJrm3HY/view?usp=drivesdk","status":"Available"},{"no":"A101","floor":"","cat":"Residential","type":"One Bedroom","view":"Pool View","suite":640.99,"balcony":308.92,"area":949.92,"op":1468685.23,"plan":"cash","planImg":"assets/plans/one-sky-park-A101.webp","planSrc":"https://drive.google.com/file/d/1WiOZxaUaOSwukebHhBsmjNVqvfPBh31w/view?usp=drivesdk","status":"Available"}]},{"id":"one-park-central","name":"One Park Central","area":"Jumeirah Village Circle","status":"construction","handover":"Q2 2027","progress":34,"image":"assets/one-park-central-main.webp","mapUrl":"https://www.google.com/maps?cid=16288608442143771136","source":"https://www.imandevelopers.com/iman-properties/one-park-central","kind":"Residences","units":[]},{"id":"gardens-2","name":"Gardens 2","area":"Arjan","status":"construction","handover":"Q2 2026","progress":96,"image":"assets/gardens-2-main.webp","mapUrl":"https://www.google.com/maps?cid=2690119001558687079","source":"https://www.imandevelopers.com/iman-properties/gardens-2","kind":"Residences","units":[]},{"id":"10-oxford-by-iman","name":"10 Oxford","area":"Arjan","status":"construction","handover":"Q2 2026","progress":91,"image":"assets/10-oxford-by-iman-main.webp","mapUrl":"https://www.google.com/maps?cid=8019316405699981091","source":"https://www.imandevelopers.com/iman-properties/10-oxford-by-iman","kind":"Residences","units":[]},{"id":"oxford-gardens","name":"Oxford Gardens","area":"Arjan","status":"ready","handover":"2025","progress":100,"image":"assets/oxford-gardens-main.webp","mapUrl":"https://www.google.com/maps?cid=7530654352194327862","source":"https://www.imandevelopers.com/iman-properties/oxford-gardens","kind":"Residences","units":[]},{"id":"the-grove-by-iman","name":"The Grove","area":"Dubai Hills Estate","status":"ready","handover":"2025","progress":100,"image":"assets/the-grove-by-iman-main.webp","mapUrl":"https://www.google.com/maps?cid=3553752404542086836","source":"https://www.imandevelopers.com/iman-properties/the-grove-by-iman","kind":"Residences","units":[]},{"id":"oxford-terraces-2","name":"Oxford Terraces 2","area":"Jumeirah Village Circle","status":"ready","handover":"2025","progress":100,"image":"assets/oxford-terraces-2-main.webp","mapUrl":"https://www.google.com/maps?cid=3316139342023264086","source":"https://www.imandevelopers.com/iman-properties/oxford-terraces-2","kind":"Residences","units":[]},{"id":"oxford-terraces","name":"Oxford Terraces","area":"Jumeirah Village Circle","status":"ready","handover":"2024","progress":100,"image":"assets/oxford-terraces-main.webp","mapUrl":"https://www.google.com/maps?cid=643165028495116450","source":"https://www.imandevelopers.com/iman-properties/oxford-terraces","kind":"Residences","units":[]},{"id":"oxford-212","name":"Oxford 212","area":"Jumeirah Village Circle","status":"ready","handover":"2023","progress":100,"image":"assets/oxford-212-main.webp","mapUrl":"https://www.google.com/maps?cid=9524917011500115199","source":"https://www.imandevelopers.com/iman-properties/oxford-212","kind":"Residences","units":[]},{"id":"oxford-boulevard","name":"Oxford Boulevard","area":"Jumeirah Village Circle","status":"ready","handover":"2021","progress":100,"image":"assets/oxford-boulevard-main.webp","mapUrl":"https://www.google.com/maps?cid=3808369405095006411","source":"https://www.imandevelopers.com/iman-properties/oxford-boulevard","kind":"Residences","units":[]},{"id":"oxford-residence-2","name":"Oxford Residence 2","area":"Jumeirah Village Circle","status":"ready","handover":"2020","progress":100,"image":"assets/oxford-residence-2-main.webp","mapUrl":"https://www.google.com/maps?cid=5767526386130135319","source":"https://www.imandevelopers.com/iman-properties/oxford-residence-2","kind":"Residences","units":[]},{"id":"oxford-residence","name":"Oxford Residence","area":"Jumeirah Village Circle","status":"ready","handover":"2018","progress":100,"image":"assets/oxford-residence-main.webp","mapUrl":"https://www.google.com/maps?cid=13857264980100852958","source":"https://www.imandevelopers.com/iman-properties/oxford-residence","kind":"Residences","units":[]},{"id":"oxford-villa","name":"Oxford Villa","area":"Jumeirah Village Circle","status":"ready","handover":"2017","progress":100,"image":"assets/oxford-villa-main.webp","mapUrl":"https://www.google.com/maps?cid=3159687292784186357","source":"https://www.imandevelopers.com/iman-properties/oxford-villa","kind":"Villas","units":[]}]};
+const WA = "971501752771";
+// Projects with inventory, in the order Sam wants them shown after The Element.
+const ORDER = ["113-residences","oxford-cove","sierra-by-iman","15-cascade","one-park-square","one-sky-park"];
+const T = {
+ en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
+  listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · list of ${d}`,curL:"Currency",
+  byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · Coming soon",eoiPill:"EOI AED 50,000",
+  nearH:"A connected neighbourhood",plot:"Dubai Science Park · Plot 6727698",dspEye:"The next chapter by IMAN · Launching soon",
+  dspLead:"A new address. An early opportunity. Launch expected early October 2026.",dspUnits:"Residential units",dspMix:"Studio · 1BR · 2BR",dspRetail:"Plus retail units",
+  eoiK:"Expression of interest",eoiTag:"Fully refundable",eoiSub:"One EOI covers residential and retail. Pre-launch offer to be announced. First come, first served.",
+  st1:"Register your interest",st1d:"Tell Sam whether you prefer a studio, 1BR, 2BR or retail unit.",st2:"Prepare your EOI",st2d:"AED 50,000 and a passport copy. The EOI is fully refundable.",
+  st3:"Submit when EOI opens",st3d:"Token numbers and priority selection follow first come, first served.",dspCta:"Register interest on WhatsApp",viewLoc:"View location",
+  dspFine:"The EOI is an expression of interest, not the property price. Unit prices, payment plans and offer terms are yet to be announced. Pre-launch information as of 1 October 2026.",
+  stNew:"New release",stCon:"Under construction",stReady:"Completed",handover:"Handover",built:p=>`${p}% built`,nUnits:n=>`${n} units available`,from:"From",
+  r113about:"A collection of 113 residences in Al Sufouh combining fluid architecture, expansive layouts and refined finishes, facing Al Sufouh Community Park. Building: B + G + 9.",
+  f1:"Hafele smart door locks and European kitchen appliances",f2:"Lagoon pool, rooftop infinity pool, fitness centre and yoga room",
+  o1:"Discount from original price",o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
+  schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",all:"All",
+  plansFrom:"Plans offered",projNote:"Each unit is sold on the payment plan shown on its card. Confirm the latest status with Sam before booking.",
+  disc113:"Prices include the 4% discount on the 40/60 plan.",
+  othersH:"More IMAN projects",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
+  floorPlan:"Floor plan",payments:"Payments",wa:"WhatsApp",op:"Original price",sqft:"sq ft",suite:"suite",balcony:"balcony",unit:"Unit",
+  close:"Close",fpNote:"Representative layout. Confirm the exact plan for your unit with Sam.",fpSrc:"Open original plan",payNote:"Excludes DLD and registration fees.",
+  footH:"Let's find your unit.",footP:"Viewings, floor plans and the latest availability, sent straight to your WhatsApp.",
+  fine:"Sam Jabr · Senior Sales Manager, IMAN Developers · +971 50 175 2771. Prices, availability and offers are subject to change; images and layouts are representative.",
+  plan:{"113":"40/60 · 4% off","40-60-instalments":"40/60 instalments","50-50-instalments":"50/50 instalments","60-40":"60/40 plan","50-50":"50/50 plan","cash":"Cash only"},
+  rows:{now:"Down payment",inst:"In instalments before handover",hand:"On handover",full:"Full payment"},
+  msg:{general:"Hi Sam, I'm interested in IMAN projects. Can you send me more details?",dsp:"Hi Sam, I'd like to register my interest (EOI) in The Element by IMAN, Dubai Science Park.",
+   unit:(u,p)=>`Hi Sam, I'm interested in unit ${u} at ${p}. Is it still available?`,proj:p=>`Hi Sam, please send me details for ${p} by IMAN.`}
+ },
+ ar:{contactAt:"جهة اتصالك في إيمان",name:"سام جبر",role:"مدير مبيعات أول · إيمان للتطوير العقاري",exp:"3 سنوات مع إيمان",copy:"نسخ",copied:"تم النسخ",waCta:"راسلني على واتساب",waShort:"واتساب",call:"اتصال",
+  listH:"مشاريع إيمان",listSub:"اضغط على أي مشروع لتشوف تفاصيله وأسعاره والوحدات المتاحة.",listEye:(n,d)=>`${n} وحدة متاحة · قائمة ${d}`,curL:"العملة",
+  byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · قريباً",eoiPill:"EOI ‏50,000 درهم",
+  nearH:"حيّ متصل بكل شيء",plot:"دبي ساينس بارك · قطعة 6727698",dspEye:"الفصل الجديد من إيمان · إطلاق قريب",
+  dspLead:"عنوان جديد. وفرصة مبكرة. الإطلاق متوقع أوائل أكتوبر 2026.",dspUnits:"وحدة سكنية",dspMix:"استوديو · غرفة · غرفتين",dspRetail:"بالإضافة إلى وحدات تجارية",
+  eoiK:"دفعة إبداء الاهتمام (EOI)",eoiTag:"مستردة بالكامل",eoiSub:"نفس الدفعة للسكني والتجاري. عرض ما قبل الإطلاق سيُعلن لاحقاً. الأولوية للأسبق.",
+  st1:"سجّل اهتمامك",st1d:"قل لسام إذا بتفضّل استوديو أو غرفة أو غرفتين أو وحدة تجارية.",st2:"جهّز دفعة الاهتمام",st2d:"50,000 درهم ونسخة من جواز السفر. الدفعة مستردة بالكامل.",
+  st3:"قدّم عند فتح باب EOI",st3d:"أرقام الأولوية واختيار الوحدات حسب الأسبقية.",dspCta:"سجّل اهتمامك على واتساب",viewLoc:"شوف الموقع",
+  dspFine:"دفعة EOI هي إبداء اهتمام وليست سعر العقار. أسعار الوحدات وخطط الدفع وشروط العرض لم تُعلن بعد. معلومات ما قبل الإطلاق بتاريخ 1 أكتوبر 2026.",
+  stNew:"إطلاق جديد",stCon:"قيد الإنشاء",stReady:"مكتمل",handover:"التسليم",built:p=>`نسبة الإنجاز ${p}%`,nUnits:n=>`${n} وحدة متاحة`,from:"ابتداءً من",
+  r113about:"مجموعة من 113 وحدة سكنية في الصفوح، تجمع بين العمارة الانسيابية والمساحات الواسعة والتشطيبات الراقية، مقابل حديقة الصفوح المجتمعية. المبنى: قبو + أرضي + 9.",
+  f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون، مسبح لا متناهٍ على السطح، نادٍ رياضي وغرفة يوغا",
+  o1:"خصم من السعر الأصلي",o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
+  schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",all:"الكل",
+  plansFrom:"خطط الدفع",projNote:"كل وحدة تُباع بخطة الدفع المذكورة على بطاقتها. تأكد من آخر حالة مع سام قبل الحجز.",
+  disc113:"الأسعار شاملة خصم 4% على خطة 40/60.",
+  othersH:"مشاريع إيمان الأخرى",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
+  floorPlan:"المخطط",payments:"الدفعات",wa:"واتساب",op:"السعر الأصلي",sqft:"قدم²",suite:"داخلي",balcony:"شرفة",unit:"وحدة",
+  close:"إغلاق",fpNote:"مخطط توضيحي. تأكد من المخطط الدقيق لوحدتك مع سام.",fpSrc:"افتح المخطط الأصلي",payNote:"لا يشمل رسوم دائرة الأراضي والتسجيل.",
+  footH:"خلّينا نلاقي وحدتك.",footP:"معاينات، مخططات، وآخر التوفر، مباشرة على واتسابك.",
+  fine:"سام جبر · مدير مبيعات أول، إيمان للتطوير العقاري · ‎+971 50 175 2771. الأسعار والتوفر والعروض قابلة للتغيير، والصور والمخططات للتوضيح.",
+  plan:{"113":"40/60 · خصم 4%","40-60-instalments":"40/60 أقساط","50-50-instalments":"50/50 أقساط","60-40":"خطة 60/40","50-50":"خطة 50/50","cash":"كاش فقط"},
+  rows:{now:"دفعة أولى",inst:"أقساط قبل التسليم",hand:"عند التسليم",full:"الدفع كاملاً"},
+  msg:{general:"مرحبا سام، مهتم بمشاريع إيمان. ممكن ترسلي تفاصيل أكثر؟",dsp:"مرحبا سام، بدي سجّل اهتمامي (EOI) بمشروع The Element من إيمان في دبي ساينس بارك.",
+   unit:(u,p)=>`مرحبا سام، مهتم بالوحدة ${u} في ${p}. هل لسا متاحة؟`,proj:p=>`مرحبا سام، ممكن ترسلي تفاصيل مشروع ${p} من إيمان؟`}
+ }
+};
+const TYPE_AR={"studio":"استوديو","one bedroom":"غرفة نوم","one bedroom with study":"غرفة نوم + مكتب","two bedroom":"غرفتا نوم","two bedroom with study":"غرفتا نوم + مكتب",
+ "two bedroom with maid":"غرفتا نوم + غرفة خادمة","three bedroom with study":"3 غرف نوم + مكتب","three bedroom with maid":"3 غرف نوم + غرفة خادمة","four bedroom duplex with pool":"دوبلكس 4 غرف + مسبح خاص","retail":"وحدة تجارية"};
+const TYPE_EN={"studio":"Studio","one bedroom":"1 Bedroom","one bedroom with study":"1 Bedroom + Study","two bedroom":"2 Bedrooms","two bedroom with study":"2 Bedrooms + Study",
+ "two bedroom with maid":"2 Bedrooms + Maid's","three bedroom with study":"3 Bedrooms + Study","three bedroom with maid":"3 Bedrooms + Maid's","four bedroom duplex with pool":"4-Bed Duplex + Pool","retail":"Retail"};
+const TYPE_ORDER=Object.keys(TYPE_EN);
+const VIEW_AR={"community view":"إطلالة على المجتمع","pool view":"إطلالة على المسبح","park view":"إطلالة على الحديقة","pool/community view":"إطلالة على المسبح والمجتمع",
+ "pool/park view":"إطلالة على المسبح والحديقة","roadside view":"على الشارع","marina skyline":"إطلالة على أفق المارينا","community/partial park view":"إطلالة على المجتمع وجزء من الحديقة"};
+const AREA_AR={"Al Sufouh":"الصفوح","Jumeirah Village Circle":"قرية جميرا الدائرية","Motor City":"موتور سيتي","Arjan":"أرجان","Dubai Hills Estate":"دبي هيلز إستيت"};
+const LANDMARKS=[["My City Centre Al Barsha","ماي سيتي سنتر البرشاء"],["American Hospital DSP & Mediclinic Parkview","المستشفى الأمريكي وميديكلينيك باركفيو"],["Repton School & Safa Community School","مدرسة ريبتون ومدرسة صفا المجتمعية"],["Dubai Butterfly Garden & Miracle Garden","حديقة الفراشات وحديقة المعجزات"],["Dubai Autodrome & Dubai Hills Mall","أوتودروم دبي ودبي هيلز مول"]];
+const DRIVE=[["Al Sufouh Community Park","حديقة الصفوح",1],["Sheikh Zayed Road","شارع الشيخ زايد",1],["Al Sufouh Beach","شاطئ الصفوح",3],["Hessa Street","شارع حصة",4],["Emirates Golf Club","نادي الإمارات للغولف",8],["The Greens","ذا جرينز",8],["Palm Jumeirah","نخلة جميرا",8],["Mall of the Emirates","مول الإمارات",10],["Dubai Marina","دبي مارينا",10],["Burj Al Arab","برج العرب",12],["Dubai Mall & Downtown","دبي مول وداون تاون",18],["Dubai Int'l Airport (DXB)","مطار دبي الدولي",24]];
+// Indicative rates per 1 AED. AED and SAR are pegged to USD; the rest are approximate.
+const CUR=[["AED",1],["USD",1/3.6725],["EUR",0.24],["GBP",0.206],["SAR",3.75/3.6725],["INR",26.16],["CNY",1.94],["RUB",22.4]];
+
+const PROJ=INV.projects;
+const byId=Object.fromEntries(PROJ.map(p=>[p.id,p]));
+const UNITS=PROJ.flatMap(p=>p.units.map(u=>({...u,pid:p.id,pname:p.name,key:p.id+"|"+u.no,p:Math.round(u.op*(1-(p.discount||0))),disc:!!p.discount})));
+const typeKey=u=>u.type.toLowerCase();
+
+const st={lang:"en",cur:"AED",open:{},filter:{}};
+try{const s=JSON.parse(localStorage.getItem("sj-prefs3")||"{}");st.lang=s.lang||st.lang;st.cur=s.cur||st.cur}catch(e){}
+const save=()=>{try{localStorage.setItem("sj-prefs3",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
+const $=s=>document.querySelector(s);
+const t=k=>T[st.lang][k];
+const fmt=n=>Math.round(n).toLocaleString("en-US");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function money(aed){const [c,r]=CUR.find(x=>x[0]===st.cur);return c+" "+fmt(aed*r)}
+const waHref=text=>"https://wa.me/"+WA+"?text="+encodeURIComponent(text);
+const typeName=k=>(st.lang==="ar"?TYPE_AR:TYPE_EN)[k]||k;
+const viewName=v=>st.lang==="ar"?(VIEW_AR[v.toLowerCase()]||v):v;
+const areaName=a=>st.lang==="ar"?(AREA_AR[a]||a):a;
+function floorName(f){if(!f)return "";if(st.lang==="en")return f;if(/ground/i.test(f))return "الطابق الأرضي";const m=f.match(/\d+/);return m?"الطابق "+m[0]:f}
+function dateName(iso){return new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":"en-GB",{day:"numeric",month:"long",year:"numeric"})}
+const chev=`<span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span>`;
+function statusPill(p){return p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill ok">${t("stReady")}</span>`}
+
+function schedule(u){
+  const r=t("rows");
+  if(u.plan==="113")return [[20,t("s1")],[10,t("s2")],[10,t("s3")],[60,t("s4")]];
+  const pl=INV.plans[u.plan]||{};
+  if(u.plan==="cash")return [[100,r.full]];
+  if(pl.beforeHandoverPercent!=null)return [[pl.beforeHandoverPercent,r.inst],[pl.handoverPercent,r.hand]];
+  if(pl.nowPercent!=null)return [[pl.nowPercent,r.now],[pl.handoverPercent,r.hand]];
+  return [];
+}
+
+function unitsBlock(p){
+  const us=UNITS.filter(u=>u.pid===p.id);
+  const types=TYPE_ORDER.filter(k=>us.some(u=>typeKey(u)===k));
+  const f=st.filter[p.id]||"all";
+  const list=us.filter(u=>f==="all"||typeKey(u)===f).sort((a,b)=>a.p-b.p);
+  const chips=types.length>1?`<div class="ufilter">`+[`<button class="chip" aria-pressed="${f==="all"}" data-f="${p.id}|all">${t("all")}<span class="c">${us.length}</span></button>`]
+    .concat(types.map(k=>`<button class="chip" aria-pressed="${f===k}" data-f="${p.id}|${k}">${typeName(k)}<span class="c">${us.filter(u=>typeKey(u)===k).length}</span></button>`)).join("")+`</div>`:"";
+  return `<div><h4 class="h4">${t("unitsH")}</h4>${chips}<div class="units">${list.map(u=>{
+    const meta=[floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · ");
+    return `<article class="unit">
+      <div class="u-top"><span class="u-no num">${esc(u.no)}</span><span class="tag ${u.plan==="cash"?"cash":""}">${t("plan")[u.plan]||""}</span></div>
+      <span class="u-type">${esc(typeName(typeKey(u)))}</span>
+      ${meta?`<span class="u-meta">${esc(meta)}</span>`:""}
+      <span class="u-meta num">${fmt(u.area)} ${t("sqft")} · ${fmt(u.area*0.092903)} m²${u.balcony?` (${t("suite")} ${fmt(u.suite)} + ${t("balcony")} ${fmt(u.balcony)})`:""}</span>
+      <span class="u-price num">${money(u.p)}</span>
+      ${u.disc?`<span class="u-op num">${t("op")} <s>${money(u.op)}</s></span>`:""}
+      <div class="u-actions">
+        ${u.planImg?`<button data-plan="${esc(u.key)}">${t("floorPlan")}</button>`:""}
+        <button data-pay="${esc(u.key)}">${t("payments")}</button>
+        <a href="${waHref(T[st.lang].msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">${t("wa")}</a>
+      </div></article>`}).join("")}</div><p class="note">${p.discount?t("disc113")+" ":""}${t("projNote")}</p></div>`;
+}
+
+function intro113(){
+  const max=Math.max(...DRIVE.map(d=>d[2]));
+  return `<div class="split">
+    <div class="hero-img"><img src="img/113-residences.jpg" alt="113 Residences, Al Sufouh" loading="lazy"></div>
+    <div><p class="lead">${t("r113about")}</p>
+      <ul class="feat"><li>${t("f1")}</li><li>${t("f2")}</li></ul>
+      <div class="offer"><div class="ot"><b>4%</b><span>${t("o1")}</span></div><div class="ot"><b>40/60</b><span>${t("o2")}</span></div><div class="ot"><b>7%</b><span>${t("o3")}</span></div></div>
+      <div class="bar" aria-hidden="true"><i style="flex:20"></i><i style="flex:10"></i><i style="flex:10"></i><i style="flex:60"></i></div>
+      <div class="psteps"><div><b>20%</b><span>${t("s1")}</span></div><div><b>10%</b><span>${t("s2")}</span></div><div><b>10%</b><span>${t("s3")}</span></div><div><b>60%</b><span>${t("s4")}</span></div></div>
+      <div class="links" style="margin-top:16px"><a href="https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ" target="_blank" rel="noopener">${t("lkMaterials")}</a><a href="https://www.google.com/maps?cid=6007820903981317149" target="_blank" rel="noopener">${t("openMaps")}</a></div>
+    </div></div>
+    ${unitsBlock(byId["113-residences"])}
+    <div class="split"><div class="hero-img"><img src="img/113-location.jpg" alt="Map of Al Sufouh showing 113 Residences" loading="lazy"></div>
+      <div><h4 class="h4">${t("locH")}</h4><ul class="drive">${DRIVE.map(d=>`<li><span class="nm">${st.lang==="ar"?d[1]:d[0]}</span><span class="mn num">${d[2]} ${t("min")}</span><span class="tr"><i style="width:${Math.max(4,d[2]/max*100)}%"></i></span></li>`).join("")}</ul></div></div>`;
+}
+
+function introGeneric(p){
+  return `<div class="split"><div class="hero-img"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div>
+    <div><p class="lead">${esc(areaName(p.area))}${p.handover&&p.handover!=="To be confirmed"?` · ${t("handover")} ${esc(p.handover)}`:""}</p>
+    ${p.status==="construction"&&p.progress!=null?`<div class="prog" style="margin-top:10px"><i style="width:${p.progress}%"></i></div><p class="sub" style="margin-top:4px">${T[st.lang].built(p.progress)}</p>`:""}
+    <div class="links" style="margin-top:16px">${p.mapUrl?`<a href="${esc(p.mapUrl)}" target="_blank" rel="noopener">${t("openMaps")}</a>`:""}<a href="${waHref(T[st.lang].msg.proj(p.name))}" target="_blank" rel="noopener">${t("ask")}</a></div></div></div>
+    ${unitsBlock(p)}`;
+}
+
+function renderProjects(){
+  $("#projects").innerHTML=ORDER.map(id=>{
+    const p=byId[id];const us=UNITS.filter(u=>u.pid===id);const min=Math.min(...us.map(u=>u.p));
+    const meta=[areaName(p.area),p.handover&&p.handover!=="To be confirmed"?`${t("handover")} ${p.handover}`:""].filter(Boolean).join(" · ");
+    return `<details class="proj" id="p-${id}" data-id="${id}" ${st.open[id]?"open":""}>
+      <summary><span class="thumb"><img src="${id==="113-residences"?"img/113-residences.jpg":esc(p.image)}" alt="" loading="lazy"></span>
+        <span class="s-main"><h3>${esc(p.name)}</h3><span class="s-meta">${esc(meta)}</span>
+          <span class="s-tags">${statusPill(p)}<span class="pill">${T[st.lang].nUnits(us.length)}</span></span></span>
+        <span class="s-side"><span class="s-from">${t("from")}</span><span class="s-price num">${money(min)}</span>${chev}</span></summary>
+      <div class="p-body">${st.open[id]?(id==="113-residences"?intro113():introGeneric(p)):""}</div></details>`}).join("");
+}
+
+function renderOthers(){
+  const rest=PROJ.filter(p=>!ORDER.includes(p.id));
+  $("#others-sub").textContent=T[st.lang].othersSub(rest.filter(p=>p.status==="construction").length,rest.filter(p=>p.status==="ready").length);
+  $("#others").innerHTML=rest.map(p=>`<article class="oc"><div class="oi"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div><div class="ob">
+    ${statusPill(p)}<h4>${esc(p.name)}</h4><span class="s-meta">${esc(areaName(p.area))}${p.handover?` · ${t("handover")} ${esc(p.handover)}`:""}</span>
+    ${p.status==="construction"&&p.progress!=null?`<div class="prog"><i style="width:${p.progress}%"></i></div><span class="s-meta">${T[st.lang].built(p.progress)}</span>`:""}
+    <div class="ofoot"><a href="${waHref(T[st.lang].msg.proj(p.name))}" target="_blank" rel="noopener">${t("ask")} →</a>${p.mapUrl?`<a class="m" href="${esc(p.mapUrl)}" target="_blank" rel="noopener">${t("map")}</a>`:""}</div></div></article>`).join("");
+}
+
+function render(){
+  const ar=st.lang==="ar";
+  document.documentElement.lang=st.lang;document.documentElement.dir=ar?"rtl":"ltr";
+  $("#lang-en").setAttribute("aria-pressed",!ar);$("#lang-ar").setAttribute("aria-pressed",ar);
+  document.querySelectorAll("[data-i]").forEach(el=>{const v=t(el.dataset.i);if(typeof v==="string"&&!el.querySelector("[data-i]"))el.textContent=v});
+  document.querySelectorAll("a.wa[data-msg]").forEach(a=>a.href=waHref(T[st.lang].msg[a.dataset.msg]));
+  $("#list-eye").textContent=T[st.lang].listEye(UNITS.length,dateName(INV.inventoryDate));
+  $("#cur").innerHTML=CUR.map(([c])=>`<option value="${c}" ${c===st.cur?"selected":""}>${c}</option>`).join("");
+  $("#landmarks").innerHTML=LANDMARKS.map(l=>`<li>${ar?l[1]:l[0]}</li>`).join("");
+  renderProjects();renderOthers();
+}
+
+// Fill a project's body the first time it opens, and remember which ones are open.
+document.addEventListener("toggle",e=>{
+  const d=e.target;if(!d.matches||!d.matches("details.proj[data-id]"))return;
+  const id=d.dataset.id;st.open[id]=d.open;
+  const body=d.querySelector(".p-body");
+  if(d.open&&!body.innerHTML.trim())body.innerHTML=id==="113-residences"?intro113():introGeneric(byId[id]);
+},true);
+
+function openDlg(title,body,foot){
+  $("#dlg-title").textContent=title;$("#dlg-body").innerHTML=body;$("#dlg-foot").innerHTML=foot;
+  const d=$("#dlg");if(d.showModal)d.showModal();else d.setAttribute("open","");
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]");
+  if(f){const [pid,k]=f.dataset.f.split("|");st.filter[pid]=k;const d=$("#p-"+pid);const body=d.querySelector(".p-body");
+    body.innerHTML=pid==="113-residences"?intro113():introGeneric(byId[pid]);return}
+  const pl=e.target.closest("[data-plan]");
+  if(pl){const u=UNITS.find(x=>x.key===pl.dataset.plan);
+    openDlg(`${u.pname} · ${t("unit")} ${u.no} · ${typeName(typeKey(u))}`,`<img src="${esc(u.planImg)}" alt="${esc(t("floorPlan"))} ${esc(u.no)}">`,
+      `<span>${t("fpNote")}</span>${u.planSrc?`<a href="${esc(u.planSrc)}" target="_blank" rel="noopener">${t("fpSrc")}</a>`:""}`);return}
+  const pa=e.target.closest("[data-pay]");
+  if(pa){const u=UNITS.find(x=>x.key===pa.dataset.pay);
+    openDlg(`${u.pname} · ${t("unit")} ${u.no}`,`<div class="pay"><span class="tag ${u.plan==="cash"?"cash":""}">${t("plan")[u.plan]||""}</span>
+      <div class="total num">${money(u.p)}</div>${u.disc?`<span class="u-op num">${t("op")} <s>${money(u.op)}</s></span>`:""}
+      <div class="sched num">${schedule(u).map(([pc,l])=>`<div><span>${pc}% · ${esc(l)}</span><b>${money(u.p*pc/100)}</b></div>`).join("")}</div></div>`,
+      `<span>${t("payNote")}</span><a href="${waHref(T[st.lang].msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">${t("wa")}</a>`);return}
+});
+$("#dlg-close").onclick=()=>{const d=$("#dlg");d.close?d.close():d.removeAttribute("open")};
+$("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
+$("#cur").onchange=e=>{st.cur=e.target.value;save();render()};
+$("#lang-en").onclick=()=>{st.lang="en";save();render()};
+$("#lang-ar").onclick=()=>{st.lang="ar";save();render()};
+$("#copy-phone").onclick=e=>{
+  const b=e.currentTarget;const done=()=>{b.textContent=t("copied");setTimeout(()=>b.textContent=t("copy"),1600)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents($("#phone-text"));const s=getSelection();s.removeAllRanges();s.addRange(r)};
+  try{navigator.clipboard.writeText("+971501752771").then(done,sel)}catch(err){sel()}
+};
+render();
+</script>
+
+</body>
+</html>
