@@ -14,3 +14,7 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 1. Update the units in `site/inventory.json` from the new inventory lists, and set `inventoryDate`.
 2. Run `python3 site/build.py`.
 3. Publish `site/sam-jabr.html` with its images, and commit.
+
+## Availability lists and offers
+
+`availability/` keeps every inventory list IMAN sends, one folder per date (`availability/YYYY-MM-DD/`), and `availability/OFFERS.md` holds the current offers and payment plans.
