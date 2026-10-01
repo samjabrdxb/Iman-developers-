@@ -18,3 +18,5 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 ## Availability lists and offers
 
 `availability/` keeps every inventory list IMAN sends, one folder per date (`availability/YYYY-MM-DD/`), and `availability/OFFERS.md` holds the current offers and payment plans.
+
+To make the PDF for partners, put the day's IMAN lists in `availability/YYYY-MM-DD/`, update the offers in `availability/tools/make_offers_pdf.py`, and run `python3 availability/tools/make_offers_pdf.py YYYY-MM-DD`. Every page carries Sam's name and WhatsApp number.
