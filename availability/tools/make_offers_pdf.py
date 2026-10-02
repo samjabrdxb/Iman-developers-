@@ -16,7 +16,7 @@ TOOLS = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(TOOLS))
 SITE = os.path.join(REPO, "site")
 
-AGENT = "Sam Jabr · Senior Sales Manager, IMAN Developers · WhatsApp +971 50 175 2771"
+AGENT = "Sam Jabr · Senior Sales Manager · OG Team · IMAN Developers · WhatsApp +971 50 175 2771"
 WA = "https://wa.me/971501752771"
 
 # match: start of the inventory PDF file name. cash: discount on 100% payment.
@@ -157,7 +157,9 @@ tr{{break-inside:avoid}} tbody tr:nth-child(even) td{{background:#f6f8f5}}
 .top{{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid #1d3f2b;padding-bottom:8px;margin-bottom:12px}}
 .logo{{color:#9a5f48;font-family:Marcellus,serif;letter-spacing:.3em;font-size:13pt;line-height:1}}
 .logo small{{display:block;font-size:5.5pt;letter-spacing:.5em;margin-top:3px}}
-.agent{{text-align:right;line-height:1.3}} .agent b{{font-size:11pt}} .agent a{{color:#1d3f2b;font-weight:700;text-decoration:none}}
+.agent{{display:flex;align-items:center;gap:10px;text-align:right;line-height:1.3}} .agent img{{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid #c0866d}}
+.agent b{{font-size:12pt}} .agent .t{{color:#5b6b60;font-size:8.5pt}} .og{{display:inline-block;border:1px solid #9a5f48;color:#9a5f48;border-radius:99px;padding:0 6px;font-size:7pt;font-weight:700;margin-left:4px}}
+.agent a{{color:#1d3f2b;font-weight:700;text-decoration:none;font-size:10pt}}
 .hint{{font-size:8pt;color:#5b6b60;margin:0 0 10px}}
 a.ulink{{color:#9a5f48;font-weight:700;text-decoration:underline}}
 .unitpage{{break-before:page}}
@@ -224,7 +226,8 @@ def main(date):
             "Final price, availability and offer terms are subject to confirmation at booking. Excludes DLD and registration fees. "
             "The original IMAN inventory lists are attached at the end of this file.")
     top = ("<div class=top><div class=logo>IMAN<small>DEVELOPERS</small></div>"
-           f"<div class=agent><b>Sam Jabr</b> · Senior Sales Manager<br><a href='{WA}'>WhatsApp +971 50 175 2771</a></div></div>"
+           f"<div class=agent><div><b>Sam Jabr</b><span class=og>OG TEAM</span><br><span class=t>Senior Sales Manager · IMAN Developers</span><br>"
+           f"<a href='{WA}'>WhatsApp +971 50 175 2771</a></div><img src='file://{os.path.join(SITE, 'img', 'sam-jabr.jpg')}' alt=''></div></div>"
            "<p class=hint>Tap a unit number to see its payment plan and floor plan.</p>")
     page = (f"<!doctype html><html><head><meta charset=utf-8><style>{CSS}</style></head><body>{top}{''.join(parts)}"
             f"<p class=note>{e(note)}</p>{''.join(details)}</body></html>")
