@@ -3,7 +3,8 @@
 Usage:  python3 availability/tools/make_offers_pdf.py 2026-10-01
 
 Reads the IMAN inventory PDFs in availability/<date>/, lays out one table per
-project with the offers below, appends the original lists, and stamps Sam's
+project with the offers, one page per unit (payment plan and floor plan,
+reached by tapping the unit number), appends the original lists, and stamps Sam's
 name and number on every page. Writes the PDF into availability/<date>/.
 Edit PROJECTS when offers change.
 """
@@ -19,19 +20,23 @@ AGENT = "Sam Jabr · Senior Sales Manager, IMAN Developers · WhatsApp +971 50 1
 WA = "https://wa.me/971501752771"
 
 # match: start of the inventory PDF file name. cash: discount on 100% payment.
+# schedule: payment plan milestones. plans: floor plan file prefix in site/assets/plans/.
 PROJECTS = [
     dict(match="113", name="113 Residences", area="Al Sufouh Gardens", img="img/113-residences.jpg",
          offer=["From AED 2M", "40/60 payment plan", "Up to 4% discount", "14% discount on 100% payment", "7% commission"],
-         bonus="Bonus: 3 units = AED 50K · 5 units = AED 100K", plan="40/60", cash=0.14,
+         bonus="Bonus: 3 units = AED 50K · 5 units = AED 100K", plan="40/60", cash=0.14, plans="113-residences",
+         schedule=[(20, "Within 30 days of booking"), (10, "Within 90 days of booking"), (10, "At 40% construction"), (60, "On handover")],
          loc="https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9",
          mkt="https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing"),
     dict(match="OXFORD COVE", name="Oxford Cove", area="Jumeirah Village Circle (JVC)", img="assets/oxford-cove-main.webp",
          offer=["50/50 payment plan", "Up to 4% discount", "14% discount on 100% payment", "7% commission"],
-         plan="50/50", cash=0.14, loc="https://maps.app.goo.gl/orznbkhTdke94kGM7",
+         plan="50/50", cash=0.14, plans="oxford-cove", loc="https://maps.app.goo.gl/orznbkhTdke94kGM7",
+         schedule=[(50, "In instalments before handover"), (50, "On handover")],
          mkt="https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"),
     dict(match="SIERRA", name="Sierra by Iman · Retail", area="Motor City", img="assets/sierra-by-iman-main.webp",
          offer=["40/60 payment plan", "Up to 4% discount", "18% discount on full cash payment", "7% commission"],
-         plan="40/60", cash=0.18, loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None),
+         plan="40/60", cash=0.18, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
+         schedule=[(40, "In instalments before handover"), (60, "On handover")]),
 ]
 
 TYPE = {"one bedroom with study": "1 BR + Study", "two bedroom": "2 BR", "two bedroom with study": "2 BR + Study",
@@ -40,6 +45,8 @@ TYPE = {"one bedroom with study": "1 BR + Study", "two bedroom": "2 BR", "two be
 e = html.escape
 num = lambda s: float(s.replace(",", ""))
 aed = lambda n: f"{round(n):,}"
+anchor = lambda p, u: f"u-{p['plans']}-{u['no']}"
+DISC = 0.04
 
 
 def parse(path):
@@ -75,20 +82,53 @@ def table(p, units):
         size = (f"<td class=r>{u['total']:,.2f}</td>" if retail else
                 f"<td class=r>{u['suite']:,}</td><td class=r>{u['balcony']:,}</td><td class=r><b>{u['total']:,}</b></td>")
         fl = "G" if u["floor"].lower().startswith("ground") else u["floor"].split()[0]
-        rows.append(f"<tr><td><b>{e(u['no'])}</b></td><td>{fl}</td><td>{e(TYPE.get(u['type'].lower(), u['type']))}</td>"
+        rows.append(f"<tr><td><a class=ulink href='#{anchor(p, u)}'>{e(u['no'])}</a></td><td>{fl}</td><td>{e(TYPE.get(u['type'].lower(), u['type']))}</td>"
                     f"<td>{e(u['view'])}</td>{size}<td class='r b'>{aed(u['price'])}</td>"
-                    f"<td class=r>{aed(u['price'] * 0.96)}</td><td class='r cash'>{aed(u['price'] * (1 - p['cash']))}</td></tr>")
+                    f"<td class=r>{aed(u['price'] * (1 - DISC))}</td><td class='r cash'>{aed(u['price'] * (1 - p['cash']))}</td></tr>")
     return f"<table><thead>{head}</thead><tbody>{''.join(rows)}</tbody></table>"
 
 
 def section(p, units):
     links = [f"<a href='{p['loc']}'>📍 Location</a>"] + ([f"<a href='{p['mkt']}'>📁 Marketing materials</a>"] if p["mkt"] else [])
     n = len(units)
-    return f"""<section class=proj><div class=ph><img src="file://{os.path.join(SITE, p['img'])}" alt="">
+    return f"""<section class=proj id="p-{p['plans']}"><div class=ph><img src="file://{os.path.join(SITE, p['img'])}" alt="">
   <div class=pt><div class=eb>{e(p['area'])} · {n} unit{'s' if n > 1 else ''} available</div><h2>{e(p['name'])}</h2>
   <ul class=offer>{''.join(f'<li>{e(o)}</li>' for o in p['offer'])}</ul>
   {f"<div class=bonus>🔥 {e(p['bonus'])}</div>" if p.get('bonus') else ''}
   <div class=links>{' '.join(links)}</div></div></div>{table(p, units)}</section>"""
+
+
+def detail(p, u):
+    """One page per unit: facts, payment plan with amounts, and the floor plan."""
+    retail = u["type"] == "Retail"
+    disc = u["price"] * (1 - DISC)
+    cash = u["price"] * (1 - p["cash"])
+    fl = u["floor"]
+    facts = [("Floor", fl), ("View", u["view"])]
+    if retail:
+        facts.append(("Area", f"{u['total']:,.2f} sq ft"))
+    else:
+        facts += [("Suite", f"{u['suite']:,} sq ft"), ("Balcony", f"{u['balcony']:,} sq ft"),
+                  ("Total", f"{u['total']:,} sq ft · {round(u['total'] * 0.092903):,} m²")]
+    plan_img = os.path.join(SITE, "assets", "plans", f"{p['plans']}-{u['no']}.webp")
+    rows = "".join(f"<tr><td>{pc}%</td><td>{e(label)}</td><td class='r b'>AED {aed(disc * pc / 100)}</td></tr>" for pc, label in p["schedule"])
+    msg = f"Hi Sam, I'm interested in unit {u['no']} at {p['name']}. Is it still available?"
+    wa = WA + "?text=" + html.escape(__import__("urllib.parse").parse.quote(msg))
+    return f"""<section class=unitpage id="{anchor(p, u)}">
+  <div class=uhead><div><div class=eb>{e(p['name'])} · {e(p['area'])}</div>
+    <h1>Unit {e(u['no'])}</h1><div class=utype>{e(TYPE.get(u['type'].lower(), u['type']))}</div></div>
+    <a class=back href="#p-{p['plans']}">← Back to {e(p['name'])} list</a></div>
+  <dl class=facts>{''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts)}</dl>
+  <div class=pay>
+    <div class=card><div class=ck>{p['plan']} payment plan · with 4% discount</div>
+      <div class=cv>AED {aed(disc)}</div><div class=cs>Original price AED {aed(u['price'])} · discount up to 4%</div>
+      <table class=sch><tbody>{rows}</tbody></table></div>
+    <div class='card alt'><div class=ck>100% payment · {round(p['cash'] * 100)}% discount</div>
+      <div class=cv>AED {aed(cash)}</div><div class=cs>Saving AED {aed(u['price'] - cash)} on the original price</div>
+      <a class=ask href="{wa}">Ask Sam about unit {e(u['no'])} on WhatsApp</a></div>
+  </div>
+  {f'<div class=plan><img src="file://{plan_img}" alt=""></div>' if os.path.isfile(plan_img) else '<p class=note>Floor plan available on request.</p>'}
+</section>"""
 
 
 CSS = f"""
@@ -114,7 +154,44 @@ td{{padding:4px 6px;border-bottom:1px solid #e3e8e2;font-variant-numeric:tabular
 tr{{break-inside:avoid}} tbody tr:nth-child(even) td{{background:#f6f8f5}}
 .r{{text-align:right}} .b{{font-weight:700}} td.cash{{color:#9a5f48;font-weight:600}}
 .note{{margin-top:14px;font-size:7.5pt;color:#5b6b60;border-top:1px solid #dde4dc;padding-top:8px}}
+.top{{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid #1d3f2b;padding-bottom:8px;margin-bottom:12px}}
+.logo{{color:#9a5f48;font-family:Marcellus,serif;letter-spacing:.3em;font-size:13pt;line-height:1}}
+.logo small{{display:block;font-size:5.5pt;letter-spacing:.5em;margin-top:3px}}
+.agent{{text-align:right;line-height:1.3}} .agent b{{font-size:11pt}} .agent a{{color:#1d3f2b;font-weight:700;text-decoration:none}}
+.hint{{font-size:8pt;color:#5b6b60;margin:0 0 10px}}
+a.ulink{{color:#9a5f48;font-weight:700;text-decoration:underline}}
+.unitpage{{break-before:page}}
+.uhead{{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}}
+.uhead h1{{font-family:Marcellus,'DejaVu Serif',serif;font-weight:400;font-size:28pt;margin:4px 0 0;line-height:1}}
+.utype{{font-size:12pt;font-weight:600;margin-top:4px}}
+a.back{{font-size:9pt;font-weight:700;color:#1d3f2b;border:1px solid #1d3f2b;border-radius:99px;padding:4px 12px;text-decoration:none;white-space:nowrap}}
+.facts{{display:flex;flex-wrap:wrap;gap:6px 22px;margin:12px 0;padding:10px 0;border-block:1px solid #dde4dc}}
+.facts dt{{font-size:7pt;text-transform:uppercase;letter-spacing:.1em;color:#5b6b60}} .facts dd{{margin:0;font-weight:600}}
+.pay{{display:grid;grid-template-columns:1.3fr 1fr;gap:10px}}
+.card{{border:1px solid #dde4dc;border-radius:10px;padding:12px 14px;break-inside:avoid}}
+.card.alt{{background:#1d3f2b;color:#f2f5f0;border-color:#1d3f2b}}
+.ck{{font-size:7.5pt;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:#9a5f48}} .alt .ck{{color:#d79e85}}
+.cv{{font-family:Marcellus,serif;font-size:20pt;margin-top:2px}}
+.cs{{font-size:8pt;color:#5b6b60}} .alt .cs{{color:#b9c9bd}}
+table.sch{{margin-top:8px}} table.sch td{{padding:4px 4px}}
+a.ask{{display:inline-block;margin-top:12px;background:#c0866d;color:#1b120d;border-radius:99px;padding:5px 12px;font-weight:700;font-size:8.5pt;text-decoration:none}}
+.plan{{margin-top:12px;border:1px solid #dde4dc;border-radius:10px;overflow:hidden;text-align:center;break-inside:avoid}}
+.plan img{{max-width:100%;max-height:150mm;object-fit:contain}}
 """
+
+
+def direct_links(doc):
+    """Turn the browser's named jumps into plain page links, which every PDF viewer follows."""
+    names = doc.resolve_names()
+    for page in doc:
+        for link in page.get_links():
+            if link["kind"] != pymupdf.LINK_NAMED:
+                continue
+            target = names.get(link.get("nameddest") or link.get("name") or "")
+            if target is None:
+                continue
+            page.delete_link(link)
+            page.insert_link({"kind": pymupdf.LINK_GOTO, "from": link["from"], "page": target["page"], "to": pymupdf.Point(0, 0)})
 
 
 def stamp(doc):
@@ -130,7 +207,7 @@ def stamp(doc):
 def main(date):
     folder = os.path.join(REPO, "availability", date)
     pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.startswith("IMAN Availability"))
-    parts, sources = [], []
+    parts, sources, details = [], [], []
     for p in PROJECTS:
         f = next((f for f in pdfs if f.upper().startswith(p["match"])), None)
         if not f:
@@ -138,6 +215,7 @@ def main(date):
         units = parse(os.path.join(folder, f))
         if units:
             parts.append(section(p, units))
+            details += [detail(p, u) for u in sorted(units, key=lambda u: u["price"])]
             sources.append(os.path.join(folder, f))
             print(f"{p['name']}: {len(units)} units from {f}")
     d = "-".join(reversed(date.split("-")))
@@ -145,7 +223,11 @@ def main(date):
             "\"With 4% off\" shows the maximum discount on the payment plan (\"up to 4%\"); the 100% payment column applies to full payment. "
             "Final price, availability and offer terms are subject to confirmation at booking. Excludes DLD and registration fees. "
             "The original IMAN inventory lists are attached at the end of this file.")
-    page = f"<!doctype html><html><head><meta charset=utf-8><style>{CSS}</style></head><body>{''.join(parts)}<p class=note>{e(note)}</p></body></html>"
+    top = ("<div class=top><div class=logo>IMAN<small>DEVELOPERS</small></div>"
+           f"<div class=agent><b>Sam Jabr</b> · Senior Sales Manager<br><a href='{WA}'>WhatsApp +971 50 175 2771</a></div></div>"
+           "<p class=hint>Tap a unit number to see its payment plan and floor plan.</p>")
+    page = (f"<!doctype html><html><head><meta charset=utf-8><style>{CSS}</style></head><body>{top}{''.join(parts)}"
+            f"<p class=note>{e(note)}</p>{''.join(details)}</body></html>")
     tmp_html = os.path.join(folder, ".offers.html")
     tmp_pdf = os.path.join(folder, ".offers.pdf")
     open(tmp_html, "w").write(page)
@@ -160,9 +242,11 @@ def main(date):
     doc = pymupdf.open(tmp_pdf)
     for s in sources:
         doc.insert_pdf(pymupdf.open(s))
+    direct_links(doc)
     stamp(doc)
     doc.set_metadata({"title": f"IMAN Availability & Offers · {d.replace('-', '.')}", "author": "Sam Jabr, IMAN Developers"})
     out = os.path.join(folder, f"IMAN Availability & Offers - Sam Jabr - {d.replace('-', '.')}.pdf")
+    doc.rewrite_images(dpi_threshold=170, dpi_target=150, quality=72)  # keeps the file small enough for WhatsApp
     doc.save(out, garbage=4, deflate=True)
     os.remove(tmp_html)
     os.remove(tmp_pdf)
