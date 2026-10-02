@@ -89,12 +89,12 @@ def table(p, units):
 
 
 def section(p, units):
-    links = [f"<a href='{p['loc']}'>📍 Location</a>"] + ([f"<a href='{p['mkt']}'>📁 Marketing materials</a>"] if p["mkt"] else [])
+    links = [f"<a href='{p['loc']}'>Location ↗</a>"] + ([f"<a href='{p['mkt']}'>Marketing materials ↗</a>"] if p["mkt"] else [])
     n = len(units)
     return f"""<section class=proj id="p-{p['plans']}"><div class=ph><img src="file://{os.path.join(SITE, p['img'])}" alt="">
   <div class=pt><div class=eb>{e(p['area'])} · {n} unit{'s' if n > 1 else ''} available</div><h2>{e(p['name'])}</h2>
   <ul class=offer>{''.join(f'<li>{e(o)}</li>' for o in p['offer'])}</ul>
-  {f"<div class=bonus>🔥 {e(p['bonus'])}</div>" if p.get('bonus') else ''}
+  {f"<div class=bonus>{e(p['bonus'])}</div>" if p.get('bonus') else ''}
   <div class=links>{' '.join(links)}</div></div></div>{table(p, units)}</section>"""
 
 
