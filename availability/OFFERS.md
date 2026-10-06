@@ -25,7 +25,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9
 - Marketing: https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing
 
-## Oxford Cove, JVC (1 October 2026)
+## Oxford Cove, JVC (6 October 2026: units G12, 313, 337)
 
 - 50/50 payment plan, up to 4% discount.
 - 14% discount on 100% payment.
