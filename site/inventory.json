@@ -615,7 +615,8 @@
      "plan": "40-60-instalments",
      "planImg": "assets/plans/sierra-by-iman-208.webp",
      "planSrc": "https://drive.google.com/file/d/1Pl9WREE7u_sOXiq6EOdMUlBDsi2rL9q2/view",
-     "status": "Available"
+     "status": "Available",
+     "cash": 0.22
     }
    ],
    "listDate": "2026-10-06",
@@ -630,8 +631,12 @@
      "o2"
     ],
     [
+     "22%",
+     "o4res"
+    ],
+    [
      "18%",
-     "o4"
+     "o4ret"
     ],
     [
      "7%",
