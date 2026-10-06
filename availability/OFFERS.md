@@ -27,8 +27,9 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 
 ## Oxford Cove, JVC (6 October 2026: units G12, 313, 337)
 
-- 50/50 payment plan, up to 4% discount.
-- 14% discount on 100% payment.
+- 4% discount.
+- 50/50 payment plan.
+- 14% discount on full cash payment.
 - Broker commission: 7%.
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ

@@ -442,7 +442,7 @@
    "handover": "To be confirmed",
    "progress": null,
    "image": "assets/oxford-cove-main.webp",
-   "mapUrl": "https://www.google.com/maps?cid=457684984549876349",
+   "mapUrl": "https://maps.app.goo.gl/orznbkhTdke94kGM7",
    "source": "https://www.imandevelopers.com/iman-properties/oxford-cove",
    "kind": "Residences",
    "units": [
@@ -493,7 +493,9 @@
     }
    ],
    "listDate": "2026-10-06",
-   "cash": 0.14
+   "cash": 0.14,
+   "discount": 0.04,
+   "marketing": "https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"
   },
   {
    "id": "sierra-by-iman",

@@ -29,7 +29,7 @@ PROJECTS = [
          loc="https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9",
          mkt="https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing"),
     dict(match="OXFORD COVE", name="Oxford Cove", area="Jumeirah Village Circle (JVC)", img="assets/oxford-cove-main.webp",
-         offer=["50/50 payment plan", "Up to 4% discount", "14% discount on 100% payment", "7% commission"],
+         offer=["4% discount", "50/50 payment plan", "14% discount on full cash payment", "7% commission"],
          plan="50/50", cash=0.14, plans="oxford-cove", loc="https://maps.app.goo.gl/orznbkhTdke94kGM7",
          schedule=[(50, "In instalments before handover"), (50, "On handover")],
          mkt="https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"),
