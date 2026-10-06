@@ -20,7 +20,7 @@ AGENT = "Sam Jabr · Senior Sales Manager · OG Team · IMAN Developers · Whats
 WA = "https://wa.me/971501752771"
 
 # match: start of the inventory PDF file name. cash: discount on 100% payment.
-# schedule: payment plan milestones. plans: floor plan file prefix in site/assets/plans/.
+# disc: discount on the payment plan (default 4%). schedule: payment plan milestones. plans: floor plan file prefix in site/assets/plans/.
 PROJECTS = [
     dict(match="113", name="113 Residences", area="Al Sufouh Gardens", img="img/113-residences.jpg",
          offer=["From AED 2M", "4% discount", "40/60 payment plan", "14% discount on full cash payment", "7% commission"],
@@ -34,8 +34,8 @@ PROJECTS = [
          schedule=[(50, "In instalments before handover"), (50, "On handover")],
          mkt="https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"),
     dict(match="SIERRA RESIDENTIAL", key="sierra-res", name="Sierra by Iman · Residential", area="Motor City", img="assets/sierra-by-iman-main.webp",
-         offer=["4% discount", "40/60 payment plan", "22% discount on full cash payment", "7% commission"],
-         plan="40/60", cash=0.22, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
+         offer=["8% discount", "40/60 payment plan", "22% discount on full cash payment", "7% commission"],
+         plan="40/60", disc=0.08, cash=0.22, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
          schedule=[(40, "In instalments before handover"), (60, "On handover")]),
     dict(match="SIERRA RETAIL", key="sierra-retail", name="Sierra by Iman · Retail", area="Motor City", img="assets/sierra-by-iman-main.webp",
          offer=["4% discount", "40/60 payment plan", "18% discount on full cash payment", "7% commission"],
@@ -81,7 +81,7 @@ def table(p, units):
     retail = us[0]["type"] == "Retail"
     head = ("<tr><th>Unit</th><th>Floor</th><th>Type</th><th>View</th>"
             + ("<th class=r>Area (sq ft)</th>" if retail else "<th class=r>Suite</th><th class=r>Balcony</th><th class=r>Total sq ft</th>")
-            + f"<th class=r>Price (AED)</th><th class=r>{p['plan']} with 4% off</th><th class=r>100% payment, {round(p['cash']*100)}% off</th></tr>")
+            + f"<th class=r>Price (AED)</th><th class=r>{p['plan']} with {round(p.get('disc', DISC)*100)}% off</th><th class=r>100% payment, {round(p['cash']*100)}% off</th></tr>")
     rows = []
     for u in us:
         size = (f"<td class=r>{u['total']:,.2f}</td>" if retail else
@@ -89,7 +89,7 @@ def table(p, units):
         fl = "G" if u["floor"].lower().startswith("ground") else u["floor"].split()[0]
         rows.append(f"<tr><td><a class=ulink href='#{anchor(p, u)}'>{e(u['no'])}</a></td><td>{fl}</td><td>{e(TYPE.get(u['type'].lower(), u['type']))}</td>"
                     f"<td>{e(u['view'])}</td>{size}<td class='r b'>{aed(u['price'])}</td>"
-                    f"<td class=r>{aed(u['price'] * (1 - DISC))}</td><td class='r cash'>{aed(u['price'] * (1 - p['cash']))}</td></tr>")
+                    f"<td class=r>{aed(u['price'] * (1 - p.get('disc', DISC)))}</td><td class='r cash'>{aed(u['price'] * (1 - p['cash']))}</td></tr>")
     return f"<table><thead>{head}</thead><tbody>{''.join(rows)}</tbody></table>"
 
 
@@ -106,7 +106,8 @@ def section(p, units):
 def detail(p, u):
     """One page per unit: facts, payment plan with amounts, and the floor plan."""
     retail = u["type"] == "Retail"
-    disc = u["price"] * (1 - DISC)
+    pd = p.get("disc", DISC)
+    disc = u["price"] * (1 - pd)
     cash = u["price"] * (1 - p["cash"])
     fl = u["floor"]
     facts = [("Floor", fl), ("View", u["view"])]
@@ -125,8 +126,8 @@ def detail(p, u):
     <a class=back href="#p-{p.get('key', p['plans'])}">← Back to {e(p['name'])} list</a></div>
   <dl class=facts>{''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts)}</dl>
   <div class=pay>
-    <div class=card><div class=ck>{p['plan']} payment plan · 4% discount</div>
-      <div class=cv>AED {aed(disc)}</div><div class=cs>Original price AED {aed(u['price'])} · 4% discount</div>
+    <div class=card><div class=ck>{p['plan']} payment plan · {round(pd*100)}% discount</div>
+      <div class=cv>AED {aed(disc)}</div><div class=cs>Original price AED {aed(u['price'])} · {round(pd*100)}% discount</div>
       <table class=sch><tbody>{rows}</tbody></table></div>
     <div class='card alt'><div class=ck>100% payment · {round(p['cash'] * 100)}% discount</div>
       <div class=cv>AED {aed(cash)}</div><div class=cs>Saving AED {aed(u['price'] - cash)} on the original price</div>
@@ -227,7 +228,7 @@ def main(date):
             print(f"{p['name']}: {len(units)} units from {f}")
     d = "-".join(reversed(date.split("-")))
     note = (f"Prices in AED as listed in IMAN's inventory dated {d.replace('-', '.')}, sorted from lowest price. "
-            "\"With 4% off\" is the price on the payment plan after the 4% discount; the 100% payment column applies to full cash payment. "
+            "The payment plan column shows the price after that project's plan discount; the 100% payment column applies to full cash payment. "
             "Final price, availability and offer terms are subject to confirmation at booking. Excludes DLD and registration fees. "
             "The original IMAN inventory lists are attached at the end of this file.")
     top = ("<div class=top><div class=logo>IMAN<small>DEVELOPERS</small></div>"

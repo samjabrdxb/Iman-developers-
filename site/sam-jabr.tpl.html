@@ -348,7 +348,7 @@ const T = {
   stNew:"New release",stCon:"Under construction",stReady:"Completed",handover:"Handover",built:p=>`${p}% built`,nUnits:n=>`${n} units available`,from:"From",
   r113about:"A collection of 113 residences in Al Sufouh combining fluid architecture, expansive layouts and refined finishes, facing Al Sufouh Community Park. Building: B + G + 9.",
   f1:"Hafele smart door locks and European kitchen appliances",f2:"Lagoon pool, rooftop infinity pool, fitness centre and yoga room",
-  upTo:"Up to 4%",o4res:"Full cash discount, residential",o4ret:"Full cash discount, retail",o1x:"Discount from original price",off4:"4% off",discOC:"Prices include the 4% discount on the 50/50 plan.",o1:"Off the original price",o4:"Discount on full cash payment",bonus:"Broker bonus: 3 units = AED 50K · 5 units = AED 100K",cashLine:(pc,v)=>`100% payment (${pc}% off): ${v}`,cashH:pc=>`100% payment · ${pc}% discount`,o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
+  upTo:"Up to 4%",o4res:"Full cash discount, residential",o4ret:"Full cash discount, retail",o1x:"Discount from original price",offN:n=>`${n}% off`,o1res:"Discount on 40/60, residential",o1ret:"Discount on 40/60, retail",discSierra:"Prices include the 40/60 plan discount shown on each unit (8% residential, 4% retail).",discOC:"Prices include the 4% discount on the 50/50 plan.",o1:"Off the original price",o4:"Discount on full cash payment",bonus:"Broker bonus: 3 units = AED 50K · 5 units = AED 100K",cashLine:(pc,v)=>`100% payment (${pc}% off): ${v}`,cashH:pc=>`100% payment · ${pc}% discount`,o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
   schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",listOf:d=>`List of ${d}`,all:"All",
   plansFrom:"Plans offered",projNote:"Each unit is sold on the payment plan shown on its card. Confirm the latest status with Sam before booking.",
   disc113:"Prices include the 4% discount on the 40/60 plan.",
@@ -374,7 +374,7 @@ const T = {
   stNew:"إطلاق جديد",stCon:"قيد الإنشاء",stReady:"مكتمل",handover:"التسليم",built:p=>`نسبة الإنجاز ${p}%`,nUnits:n=>`${n} وحدة متاحة`,from:"ابتداءً من",
   r113about:"مجموعة من 113 وحدة سكنية في الصفوح، تجمع بين العمارة الانسيابية والمساحات الواسعة والتشطيبات الراقية، مقابل حديقة الصفوح المجتمعية. المبنى: قبو + أرضي + 9.",
   f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون، مسبح لا متناهٍ على السطح، نادٍ رياضي وغرفة يوغا",
-  upTo:"لحد 4%",o4res:"خصم الكاش للسكني",o4ret:"خصم الكاش للمحلات",o1x:"خصم من السعر الأصلي",off4:"خصم 4%",discOC:"الأسعار شاملة خصم 4% على خطة 50/50.",o1:"خصم من السعر الأصلي",o4:"خصم عند الدفع الكامل كاش",bonus:"بونص للوسطاء: 3 وحدات = 50 ألف درهم · 5 وحدات = 100 ألف درهم",cashLine:(pc,v)=>`الدفع الكامل (خصم ${pc}%): ${v}`,cashH:pc=>`الدفع الكامل · خصم ${pc}%`,o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
+  upTo:"لحد 4%",o4res:"خصم الكاش للسكني",o4ret:"خصم الكاش للمحلات",o1x:"خصم من السعر الأصلي",offN:n=>`خصم ${n}%`,o1res:"خصم على 40/60 للسكني",o1ret:"خصم على 40/60 للمحلات",discSierra:"الأسعار شاملة خصم خطة 40/60 المذكور على كل وحدة (8% للسكني، 4% للمحلات).",discOC:"الأسعار شاملة خصم 4% على خطة 50/50.",o1:"خصم من السعر الأصلي",o4:"خصم عند الدفع الكامل كاش",bonus:"بونص للوسطاء: 3 وحدات = 50 ألف درهم · 5 وحدات = 100 ألف درهم",cashLine:(pc,v)=>`الدفع الكامل (خصم ${pc}%): ${v}`,cashH:pc=>`الدفع الكامل · خصم ${pc}%`,o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
   schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",listOf:d=>`قائمة ${d}`,all:"الكل",
   plansFrom:"خطط الدفع",projNote:"كل وحدة تُباع بخطة الدفع المذكورة على بطاقتها. تأكد من آخر حالة مع سام قبل الحجز.",
   disc113:"الأسعار شاملة خصم 4% على خطة 40/60.",
@@ -404,7 +404,7 @@ const CUR=[["AED",1],["USD",1/3.6725],["EUR",0.24],["GBP",0.206],["SAR",3.75/3.6
 
 const PROJ=INV.projects;
 const byId=Object.fromEntries(PROJ.map(p=>[p.id,p]));
-const UNITS=PROJ.flatMap(p=>p.units.map(u=>({...u,pid:p.id,pname:p.name,key:p.id+"|"+u.no,p:Math.round(u.op*(1-(p.discount||0))),disc:!!p.discount,cash:(u.cash??p.cash)||0,cashP:(u.cash??p.cash)?Math.round(u.op*(1-(u.cash??p.cash))):null})));
+const UNITS=PROJ.flatMap(p=>p.units.map(u=>({...u,pid:p.id,pname:p.name,key:p.id+"|"+u.no,p:Math.round(u.op*(1-((u.discount??p.discount)||0))),disc:(u.discount??p.discount)||0,cash:(u.cash??p.cash)||0,cashP:(u.cash??p.cash)?Math.round(u.op*(1-(u.cash??p.cash))):null})));
 const typeKey=u=>u.type.toLowerCase();
 
 const st={lang:"en",cur:"AED",open:{},filter:{}};
@@ -444,7 +444,7 @@ function unitsBlock(p){
   return `<div><h4 class="h4">${t("unitsH")}</h4>${p.listDate?`<p class="sub" style="margin:-6px 0 12px">${T[st.lang].listOf(dateName(p.listDate))}</p>`:""}${chips}<div class="units">${list.map(u=>{
     const meta=[floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · ");
     return `<article class="unit">
-      <div class="u-top"><span class="u-no num">${esc(u.no)}</span><span class="tag ${u.plan==="cash"?"cash":""}">${(t("plan")[u.plan]||"")+(u.disc&&u.plan!=="113"?" · "+t("off4"):"")}</span></div>
+      <div class="u-top"><span class="u-no num">${esc(u.no)}</span><span class="tag ${u.plan==="cash"?"cash":""}">${(t("plan")[u.plan]||"")+(u.disc&&u.plan!=="113"?" · "+T[st.lang].offN(Math.round(u.disc*100)):"")}</span></div>
       <span class="u-type">${esc(typeName(typeKey(u)))}</span>
       ${meta?`<span class="u-meta">${esc(meta)}</span>`:""}
       <span class="u-meta num">${fmt(u.area)} ${t("sqft")} · ${fmt(u.area*0.092903)} m²${u.balcony?` (${t("suite")} ${fmt(u.suite)} + ${t("balcony")} ${fmt(u.balcony)})`:""}</span>
@@ -455,7 +455,7 @@ function unitsBlock(p){
         ${u.planImg?`<button data-plan="${esc(u.key)}">${t("floorPlan")}</button>`:""}
         <button data-pay="${esc(u.key)}">${t("payments")}</button>
         <a href="${waHref(T[st.lang].msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">${t("wa")}</a>
-      </div></article>`}).join("")}</div><p class="note">${p.id==="113-residences"?t("disc113")+" ":p.id==="sierra-by-iman"?t("disc113")+" ":p.discount?t("discOC")+" ":""}${t("projNote")}</p></div>`;
+      </div></article>`}).join("")}</div><p class="note">${p.id==="113-residences"?t("disc113")+" ":p.id==="sierra-by-iman"?t("discSierra")+" ":p.discount?t("discOC")+" ":""}${t("projNote")}</p></div>`;
 }
 
 function intro113(){
@@ -539,7 +539,7 @@ document.addEventListener("click",e=>{
       `<span>${t("fpNote")}</span>${u.planSrc?`<a href="${esc(u.planSrc)}" target="_blank" rel="noopener">${t("fpSrc")}</a>`:""}`);return}
   const pa=e.target.closest("[data-pay]");
   if(pa){const u=UNITS.find(x=>x.key===pa.dataset.pay);
-    openDlg(`${u.pname} · ${t("unit")} ${u.no}`,`<div class="pay"><span class="tag ${u.plan==="cash"?"cash":""}">${(t("plan")[u.plan]||"")+(u.disc&&u.plan!=="113"?" · "+t("off4"):"")}</span>
+    openDlg(`${u.pname} · ${t("unit")} ${u.no}`,`<div class="pay"><span class="tag ${u.plan==="cash"?"cash":""}">${(t("plan")[u.plan]||"")+(u.disc&&u.plan!=="113"?" · "+T[st.lang].offN(Math.round(u.disc*100)):"")}</span>
       <div class="total num">${money(u.p)}</div>${u.disc?`<span class="u-op num">${t("op")} <s>${money(u.op)}</s></span>`:""}
       <div class="sched num">${schedule(u).map(([pc,l])=>`<div><span>${pc}% · ${esc(l)}</span><b>${money(u.p*pc/100)}</b></div>`).join("")}</div>
       ${u.cashP?`<div class="cashbox num"><span>${T[st.lang].cashH(Math.round(u.cash*100))}</span><b>${money(u.cashP)}</b></div>`:""}</div>`,
