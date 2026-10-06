@@ -34,10 +34,10 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ
 
-## Sierra by Iman, retail (1 October 2026)
+## Sierra by Iman (retail list 1 October 2026, residential list 6 October 2026: unit 208)
 
 - 4% discount on the 40/60 payment plan.
-- 18% discount on full cash payment.
+- 18% discount on full cash payment (confirmed for retail; applied to residential too until told otherwise).
 - Broker commission: 7%.
 
 ## Payment plans in the 30 September 2026 lists

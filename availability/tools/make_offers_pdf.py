@@ -33,7 +33,11 @@ PROJECTS = [
          plan="50/50", cash=0.14, plans="oxford-cove", loc="https://maps.app.goo.gl/orznbkhTdke94kGM7",
          schedule=[(50, "In instalments before handover"), (50, "On handover")],
          mkt="https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"),
-    dict(match="SIERRA", name="Sierra by Iman · Retail", area="Motor City", img="assets/sierra-by-iman-main.webp",
+    dict(match="SIERRA RESIDENTIAL", key="sierra-res", name="Sierra by Iman · Residential", area="Motor City", img="assets/sierra-by-iman-main.webp",
+         offer=["4% discount", "40/60 payment plan", "18% discount on full cash payment", "7% commission"],
+         plan="40/60", cash=0.18, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
+         schedule=[(40, "In instalments before handover"), (60, "On handover")]),
+    dict(match="SIERRA RETAIL", key="sierra-retail", name="Sierra by Iman · Retail", area="Motor City", img="assets/sierra-by-iman-main.webp",
          offer=["4% discount", "40/60 payment plan", "18% discount on full cash payment", "7% commission"],
          plan="40/60", cash=0.18, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
          schedule=[(40, "In instalments before handover"), (60, "On handover")]),
@@ -45,7 +49,7 @@ TYPE = {"one bedroom with study": "1 BR + Study", "two bedroom": "2 BR", "two be
 e = html.escape
 num = lambda s: float(s.replace(",", ""))
 aed = lambda n: f"{round(n):,}"
-anchor = lambda p, u: f"u-{p['plans']}-{u['no']}"
+anchor = lambda p, u: f"u-{p.get('key', p['plans'])}-{u['no']}"
 DISC = 0.04
 
 
@@ -65,8 +69,9 @@ def parse(path):
     while i + 10 < len(lines) and lines[i].upper() == project:
         no, fl, _cat, view, typ, s, b, tot, price, status = lines[i + 1:i + 11]
         if status.lower() == "available":
-            units.append(dict(no=no, floor=fl, view=view, type=typ, suite=int(num(s)), balcony=int(num(b)),
-                              total=int(num(tot)), price=num(price)))
+            whole = lambda v: int(v) if v == int(v) else v
+            units.append(dict(no=no, floor=fl, view=view, type=typ, suite=whole(num(s)), balcony=whole(num(b)),
+                              total=whole(num(tot)), price=num(price)))
         i += 11
     return units
 
@@ -91,7 +96,7 @@ def table(p, units):
 def section(p, units):
     links = [f"<a href='{p['loc']}'>Location ↗</a>"] + ([f"<a href='{p['mkt']}'>Marketing materials ↗</a>"] if p["mkt"] else [])
     n = len(units)
-    return f"""<section class=proj id="p-{p['plans']}"><div class=ph><img src="file://{os.path.join(SITE, p['img'])}" alt="">
+    return f"""<section class=proj id="p-{p.get('key', p['plans'])}"><div class=ph><img src="file://{os.path.join(SITE, p['img'])}" alt="">
   <div class=pt><div class=eb>{e(p['area'])} · {n} unit{'s' if n > 1 else ''} available</div><h2>{e(p['name'])}</h2>
   <ul class=offer>{''.join(f'<li>{e(o)}</li>' for o in p['offer'])}</ul>
   {f"<div class=bonus>{e(p['bonus'])}</div>" if p.get('bonus') else ''}
@@ -117,7 +122,7 @@ def detail(p, u):
     return f"""<section class=unitpage id="{anchor(p, u)}">
   <div class=uhead><div><div class=eb>{e(p['name'])} · {e(p['area'])}</div>
     <h1>Unit {e(u['no'])}</h1><div class=utype>{e(TYPE.get(u['type'].lower(), u['type']))}</div></div>
-    <a class=back href="#p-{p['plans']}">← Back to {e(p['name'])} list</a></div>
+    <a class=back href="#p-{p.get('key', p['plans'])}">← Back to {e(p['name'])} list</a></div>
   <dl class=facts>{''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts)}</dl>
   <div class=pay>
     <div class=card><div class=ck>{p['plan']} payment plan · 4% discount</div>
@@ -211,7 +216,7 @@ def main(date):
     pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.startswith("IMAN Availability"))
     parts, sources, details = [], [], []
     for p in PROJECTS:
-        f = next((f for f in pdfs if f.upper().startswith(p["match"])), None)
+        f = next((f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")), None)
         if not f:
             continue
         units = parse(os.path.join(folder, f))

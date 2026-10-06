@@ -601,9 +601,24 @@
      "planImg": "assets/plans/sierra-by-iman-RETAIL-5.webp",
      "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
      "status": "Available"
+    },
+    {
+     "no": "208",
+     "floor": "2nd Floor",
+     "cat": "Apartment",
+     "type": "Two Bedroom",
+     "view": "Pool View",
+     "suite": 864.88,
+     "balcony": 197.73,
+     "area": 1062.51,
+     "op": 1930237.05,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-208.webp",
+     "planSrc": "https://drive.google.com/file/d/1Pl9WREE7u_sOXiq6EOdMUlBDsi2rL9q2/view",
+     "status": "Available"
     }
    ],
-   "listDate": "2026-10-01",
+   "listDate": "2026-10-06",
    "cash": 0.18,
    "tiles": [
     [
