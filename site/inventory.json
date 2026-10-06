@@ -495,7 +495,25 @@
    "listDate": "2026-10-06",
    "cash": 0.14,
    "discount": 0.04,
-   "marketing": "https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"
+   "marketing": "https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ",
+   "tiles": [
+    [
+     "4%",
+     "o1x"
+    ],
+    [
+     "50/50",
+     "o2"
+    ],
+    [
+     "14%",
+     "o4"
+    ],
+    [
+     "7%",
+     "o3"
+    ]
+   ]
   },
   {
    "id": "sierra-by-iman",
@@ -586,7 +604,26 @@
     }
    ],
    "listDate": "2026-10-01",
-   "cash": 0.18
+   "cash": 0.18,
+   "tiles": [
+    [
+     "4%",
+     "o1x"
+    ],
+    [
+     "40/60",
+     "o2"
+    ],
+    [
+     "18%",
+     "o4"
+    ],
+    [
+     "7%",
+     "o3"
+    ]
+   ],
+   "discount": 0.04
   },
   {
    "id": "15-cascade",

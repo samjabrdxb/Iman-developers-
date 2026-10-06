@@ -23,7 +23,7 @@ WA = "https://wa.me/971501752771"
 # schedule: payment plan milestones. plans: floor plan file prefix in site/assets/plans/.
 PROJECTS = [
     dict(match="113", name="113 Residences", area="Al Sufouh Gardens", img="img/113-residences.jpg",
-         offer=["From AED 2M", "40/60 payment plan", "Up to 4% discount", "14% discount on 100% payment", "7% commission"],
+         offer=["From AED 2M", "4% discount", "40/60 payment plan", "14% discount on full cash payment", "7% commission"],
          bonus="Bonus: 3 units = AED 50K · 5 units = AED 100K", plan="40/60", cash=0.14, plans="113-residences",
          schedule=[(20, "Within 30 days of booking"), (10, "Within 90 days of booking"), (10, "At 40% construction"), (60, "On handover")],
          loc="https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9",
@@ -34,7 +34,7 @@ PROJECTS = [
          schedule=[(50, "In instalments before handover"), (50, "On handover")],
          mkt="https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ"),
     dict(match="SIERRA", name="Sierra by Iman · Retail", area="Motor City", img="assets/sierra-by-iman-main.webp",
-         offer=["40/60 payment plan", "Up to 4% discount", "18% discount on full cash payment", "7% commission"],
+         offer=["4% discount", "40/60 payment plan", "18% discount on full cash payment", "7% commission"],
          plan="40/60", cash=0.18, plans="sierra-by-iman", loc="https://www.google.com/maps?cid=2303450858755146668", mkt=None,
          schedule=[(40, "In instalments before handover"), (60, "On handover")]),
 ]
@@ -120,8 +120,8 @@ def detail(p, u):
     <a class=back href="#p-{p['plans']}">← Back to {e(p['name'])} list</a></div>
   <dl class=facts>{''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts)}</dl>
   <div class=pay>
-    <div class=card><div class=ck>{p['plan']} payment plan · with 4% discount</div>
-      <div class=cv>AED {aed(disc)}</div><div class=cs>Original price AED {aed(u['price'])} · discount up to 4%</div>
+    <div class=card><div class=ck>{p['plan']} payment plan · 4% discount</div>
+      <div class=cv>AED {aed(disc)}</div><div class=cs>Original price AED {aed(u['price'])} · 4% discount</div>
       <table class=sch><tbody>{rows}</tbody></table></div>
     <div class='card alt'><div class=ck>100% payment · {round(p['cash'] * 100)}% discount</div>
       <div class=cv>AED {aed(cash)}</div><div class=cs>Saving AED {aed(u['price'] - cash)} on the original price</div>
@@ -222,7 +222,7 @@ def main(date):
             print(f"{p['name']}: {len(units)} units from {f}")
     d = "-".join(reversed(date.split("-")))
     note = (f"Prices in AED as listed in IMAN's inventory dated {d.replace('-', '.')}, sorted from lowest price. "
-            "\"With 4% off\" shows the maximum discount on the payment plan (\"up to 4%\"); the 100% payment column applies to full payment. "
+            "\"With 4% off\" is the price on the payment plan after the 4% discount; the 100% payment column applies to full cash payment. "
             "Final price, availability and offer terms are subject to confirmation at booking. Excludes DLD and registration fees. "
             "The original IMAN inventory lists are attached at the end of this file.")
     top = ("<div class=top><div class=logo>IMAN<small>DEVELOPERS</small></div>"

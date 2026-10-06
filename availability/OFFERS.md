@@ -13,12 +13,12 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 
 ## 113 Residences, Al Sufouh Gardens (1 October 2026)
 
-- From AED 2M. 40/60 payment plan, up to 4% discount.
+- From AED 2M. 4% discount on the 40/60 payment plan.
   - 20% within 30 days of booking
   - 10% within 90 days of booking
   - 10% at 40% construction
   - 60% on handover
-- 14% discount on 100% payment.
+- 14% discount on full cash payment.
 - Broker commission: 7%.
 - Bonus: 3 units = AED 50K, 5 units = AED 100K.
 - Handover: Q2 2029.
@@ -36,7 +36,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 
 ## Sierra by Iman, retail (1 October 2026)
 
-- 40/60 payment plan, up to 4% discount.
+- 4% discount on the 40/60 payment plan.
 - 18% discount on full cash payment.
 - Broker commission: 7%.
 
