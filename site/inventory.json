@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-10-01",
+ "inventoryDate": "2026-10-06",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -431,7 +431,7 @@
     }
    ],
    "discount": 0.04,
-   "listDate": "2026-09-30"
+   "listDate": "2026-10-01"
   },
   {
    "id": "oxford-cove",
@@ -446,21 +446,6 @@
    "kind": "Residences",
    "units": [
     {
-     "no": "312",
-     "floor": "3rd Floor",
-     "cat": "Apartment",
-     "type": "Studio",
-     "view": "Pool View",
-     "suite": 330.0,
-     "balcony": 82.0,
-     "area": 412.0,
-     "op": 865200.0,
-     "plan": "50-50-instalments",
-     "planImg": "assets/plans/oxford-cove-312.webp",
-     "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view?usp=drivesdk",
-     "status": "Available"
-    },
-    {
      "no": "G12",
      "floor": "Ground Floor",
      "cat": "Apartment",
@@ -474,9 +459,39 @@
      "planImg": "assets/plans/oxford-cove-G12.webp",
      "planSrc": "https://drive.google.com/file/d/1wlA-Bs5-Hr8mLm9eR32g-8R-RtZiFpEI/view?usp=drivesdk",
      "status": "Available"
+    },
+    {
+     "no": "313",
+     "floor": "3rd Floor",
+     "cat": "Apartment",
+     "type": "Studio",
+     "view": "Pool View",
+     "suite": 330,
+     "balcony": 84,
+     "area": 414,
+     "op": 869400.0,
+     "plan": "50-50-instalments",
+     "planImg": "assets/plans/oxford-cove-313.webp",
+     "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view",
+     "status": "Available"
+    },
+    {
+     "no": "337",
+     "floor": "3rd Floor",
+     "cat": "Apartment",
+     "type": "One Bedroom",
+     "view": "Community View",
+     "suite": 636,
+     "balcony": 167,
+     "area": 803,
+     "op": 1290019.5,
+     "plan": "50-50-instalments",
+     "planImg": "assets/plans/oxford-cove-337.webp",
+     "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view",
+     "status": "Available"
     }
    ],
-   "listDate": "2026-10-01"
+   "listDate": "2026-10-06"
   },
   {
    "id": "sierra-by-iman",
@@ -566,7 +581,7 @@
      "status": "Available"
     }
    ],
-   "listDate": "2026-09-30"
+   "listDate": "2026-10-01"
   },
   {
    "id": "15-cascade",
