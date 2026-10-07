@@ -230,14 +230,14 @@ def detail(p, u):
 
 
 def cover(date_long, parts):
-    best = max(p["cash"] for p, _ in parts)
+    best = max((p for p, _ in parts), key=lambda p: p["cash"])
     n = sum(len(us) for _, us in parts)
     return f"""<section class=cover><img class=bg src="{jpg(os.path.join(SITE, 'img', '113-residences.jpg'))}" alt="">
   <div class=cin>
     <div class=logo>IMAN<small>DEVELOPERS</small></div>
     <div class=ct><div class=eb>Partner availability · {e(date_long)}</div><h1>Availability<br>&amp; Offers</h1>
       <div class=cp>{' · '.join(e(p['name'].split(' · ')[0]) for p in dict((p['plans'], p) for p, _ in parts).values())}</div>
-      <ul class=hl3><li><b>{round(COMMISSION * 100)}%</b>commission</li><li><b>{n}</b>units available</li><li><b>Up to {round(best * 100)}%</b>off on full cash</li></ul></div>
+      <ul class=hl3><li><b>{round(COMMISSION * 100)}%</b>commission</li><li><b>{n}</b>units available</li><li><b>{round(best['cash'] * 100)}%</b>off full cash · {e(best['name'].replace(' by Iman · ', ' '))} only</li></ul></div>
     <div class=me><img src="{jpg(os.path.join(SITE, 'img', 'sam-jabr.jpg'), 300)}" alt="">
       <div><b>Sam Jabr</b> <span class=og>OG TEAM</span><br><span>Senior Sales Manager · IMAN Developers</span><br>
       <a href="{WA}">WhatsApp +971 50 175 2771</a></div></div>
