@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-10-06",
+ "inventoryDate": "2026-10-07",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -618,9 +618,26 @@
      "status": "Available",
      "cash": 0.22,
      "discount": 0.08
+    },
+    {
+     "no": "3005",
+     "floor": "30th Floor",
+     "cat": "Apartment",
+     "type": "Two Bedroom",
+     "view": "Pool View",
+     "suite": 865.2,
+     "balcony": 197.52,
+     "area": 1062.72,
+     "op": 1902535.95,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-3005.webp",
+     "planSrc": "https://drive.google.com/file/d/1mD40r0qB1ige_mqjB8Wh5irBVtKHBkOf/view",
+     "status": "Available",
+     "discount": 0.08,
+     "cash": 0.22
     }
    ],
-   "listDate": "2026-10-06",
+   "listDate": "2026-10-07",
    "cash": 0.18,
    "tiles": [
     [
