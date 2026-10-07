@@ -230,14 +230,25 @@ def detail(p, u):
 
 
 def cover(date_long, parts):
-    best = max((p for p, _ in parts), key=lambda p: p["cash"])
+    """Cover: title and Sam on the left; one photo per project on the right, each labelled with its own offer."""
     n = sum(len(us) for _, us in parts)
-    return f"""<section class=cover><img class=bg src="{jpg(os.path.join(SITE, 'img', '113-residences.jpg'))}" alt="">
+    byproj = {}
+    for p, us in parts:
+        byproj.setdefault(p["plans"], []).append(p)
+    panels = []
+    for ps in byproj.values():
+        title = ps[0]["name"].split(" · ")[0]
+        lines = "".join(f"<div>{e(p['name'].split(' · ')[1]) + ': ' if len(ps) > 1 else ''}<b>{round(p.get('disc', DISC) * 100)}% off</b> on {p['plan']}"
+                        f" · <b>{round(p['cash'] * 100)}% off</b> full cash</div>" for p in ps)
+        panels.append(f"<a class=cpanel href='#p-{key(ps[0])}'><img src=\"{jpg(os.path.join(SITE, ps[0]['img']), 1000)}\" alt=''>"
+                      f"<div class=cap><b class=cn>{e(title)}</b>{lines}</div></a>")
+    return f"""<section class=cover><div class=stack>{''.join(panels)}</div>
   <div class=cin>
     <div class=logo>IMAN<small>DEVELOPERS</small></div>
     <div class=ct><div class=eb>Partner availability · {e(date_long)}</div><h1>Availability<br>&amp; Offers</h1>
-      <div class=cp>{' · '.join(e(p['name'].split(' · ')[0]) for p in dict((p['plans'], p) for p, _ in parts).values())}</div>
-      <ul class=hl3><li><b>{round(COMMISSION * 100)}%</b>commission</li><li><b>{n}</b>units available</li><li><b>{round(best['cash'] * 100)}%</b>off full cash · {e(best['name'].replace(' by Iman · ', ' '))} only</li></ul></div>
+      <div class=cp>{' · '.join(e(ps[0]['name'].split(' · ')[0]) for ps in byproj.values())}</div>
+      <ul class=hl3><li><b>{round(COMMISSION * 100)}%</b>commission on every project</li><li><b>{n}</b>units available</li></ul>
+      <div class=cp style='margin-top:12px;font-size:9pt'>Each project's discount is shown on its photo →</div></div>
     <div class=me><img src="{jpg(os.path.join(SITE, 'img', 'sam-jabr.jpg'), 300)}" alt="">
       <div><b>Sam Jabr</b> <span class=og>OG TEAM</span><br><span>Senior Sales Manager · IMAN Developers</span><br>
       <a href="{WA}">WhatsApp +971 50 175 2771</a></div></div>
@@ -276,7 +287,11 @@ a{{color:inherit}}
 .logo{{color:var(--c);font-family:Marcellus,serif;letter-spacing:.42em;font-size:20pt;line-height:1}}
 .logo small{{display:block;font-size:6pt;letter-spacing:.62em;margin-top:5px}}
 .cover{{page:cover;position:relative;width:297mm;height:210mm;overflow:hidden;background:var(--g2);color:#f2f5f0}}
-.cover .bg{{position:absolute;right:0;top:0;width:47%;height:100%;object-fit:cover;border-left:3px solid var(--c)}}
+.stack{{position:absolute;right:0;top:0;width:47%;height:201mm;display:flex;flex-direction:column;gap:3px;background:var(--c);padding-left:3px}}
+.cpanel{{flex:1;position:relative;overflow:hidden;display:block;text-decoration:none}}
+.cpanel img{{width:100%;height:100%;object-fit:cover;display:block}}
+.cap{{position:absolute;left:0;bottom:0;background:var(--g2);color:#f2f5f0;padding:6px 12px 7px;border-top-right-radius:10px;font-size:8.5pt;line-height:1.35}}
+.cap b{{color:var(--c)}} .cap .cn{{display:block;font-family:Marcellus,serif;font-weight:400;font-size:13pt;color:#fff}}
 .cin{{position:relative;height:100%;padding:16mm 14mm 20mm 16mm;display:flex;flex-direction:column;justify-content:space-between;width:53%}}
 .ct .eb{{color:var(--c)}} .ct h1{{font-size:46pt;margin:8px 0 10px}}
 .cp{{color:#c9d6cc;font-size:11pt}}
