@@ -11,7 +11,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Launch expected early October 2026. Prices, payment plans and the pre-launch offer are not announced yet.
 - First come, first served for token numbers and unit selection.
 
-## 113 Residences, Al Sufouh Gardens (1 October 2026)
+## 113 Residences, Al Sufouh Gardens (list 12 October 2026)
 
 - From AED 2M. 4% discount on the 40/60 payment plan.
   - 20% within 30 days of booking
