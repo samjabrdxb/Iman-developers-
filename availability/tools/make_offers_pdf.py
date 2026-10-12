@@ -397,7 +397,7 @@ def stamp(doc):
 
 def main(date):
     folder = os.path.join(REPO, "availability", date)
-    pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.startswith("IMAN Availability"))
+    pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.upper().startswith("IMAN"))
     parts, sources = [], []
     for p in PROJECTS:
         f = next((f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")), None)
@@ -443,7 +443,7 @@ def main(date):
     stamp(doc)
     doc.set_toc(toc)
     doc.set_metadata({"title": f"IMAN Availability & Offers · {d}", "author": "Sam Jabr, IMAN Developers"})
-    out = os.path.join(folder, f"IMAN Availability & Offers - Sam Jabr - {d}.pdf")
+    out = os.path.join(folder, f"IMAN-Availability-Sam-Jabr-{d}.pdf")  # no spaces or &: some phones fail to open such names
     doc.save(out, garbage=4, deflate=True)
     os.remove(tmp_html)
     os.remove(tmp_pdf)
