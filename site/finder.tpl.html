@@ -1,0 +1,266 @@
+<title>IMAN Unit Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a green header with Sam's card, a three-question search panel, then a single column of unit cards sorted by price. */
+:root{
+  --green:#1d3f2b; --green-2:#264f37; --copper:#c0866d; --copper-ink:#9a5f48;
+  --bg:#f3f5f1; --surface:#ffffff; --ink:#17251c; --muted:#5b6b60; --line:#dde4dc; --chip:#e9eee8;
+  --on-green:#f2f5f0; --on-green-muted:#b9c9bd; --ok:#2f6b45; --warn:#9a5f48;
+  --f-display:"Marcellus","IBM Plex Sans Arabic",Georgia,serif;
+  --f-body:"Figtree","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
+  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
+  --on-green:#eef3ee; --on-green-muted:#a9bcae; --ok:#8fcfa4; --warn:#e2ad95; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
+  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
+  --on-green:#eef3ee; --on-green-muted:#a9bcae; --ok:#8fcfa4; --warn:#e2ad95; color-scheme:dark}
+[dir="rtl"]{--f-display:"IBM Plex Sans Arabic",Georgia,serif}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+.top{background:var(--green);color:var(--on-green);padding-block:20px 22px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-family:"Marcellus",serif;color:var(--copper);letter-spacing:.38em;font-size:18px;line-height:1}
+.logo small{display:block;font-size:8px;letter-spacing:.6em;margin-top:4px}
+.lang{background:transparent;border:1px solid var(--on-green-muted);color:var(--on-green);border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600}
+.top h1{font-size:clamp(28px,7vw,40px);margin-top:18px}
+.top p{color:var(--on-green-muted);margin:6px 0 0;max-width:52ch}
+.me{display:flex;align-items:center;gap:12px;margin-top:16px;background:var(--green-2);border-radius:var(--r);padding:10px 14px 10px 10px;width:fit-content;max-width:100%}
+.me img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--copper);flex:none}
+.me b{font-size:16px}
+.og{display:inline-block;border:1px solid var(--copper);color:var(--copper);border-radius:99px;padding:0 7px;font-size:11px;font-weight:800;letter-spacing:.06em;margin-inline-start:6px;vertical-align:2px}
+.me span{color:var(--on-green-muted);font-size:13px}
+.me a{color:var(--on-green);font-weight:700;text-decoration:none;font-variant-numeric:tabular-nums}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:-1px;display:grid;gap:16px;position:relative;top:-12px;box-shadow:0 8px 24px -18px rgba(0,0,0,.35)}
+.q{display:grid;gap:8px;min-width:0}
+.panel>*{min-width:0}
+.ql{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--copper-ink)}
+[dir="rtl"] .ql{letter-spacing:0;font-size:13px}
+.money{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding-inline:12px}
+.money:focus-within{border-color:var(--copper)}
+.money span{color:var(--muted);font-weight:700;font-size:14px}
+.money input{flex:1;min-width:0;width:100%;border:0;background:transparent;font:600 20px var(--f-body);color:var(--ink);padding:10px 8px;font-variant-numeric:tabular-nums;outline:none}
+.money button{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.chip small{opacity:.7;font-weight:500;margin-inline-start:4px;font-variant-numeric:tabular-nums}
+.chip.quick{padding:4px 10px;font-size:13px;color:var(--muted)}
+.chip.quick[aria-pressed="true"]{color:var(--on-green)}
+.sum{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
+.sum h2{font-size:22px}
+.sum span{color:var(--muted);font-size:13px}
+.list{display:grid;gap:12px;padding-bottom:12px}
+.sec{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--warn);margin-top:10px}
+[dir="rtl"] .sec{letter-spacing:0;font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:120px 1fr}
+.card>img{width:100%;height:100%;object-fit:cover;min-height:100%}
+.cb{padding:12px 14px 14px;min-width:0;display:grid;gap:8px}
+.eb{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--copper-ink)}
+[dir="rtl"] .eb{letter-spacing:0}
+.uh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.uh h3{font-size:24px}
+.ut{font-weight:700}
+.meta{color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:4px 12px}
+.meta b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.pr{border-radius:10px;padding:8px 10px;background:var(--chip)}
+.pr.cash{background:var(--green);color:var(--on-green)}
+.pr .k{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-ink)}
+.pr.cash .k{color:var(--copper)}
+[dir="rtl"] .pr .k{letter-spacing:0;font-size:12.5px}
+.pr .v{font-family:"Marcellus",var(--f-body);font-size:21px;font-variant-numeric:tabular-nums}
+.pr .s{font-size:12px;color:var(--muted)}
+.pr.cash .s{color:var(--on-green-muted)}
+.pr s{opacity:.8}
+.pr.off{opacity:.45}
+.sch{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+.sch td{padding:3px 0;border-top:1px solid var(--line)}
+.sch td:first-child{font-weight:800;color:var(--copper-ink);width:44px}
+.sch td:last-child{text-align:end;font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;background:var(--chip);color:var(--warn)}
+.comm{font-size:13px;color:var(--ok);font-weight:600}
+.acts{display:flex;flex-wrap:wrap;gap:6px}
+.btn{border:1.5px solid var(--green);background:transparent;color:var(--green);border-radius:99px;padding:6px 13px;font-size:13.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+:root[data-theme="dark"] .btn{color:var(--ink);border-color:var(--line)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:var(--ink);border-color:var(--line)}}
+.btn.wa{background:var(--copper);border-color:var(--copper);color:#1b120d}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:20px;text-align:center;color:var(--muted)}
+.foot{color:var(--muted);font-size:12.5px;padding-block:8px 28px;border-top:1px solid var(--line);margin-top:8px}
+.foot b{color:var(--ink)}
+dialog{border:0;border-radius:var(--r);padding:0;max-width:min(680px,94vw);width:100%;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,20,14,.6)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.dh button{border:0;background:var(--chip);border-radius:99px;width:32px;height:32px;font-size:18px}
+dialog img{display:block;width:100%;height:auto;background:#fff}
+.toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:auto;width:fit-content;max-width:90vw;background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600}
+@media (max-width:520px){.card{grid-template-columns:1fr}.card>img{height:120px}}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease both}@keyframes in{from{transform:translateY(4px)}}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="bar"><div class="logo">IMAN<small>DEVELOPERS</small></div><button class="lang" id="lang" type="button">العربية</button></div>
+  <h1 id="t-h1"></h1>
+  <p id="t-sub"></p>
+  <div class="me"><img src="img/sam-jabr.jpg" alt="Sam Jabr">
+    <div><b>Sam Jabr</b><span class="og">OG TEAM</span><br><span id="t-role"></span><br>
+    <a href="https://wa.me/971501752771" dir="ltr">WhatsApp +971 50 175 2771</a></div></div>
+</div></header>
+
+<main class="wrap">
+  <form class="panel" id="f" autocomplete="off">
+    <div class="q">
+      <label class="ql" for="budget" id="t-budget"></label>
+      <div class="money"><span>AED</span><input id="budget" inputmode="decimal" placeholder="2,500,000" dir="ltr"><button type="button" id="clear" hidden></button></div>
+      <div class="chips" id="quick"></div>
+    </div>
+    <div class="q"><div class="ql" id="t-loc"></div><div class="chips" id="locs" role="group"></div></div>
+    <div class="q"><div class="ql" id="t-plan"></div><div class="chips" id="plans" role="group"></div></div>
+  </form>
+  <div class="sum"><h2 id="count"></h2><span id="asof"></span></div>
+  <div class="list" id="list"></div>
+  <p class="foot" id="foot"></p>
+</main>
+
+<dialog id="dlg"><div class="dh"><b id="dt"></b><button type="button" id="dx" aria-label="Close">×</button></div><img id="di" alt=""></dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const D=/*DATA*/;
+const WA="971501752771", COMM=0.07;
+const T={
+ en:{dir:"ltr",other:"العربية",h1:"Find the right unit",sub:"Enter your client's budget, preferred area and payment plan. You will see every IMAN unit available today that fits.",
+  role:"Senior Sales Manager · IMAN Developers",budget:"1 · Client budget",loc:"2 · Location",plan:"3 · Payment plan",
+  any:"Any",cash:"Full cash",clear:"Clear",
+  locs:{sufouh:"Al Sufouh Gardens",jvc:"JVC",motorcity:"Motor City"},
+  n:k=>k===1?"1 unit fits":k+" units fit",none:"No unit fits these choices. Try a higher budget or another area.",
+  near:"Just above budget (up to 10% more)",asof:d=>"Availability of "+d,
+  planP:(p,d)=>p+" plan · "+d+"% off",cashP:d=>"Full cash · "+d+"% off",list:"List price",save:"You save AED ",
+  onlyCash:"Fits the budget with full cash only",comm:v=>"Your commission 7%: AED "+v,
+  plan2:"Floor plan",copy:"Copy for client",wa:"Ask Sam",copied:"Copied. Paste it to your client.",copyFail:"Copy did not work. Select the text in the card instead.",
+  floor:"Floor",view:"View",sqft:"sq ft",handover:"Handover",
+  foot:"Prices in AED from IMAN's latest availability lists. Instalments are worked out on the discounted price. Prices, availability and offers are confirmed at booking; DLD and registration fees are extra.",
+  waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it.",
+  types:{}},
+ ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",sub:"اكتب ميزانية العميل والمنطقة يلي بدو ياها وطريقة الدفع، وبتطلعلك كل وحدات إيمان المتاحة اليوم يلي بتناسبه.",
+  role:"Senior Sales Manager · IMAN Developers",budget:"١ · ميزانية العميل",loc:"٢ · المنطقة",plan:"٣ · طريقة الدفع",
+  any:"الكل",cash:"كاش كامل",clear:"مسح",
+  locs:{sufouh:"الصفوح",jvc:"JVC",motorcity:"موتور سيتي"},
+  n:k=>k===1?"وحدة مناسبة":k+" وحدات مناسبة",none:"ما في وحدة بتناسب هالاختيارات. جرب ميزانية أعلى أو منطقة تانية.",
+  near:"فوق الميزانية بشوي (لحد 10%)",asof:d=>"المتاح بتاريخ "+d,
+  planP:(p,d)=>"خطة "+p+" · خصم "+d+"%",cashP:d=>"كاش كامل · خصم "+d+"%",list:"السعر الأصلي",save:"توفير AED ",
+  onlyCash:"بتناسب الميزانية بالكاش بس",comm:v=>"عمولتك 7%: AED "+v,
+  plan2:"المخطط",copy:"نسخ للعميل",wa:"اسأل سام",copied:"انتسخت. الصقها للعميل.",copyFail:"ما زبط النسخ. حدد النص من الكرت.",
+  floor:"الطابق",view:"الإطلالة",sqft:"قدم²",handover:"التسليم",
+  foot:"الأسعار بالدرهم من آخر قوائم إيمان. الأقساط محسوبة على السعر بعد الخصم. الأسعار والتوفر والعروض بتتأكد عند الحجز، ورسوم الأراضي والتسجيل مش محسوبة.",
+  waMsg:(u,p)=>"مرحبا سام، الوحدة "+u+" بمشروع "+p+" لسا متاحة؟ عندي عميل إلها.",
+  types:{}}
+};
+const TYPE={"one bedroom":"1 BR","one bedroom with study":"1 BR + Study","two bedroom":"2 BR","two bedroom with study":"2 BR + Study",
+ "two bedroom with maid":"2 BR + Maid","three bedroom with study":"3 BR + Study","three bedroom with maid":"3 BR + Maid",
+ "four bedroom duplex with pool":"4 BR Duplex + Pool",studio:"Studio",retail:"Retail shop"};
+const TYPE_AR={"1 BR":"غرفة نوم","1 BR + Study":"غرفة + مكتب","2 BR":"غرفتين نوم","2 BR + Study":"غرفتين + مكتب","2 BR + Maid":"غرفتين + خادمة",
+ "3 BR + Study":"3 غرف + مكتب","3 BR + Maid":"3 غرف + خادمة","4 BR Duplex + Pool":"دوبلكس 4 غرف + مسبح",Studio:"ستوديو","Retail shop":"محل تجاري"};
+const fmt=n=>Math.round(n).toLocaleString("en-US");
+const short=n=>n>=1e6?(n/1e6).toFixed(n%1e6?2:0).replace(/\.?0+$/,"")+"M":Math.round(n/1e3)+"K";
+const st={lang:"en",budget:null,loc:"any",plan:"any"};
+try{const l=localStorage.getItem("finder-lang");if(l==="ar"||l==="en")st.lang=l}catch(e){}
+
+const U=D.units.map(u=>{const p=D.projects[u.pid];const t=TYPE[u.type.toLowerCase()]||u.type;
+  return {...u,p,t,planName:p.plan,planPrice:u.op*(1-u.disc),cashPrice:u.op*(1-u.cash)}});
+
+function priceFor(u,plan){return plan==="cash"?u.cashPrice:u.planPrice}
+function matchesLocPlan(u,loc,plan){return (loc==="any"||u.p.loc===loc)&&(plan==="any"||plan==="cash"||u.planName===plan)}
+function fit(u){ // returns "yes", "cash" (fits only with full cash), "near", or null
+  if(!matchesLocPlan(u,st.loc,st.plan))return null;
+  const b=st.budget; if(!b)return "yes";
+  const p=priceFor(u,st.plan);
+  if(p<=b)return "yes";
+  if(st.plan==="any"&&u.cashPrice<=b)return "cash";
+  if(p<=b*1.1)return "near";
+  return null;
+}
+function parseBudget(s){s=(s||"").trim().toLowerCase().replace(/,/g,"");if(!s)return null;
+  const m=s.match(/^([\d.]+)\s*(m|k|مليون|الف|ألف)?/);if(!m)return null;let v=parseFloat(m[1]);if(isNaN(v))return null;
+  if(m[2]==="m"||m[2]==="مليون")v*=1e6;else if(m[2]&&m[2]!=="m")v*=1e3;else if(v<100)v*=1e6;return v}
+
+function chips(el,opts,cur,onPick){el.innerHTML="";for(const o of opts){const b=document.createElement("button");b.type="button";b.className="chip";
+  b.setAttribute("aria-pressed",String(o.v===cur));b.innerHTML=o.l+(o.c!=null?`<small>${o.c}</small>`:"");b.onclick=()=>onPick(o.v);el.append(b)}}
+
+function count(loc,plan){return U.filter(u=>{if(!matchesLocPlan(u,loc,plan))return false;
+  if(!st.budget)return true;const p=priceFor(u,plan);return p<=st.budget||(plan==="any"&&u.cashPrice<=st.budget)}).length}
+
+function card(u,f){const L=T[st.lang],ar=st.lang==="ar";
+  const showPlan=st.plan!=="cash", showCash=true;
+  const sch=u.p.schedule.map(([pc,en,a])=>`<tr><td>${pc}%</td><td>${ar?a:en}</td><td>AED ${fmt(u.planPrice*pc/100)}</td></tr>`).join("");
+  const type=ar?(TYPE_AR[u.t]||u.t):u.t;
+  const floor=u.floor.replace(" Floor","");
+  return `<article class="card"><img src="${u.p.image}" alt="" loading="lazy"><div class="cb">
+   <div class="eb">${u.p.name} · ${L.locs[u.p.loc]}${u.p.handover?` · ${L.handover} ${u.p.handover}`:""}</div>
+   <div class="uh"><h3 dir="ltr">${u.no}</h3><span class="ut">${type}</span>${f==="cash"?`<span class="tag">${L.onlyCash}</span>`:""}</div>
+   <div class="meta"><span>${L.floor} <b>${floor}</b></span><span>${L.view} <b>${u.view.replace(" View","")}</b></span><span><b>${fmt(u.area)}</b> ${L.sqft}</span></div>
+   <div class="prices">
+    ${showPlan?`<div class="pr${f==="cash"?" off":""}"><div class="k">${L.planP(u.planName,Math.round(u.disc*100))}</div><div class="v">AED ${fmt(u.planPrice)}</div>
+      <div class="s">${L.list} <s>${fmt(u.op)}</s></div><table class="sch"><tbody>${sch}</tbody></table></div>`:""}
+    ${showCash?`<div class="pr cash"><div class="k">${L.cashP(Math.round(u.cash*100))}</div><div class="v">AED ${fmt(u.cashPrice)}</div>
+      <div class="s">${L.save}${fmt(u.op-u.cashPrice)}</div></div>`:""}
+   </div>
+   <div class="comm">${L.comm(fmt((st.plan==="cash"||f==="cash"?u.cashPrice:u.planPrice)*COMM))}</div>
+   <div class="acts">${u.img?`<button type="button" class="btn" data-plan="${u.pid}|${u.no}">${L.plan2}</button>`:""}
+    <button type="button" class="btn" data-copy="${u.pid}|${u.no}">${L.copy}</button>
+    <a class="btn wa" href="https://wa.me/${WA}?text=${encodeURIComponent(L.waMsg(u.no,u.p.name))}" target="_blank" rel="noopener">${L.wa}</a></div>
+  </div></article>`}
+
+function render(){const L=T[st.lang];
+  document.documentElement.lang=st.lang;document.documentElement.dir=L.dir;
+  for(const k of ["h1","sub","role","budget","loc","plan"])document.getElementById("t-"+k).textContent=L[k];
+  document.getElementById("lang").textContent=L.other;
+  const clr=document.getElementById("clear");clr.textContent=L.clear;clr.hidden=!st.budget;
+  chips(document.getElementById("quick"),[1,2,3,4,6].map(m=>({v:m*1e6,l:(st.lang==="ar"?"لحد ":"Up to ")+m+"M"})).map(o=>({...o})),st.budget,v=>{st.budget=v;document.getElementById("budget").value=fmt(v);render()});
+  document.querySelectorAll("#quick .chip").forEach(b=>b.classList.add("quick"));
+  chips(document.getElementById("locs"),[{v:"any",l:L.any},...["sufouh","jvc","motorcity"].map(k=>({v:k,l:L.locs[k]}))].map(o=>({...o,c:count(o.v,st.plan)})),st.loc,v=>{st.loc=v;render()});
+  const planOpts=[...new Set(U.map(u=>u.planName))].sort();
+  chips(document.getElementById("plans"),[{v:"any",l:L.any},...planOpts.map(p=>({v:p,l:p})),{v:"cash",l:L.cash}].map(o=>({...o,c:count(st.loc,o.v)})),st.plan,v=>{st.plan=v;render()});
+  const rows=U.map(u=>({u,f:fit(u)})).filter(r=>r.f).sort((a,b)=>priceFor(a.u,st.plan)-priceFor(b.u,st.plan));
+  const yes=rows.filter(r=>r.f!=="near"),near=rows.filter(r=>r.f==="near");
+  document.getElementById("count").textContent=L.n(yes.length);
+  const [y,m,d]=D.date.split("-");document.getElementById("asof").textContent=L.asof(`${d}.${m}.${y}`);
+  document.getElementById("list").innerHTML=(yes.length?yes.map(r=>card(r.u,r.f)).join(""):`<div class="empty">${L.none}</div>`)
+    +(near.length?`<div class="sec">${L.near}</div>`+near.map(r=>card(r.u,r.f)).join(""):"");
+  document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr</b> · Senior Sales Manager · OG Team · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
+}
+
+function find(key){const [pid,no]=key.split("|");return U.find(u=>u.pid===pid&&u.no===no)}
+function clientText(u){const ar=st.lang==="ar",L=T[st.lang];
+  const lines=[`${u.p.name} · ${L.locs[u.p.loc]}`,`Unit ${u.no} · ${u.t} · ${u.floor} · ${u.view} · ${fmt(u.area)} sq ft`];
+  if(st.plan!=="cash"){lines.push(`${u.planName} payment plan, ${Math.round(u.disc*100)}% off: AED ${fmt(u.planPrice)}`);
+    for(const [pc,en] of u.p.schedule)lines.push(`  ${pc}% ${en}: AED ${fmt(u.planPrice*pc/100)}`)}
+  lines.push(`Full cash, ${Math.round(u.cash*100)}% off: AED ${fmt(u.cashPrice)}`);
+  if(u.p.handover)lines.push(`Handover ${u.p.handover}`);
+  lines.push("","Sam Jabr · Senior Sales Manager · IMAN Developers · WhatsApp +971 50 175 2771");return lines.join("\n")}
+let tt;function toast(s){const t=document.getElementById("toast");t.textContent=s;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+
+document.getElementById("list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.plan){const u=find(b.dataset.plan);document.getElementById("dt").textContent=`${u.p.name} · ${u.no}`;
+    document.getElementById("di").src=u.img;document.getElementById("dlg").showModal()}
+  if(b.dataset.copy){const u=find(b.dataset.copy);const s=clientText(u);
+    try{navigator.clipboard.writeText(s).then(()=>toast(T[st.lang].copied),()=>toast(T[st.lang].copyFail))}catch(err){toast(T[st.lang].copyFail)}}});
+document.getElementById("dx").onclick=()=>document.getElementById("dlg").close();
+document.getElementById("dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
+const bi=document.getElementById("budget");
+bi.addEventListener("input",()=>{st.budget=parseBudget(bi.value);render()});
+bi.addEventListener("blur",()=>{if(st.budget)bi.value=fmt(st.budget)});
+document.getElementById("clear").onclick=()=>{st.budget=null;bi.value="";render();bi.focus()};
+document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();bi.blur()});
+document.getElementById("lang").onclick=()=>{st.lang=st.lang==="en"?"ar":"en";try{localStorage.setItem("finder-lang",st.lang)}catch(e){}render()};
+render();
+</script>

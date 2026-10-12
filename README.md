@@ -9,6 +9,8 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 - `site/build.py`: puts the inventory into the page and writes `site/index.html` and `site/sam-jabr.html`.
 - `site/img/`, `site/assets/`: photos, project images and floor plans.
 
+- `site/finder.tpl.html`, `site/finder_build.py`: the unit finder for brokers (budget, location, payment plan), published as its own artifact: https://claude.ai/artifact/Eg5NZJCZRwriTRGYLCwTb7. Run `python3 site/finder_build.py` after updating the inventory and publish `site/finder.html` with its images.
+
 ## Daily update
 
 1. Update the units in `site/inventory.json` from the new inventory lists, and set `inventoryDate`.
