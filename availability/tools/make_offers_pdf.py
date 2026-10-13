@@ -59,6 +59,8 @@ aed = lambda n: f"{round(n):,}"
 anchor = lambda p, u: f"u-{p.get('key', p['plans'])}-{u['no']}"
 DISC = 0.04
 TMP = "/tmp/iman-offers-img"
+NOTE_FILE = os.path.join(SITE, "note.txt")  # Sam's note of the day, shown on the cover
+NOTE = open(NOTE_FILE).read().strip() if os.path.exists(NOTE_FILE) else ""
 
 
 def parse(path):
@@ -248,6 +250,7 @@ def cover(date_long, parts):
     <div class=ct><div class=eb>Partner availability · {e(date_long)}</div><h1>Availability<br>&amp; Offers</h1>
       <div class=cp>{' · '.join(e(ps[0]['name'].split(' · ')[0]) for ps in byproj.values())}</div>
       <ul class=hl3><li><b>{round(COMMISSION * 100)}%</b>commission on every project</li><li><b>{n}</b>units available</li></ul>
+      {f"<div class=cnote><b>Today</b>{e(NOTE)}</div>" if NOTE else ''}
       <div class=cp style='margin-top:12px;font-size:9pt'>Each project's discount is shown on its photo →</div></div>
     <div class=me><img src="{jpg(os.path.join(SITE, 'img', 'sam-jabr.jpg'), 300)}" alt="">
       <div><b>Sam Jabr</b> <span class=og>OG TEAM</span><br><span>Senior Sales Manager · IMAN Developers</span><br>
@@ -298,6 +301,8 @@ a{{color:inherit}}
 .hl3{{list-style:none;padding:0;margin:16px 0 0;display:flex;gap:10px}}
 .hl3 li{{border:1px solid #8a6a55;border-radius:10px;padding:8px 12px;font-size:8pt;color:#c9d6cc;text-transform:uppercase;letter-spacing:.08em}}
 .hl3 b{{display:block;font-family:Marcellus,serif;font-size:19pt;color:var(--c);letter-spacing:0;text-transform:none}}
+.cnote{{margin-top:14px;background:var(--c);color:#1b120d;border-radius:10px;padding:8px 13px;font-weight:700;font-size:11pt;width:max-content;max-width:100%}}
+.cnote b{{font-size:7pt;letter-spacing:.14em;text-transform:uppercase;margin-right:10px}}
 .me{{display:flex;align-items:center;gap:12px;background:#24452f;border:1px solid #3a5a45;border-radius:14px;padding:10px 16px 10px 10px;width:max-content}}
 .me img{{width:62px;height:62px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--c)}}
 .me b{{font-size:13pt}} .me span{{color:#c9d6cc;font-size:8.5pt}} .me a{{color:#fff;font-weight:700;text-decoration:none;font-size:10pt}}

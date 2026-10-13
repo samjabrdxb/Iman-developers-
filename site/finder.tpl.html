@@ -45,6 +45,9 @@ button,select{font:inherit;color:inherit;cursor:pointer}
 .me span{color:var(--on-green-muted)}
 .me a{color:var(--on-green);font-weight:700;text-decoration:none}
 
+.note{background:var(--copper);color:#1b120d;border-radius:12px;padding:10px 14px;margin-top:-18px;position:relative;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.note b{font-size:11px;letter-spacing:.12em;text-transform:uppercase;flex:none}
+.note+.panel{margin-top:10px}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 16px;margin-top:-18px;position:relative;display:grid;gap:14px;box-shadow:0 10px 28px -20px rgba(0,0,0,.4)}
 .panel>*{min-width:0}
 .ph{display:flex;justify-content:space-between;align-items:center}
@@ -134,6 +137,7 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
 </div></header>
 
 <main class="wrap">
+  <div class="note" id="note" hidden><b id="t-note"></b><span id="notetext" dir="ltr"></span></div>
   <form class="panel" id="f" autocomplete="off">
     <div class="ph"><b id="t-ask"></b><button type="button" class="reset" id="reset"></button></div>
     <div class="q">
@@ -158,7 +162,7 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
 const D=/*DATA*/;
 const WA="971501752771", COMM=0.07;
 const T={
- en:{dir:"ltr",other:"العربية",h1:"Find the right unit",sub:"Every IMAN unit available today, filtered for your client.",
+ en:{dir:"ltr",other:"العربية",h1:"Find the right unit",noteL:"Today",sub:"Every IMAN unit available today, filtered for your client.",
   role:"Senior Sales Manager",ask:"Your client's needs",reset:"Reset",budget:"Budget",loc:"Location",plan:"Payment plan",beds:"Bedrooms",
   any:"Any",cash:"Full cash",clear:"Clear",upTo:"Up to ",
   planHint:{"40/60":"40% before handover","50/50":"50% before handover",cash:"Biggest discount"},
@@ -174,7 +178,7 @@ const T={
   floor:"Floor",sqft:"sq ft",handover:"Handover",
   foot:"Prices in AED from IMAN's latest availability lists. Instalments are worked out on the discounted price. Prices, availability and offers are confirmed at booking; DLD and registration fees are extra.",
   waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it."},
- ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",sub:"كل وحدات إيمان المتاحة اليوم، حسب طلب عميلك.",
+ ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",noteL:"اليوم",sub:"كل وحدات إيمان المتاحة اليوم، حسب طلب عميلك.",
   role:"Senior Sales Manager",ask:"طلب العميل",reset:"مسح الكل",budget:"الميزانية",loc:"المنطقة",plan:"طريقة الدفع",beds:"عدد الغرف",
   any:"الكل",cash:"كاش كامل",clear:"مسح",upTo:"لحد ",
   planHint:{"40/60":"40% قبل التسليم","50/50":"50% قبل التسليم",cash:"أعلى خصم"},
@@ -253,6 +257,7 @@ function unitCard(u,f){const L=T[st.lang],ar=st.lang==="ar";
 function render(){const L=T[st.lang];
   document.documentElement.lang=st.lang;document.documentElement.dir=L.dir;
   for(const k of ["h1","sub","role","ask","budget","loc","plan","beds"])document.getElementById("t-"+k).textContent=L[k];
+  const nt=document.getElementById("note");nt.hidden=!D.note;document.getElementById("notetext").textContent=D.note;document.getElementById("t-note").textContent=L.noteL;
   document.getElementById("lang").textContent=L.other;document.getElementById("reset").textContent=L.reset;
   document.getElementById("edit").textContent=L.edit;
   const clr=document.getElementById("clear");clr.textContent=L.clear;clr.hidden=!st.budget;

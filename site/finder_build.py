@@ -31,7 +31,8 @@ for p in inv["projects"]:
         units.append(dict(pid=p["id"], no=u["no"], type=u["type"], floor=u["floor"], view=u["view"],
                           area=u["area"], op=u["op"], disc=u.get("discount", p.get("discount") or 0),
                           cash=u.get("cash", p.get("cash") or 0), img=u.get("planImg")))
-data = dict(date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
+note = open(os.path.join(HERE, "note.txt")).read().strip() if os.path.exists(os.path.join(HERE, "note.txt")) else ""
+data = dict(note=note, date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
                                                  for k, v in FINDER.items()}, units=units)
 tpl = open(os.path.join(HERE, "finder.tpl.html")).read()
 assert tpl.count("/*DATA*/") == 1
