@@ -47,8 +47,7 @@ PROJECTS = [
 ]
 COMMISSION = 0.07
 COMING = dict(name="The Element by IMAN", area="Dubai Science Park", img="img/dsp-teaser.jpg",
-              points=["Pre-launch: expression of interest open", "AED 50,000 EOI, fully refundable", "Studio, 1 and 2 bedrooms plus retail",
-                      "Priority token and unit selection, first come first served"])
+              points=["Coming soon: be ready for EOI", "EOI details to be announced", "170 homes: studio, 1 and 2 bedrooms", "Plus retail units"])
 
 TYPE = {"one bedroom with study": "1 BR + Study", "two bedroom": "2 BR", "two bedroom with study": "2 BR + Study",
         "two bedroom with maid": "2 BR + Maid", "three bedroom with study": "3 BR + Study", "three bedroom with maid": "3 BR + Maid",
@@ -268,7 +267,7 @@ def overview(parts):
   <div class=row2>
     <div class=soon><img src="{jpg(os.path.join(SITE, c['img']), 900)}" alt=""><div><div class=eb>Coming soon · {e(c['area'])}</div>
       <h3>{e(c['name'])}</h3><ul>{''.join(f'<li>{e(x)}</li>' for x in c['points'])}</ul>
-      <a href="{WA}?text={urllib.parse.quote('Hi Sam, I would like to register an EOI for The Element by IMAN, Dubai Science Park.')}">Register EOI with Sam →</a></div></div>
+      <a href="{WA}?text={urllib.parse.quote('Hi Sam, please let me know when the EOI for The Element by IMAN, Dubai Science Park opens.')}">Ask Sam to notify you →</a></div></div>
     <div class=how>{f"<div class=bonus>{e(bonus)} (113 Residences)</div>" if bonus else ''}
       <div class=ok>How to use this file</div><ol><li>Tap a project card.</li><li>Tap any unit number to open its payment schedule, cash price, your commission and floor plan.</li>
       <li>Tap the green bar at the foot of any page to WhatsApp Sam.</li></ol></div>

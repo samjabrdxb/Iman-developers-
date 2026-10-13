@@ -2,14 +2,11 @@
 
 Last updated: 1 October 2026. When an offer changes, update this file and `site/inventory.json`.
 
-## The Element by IMAN, Dubai Science Park (pre-launch)
+## The Element by IMAN, Dubai Science Park (coming soon)
 
-- Expression of interest: AED 50,000, fully refundable.
-- One EOI covers residential and retail units.
-- To submit: AED 50,000 and a passport copy.
+- Be ready for EOI. EOI registration has not opened yet (Sam, 13 October 2026); its amount and terms will be announced.
 - 170 residential units (studio, 1BR, 2BR) plus retail units.
-- Launch expected early October 2026. Prices, payment plans and the pre-launch offer are not announced yet.
-- First come, first served for token numbers and unit selection.
+- Prices, payment plans and the pre-launch offer are not announced yet.
 
 ## 113 Residences, Al Sufouh Gardens (list 12 October 2026)
 
