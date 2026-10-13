@@ -3,11 +3,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a green header with Sam's card, a three-question search panel, then a single column of unit cards sorted by price. */
+/* Layout: compact green header, a filter panel (budget, location, payment plan, bedrooms), a sticky results bar with sort, then compact unit rows that open for the full payment schedule. */
 :root{
   --green:#1d3f2b; --green-2:#264f37; --copper:#c0866d; --copper-ink:#9a5f48;
   --bg:#f3f5f1; --surface:#ffffff; --ink:#17251c; --muted:#5b6b60; --line:#dde4dc; --chip:#e9eee8;
-  --on-green:#f2f5f0; --on-green-muted:#b9c9bd; --ok:#2f6b45; --warn:#9a5f48;
+  --on-green:#f2f5f0; --on-green-muted:#b9c9bd; --ok:#2f6b45; --warn:#9a5f48; --shade:rgba(10,20,14,.6);
   --f-display:"Marcellus","IBM Plex Sans Arabic",Georgia,serif;
   --f-body:"Figtree","IBM Plex Sans Arabic",system-ui,sans-serif;
   --r:14px;
@@ -25,99 +25,117 @@
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
 .wrap{max-width:760px;margin:0 auto;padding-inline:16px}
 h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.1;text-wrap:balance}
-button{font:inherit;color:inherit;cursor:pointer}
+button,select{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--copper);outline-offset:2px}
-.top{background:var(--green);color:var(--on-green);padding-block:20px 22px}
+.num{font-variant-numeric:tabular-nums}
+
+.top{background:var(--green);color:var(--on-green);padding-block:16px 30px}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{font-family:"Marcellus",serif;color:var(--copper);letter-spacing:.38em;font-size:18px;line-height:1}
-.logo small{display:block;font-size:8px;letter-spacing:.6em;margin-top:4px}
+.logo{font-family:"Marcellus",serif;color:var(--copper);letter-spacing:.38em;font-size:17px;line-height:1}
+.logo small{display:block;font-size:7.5px;letter-spacing:.6em;margin-top:4px}
 .lang{background:transparent;border:1px solid var(--on-green-muted);color:var(--on-green);border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600}
-.top h1{font-size:clamp(28px,7vw,40px);margin-top:18px}
-.top p{color:var(--on-green-muted);margin:6px 0 0;max-width:52ch}
-.me{display:flex;align-items:center;gap:12px;margin-top:16px;background:var(--green-2);border-radius:var(--r);padding:10px 14px 10px 10px;width:fit-content;max-width:100%}
-.me img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--copper);flex:none}
-.me b{font-size:16px}
-.og{display:inline-block;border:1px solid var(--copper);color:var(--copper);border-radius:99px;padding:0 7px;font-size:11px;font-weight:800;letter-spacing:.06em;margin-inline-start:6px;vertical-align:2px}
-.me span{color:var(--on-green-muted);font-size:13px}
-.me a{color:var(--on-green);font-weight:700;text-decoration:none;font-variant-numeric:tabular-nums}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:-1px;display:grid;gap:16px;position:relative;top:-12px;box-shadow:0 8px 24px -18px rgba(0,0,0,.35)}
-.q{display:grid;gap:8px;min-width:0}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-top:16px}
+.hero h1{font-size:clamp(26px,6.5vw,36px)}
+.hero p{color:var(--on-green-muted);margin:4px 0 0;font-size:14px;max-width:44ch}
+.me{display:flex;align-items:center;gap:10px;background:var(--green-2);border-radius:12px;padding:7px 12px 7px 7px;max-width:100%}
+.me img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid var(--copper);flex:none}
+.me div{line-height:1.3;font-size:13px}
+.me b{font-size:14px}
+.og{display:inline-block;border:1px solid var(--copper);color:var(--copper);border-radius:99px;padding:0 6px;font-size:10px;font-weight:800;letter-spacing:.06em;margin-inline-start:5px;vertical-align:1px}
+.me span{color:var(--on-green-muted)}
+.me a{color:var(--on-green);font-weight:700;text-decoration:none}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 16px;margin-top:-18px;position:relative;display:grid;gap:14px;box-shadow:0 10px 28px -20px rgba(0,0,0,.4)}
 .panel>*{min-width:0}
-.ql{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--copper-ink)}
+.ph{display:flex;justify-content:space-between;align-items:center}
+.ph b{font-size:13px;color:var(--muted);font-weight:600}
+.reset{border:0;background:transparent;color:var(--copper-ink);font-weight:700;font-size:13px;padding:2px 0}
+.q{display:grid;gap:7px;min-width:0}
+.ql{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--copper-ink)}
 [dir="rtl"] .ql{letter-spacing:0;font-size:13px}
 .money{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding-inline:12px}
 .money:focus-within{border-color:var(--copper)}
 .money span{color:var(--muted);font-weight:700;font-size:14px}
-.money input{flex:1;min-width:0;width:100%;border:0;background:transparent;font:600 20px var(--f-body);color:var(--ink);padding:10px 8px;font-variant-numeric:tabular-nums;outline:none}
+.money input{flex:1;min-width:0;width:100%;border:0;background:transparent;font:600 20px var(--f-body);color:var(--ink);padding:9px 8px;font-variant-numeric:tabular-nums;outline:none}
 .money button{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:14px;font-weight:600}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 11px;font-size:14px;font-weight:700;text-align:start;line-height:1.25}
+.chip small{display:block;font-size:11.5px;font-weight:500;color:var(--muted)}
+.chip i{font-style:normal;font-weight:600;color:var(--muted);margin-inline-start:5px;font-size:12.5px}
 .chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
-.chip small{opacity:.7;font-weight:500;margin-inline-start:4px;font-variant-numeric:tabular-nums}
-.chip.quick{padding:4px 10px;font-size:13px;color:var(--muted)}
-.chip.quick[aria-pressed="true"]{color:var(--on-green)}
-.sum{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
-.sum h2{font-size:22px}
-.sum span{color:var(--muted);font-size:13px}
-.list{display:grid;gap:12px;padding-bottom:12px}
-.sec{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--warn);margin-top:10px}
+.chip[aria-pressed="true"] small,.chip[aria-pressed="true"] i{color:var(--on-green-muted)}
+.chip.zero:not([aria-pressed="true"]){opacity:.42}
+.chip.sm{border-radius:99px;padding:4px 11px;font-size:13px}
+
+.rbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;margin-top:6px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rbar h2{font-size:21px}
+.rbar .sub{font-size:12.5px;color:var(--muted)}
+.rbar .r{display:flex;gap:6px;align-items:center}
+.rbar select{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 10px;font-size:13px;font-weight:600}
+.edit{border:1.5px solid var(--green);background:var(--surface);color:var(--green);border-radius:99px;padding:5px 11px;font-size:13px;font-weight:700}
+:root[data-theme="dark"] .edit{color:var(--ink);border-color:var(--line)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .edit{color:var(--ink);border-color:var(--line)}}
+
+.list{display:grid;gap:10px;padding-block:12px}
+.sec{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--warn);margin-top:8px}
 [dir="rtl"] .sec{letter-spacing:0;font-size:13px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:120px 1fr}
-.card>img{width:100%;height:100%;object-fit:cover;min-height:100%}
-.cb{padding:12px 14px 14px;min-width:0;display:grid;gap:8px}
-.eb{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--copper-ink)}
-[dir="rtl"] .eb{letter-spacing:0}
-.uh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:8px;min-width:0}
+.row1{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.row1>div{min-width:0}
+.eb{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--copper-ink)}
+[dir="rtl"] .eb{letter-spacing:0;font-size:12.5px}
+.uh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px}
 .uh h3{font-size:24px}
 .ut{font-weight:700}
-.meta{color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:4px 12px}
-.meta b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
-.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
-.pr{border-radius:10px;padding:8px 10px;background:var(--chip)}
-.pr.cash{background:var(--green);color:var(--on-green)}
-.pr .k{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-ink)}
-.pr.cash .k{color:var(--copper)}
-[dir="rtl"] .pr .k{letter-spacing:0;font-size:12.5px}
-.pr .v{font-family:"Marcellus",var(--f-body);font-size:21px;font-variant-numeric:tabular-nums}
-.pr .s{font-size:12px;color:var(--muted)}
-.pr.cash .s{color:var(--on-green-muted)}
-.pr s{opacity:.8}
-.pr.off{opacity:.45}
-.sch{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
-.sch td{padding:3px 0;border-top:1px solid var(--line)}
-.sch td:first-child{font-weight:800;color:var(--copper-ink);width:44px}
-.sch td:last-child{text-align:end;font-weight:700}
-.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;background:var(--chip);color:var(--warn)}
-.comm{font-size:13px;color:var(--ok);font-weight:600}
+.price{text-align:end;flex:none}
+.price .k{font-size:11.5px;color:var(--muted);font-weight:600}
+.price .v{font-family:"Marcellus",var(--f-body);font-size:21px;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price s{font-size:12px;color:var(--muted)}
+.meta{color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:3px 12px}
+.meta b{color:var(--ink);font-weight:600}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:12.5px;font-weight:700;border-radius:99px;padding:2px 10px;background:var(--chip)}
+.pill.cash{background:var(--green);color:var(--on-green)}
+.pill.comm{color:var(--ok)}
+.pill.warn{color:var(--warn)}
+details{border-top:1px solid var(--line);padding-top:6px}
+summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--copper-ink);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" +"}
+details[open] summary::after{content:" −"}
+.sch{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;margin-top:6px}
+.sch td{padding:4px 0;border-top:1px solid var(--line)}
+.sch td:first-child{font-weight:800;color:var(--copper-ink);width:46px}
+.sch td:last-child{text-align:end;font-weight:700;white-space:nowrap}
+.sch tr.tot td{font-weight:800;color:var(--ink)}
 .acts{display:flex;flex-wrap:wrap;gap:6px}
-.btn{border:1.5px solid var(--green);background:transparent;color:var(--green);border-radius:99px;padding:6px 13px;font-size:13.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn{border:1.5px solid var(--green);background:transparent;color:var(--green);border-radius:99px;padding:6px 13px;font-size:13.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center}
 :root[data-theme="dark"] .btn{color:var(--ink);border-color:var(--line)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:var(--ink);border-color:var(--line)}}
 .btn.wa{background:var(--copper);border-color:var(--copper);color:#1b120d}
-.empty{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:20px;text-align:center;color:var(--muted)}
-.foot{color:var(--muted);font-size:12.5px;padding-block:8px 28px;border-top:1px solid var(--line);margin-top:8px}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:18px;text-align:center;color:var(--muted);display:grid;gap:10px;justify-items:center}
+.foot{color:var(--muted);font-size:12.5px;padding-block:10px 28px;border-top:1px solid var(--line)}
 .foot b{color:var(--ink)}
 dialog{border:0;border-radius:var(--r);padding:0;max-width:min(680px,94vw);width:100%;background:var(--surface);color:var(--ink)}
-dialog::backdrop{background:rgba(10,20,14,.6)}
+dialog::backdrop{background:var(--shade)}
 .dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
 .dh button{border:0;background:var(--chip);border-radius:99px;width:32px;height:32px;font-size:18px}
 dialog img{display:block;width:100%;height:auto;background:#fff}
-.toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:auto;width:fit-content;max-width:90vw;background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600}
-@media (max-width:520px){.card{grid-template-columns:1fr}.card>img{height:120px}}
-@media (prefers-reduced-motion:no-preference){.card{animation:in .25s ease both}@keyframes in{from{transform:translateY(4px)}}}
+.toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:auto;width:fit-content;max-width:90vw;background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600;z-index:9}
+@media (max-width:440px){.price .v{font-size:18px}.uh h3{font-size:21px}}
 </style>
 
 <header class="top"><div class="wrap">
   <div class="bar"><div class="logo">IMAN<small>DEVELOPERS</small></div><button class="lang" id="lang" type="button">العربية</button></div>
-  <h1 id="t-h1"></h1>
-  <p id="t-sub"></p>
-  <div class="me"><img src="img/sam-jabr.jpg" alt="Sam Jabr">
-    <div><b>Sam Jabr</b><span class="og">OG TEAM</span><br><span id="t-role"></span><br>
-    <a href="https://wa.me/971501752771" dir="ltr">WhatsApp +971 50 175 2771</a></div></div>
+  <div class="hero"><div><h1 id="t-h1"></h1><p id="t-sub"></p></div>
+    <div class="me"><img src="img/sam-jabr.jpg" alt="Sam Jabr">
+      <div><b>Sam Jabr</b><span class="og">OG TEAM</span><br><span id="t-role"></span><br>
+      <a href="https://wa.me/971501752771" dir="ltr">+971 50 175 2771</a></div></div></div>
 </div></header>
 
 <main class="wrap">
   <form class="panel" id="f" autocomplete="off">
+    <div class="ph"><b id="t-ask"></b><button type="button" class="reset" id="reset"></button></div>
     <div class="q">
       <label class="ql" for="budget" id="t-budget"></label>
       <div class="money"><span>AED</span><input id="budget" inputmode="decimal" placeholder="2,500,000" dir="ltr"><button type="button" id="clear" hidden></button></div>
@@ -125,8 +143,10 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
     </div>
     <div class="q"><div class="ql" id="t-loc"></div><div class="chips" id="locs" role="group"></div></div>
     <div class="q"><div class="ql" id="t-plan"></div><div class="chips" id="plans" role="group"></div></div>
+    <div class="q"><div class="ql" id="t-beds"></div><div class="chips" id="beds" role="group"></div></div>
   </form>
-  <div class="sum"><h2 id="count"></h2><span id="asof"></span></div>
+  <div class="rbar" id="rbar"><div><h2 id="count"></h2><div class="sub" id="sumline"></div></div>
+    <div class="r"><select id="sort" aria-label="Sort"></select><button type="button" class="edit" id="edit"></button></div></div>
   <div class="list" id="list"></div>
   <p class="foot" id="foot"></p>
 </main>
@@ -138,129 +158,160 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
 const D={"date":"2026-10-12","projects":{"113-residences":{"name":"113 Residences","loc":"sufouh","plan":"40/60","handover":"Q2 2029","schedule":[[20,"Within 30 days of booking","خلال 30 يوم من الحجز"],[10,"Within 90 days of booking","خلال 90 يوم من الحجز"],[10,"At 40% construction","عند إنجاز 40% من البناء"],[60,"On handover","عند التسليم"]],"image":"assets/113-residences-main.webp"},"oxford-cove":{"name":"Oxford Cove","loc":"jvc","plan":"50/50","handover":null,"schedule":[[50,"In instalments before handover","أقساط قبل التسليم"],[50,"On handover","عند التسليم"]],"image":"assets/oxford-cove-main.webp"},"sierra-by-iman":{"name":"Sierra by Iman","loc":"motorcity","plan":"40/60","handover":null,"schedule":[[40,"In instalments during construction","أقساط خلال البناء"],[60,"On handover","عند التسليم"]],"image":"assets/sierra-by-iman-main.webp"}},"units":[{"pid":"113-residences","no":"G01","type":"Two Bedroom with study","floor":"Ground Floor","view":"Community View","area":1369.0,"op":3012409.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G01.webp"},{"pid":"113-residences","no":"G02","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G02.webp"},{"pid":"113-residences","no":"G04","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G04.webp"},{"pid":"113-residences","no":"102","type":"Three Bedroom with Maid","floor":"1st Floor","view":"Pool/Park View","area":1690.0,"op":3803562.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-102.webp"},{"pid":"113-residences","no":"105","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1136.0,"op":2761321.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-105.webp"},{"pid":"113-residences","no":"107","type":"Two Bedroom with Maid","floor":"1st Floor","view":"Community View","area":1309.0,"op":3181129.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-107.webp"},{"pid":"113-residences","no":"108","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1119.0,"op":2720255.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-108.webp"},{"pid":"113-residences","no":"110","type":"Two Bedroom with Study","floor":"1st Floor","view":"Pool View","area":1188.0,"op":3028609.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-110.webp"},{"pid":"113-residences","no":"205","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1283.0,"op":3015945.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-205.webp"},{"pid":"113-residences","no":"206","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1117.0,"op":2737370.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-206.webp"},{"pid":"113-residences","no":"207","type":"Two Bedroom with Maid","floor":"2nd Floor","view":"Community View","area":1278.0,"op":3132153.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-207.webp"},{"pid":"113-residences","no":"209","type":"Three Bedroom with Study","floor":"2nd Floor","view":"Pool/Community View","area":2059.0,"op":4323508.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-209.webp"},{"pid":"113-residences","no":"310","type":"Two Bedroom","floor":"3rd Floor","view":"Community View","area":1126.0,"op":2793579.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-310.webp"},{"pid":"113-residences","no":"312","type":"Two Bedroom with study","floor":"3rd Floor","view":"Pool View","area":1209.0,"op":3178827.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-312.webp"},{"pid":"113-residences","no":"409","type":"Two Bedroom","floor":"4th Floor","view":"Community View","area":1099.0,"op":2748026.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-409.webp"},{"pid":"113-residences","no":"410","type":"Three Bedroom with Study","floor":"4th Floor","view":"Pool/Community View","area":2010.0,"op":4302434.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-410.webp"},{"pid":"113-residences","no":"601","type":"Two Bedroom","floor":"6th Floor","view":"Pool View","area":1031.0,"op":2752395.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-601.webp"},{"pid":"113-residences","no":"606","type":"Two Bedroom","floor":"6th Floor","view":"Community View","area":1148.0,"op":2915300.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-606.webp"},{"pid":"113-residences","no":"609","type":"Three Bedroom with Study","floor":"6th Floor","view":"Pool/Community View","area":2059.0,"op":4426217.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-609.webp"},{"pid":"113-residences","no":"611","type":"Two Bedroom with Study","floor":"6th Floor","view":"Pool View","area":1141.0,"op":3079469.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-611.webp"},{"pid":"113-residences","no":"704","type":"Two Bedroom","floor":"7th Floor","view":"Community View","area":1097.0,"op":2819162.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-704.webp"},{"pid":"113-residences","no":"710","type":"Two Bedroom with study","floor":"7th Floor","view":"Pool View","area":1209.0,"op":3311782.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-710.webp"},{"pid":"113-residences","no":"708","type":"Two Bedroom","floor":"7th Floor","view":"Community View","area":1099.0,"op":2824694.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-708.webp"},{"pid":"113-residences","no":"709","type":"Three Bedroom with Study","floor":"7th Floor","view":"Pool/Community View","area":2010.0,"op":4362515.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-709.webp"},{"pid":"113-residences","no":"808","type":"Two Bedroom with Maid","floor":"8th Floor","view":"Community View","area":1228.0,"op":3179267.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-808.webp"},{"pid":"113-residences","no":"809","type":"Two Bedroom","floor":"8th Floor","view":"Community View","area":1126.0,"op":2917488.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-809.webp"},{"pid":"113-residences","no":"902","type":"Three Bedroom with Maid","floor":"9th Floor","view":"Pool/Park View","area":1588.0,"op":3826820.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-902.webp"},{"pid":"oxford-cove","no":"G12","type":"Two Bedroom","floor":"Ground Floor","view":"Community View","area":1181.0,"op":1674068.0,"disc":0.04,"cash":0.14,"img":"assets/plans/oxford-cove-G12.webp"},{"pid":"oxford-cove","no":"313","type":"Studio","floor":"3rd Floor","view":"Pool View","area":414,"op":869400.0,"disc":0.04,"cash":0.14,"img":"assets/plans/oxford-cove-313.webp"},{"pid":"oxford-cove","no":"337","type":"One Bedroom","floor":"3rd Floor","view":"Community View","area":803,"op":1290019.5,"disc":0.04,"cash":0.14,"img":"assets/plans/oxford-cove-337.webp"},{"pid":"sierra-by-iman","no":"RETAIL-2","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2873.96,"op":7919913.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-2.webp"},{"pid":"sierra-by-iman","no":"RETAIL-1","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2897.97,"op":7980794.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-1.webp"},{"pid":"sierra-by-iman","no":"RETAIL-3","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2987.42,"op":8261387.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-3.webp"},{"pid":"sierra-by-iman","no":"RETAIL-4","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3075.46,"op":8484112.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-4.webp"},{"pid":"sierra-by-iman","no":"RETAIL-5","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3933.35,"op":10079595.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-5.webp"},{"pid":"sierra-by-iman","no":"208","type":"Two Bedroom","floor":"2nd Floor","view":"Pool View","area":1062.51,"op":1930237.05,"disc":0.08,"cash":0.22,"img":"assets/plans/sierra-by-iman-208.webp"},{"pid":"sierra-by-iman","no":"3005","type":"Two Bedroom","floor":"30th Floor","view":"Pool View","area":1062.72,"op":1902535.95,"disc":0.08,"cash":0.22,"img":"assets/plans/sierra-by-iman-3005.webp"}]};
 const WA="971501752771", COMM=0.07;
 const T={
- en:{dir:"ltr",other:"العربية",h1:"Find the right unit",sub:"Enter your client's budget, preferred area and payment plan. You will see every IMAN unit available today that fits.",
-  role:"Senior Sales Manager · IMAN Developers",budget:"1 · Client budget",loc:"2 · Location",plan:"3 · Payment plan",
-  any:"Any",cash:"Full cash",clear:"Clear",
-  locs:{sufouh:"Al Sufouh Gardens",jvc:"JVC",motorcity:"Motor City"},
-  n:k=>k===1?"1 unit fits":k+" units fit",none:"No unit fits these choices. Try a higher budget or another area.",
-  near:"Just above budget (up to 10% more)",asof:d=>"Availability of "+d,
-  planP:(p,d)=>p+" plan · "+d+"% off",cashP:d=>"Full cash · "+d+"% off",list:"List price",save:"You save AED ",
-  onlyCash:"Fits the budget with full cash only",comm:v=>"Your commission 7%: AED "+v,
-  plan2:"Floor plan",copy:"Copy for client",wa:"Ask Sam",copied:"Copied. Paste it to your client.",copyFail:"Copy did not work. Select the text in the card instead.",
-  floor:"Floor",view:"View",sqft:"sq ft",handover:"Handover",
+ en:{dir:"ltr",other:"العربية",h1:"Find the right unit",sub:"Every IMAN unit available today, filtered for your client.",
+  role:"Senior Sales Manager",ask:"Your client's needs",reset:"Reset",budget:"Budget",loc:"Location",plan:"Payment plan",beds:"Bedrooms",
+  any:"Any",cash:"Full cash",clear:"Clear",upTo:"Up to ",
+  planHint:{"40/60":"40% before handover","50/50":"50% before handover",cash:"Biggest discount"},
+  locs:{sufouh:["Al Sufouh Gardens","113 Residences"],jvc:["JVC","Oxford Cove"],motorcity:["Motor City","Sierra by Iman"]},
+  bedsL:{0:"Studio",1:"1 BR",2:"2 BR",3:"3 BR",4:"4 BR",r:"Retail"},
+  n:k=>k===1?"1 unit":k+" units",none:"No unit fits all your choices.",showCheapest:(v)=>"Raise budget to AED "+v,
+  anyBudget:"any budget",near:"Slightly above budget (up to 10% more)",asof:d=>"Availability "+d,
+  sort:{price:"Price: low to high",priceD:"Price: high to low",size:"Size: largest first"},edit:"Filters",
+  planP:p=>p+" plan",cashP:"Full cash",off:d=>d+"% off",list:"List",
+  onlyCash:"In budget with full cash only",comm:v=>"Your 7%: AED "+v,cashPill:(v,d)=>"Cash "+v+" ("+d+"% off)",
+  details:"Payment schedule",total:"Total",save:"Saving on list price",
+  plan2:"Floor plan",copy:"Copy for client",wa:"Ask Sam",copied:"Copied. Paste it to your client.",copyFail:"Copy did not work on this device.",
+  floor:"Floor",sqft:"sq ft",handover:"Handover",
   foot:"Prices in AED from IMAN's latest availability lists. Instalments are worked out on the discounted price. Prices, availability and offers are confirmed at booking; DLD and registration fees are extra.",
-  waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it.",
-  types:{}},
- ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",sub:"اكتب ميزانية العميل والمنطقة يلي بدو ياها وطريقة الدفع، وبتطلعلك كل وحدات إيمان المتاحة اليوم يلي بتناسبه.",
-  role:"Senior Sales Manager · IMAN Developers",budget:"١ · ميزانية العميل",loc:"٢ · المنطقة",plan:"٣ · طريقة الدفع",
-  any:"الكل",cash:"كاش كامل",clear:"مسح",
-  locs:{sufouh:"الصفوح",jvc:"JVC",motorcity:"موتور سيتي"},
-  n:k=>k===1?"وحدة مناسبة":k+" وحدات مناسبة",none:"ما في وحدة بتناسب هالاختيارات. جرب ميزانية أعلى أو منطقة تانية.",
-  near:"فوق الميزانية بشوي (لحد 10%)",asof:d=>"المتاح بتاريخ "+d,
-  planP:(p,d)=>"خطة "+p+" · خصم "+d+"%",cashP:d=>"كاش كامل · خصم "+d+"%",list:"السعر الأصلي",save:"توفير AED ",
-  onlyCash:"بتناسب الميزانية بالكاش بس",comm:v=>"عمولتك 7%: AED "+v,
-  plan2:"المخطط",copy:"نسخ للعميل",wa:"اسأل سام",copied:"انتسخت. الصقها للعميل.",copyFail:"ما زبط النسخ. حدد النص من الكرت.",
-  floor:"الطابق",view:"الإطلالة",sqft:"قدم²",handover:"التسليم",
+  waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it."},
+ ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",sub:"كل وحدات إيمان المتاحة اليوم، حسب طلب عميلك.",
+  role:"Senior Sales Manager",ask:"طلب العميل",reset:"مسح الكل",budget:"الميزانية",loc:"المنطقة",plan:"طريقة الدفع",beds:"عدد الغرف",
+  any:"الكل",cash:"كاش كامل",clear:"مسح",upTo:"لحد ",
+  planHint:{"40/60":"40% قبل التسليم","50/50":"50% قبل التسليم",cash:"أعلى خصم"},
+  locs:{sufouh:["الصفوح","113 Residences"],jvc:["JVC","Oxford Cove"],motorcity:["موتور سيتي","Sierra by Iman"]},
+  bedsL:{0:"ستوديو",1:"غرفة",2:"غرفتين",3:"3 غرف",4:"4 غرف",r:"محل تجاري"},
+  n:k=>k===1?"وحدة":k+" وحدات",none:"ما في وحدة بتناسب كل هالاختيارات.",showCheapest:(v)=>"ارفع الميزانية لـ AED "+v,
+  anyBudget:"بدون ميزانية",near:"فوق الميزانية بشوي (لحد 10%)",asof:d=>"المتاح بتاريخ "+d,
+  sort:{price:"السعر: من الأرخص",priceD:"السعر: من الأغلى",size:"المساحة: الأكبر أول"},edit:"الفلتر",
+  planP:p=>"خطة "+p,cashP:"كاش كامل",off:d=>"خصم "+d+"%",list:"الأصلي",
+  onlyCash:"بتناسب الميزانية بالكاش بس",comm:v=>"عمولتك 7%: AED "+v,cashPill:(v,d)=>"كاش "+v+" (خصم "+d+"%)",
+  details:"جدول الدفعات",total:"المجموع",save:"التوفير عن السعر الأصلي",
+  plan2:"المخطط",copy:"نسخ للعميل",wa:"اسأل سام",copied:"انتسخت. الصقها للعميل.",copyFail:"ما زبط النسخ على هالجهاز.",
+  floor:"الطابق",sqft:"قدم²",handover:"التسليم",
   foot:"الأسعار بالدرهم من آخر قوائم إيمان. الأقساط محسوبة على السعر بعد الخصم. الأسعار والتوفر والعروض بتتأكد عند الحجز، ورسوم الأراضي والتسجيل مش محسوبة.",
-  waMsg:(u,p)=>"مرحبا سام، الوحدة "+u+" بمشروع "+p+" لسا متاحة؟ عندي عميل إلها.",
-  types:{}}
+  waMsg:(u,p)=>"مرحبا سام، الوحدة "+u+" بمشروع "+p+" لسا متاحة؟ عندي عميل إلها."}
 };
+T.ar.n=k=>k===1?"وحدة":k===2?"وحدتين":k+" وحدات";
 const TYPE={"one bedroom":"1 BR","one bedroom with study":"1 BR + Study","two bedroom":"2 BR","two bedroom with study":"2 BR + Study",
  "two bedroom with maid":"2 BR + Maid","three bedroom with study":"3 BR + Study","three bedroom with maid":"3 BR + Maid",
  "four bedroom duplex with pool":"4 BR Duplex + Pool",studio:"Studio",retail:"Retail shop"};
 const TYPE_AR={"1 BR":"غرفة نوم","1 BR + Study":"غرفة + مكتب","2 BR":"غرفتين نوم","2 BR + Study":"غرفتين + مكتب","2 BR + Maid":"غرفتين + خادمة",
  "3 BR + Study":"3 غرف + مكتب","3 BR + Maid":"3 غرف + خادمة","4 BR Duplex + Pool":"دوبلكس 4 غرف + مسبح",Studio:"ستوديو","Retail shop":"محل تجاري"};
+const VIEW_AR={Community:"المجمع",Pool:"المسبح",Park:"الحديقة","Pool/Park":"المسبح والحديقة","Pool/Community":"المسبح والمجمع",Roadside:"الشارع"};
 const fmt=n=>Math.round(n).toLocaleString("en-US");
-const short=n=>n>=1e6?(n/1e6).toFixed(n%1e6?2:0).replace(/\.?0+$/,"")+"M":Math.round(n/1e3)+"K";
-const st={lang:"en",budget:null,loc:"any",plan:"any"};
+const mill=n=>n>=1e6?(Math.round(n/1e4)/100).toString()+"M":Math.round(n/1e3)+"K";
+const DEF={budget:null,loc:"any",plan:"any",beds:"any",sort:"price"};
+const st={lang:"en",...DEF};
 try{const l=localStorage.getItem("finder-lang");if(l==="ar"||l==="en")st.lang=l}catch(e){}
 
+const bedsOf=t=>{t=t.toLowerCase();if(t==="retail")return "r";if(t.startsWith("studio"))return "0";
+  for(const [w,n] of [["one",1],["two",2],["three",3],["four",4]])if(t.startsWith(w))return String(n);return "?"};
 const U=D.units.map(u=>{const p=D.projects[u.pid];const t=TYPE[u.type.toLowerCase()]||u.type;
-  return {...u,p,t,planName:p.plan,planPrice:u.op*(1-u.disc),cashPrice:u.op*(1-u.cash)}});
+  return {...u,p,t,beds:bedsOf(u.type),planName:p.plan,planPrice:u.op*(1-u.disc),cashPrice:u.op*(1-u.cash)}});
+const priceFor=(u,plan)=>plan==="cash"?u.cashPrice:u.planPrice;
+const priceFrom=(u,plan)=>plan==="any"?Math.min(u.planPrice,u.cashPrice):priceFor(u,plan);
 
-function priceFor(u,plan){return plan==="cash"?u.cashPrice:u.planPrice}
-function matchesLocPlan(u,loc,plan){return (loc==="any"||u.p.loc===loc)&&(plan==="any"||plan==="cash"||u.planName===plan)}
-function fit(u){ // returns "yes", "cash" (fits only with full cash), "near", or null
-  if(!matchesLocPlan(u,st.loc,st.plan))return null;
-  const b=st.budget; if(!b)return "yes";
-  const p=priceFor(u,st.plan);
-  if(p<=b)return "yes";
-  if(st.plan==="any"&&u.cashPrice<=b)return "cash";
-  if(p<=b*1.1)return "near";
-  return null;
-}
-function parseBudget(s){s=(s||"").trim().toLowerCase().replace(/,/g,"");if(!s)return null;
-  const m=s.match(/^([\d.]+)\s*(m|k|مليون|الف|ألف)?/);if(!m)return null;let v=parseFloat(m[1]);if(isNaN(v))return null;
-  if(m[2]==="m"||m[2]==="مليون")v*=1e6;else if(m[2]&&m[2]!=="m")v*=1e3;else if(v<100)v*=1e6;return v}
+function base(u,s){return (s.loc==="any"||u.p.loc===s.loc)&&(s.plan==="any"||s.plan==="cash"||u.planName===s.plan)&&(s.beds==="any"||u.beds===s.beds)}
+function fit(u,s=st){ // "yes", "cash" (only with full cash), "near" (up to 10% over), or null
+  if(!base(u,s))return null;const b=s.budget;if(!b)return "yes";
+  const p=priceFor(u,s.plan);if(p<=b)return "yes";
+  if(s.plan==="any"&&u.cashPrice<=b)return "cash";
+  if(p<=b*1.1)return "near";return null}
+const countWith=ch=>{const s={...st,...ch};return U.filter(u=>{const f=fit(u,s);return f==="yes"||f==="cash"}).length};
 
-function chips(el,opts,cur,onPick){el.innerHTML="";for(const o of opts){const b=document.createElement("button");b.type="button";b.className="chip";
-  b.setAttribute("aria-pressed",String(o.v===cur));b.innerHTML=o.l+(o.c!=null?`<small>${o.c}</small>`:"");b.onclick=()=>onPick(o.v);el.append(b)}}
+function parseBudget(s){s=(s||"").trim().toLowerCase().replace(/[,\s]/g,"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));if(!s)return null;
+  const m=s.match(/^([\d.]+)(m|k|مليون|الف|ألف)?/);if(!m)return null;let v=parseFloat(m[1]);if(isNaN(v))return null;
+  if(m[2]==="m"||m[2]==="مليون")v*=1e6;else if(m[2])v*=1e3;else if(v<100)v*=1e6;return v}
 
-function count(loc,plan){return U.filter(u=>{if(!matchesLocPlan(u,loc,plan))return false;
-  if(!st.budget)return true;const p=priceFor(u,plan);return p<=st.budget||(plan==="any"&&u.cashPrice<=st.budget)}).length}
+function chips(el,opts,cur,onPick,cls=""){el.innerHTML="";for(const o of opts){const b=document.createElement("button");b.type="button";
+  b.className="chip "+cls+(o.c===0?" zero":"");b.setAttribute("aria-pressed",String(o.v===cur));
+  b.innerHTML=`${o.l}${o.c!=null?`<i class="num">${o.c}</i>`:""}${o.h?`<small>${o.h}</small>`:""}`;b.onclick=()=>onPick(o.v);el.append(b)}}
 
-function card(u,f){const L=T[st.lang],ar=st.lang==="ar";
-  const showPlan=st.plan!=="cash", showCash=true;
-  const sch=u.p.schedule.map(([pc,en,a])=>`<tr><td>${pc}%</td><td>${ar?a:en}</td><td>AED ${fmt(u.planPrice*pc/100)}</td></tr>`).join("");
+function unitCard(u,f){const L=T[st.lang],ar=st.lang==="ar";
+  const cashMain=st.plan==="cash"||f==="cash";
+  const main=cashMain?u.cashPrice:u.planPrice;
   const type=ar?(TYPE_AR[u.t]||u.t):u.t;
-  const floor=u.floor.replace(" Floor","");
-  return `<article class="card"><img src="${u.p.image}" alt="" loading="lazy"><div class="cb">
-   <div class="eb">${u.p.name} · ${L.locs[u.p.loc]}${u.p.handover?` · ${L.handover} ${u.p.handover}`:""}</div>
-   <div class="uh"><h3 dir="ltr">${u.no}</h3><span class="ut">${type}</span>${f==="cash"?`<span class="tag">${L.onlyCash}</span>`:""}</div>
-   <div class="meta"><span>${L.floor} <b>${floor}</b></span><span>${L.view} <b>${u.view.replace(" View","")}</b></span><span><b>${fmt(u.area)}</b> ${L.sqft}</span></div>
-   <div class="prices">
-    ${showPlan?`<div class="pr${f==="cash"?" off":""}"><div class="k">${L.planP(u.planName,Math.round(u.disc*100))}</div><div class="v">AED ${fmt(u.planPrice)}</div>
-      <div class="s">${L.list} <s>${fmt(u.op)}</s></div><table class="sch"><tbody>${sch}</tbody></table></div>`:""}
-    ${showCash?`<div class="pr cash"><div class="k">${L.cashP(Math.round(u.cash*100))}</div><div class="v">AED ${fmt(u.cashPrice)}</div>
-      <div class="s">${L.save}${fmt(u.op-u.cashPrice)}</div></div>`:""}
-   </div>
-   <div class="comm">${L.comm(fmt((st.plan==="cash"||f==="cash"?u.cashPrice:u.planPrice)*COMM))}</div>
+  const fl=u.floor.replace(/ Floor$/,"").replace(/^Ground$/,ar?"أرضي":"Ground");
+  const v=u.view.replace(/ View$/,"");
+  const sch=u.p.schedule.map(([pc,en,a])=>`<tr><td>${pc}%</td><td>${ar?a:en}</td><td>AED ${fmt(u.planPrice*pc/100)}</td></tr>`).join("");
+  return `<article class="unit">
+   <div class="row1"><div><div class="eb">${u.p.name} · ${L.locs[u.p.loc][0]}</div>
+     <div class="uh"><h3 dir="ltr">${u.no}</h3><span class="ut">${type}</span></div></div>
+    <div class="price"><div class="k">${cashMain?L.cashP:L.planP(u.planName)} · ${L.off(Math.round((cashMain?u.cash:u.disc)*100))}</div>
+     <div class="v">AED ${fmt(main)}</div><s class="num">${L.list} ${fmt(u.op)}</s></div></div>
+   <div class="meta"><span>${L.floor} <b>${fl}</b></span><span><b>${ar?(VIEW_AR[v]||v):v}</b></span><span><b class="num">${fmt(u.area)}</b> ${L.sqft}</span>${u.p.handover?`<span>${L.handover} <b>${u.p.handover}</b></span>`:""}</div>
+   <div class="pills">${f==="cash"?`<span class="pill warn">${L.onlyCash}</span>`:""}
+    ${!cashMain?`<span class="pill cash num">${L.cashPill(fmt(u.cashPrice),Math.round(u.cash*100))}</span>`:""}
+    <span class="pill comm num">${L.comm(fmt(main*COMM))}</span></div>
+   ${!cashMain?`<details><summary>${L.details} (${u.planName})</summary><table class="sch"><tbody>${sch}
+     <tr class="tot"><td></td><td>${L.total}</td><td>AED ${fmt(u.planPrice)}</td></tr></tbody></table></details>`:""}
    <div class="acts">${u.img?`<button type="button" class="btn" data-plan="${u.pid}|${u.no}">${L.plan2}</button>`:""}
     <button type="button" class="btn" data-copy="${u.pid}|${u.no}">${L.copy}</button>
     <a class="btn wa" href="https://wa.me/${WA}?text=${encodeURIComponent(L.waMsg(u.no,u.p.name))}" target="_blank" rel="noopener">${L.wa}</a></div>
-  </div></article>`}
+  </article>`}
 
 function render(){const L=T[st.lang];
   document.documentElement.lang=st.lang;document.documentElement.dir=L.dir;
-  for(const k of ["h1","sub","role","budget","loc","plan"])document.getElementById("t-"+k).textContent=L[k];
-  document.getElementById("lang").textContent=L.other;
+  for(const k of ["h1","sub","role","ask","budget","loc","plan","beds"])document.getElementById("t-"+k).textContent=L[k];
+  document.getElementById("lang").textContent=L.other;document.getElementById("reset").textContent=L.reset;
+  document.getElementById("edit").textContent=L.edit;
   const clr=document.getElementById("clear");clr.textContent=L.clear;clr.hidden=!st.budget;
-  chips(document.getElementById("quick"),[1,2,3,4,6].map(m=>({v:m*1e6,l:(st.lang==="ar"?"لحد ":"Up to ")+m+"M"})).map(o=>({...o})),st.budget,v=>{st.budget=v;document.getElementById("budget").value=fmt(v);render()});
-  document.querySelectorAll("#quick .chip").forEach(b=>b.classList.add("quick"));
-  chips(document.getElementById("locs"),[{v:"any",l:L.any},...["sufouh","jvc","motorcity"].map(k=>({v:k,l:L.locs[k]}))].map(o=>({...o,c:count(o.v,st.plan)})),st.loc,v=>{st.loc=v;render()});
+  chips(document.getElementById("quick"),[1,1.5,2,3,4,6].map(m=>({v:m*1e6,l:L.upTo+m+"M"})),st.budget,v=>{st.budget=st.budget===v?null:v;
+    document.getElementById("budget").value=st.budget?fmt(st.budget):"";render()},"sm");
+  chips(document.getElementById("locs"),[{v:"any",l:L.any,c:countWith({loc:"any"})},
+    ...Object.keys(L.locs).map(k=>({v:k,l:L.locs[k][0],h:L.locs[k][1],c:countWith({loc:k})}))],st.loc,v=>{st.loc=v;render()});
   const planOpts=[...new Set(U.map(u=>u.planName))].sort();
-  chips(document.getElementById("plans"),[{v:"any",l:L.any},...planOpts.map(p=>({v:p,l:p})),{v:"cash",l:L.cash}].map(o=>({...o,c:count(st.loc,o.v)})),st.plan,v=>{st.plan=v;render()});
-  const rows=U.map(u=>({u,f:fit(u)})).filter(r=>r.f).sort((a,b)=>priceFor(a.u,st.plan)-priceFor(b.u,st.plan));
+  chips(document.getElementById("plans"),[{v:"any",l:L.any,c:countWith({plan:"any"})},...planOpts.map(p=>({v:p,l:p,h:L.planHint[p],c:countWith({plan:p})})),
+    {v:"cash",l:L.cash,h:L.planHint.cash,c:countWith({plan:"cash"})}],st.plan,v=>{st.plan=v;render()});
+  const bedKeys=["0","1","2","3","4","r"].filter(k=>U.some(u=>u.beds===k));
+  chips(document.getElementById("beds"),[{v:"any",l:L.any,c:countWith({beds:"any"})},...bedKeys.map(k=>({v:k,l:L.bedsL[k],c:countWith({beds:k})}))],st.beds,v=>{st.beds=v;render()},"sm");
+  const sel=document.getElementById("sort");sel.innerHTML=Object.entries(L.sort).map(([k,t])=>`<option value="${k}"${k===st.sort?" selected":""}>${t}</option>`).join("");
+
+  const key=r=>st.sort==="size"?-r.u.area:(st.sort==="priceD"?-1:1)*(r.f==="cash"?r.u.cashPrice:priceFor(r.u,st.plan));
+  const rows=U.map(u=>({u,f:fit(u)})).filter(r=>r.f).sort((a,b)=>key(a)-key(b));
   const yes=rows.filter(r=>r.f!=="near"),near=rows.filter(r=>r.f==="near");
   document.getElementById("count").textContent=L.n(yes.length);
-  const [y,m,d]=D.date.split("-");document.getElementById("asof").textContent=L.asof(`${d}.${m}.${y}`);
-  document.getElementById("list").innerHTML=(yes.length?yes.map(r=>card(r.u,r.f)).join(""):`<div class="empty">${L.none}</div>`)
-    +(near.length?`<div class="sec">${L.near}</div>`+near.map(r=>card(r.u,r.f)).join(""):"");
+  const bits=[st.budget?L.upTo+"AED "+mill(st.budget):L.anyBudget];
+  if(st.loc!=="any")bits.push(L.locs[st.loc][0]);if(st.plan!=="any")bits.push(st.plan==="cash"?L.cash:st.plan);if(st.beds!=="any")bits.push(L.bedsL[st.beds]);
+  const [y,m,d]=D.date.split("-");
+  document.getElementById("sumline").textContent=bits.join(" · ")+"  ·  "+L.asof(`${d}.${m}.${y}`);
+  let html=yes.map(r=>unitCard(r.u,r.f)).join("");
+  if(!yes.length){const pool=U.filter(u=>base(u,st));const low=pool.length?Math.min(...pool.map(u=>priceFor(u,st.plan==="any"?"cash":st.plan))):null;
+    html=`<div class="empty">${L.none}${low&&st.budget?`<button type="button" class="btn" id="raise" data-v="${Math.ceil(low/5e4)*5e4}">${L.showCheapest(fmt(Math.ceil(low/5e4)*5e4))}</button>`:""}
+      <button type="button" class="reset" data-reset="1">${L.reset}</button></div>`}
+  if(near.length)html+=`<div class="sec">${L.near}</div>`+near.map(r=>unitCard(r.u,r.f)).join("");
+  document.getElementById("list").innerHTML=html;
   document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr</b> · Senior Sales Manager · OG Team · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
 }
 
-function find(key){const [pid,no]=key.split("|");return U.find(u=>u.pid===pid&&u.no===no)}
-function clientText(u){const ar=st.lang==="ar",L=T[st.lang];
-  const lines=[`${u.p.name} · ${L.locs[u.p.loc]}`,`Unit ${u.no} · ${u.t} · ${u.floor} · ${u.view} · ${fmt(u.area)} sq ft`];
+const find=k=>{const [pid,no]=k.split("|");return U.find(u=>u.pid===pid&&u.no===no)};
+function clientText(u){const L=T[st.lang];
+  const lines=[`${u.p.name} · ${T.en.locs[u.p.loc][0]}`,`Unit ${u.no} · ${u.t} · ${u.floor} · ${u.view} · ${fmt(u.area)} sq ft`];
   if(st.plan!=="cash"){lines.push(`${u.planName} payment plan, ${Math.round(u.disc*100)}% off: AED ${fmt(u.planPrice)}`);
     for(const [pc,en] of u.p.schedule)lines.push(`  ${pc}% ${en}: AED ${fmt(u.planPrice*pc/100)}`)}
   lines.push(`Full cash, ${Math.round(u.cash*100)}% off: AED ${fmt(u.cashPrice)}`);
   if(u.p.handover)lines.push(`Handover ${u.p.handover}`);
   lines.push("","Sam Jabr · Senior Sales Manager · IMAN Developers · WhatsApp +971 50 175 2771");return lines.join("\n")}
 let tt;function toast(s){const t=document.getElementById("toast");t.textContent=s;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+const bi=document.getElementById("budget");
+function resetAll(){Object.assign(st,DEF);bi.value="";render()}
 
 document.getElementById("list").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
   if(b.dataset.plan){const u=find(b.dataset.plan);document.getElementById("dt").textContent=`${u.p.name} · ${u.no}`;
     document.getElementById("di").src=u.img;document.getElementById("dlg").showModal()}
-  if(b.dataset.copy){const u=find(b.dataset.copy);const s=clientText(u);
-    try{navigator.clipboard.writeText(s).then(()=>toast(T[st.lang].copied),()=>toast(T[st.lang].copyFail))}catch(err){toast(T[st.lang].copyFail)}}});
+  if(b.dataset.copy){const s=clientText(find(b.dataset.copy));
+    try{navigator.clipboard.writeText(s).then(()=>toast(T[st.lang].copied),()=>toast(T[st.lang].copyFail))}catch(err){toast(T[st.lang].copyFail)}}
+  if(b.id==="raise"){st.budget=+b.dataset.v;bi.value=fmt(st.budget);render()}
+  if(b.dataset.reset)resetAll()});
 document.getElementById("dx").onclick=()=>document.getElementById("dlg").close();
 document.getElementById("dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
-const bi=document.getElementById("budget");
 bi.addEventListener("input",()=>{st.budget=parseBudget(bi.value);render()});
 bi.addEventListener("blur",()=>{if(st.budget)bi.value=fmt(st.budget)});
 document.getElementById("clear").onclick=()=>{st.budget=null;bi.value="";render();bi.focus()};
-document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();bi.blur()});
+document.getElementById("reset").onclick=resetAll;
+document.getElementById("sort").onchange=e=>{st.sort=e.target.value;render()};
+document.getElementById("edit").onclick=()=>document.getElementById("f").scrollIntoView({behavior:"smooth",block:"start"});
+document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();bi.blur();document.getElementById("rbar").scrollIntoView({behavior:"smooth"})});
 document.getElementById("lang").onclick=()=>{st.lang=st.lang==="en"?"ar":"en";try{localStorage.setItem("finder-lang",st.lang)}catch(e){}render()};
 render();
 </script>
