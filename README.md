@@ -28,3 +28,4 @@ To make the PDF for partners, put the day's IMAN lists in `availability/YYYY-MM-
 ## Rules from Sam
 
 - A unit that is missing from the newest IMAN list for its project is sold: remove it from `site/inventory.json` and from the PDF.
+- When Sam says a unit is sold before IMAN sends a new list, remove it from `site/inventory.json` and add it to `availability/sold.txt`; the PDF leaves it out and marks it SOLD on the attached IMAN list.

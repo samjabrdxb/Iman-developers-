@@ -58,6 +58,32 @@ aed = lambda n: f"{round(n):,}"
 anchor = lambda p, u: f"u-{p.get('key', p['plans'])}-{u['no']}"
 DISC = 0.04
 TMP = "/tmp/iman-offers-img"
+SOLD_FILE = os.path.join(REPO, "availability", "sold.txt")
+
+
+def read_sold():
+    """Units Sam reported sold that are still on IMAN's newest list: {file name start: {unit, ...}}."""
+    sold = {}
+    if os.path.exists(SOLD_FILE):
+        for line in open(SOLD_FILE):
+            line = line.split("#")[0].strip()
+            if ":" in line:
+                k, v = line.split(":", 1)
+                sold.setdefault(k.strip().upper(), set()).update(x.strip().upper() for x in v.split(",") if x.strip())
+    return sold
+
+
+def mark_sold(doc, first_page, units):
+    """Cross out sold units on an attached IMAN list and label them SOLD."""
+    for page in doc.pages(first_page, len(doc)):
+        for w in page.get_text("words"):
+            if w[4].upper() in units and w[0] < page.rect.width * 0.3:
+                row = pymupdf.Rect(page.rect.x0 + 10, w[1] - 1.5, page.rect.x1 - 10, w[3] + 1.5)
+                page.draw_rect(row, color=(0.75, 0.15, 0.1), fill=(1, 0.85, 0.82), fill_opacity=0.55, width=0.8)
+                page.draw_line(pymupdf.Point(row.x0, (row.y0 + row.y1) / 2), pymupdf.Point(row.x1, (row.y0 + row.y1) / 2), color=(0.75, 0.15, 0.1), width=0.8)
+                page.insert_text((row.x1 - 34, row.y1 - 2), "SOLD", fontname="hebo", fontsize=max(6, row.height * 0.75), color=(0.75, 0.15, 0.1))
+
+
 NOTE_FILE = os.path.join(SITE, "note.txt")  # Sam's note of the day, shown on the cover
 NOTE = open(NOTE_FILE).read().strip() if os.path.exists(NOTE_FILE) else ""
 
@@ -400,6 +426,8 @@ def stamp(doc):
 
 
 def main(date):
+    global SOLD
+    SOLD = read_sold()
     folder = os.path.join(REPO, "availability", date)
     pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.upper().startswith("IMAN"))
     parts, sources = [], []
@@ -407,10 +435,11 @@ def main(date):
         f = next((f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")), None)
         if not f:
             continue
-        units = parse(os.path.join(folder, f))
+        gone = SOLD.get(p["match"], set())
+        units = [u for u in parse(os.path.join(folder, f)) if u["no"].upper() not in gone]
         if units:
             parts.append((p, units))
-            sources.append(os.path.join(folder, f))
+            sources.append((os.path.join(folder, f), gone))
             print(f"{p['name']}: {len(units)} units from {f}")
     dt = datetime.date.fromisoformat(date)
     d = dt.strftime("%d.%m.%Y")
@@ -441,8 +470,11 @@ def main(date):
         toc.append([1, p["name"], names[f"p-{key(p)}"]["page"] + 1])
         toc += [[2, f"Unit {u['no']} · {short(u)}", names[anchor(p, u)]["page"] + 1] for u in sorted(us, key=lambda u: u["price"])]
     toc.append([1, "Original IMAN lists", made + 1])
-    for s in sources:
-        doc.insert_pdf(pymupdf.open(s))
+    for src, gone in sources:
+        start = len(doc)
+        doc.insert_pdf(pymupdf.open(src))
+        if gone:
+            mark_sold(doc, start, gone)
     direct_links(doc)
     stamp(doc)
     doc.set_toc(toc)
