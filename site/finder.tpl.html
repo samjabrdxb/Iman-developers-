@@ -132,7 +132,7 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
   <div class="bar"><div class="logo">IMAN<small>DEVELOPERS</small></div><button class="lang" id="lang" type="button">العربية</button></div>
   <div class="hero"><div><h1 id="t-h1"></h1><p id="t-sub"></p></div>
     <div class="me"><img src="img/sam-jabr.jpg" alt="Sam Jabr">
-      <div><b>Sam Jabr</b><span class="og">OG TEAM</span><br><span id="t-role"></span><br>
+      <div><b>Sam Jabr</b><br><span id="t-role"></span><br>
       <a href="https://wa.me/971501752771" dir="ltr">+971 50 175 2771</a></div></div></div>
 </div></header>
 
@@ -286,7 +286,7 @@ function render(){const L=T[st.lang];
       <button type="button" class="reset" data-reset="1">${L.reset}</button></div>`}
   if(near.length)html+=`<div class="sec">${L.near}</div>`+near.map(r=>unitCard(r.u,r.f)).join("");
   document.getElementById("list").innerHTML=html;
-  document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr</b> · Senior Sales Manager · OG Team · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
+  document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr</b> · Senior Sales Manager · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
 }
 
 const find=k=>{const [pid,no]=k.split("|");return U.find(u=>u.pid===pid&&u.no===no)};

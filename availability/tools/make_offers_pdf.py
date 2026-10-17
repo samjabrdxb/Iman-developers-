@@ -18,7 +18,7 @@ TOOLS = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(TOOLS))
 SITE = os.path.join(REPO, "site")
 
-AGENT = "Sam Jabr · Senior Sales Manager · OG Team · IMAN Developers · WhatsApp +971 50 175 2771"
+AGENT = "Sam Jabr · Senior Sales Manager · IMAN Developers · WhatsApp +971 50 175 2771"
 WA = "https://wa.me/971501752771"
 
 # match: start of the inventory PDF file name. disc: discount on the payment plan (default 4%). cash: discount on 100% payment.
@@ -278,7 +278,7 @@ def cover(date_long, parts):
       {f"<div class=cnote><b>Today</b>{e(NOTE)}</div>" if NOTE else ''}
       <div class=cp style='margin-top:12px;font-size:9pt'>Each project's discount is shown on its photo →</div></div>
     <div class=me><img src="{jpg(os.path.join(SITE, 'img', 'sam-jabr.jpg'), 300)}" alt="">
-      <div><b>Sam Jabr</b> <span class=og>OG TEAM</span><br><span>Senior Sales Manager · IMAN Developers</span><br>
+      <div><b>Sam Jabr</b><br><span>Senior Sales Manager · IMAN Developers</span><br>
       <a href="{WA}">WhatsApp +971 50 175 2771</a></div></div>
   </div></section>"""
 
