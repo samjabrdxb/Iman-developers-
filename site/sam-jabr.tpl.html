@@ -329,6 +329,8 @@ const INV = /*INVENTORY*/;
 const WA = "971501752771";
 // Projects with inventory, in the order Sam wants them shown after The Element.
 const ORDER = ["113-residences","oxford-cove","sierra-by-iman","15-cascade","one-park-square","one-sky-park"];
+// A listed project with no units left (sold out) moves down to "More IMAN projects".
+const SHOWN = ORDER.filter(id=>INV.projects.some(p=>p.id===id&&p.units.length));
 const T = {
  en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
   listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · updated ${d}`,curL:"Currency",
@@ -341,11 +343,11 @@ const T = {
   stNew:"New release",stCon:"Under construction",stReady:"Completed",handover:"Handover",built:p=>`${p}% built`,nUnits:n=>`${n} units available`,from:"From",
   r113about:"A collection of 113 residences in Al Sufouh combining fluid architecture, expansive layouts and refined finishes, facing Al Sufouh Community Park. Building: B + G + 9.",
   f1:"Hafele smart door locks and European kitchen appliances",f2:"Lagoon pool, rooftop infinity pool, fitness centre and yoga room",
-  upTo:"Up to 4%",o4res:"Full cash discount, residential",o4ret:"Full cash discount, retail",o1x:"Discount from original price",offN:n=>`${n}% off`,o1res:"Discount on 40/60, residential",o1ret:"Discount on 40/60, retail",discSierra:"Prices include the 4% discount on the 40/60 plan.",discOC:"Prices include the 4% discount on the 50/50 plan.",o1:"Off the original price",o4:"Discount on full cash payment",bonus:"Broker bonus: 3 units = AED 50K · 5 units = AED 100K",cashLine:(pc,v)=>`100% payment (${pc}% off): ${v}`,cashH:pc=>`100% payment · ${pc}% discount`,o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
+  upTo:"Up to 4%",o4res:"Full cash discount, residential",o4ret:"Full cash discount, retail",o1x:"Discount from original price",offN:n=>`${n}% off`,o1res:"Discount on 40/60, residential",o1ret:"Discount on 40/60, retail",discSierra:"Prices include the 40/60 plan discount shown on each unit (8% residential, 4% retail).",discOC:"Prices include the 4% discount on the 50/50 plan.",o1:"Off the original price",o4:"Discount on full cash payment",bonus:"Broker bonus: 3 units = AED 50K · 5 units = AED 100K",cashLine:(pc,v)=>`100% payment (${pc}% off): ${v}`,cashH:pc=>`100% payment · ${pc}% discount`,o2:"Payment plan",o3:"Broker commission",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover",
   schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",listOf:d=>`List of ${d}`,all:"All",
   plansFrom:"Plans offered",projNote:"Each unit is sold on the payment plan shown on its card. Confirm the latest status with Sam before booking.",
   disc113:"Prices include the 4% discount on the 40/60 plan.",
-  othersH:"More IMAN projects",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
+  othersH:"More IMAN projects",soldOut:"Sold out",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
   floorPlan:"Floor plan",payments:"Payments",wa:"WhatsApp",op:"Original price",sqft:"sq ft",suite:"suite",balcony:"balcony",unit:"Unit",
   close:"Close",fpNote:"Representative layout. Confirm the exact plan for your unit with Sam.",fpSrc:"Open original plan",payNote:"Excludes DLD and registration fees.",
   footH:"Let's find your unit.",footP:"Viewings, floor plans and the latest availability, sent straight to your WhatsApp.",
@@ -366,11 +368,11 @@ const T = {
   stNew:"إطلاق جديد",stCon:"قيد الإنشاء",stReady:"مكتمل",handover:"التسليم",built:p=>`نسبة الإنجاز ${p}%`,nUnits:n=>`${n} وحدة متاحة`,from:"ابتداءً من",
   r113about:"مجموعة من 113 وحدة سكنية في الصفوح، تجمع بين العمارة الانسيابية والمساحات الواسعة والتشطيبات الراقية، مقابل حديقة الصفوح المجتمعية. المبنى: قبو + أرضي + 9.",
   f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون، مسبح لا متناهٍ على السطح، نادٍ رياضي وغرفة يوغا",
-  upTo:"لحد 4%",o4res:"خصم الكاش للسكني",o4ret:"خصم الكاش للمحلات",o1x:"خصم من السعر الأصلي",offN:n=>`خصم ${n}%`,o1res:"خصم على 40/60 للسكني",o1ret:"خصم على 40/60 للمحلات",discSierra:"الأسعار شاملة خصم 4% على خطة 40/60.",discOC:"الأسعار شاملة خصم 4% على خطة 50/50.",o1:"خصم من السعر الأصلي",o4:"خصم عند الدفع الكامل كاش",bonus:"بونص للوسطاء: 3 وحدات = 50 ألف درهم · 5 وحدات = 100 ألف درهم",cashLine:(pc,v)=>`الدفع الكامل (خصم ${pc}%): ${v}`,cashH:pc=>`الدفع الكامل · خصم ${pc}%`,o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
+  upTo:"لحد 4%",o4res:"خصم الكاش للسكني",o4ret:"خصم الكاش للمحلات",o1x:"خصم من السعر الأصلي",offN:n=>`خصم ${n}%`,o1res:"خصم على 40/60 للسكني",o1ret:"خصم على 40/60 للمحلات",discSierra:"الأسعار شاملة خصم خطة 40/60 المذكور على كل وحدة (8% للسكني، 4% للمحلات).",discOC:"الأسعار شاملة خصم 4% على خطة 50/50.",o1:"خصم من السعر الأصلي",o4:"خصم عند الدفع الكامل كاش",bonus:"بونص للوسطاء: 3 وحدات = 50 ألف درهم · 5 وحدات = 100 ألف درهم",cashLine:(pc,v)=>`الدفع الكامل (خصم ${pc}%): ${v}`,cashH:pc=>`الدفع الكامل · خصم ${pc}%`,o2:"خطة الدفع",o3:"عمولة الوسيط",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40% من البناء",s4:"عند التسليم",
   schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",listOf:d=>`قائمة ${d}`,all:"الكل",
   plansFrom:"خطط الدفع",projNote:"كل وحدة تُباع بخطة الدفع المذكورة على بطاقتها. تأكد من آخر حالة مع سام قبل الحجز.",
   disc113:"الأسعار شاملة خصم 4% على خطة 40/60.",
-  othersH:"مشاريع إيمان الأخرى",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
+  othersH:"مشاريع إيمان الأخرى",soldOut:"مباع بالكامل",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
   floorPlan:"المخطط",payments:"الدفعات",wa:"واتساب",op:"السعر الأصلي",sqft:"قدم²",suite:"داخلي",balcony:"شرفة",unit:"وحدة",
   close:"إغلاق",fpNote:"مخطط توضيحي. تأكد من المخطط الدقيق لوحدتك مع سام.",fpSrc:"افتح المخطط الأصلي",payNote:"لا يشمل رسوم دائرة الأراضي والتسجيل.",
   footH:"خلّينا نلاقي وحدتك.",footP:"معاينات، مخططات، وآخر التوفر، مباشرة على واتسابك.",
@@ -414,7 +416,7 @@ const areaName=a=>st.lang==="ar"?(AREA_AR[a]||a):a;
 function floorName(f){if(!f)return "";if(st.lang==="en")return f;if(/ground/i.test(f))return "الطابق الأرضي";const m=f.match(/\d+/);return m?"الطابق "+m[0]:f}
 function dateName(iso){return new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":"en-GB",{day:"numeric",month:"long",year:"numeric"})}
 const chev=`<span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span>`;
-function statusPill(p){return p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill ok">${t("stReady")}</span>`}
+function statusPill(p){return p.status==="new"&&ORDER.includes(p.id)&&!SHOWN.includes(p.id)?`<span class="pill">${t("soldOut")}</span>`:p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill ok">${t("stReady")}</span>`}
 
 function schedule(u){
   const r=t("rows");
@@ -477,7 +479,7 @@ function introGeneric(p){
 }
 
 function renderProjects(){
-  $("#projects").innerHTML=ORDER.map(id=>{
+  $("#projects").innerHTML=SHOWN.map(id=>{
     const p=byId[id];const us=UNITS.filter(u=>u.pid===id);const min=Math.min(...us.map(u=>u.p));
     const meta=[areaName(p.area),p.handover&&p.handover!=="To be confirmed"?`${t("handover")} ${p.handover}`:""].filter(Boolean).join(" · ");
     return `<details class="proj" id="p-${id}" data-id="${id}" ${st.open[id]?"open":""}>
@@ -489,7 +491,7 @@ function renderProjects(){
 }
 
 function renderOthers(){
-  const rest=PROJ.filter(p=>!ORDER.includes(p.id));
+  const rest=PROJ.filter(p=>!SHOWN.includes(p.id));
   $("#others-sub").textContent=T[st.lang].othersSub(rest.filter(p=>p.status==="construction").length,rest.filter(p=>p.status==="ready").length);
   $("#others").innerHTML=rest.map(p=>`<article class="oc"><div class="oi"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div><div class="ob">
     ${statusPill(p)}<h4>${esc(p.name)}</h4><span class="s-meta">${esc(areaName(p.area))}${p.handover?` · ${t("handover")} ${esc(p.handover)}`:""}</span>
