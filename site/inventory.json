@@ -494,7 +494,9 @@
      "plan": "40-60-instalments",
      "status": "Available",
      "cash": 0.22,
-     "discount": 0.08
+     "discount": 0.08,
+     "planImg": "assets/plans/sierra-by-iman-515.webp",
+     "planSrc": "https://api.imandevelopers.com/wp-content/uploads/2025/08/SIERRA-PROJECT-BRIEF-1.pdf"
     },
     {
      "no": "RETAIL-2",
