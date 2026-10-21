@@ -22,7 +22,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9
 - Marketing: https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing
 
-## Oxford Cove, JVC (6 October 2026 list; 313 sold 16 October 2026: units G12, 337)
+## Oxford Cove, JVC (6 October 2026 list plus new release 20 October 2026: units G12, 337, 331)
 
 - 4% discount.
 - 50/50 payment plan.
@@ -31,11 +31,10 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ
 
-## Sierra by Iman, retail only (retail list 1 October 2026)
+## Sierra by Iman (retail list 1 October 2026; residential new release 20 October 2026: unit 213)
 
-- Residential units sold out on 13 October 2026 (Sam). The residential offer was 8% on 40/60 and 22% on full cash.
-- 40/60 payment plan discount: 4%.
-- Full cash payment discount: 18%.
+- 40/60 payment plan discount: 8% on residential units, 4% on retail units.
+- Full cash payment discount: 22% on residential units, 18% on retail units.
 - Broker commission: 7%.
 
 ## Payment plans in the 30 September 2026 lists

@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-10-16",
+ "inventoryDate": "2026-10-21",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -475,9 +475,24 @@
      "planImg": "assets/plans/oxford-cove-337.webp",
      "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view",
      "status": "Available"
+    },
+    {
+     "no": "331",
+     "floor": "3rd Floor",
+     "cat": "Apartment",
+     "type": "One Bedroom",
+     "view": "Community View",
+     "suite": 635.0,
+     "balcony": 167.0,
+     "area": 802.0,
+     "op": 1288413.0,
+     "plan": "50-50-instalments",
+     "planImg": "assets/plans/oxford-cove-331.webp",
+     "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view",
+     "status": "Available"
     }
    ],
-   "listDate": "2026-10-06",
+   "listDate": "2026-10-20",
    "cash": 0.14,
    "discount": 0.04,
    "marketing": "https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ",
@@ -512,6 +527,23 @@
    "source": "https://www.imandevelopers.com/iman-properties/sierra-by-iman",
    "kind": "Residences & retail",
    "units": [
+    {
+     "no": "213",
+     "floor": "2nd Floor",
+     "cat": "Apartment",
+     "type": "Studio",
+     "view": "Pool View",
+     "suite": 346.06,
+     "balcony": 71.36,
+     "area": 417.42,
+     "op": 880347.9,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-213.webp",
+     "planSrc": "https://drive.google.com/file/d/1Pl9WREE7u_sOXiq6EOdMUlBDsi2rL9q2/view",
+     "status": "Available",
+     "discount": 0.08,
+     "cash": 0.22
+    },
     {
      "no": "RETAIL-2",
      "floor": "Ground Floor",
@@ -588,16 +620,24 @@
      "status": "Available"
     }
    ],
-   "listDate": "2026-10-07",
+   "listDate": "2026-10-20",
    "cash": 0.18,
    "tiles": [
     [
+     "8%",
+     "o1res"
+    ],
+    [
      "4%",
-     "o1x"
+     "o1ret"
     ],
     [
      "40/60",
      "o2"
+    ],
+    [
+     "22%",
+     "o4res"
     ],
     [
      "18%",

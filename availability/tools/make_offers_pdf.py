@@ -432,15 +432,19 @@ def main(date):
     pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.upper().startswith("IMAN"))
     parts, sources = [], []
     for p in PROJECTS:
-        f = next((f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")), None)
-        if not f:
-            continue
+        # A project can have several lists on one day, for example the last full list plus a new release.
+        fs = [f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")]
         gone = SOLD.get(p["match"], set())
-        units = [u for u in parse(os.path.join(folder, f)) if u["no"].upper() not in gone]
+        units, seen = [], set()
+        for f in fs:
+            for u in parse(os.path.join(folder, f)):
+                if u["no"].upper() not in gone and u["no"] not in seen:
+                    seen.add(u["no"])
+                    units.append(u)
         if units:
             parts.append((p, units))
-            sources.append((os.path.join(folder, f), gone))
-            print(f"{p['name']}: {len(units)} units from {f}")
+            sources += [(os.path.join(folder, f), gone) for f in fs]
+            print(f"{p['name']}: {len(units)} units from {', '.join(fs)}")
     dt = datetime.date.fromisoformat(date)
     d = dt.strftime("%d.%m.%Y")
     note = (f"Prices in AED from IMAN's inventory lists dated {d}. Offer price = list price less the project's plan discount; "
