@@ -329,6 +329,8 @@ const INV = /*INVENTORY*/;
 const WA = "971501752771";
 // Projects with inventory, in the order Sam wants them shown after The Element.
 const ORDER = ["113-residences","oxford-cove","sierra-by-iman","15-cascade","one-park-square","one-sky-park"];
+// A listed project with no units left (sold out) moves down to "More IMAN projects".
+const SHOWN = ORDER.filter(id=>INV.projects.some(p=>p.id===id&&p.units.length));
 const T = {
  en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
   listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · updated ${d}`,curL:"Currency",
@@ -345,7 +347,7 @@ const T = {
   schedH:"Payment schedule",lkMaterials:"Brochure & materials",openMaps:"Google Maps",locH:"Framed by prestige",min:"min",unitsH:"Available units",listOf:d=>`List of ${d}`,all:"All",
   plansFrom:"Plans offered",projNote:"Each unit is sold on the payment plan shown on its card. Confirm the latest status with Sam before booking.",
   disc113:"Prices include the 4% discount on the 40/60 plan.",
-  othersH:"More IMAN projects",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
+  othersH:"More IMAN projects",soldOut:"Sold out",othersSub:(c,r)=>`${c} under construction · ${r} completed. Ask Sam about resale units.`,ask:"Ask Sam",map:"Map",
   floorPlan:"Floor plan",payments:"Payments",wa:"WhatsApp",op:"Original price",sqft:"sq ft",suite:"suite",balcony:"balcony",unit:"Unit",
   close:"Close",fpNote:"Representative layout. Confirm the exact plan for your unit with Sam.",fpSrc:"Open original plan",payNote:"Excludes DLD and registration fees.",
   footH:"Let's find your unit.",footP:"Viewings, floor plans and the latest availability, sent straight to your WhatsApp.",
@@ -370,7 +372,7 @@ const T = {
   schedH:"جدول الدفعات",lkMaterials:"البروشور والمواد",openMaps:"خرائط Google",locH:"في قلب الفخامة",min:"د",unitsH:"الوحدات المتاحة",listOf:d=>`قائمة ${d}`,all:"الكل",
   plansFrom:"خطط الدفع",projNote:"كل وحدة تُباع بخطة الدفع المذكورة على بطاقتها. تأكد من آخر حالة مع سام قبل الحجز.",
   disc113:"الأسعار شاملة خصم 4% على خطة 40/60.",
-  othersH:"مشاريع إيمان الأخرى",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
+  othersH:"مشاريع إيمان الأخرى",soldOut:"مباع بالكامل",othersSub:(c,r)=>`${c} قيد الإنشاء · ${r} مكتملة. اسأل سام عن وحدات إعادة البيع.`,ask:"اسأل سام",map:"الخريطة",
   floorPlan:"المخطط",payments:"الدفعات",wa:"واتساب",op:"السعر الأصلي",sqft:"قدم²",suite:"داخلي",balcony:"شرفة",unit:"وحدة",
   close:"إغلاق",fpNote:"مخطط توضيحي. تأكد من المخطط الدقيق لوحدتك مع سام.",fpSrc:"افتح المخطط الأصلي",payNote:"لا يشمل رسوم دائرة الأراضي والتسجيل.",
   footH:"خلّينا نلاقي وحدتك.",footP:"معاينات، مخططات، وآخر التوفر، مباشرة على واتسابك.",
@@ -414,7 +416,7 @@ const areaName=a=>st.lang==="ar"?(AREA_AR[a]||a):a;
 function floorName(f){if(!f)return "";if(st.lang==="en")return f;if(/ground/i.test(f))return "الطابق الأرضي";const m=f.match(/\d+/);return m?"الطابق "+m[0]:f}
 function dateName(iso){return new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":"en-GB",{day:"numeric",month:"long",year:"numeric"})}
 const chev=`<span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span>`;
-function statusPill(p){return p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill ok">${t("stReady")}</span>`}
+function statusPill(p){return p.status==="new"&&ORDER.includes(p.id)&&!SHOWN.includes(p.id)?`<span class="pill">${t("soldOut")}</span>`:p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill ok">${t("stReady")}</span>`}
 
 function schedule(u){
   const r=t("rows");
@@ -477,7 +479,7 @@ function introGeneric(p){
 }
 
 function renderProjects(){
-  $("#projects").innerHTML=ORDER.map(id=>{
+  $("#projects").innerHTML=SHOWN.map(id=>{
     const p=byId[id];const us=UNITS.filter(u=>u.pid===id);const min=Math.min(...us.map(u=>u.p));
     const meta=[areaName(p.area),p.handover&&p.handover!=="To be confirmed"?`${t("handover")} ${p.handover}`:""].filter(Boolean).join(" · ");
     return `<details class="proj" id="p-${id}" data-id="${id}" ${st.open[id]?"open":""}>
@@ -489,7 +491,7 @@ function renderProjects(){
 }
 
 function renderOthers(){
-  const rest=PROJ.filter(p=>!ORDER.includes(p.id));
+  const rest=PROJ.filter(p=>!SHOWN.includes(p.id));
   $("#others-sub").textContent=T[st.lang].othersSub(rest.filter(p=>p.status==="construction").length,rest.filter(p=>p.status==="ready").length);
   $("#others").innerHTML=rest.map(p=>`<article class="oc"><div class="oi"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div><div class="ob">
     ${statusPill(p)}<h4>${esc(p.name)}</h4><span class="s-meta">${esc(areaName(p.area))}${p.handover?` · ${t("handover")} ${esc(p.handover)}`:""}</span>
