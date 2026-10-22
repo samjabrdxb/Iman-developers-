@@ -8,7 +8,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - 170 residential units (studio, 1BR, 2BR) plus retail units.
 - Prices, payment plans and the pre-launch offer are not announced yet.
 
-## 113 Residences, Al Sufouh Gardens (list 12 October 2026)
+## 113 Residences, Al Sufouh Gardens (list 22 October 2026)
 
 - From AED 2M. 4% discount on the 40/60 payment plan.
   - 20% within 30 days of booking

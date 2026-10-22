@@ -9,7 +9,7 @@ and floor plan, reached by tapping the unit number), appends the original lists,
 name and number on every page. Writes the PDF into availability/<date>/.
 Edit PROJECTS when offers change.
 """
-import datetime, html, os, shutil, sys, urllib.parse
+import datetime, html, json, os, shutil, sys, urllib.parse
 import pymupdf
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -89,7 +89,14 @@ NOTE = open(NOTE_FILE).read().strip() if os.path.exists(NOTE_FILE) else ""
 
 
 def parse(path):
-    """Return the available units in one IMAN inventory PDF."""
+    """Return the available units in one IMAN inventory PDF.
+
+    When IMAN sends a list as a picture, its rows are typed into a .json file with the
+    same name; that file is read instead and the picture is attached as the list.
+    """
+    sidecar = os.path.splitext(path)[0] + ".json"
+    if os.path.exists(sidecar):
+        return json.load(open(sidecar))["units"]
     lines = [l.strip() for p in pymupdf.open(path) for l in p.get_text("text").split("\n") if l.strip()]
     units = []
     if any(l.startswith("RETAIL-") for l in lines):  # retail layout: unit, floor, B/R, view, internal, total, price, status
