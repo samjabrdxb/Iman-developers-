@@ -600,25 +600,78 @@
    "mapUrl": "https://www.google.com/maps?cid=2303450858755146668",
    "source": "https://www.imandevelopers.com/iman-properties/sierra-by-iman",
    "kind": "Residences & retail",
-   "units": [],
+   "units": [
+    {
+     "no": "RETAIL-2",
+     "floor": "Ground Floor",
+     "cat": "Retail",
+     "type": "Retail",
+     "view": "Roadside View",
+     "suite": 2873.96,
+     "balcony": null,
+     "area": 2873.96,
+     "op": 7919913.0,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-RETAIL-2.webp",
+     "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
+     "status": "Available"
+    },
+    {
+     "no": "RETAIL-3",
+     "floor": "Ground Floor",
+     "cat": "Retail",
+     "type": "Retail",
+     "view": "Roadside View",
+     "suite": 2987.42,
+     "balcony": null,
+     "area": 2987.42,
+     "op": 8261387.0,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-RETAIL-3.webp",
+     "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
+     "status": "Available"
+    },
+    {
+     "no": "RETAIL-4",
+     "floor": "Ground Floor",
+     "cat": "Retail",
+     "type": "Retail",
+     "view": "Roadside View",
+     "suite": 3075.46,
+     "balcony": null,
+     "area": 3075.46,
+     "op": 8484112.0,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-RETAIL-4.webp",
+     "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
+     "status": "Available"
+    },
+    {
+     "no": "RETAIL-5",
+     "floor": "Ground Floor",
+     "cat": "Retail",
+     "type": "Retail",
+     "view": "Roadside View",
+     "suite": 3933.35,
+     "balcony": null,
+     "area": 3933.35,
+     "op": 10079595.0,
+     "plan": "40-60-instalments",
+     "planImg": "assets/plans/sierra-by-iman-RETAIL-5.webp",
+     "planSrc": "https://drive.google.com/file/d/1MfjMODd6O9B4Pqq3x3KCUcrCIkSjsykV/view",
+     "status": "Available"
+    }
+   ],
    "listDate": "2026-10-20",
    "cash": 0.18,
    "tiles": [
     [
-     "8%",
-     "o1res"
-    ],
-    [
      "4%",
-     "o1ret"
+     "o1x"
     ],
     [
      "40/60",
      "o2"
-    ],
-    [
-     "22%",
-     "o4res"
     ],
     [
      "18%",

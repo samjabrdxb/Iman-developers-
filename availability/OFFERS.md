@@ -28,9 +28,12 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ
 
-## Sierra by Iman, Motor City: sold out
+## Sierra by Iman, Motor City: retail only (retail list 1 October 2026)
 
-- All units sold, residential and retail (24 October 2026, Sam). The last offer was 8% (residential) / 4% (retail) on 40/60, 22% / 18% on full cash, 7% commission.
+- Residential units sold out (24 October 2026, Sam). RETAIL-1 sold (24 October 2026, Sam); RETAIL-2 to RETAIL-5 available.
+- 40/60 payment plan discount: 4%.
+- Full cash payment discount: 18%.
+- Broker commission: 7%.
 
 ## Payment plans in the 30 September 2026 lists
 

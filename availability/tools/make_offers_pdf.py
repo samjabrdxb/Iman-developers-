@@ -271,7 +271,7 @@ def cover(date_long, parts):
         byproj.setdefault(p["plans"], []).append(p)
     panels = []
     for ps in byproj.values():
-        title = ps[0]["name"].split(" · ")[0]
+        title = ps[0]["name"].split(" · ")[0] if len(ps) > 1 else ps[0]["name"]
         lines = "".join(f"<div>{e(p['name'].split(' · ')[1]) + ': ' if len(ps) > 1 else ''}<b>{round(p.get('disc', DISC) * 100)}% off</b> on {p['plan']}"
                         f" · <b>{round(p['cash'] * 100)}% off</b> full cash</div>" for p in ps)
         panels.append(f"<a class=cpanel href='#p-{key(ps[0])}'><img src=\"{jpg(os.path.join(SITE, ps[0]['img']), 1000)}\" alt=''>"

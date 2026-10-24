@@ -3,3 +3,4 @@
 # The PDF tool leaves these units out and marks them SOLD on the attached IMAN lists.
 # Remove a line once IMAN sends a newer list for that project.
 OXFORD COVE: 313, G12, 337
+SIERRA RETAIL: RETAIL-1
