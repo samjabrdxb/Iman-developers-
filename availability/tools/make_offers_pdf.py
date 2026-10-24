@@ -292,6 +292,12 @@ def cover(date_long, parts):
 
 def overview(parts):
     cards = "".join(card(p, us) for p, us in parts)
+    # Projects in PROJECTS with no list today are shown as sold out.
+    live = {p["plans"] for p, _ in parts}
+    gone = list({p["plans"]: p for p in PROJECTS if p["plans"] not in live}.values())
+    cards += "".join(f"""<div class="pcard sold"><img src="{jpg(os.path.join(SITE, p['img']), 900)}" alt="">
+  <div class=pcb><div class=eb>{e(p['area'])}</div><h3>{e(p['name'].split(' · ')[0])}</h3><div class=so>Sold out</div>
+  <div class=pn>Ask Sam about upcoming releases</div></div></div>""" for p in gone)
     c = COMING
     bonus = next((p["bonus"] for p, _ in parts if p.get("bonus")), None)
     return f"""<section class=over id=overview>
@@ -343,6 +349,8 @@ a{{color:inherit}}
 a.toc{{color:#f2f5f0;font-weight:700;font-size:8.5pt;text-decoration:none;border:1px solid #6f8a78;border-radius:99px;padding:3px 11px}}
 .over,.proj{{break-before:page}}
 .cards{{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:8mm 12mm 0}}
+.pcard.sold img{{filter:grayscale(1);opacity:.75}}
+.so{{display:inline-block;margin:6px 0;background:#7b4a37;color:#fff;border-radius:99px;padding:3px 12px;font-weight:800;font-size:9pt;letter-spacing:.08em;text-transform:uppercase}}
 .pcard{{display:block;text-decoration:none;border:1px solid var(--ln);border-radius:12px;overflow:hidden;background:#fff}}
 .pcard img{{width:100%;height:30mm;object-fit:cover;display:block}}
 .pcb{{padding:9px 11px 11px}} .pcb h3{{font-size:13.5pt;margin:3px 0 4px}}

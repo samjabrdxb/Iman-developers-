@@ -264,7 +264,7 @@ function render(){const L=T[st.lang];
   chips(document.getElementById("quick"),[1,1.5,2,3,4,6].map(m=>({v:m*1e6,l:L.upTo+m+"M"})),st.budget,v=>{st.budget=st.budget===v?null:v;
     document.getElementById("budget").value=st.budget?fmt(st.budget):"";render()},"sm");
   chips(document.getElementById("locs"),[{v:"any",l:L.any,c:countWith({loc:"any"})},
-    ...Object.keys(L.locs).map(k=>({v:k,l:L.locs[k][0],h:L.locs[k][1],c:countWith({loc:k})}))],st.loc,v=>{st.loc=v;render()});
+    ...Object.keys(L.locs).filter(k=>U.some(u=>u.p.loc===k)).map(k=>({v:k,l:L.locs[k][0],h:L.locs[k][1],c:countWith({loc:k})}))],st.loc,v=>{st.loc=v;render()});
   const planOpts=[...new Set(U.map(u=>u.planName))].sort();
   chips(document.getElementById("plans"),[{v:"any",l:L.any,c:countWith({plan:"any"})},...planOpts.map(p=>({v:p,l:p,h:L.planHint[p],c:countWith({plan:p})})),
     {v:"cash",l:L.cash,h:L.planHint.cash,c:countWith({plan:"cash"})}],st.plan,v=>{st.plan=v;render()});

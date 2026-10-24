@@ -22,20 +22,15 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9
 - Marketing: https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing
 
-## Oxford Cove, JVC (new release 20 October 2026: unit 331)
+## Oxford Cove, JVC: sold out
 
-- 313, G12 and 337 sold (16 and 19 October 2026, Sam). Unit 331 released on 20 October 2026.
-- 4% discount on the 50/50 payment plan.
-- 14% discount on full cash payment.
-- Broker commission: 7%.
+- All units sold (last unit 331 sold by 24 October 2026, Sam).
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ
 
-## Sierra by Iman (residential releases 19 October 2026: studio 515, and 20 October 2026: studio 213; retail list 1 October 2026)
+## Sierra by Iman, Motor City: sold out
 
-- 40/60 payment plan discount: 8% on residential units, 4% on retail units.
-- Full cash payment discount: 22% on residential units, 18% on retail units.
-- Broker commission: 7%.
+- All units sold, residential and retail (24 October 2026, Sam). The last offer was 8% (residential) / 4% (retail) on 40/60, 22% / 18% on full cash, 7% commission.
 
 ## Payment plans in the 30 September 2026 lists
 
