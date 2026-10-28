@@ -22,9 +22,12 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Location: https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9
 - Marketing: https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing
 
-## Oxford Cove, JVC: sold out
+## Oxford Cove, JVC (list 28 October 2026: unit 331)
 
-- All units sold (last unit 331 sold by 24 October 2026, Sam).
+- Unit 331 is back on IMAN's list on 28 October 2026 (Sam). All other units sold.
+- 4% discount on the 50/50 payment plan.
+- 14% discount on full cash payment.
+- Broker commission: 7%.
 - Location: https://maps.app.goo.gl/orznbkhTdke94kGM7
 - Marketing: https://drive.google.com/drive/folders/1u3iiAnrIkTITz4lvnTTJzU6c8gaIwXiZ
 
