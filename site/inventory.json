@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-10-28",
+ "inventoryDate": "2026-10-29",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -565,23 +565,7 @@
    "mapUrl": "https://maps.app.goo.gl/orznbkhTdke94kGM7",
    "source": "https://www.imandevelopers.com/iman-properties/oxford-cove",
    "kind": "Residences",
-   "units": [
-    {
-     "no": "331",
-     "floor": "3rd Floor",
-     "cat": "Apartment",
-     "type": "One Bedroom",
-     "view": "Community View",
-     "suite": 635.0,
-     "balcony": 167.0,
-     "area": 802.0,
-     "op": 1288413.0,
-     "plan": "50-50-instalments",
-     "planImg": "assets/plans/oxford-cove-331.webp",
-     "planSrc": "https://drive.google.com/file/d/1yPSQ9oa8vL3gNizHRnLD2b8jN2n3Ph-M/view",
-     "status": "Available"
-    }
-   ],
+   "units": [],
    "listDate": "2026-10-28",
    "cash": 0.14,
    "discount": 0.04,
