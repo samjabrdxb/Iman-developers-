@@ -1,5 +1,5 @@
 {
- "inventoryDate": "2026-10-30",
+ "inventoryDate": "2026-11-02",
  "plans": {
   "unspecified": {
    "label": "Payment plan on request",
@@ -427,21 +427,6 @@
      "plan": "113",
      "planImg": "assets/plans/113-residences-607.webp",
      "planSrc": "https://drive.google.com/file/d/1WM0qyAkaZMV-u3BvdkY2nIJUwqiGTzT-/view?usp=drivesdk",
-     "status": "Available"
-    },
-    {
-     "no": "701",
-     "floor": "7th Floor",
-     "cat": "Apartment",
-     "type": "Two Bedroom",
-     "view": "Pool View",
-     "suite": 914.0,
-     "balcony": 117.0,
-     "area": 1031.0,
-     "op": 2803938.0,
-     "plan": "113",
-     "planImg": "assets/plans/113-residences-701.webp",
-     "planSrc": "https://drive.google.com/file/d/1otoRhNFp4WVMneU-zL_uM-nzX9iTX9F6/view?usp=drivesdk",
      "status": "Available"
     },
     {
