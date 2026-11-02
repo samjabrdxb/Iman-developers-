@@ -74,14 +74,27 @@ def read_sold():
 
 
 def mark_sold(doc, first_page, units):
-    """Cross out sold units on an attached IMAN list and label them SOLD."""
+    """Take sold units off an attached IMAN list: their rows are blanked out."""
     for page in doc.pages(first_page, len(doc)):
-        for w in page.get_text("words"):
-            if w[4].upper() in units and w[0] < page.rect.width * 0.3:
-                row = pymupdf.Rect(page.rect.x0 + 10, w[1] - 1.5, page.rect.x1 - 10, w[3] + 1.5)
-                page.draw_rect(row, color=(0.75, 0.15, 0.1), fill=(1, 0.85, 0.82), fill_opacity=0.55, width=0.8)
-                page.draw_line(pymupdf.Point(row.x0, (row.y0 + row.y1) / 2), pymupdf.Point(row.x1, (row.y0 + row.y1) / 2), color=(0.75, 0.15, 0.1), width=0.8)
-                page.insert_text((row.x1 - 34, row.y1 - 2), "SOLD", fontname="hebo", fontsize=max(6, row.height * 0.75), color=(0.75, 0.15, 0.1))
+        rows = [pymupdf.Rect(page.rect.x0 + 10, w[1] - 1, page.rect.x1 - 10, w[3] + 1)
+                for w in page.get_text("words") if w[4].upper() in units and w[0] < page.rect.width * 0.3]
+        if rows:  # IMAN's "Total" count under the table no longer matches, so leave it out
+            words = page.get_text("words")
+            for t in (w for w in words if w[4].lower().startswith("total")):
+                rows += [pymupdf.Rect(w[:4]) for w in words if abs(w[1] - t[1]) < 2 and w[0] > t[0] and w[4].replace(",", "").isdigit()]
+        for row in rows:
+            page.add_redact_annot(row, fill=(1, 1, 1))
+        if rows:
+            page.apply_redactions(images=pymupdf.PDF_REDACT_IMAGE_NONE, graphics=pymupdf.PDF_REDACT_LINE_ART_NONE)
+
+
+def list_table(title, units):
+    """An IMAN list typed in from a picture, shown as a table (sold units already left out)."""
+    rows = "".join(f"<tr><td>{e(title.split(' · ')[0])}</td><td><b>{e(u['no'])}</b></td><td>{e(u['floor'])}</td><td>{e(u['view'])}</td>"
+                   f"<td>{e(u['type'])}</td><td class=r>{u['suite']:,}</td><td class=r>{u['balcony']:,}</td><td class=r>{u['total']:,}</td>"
+                   f"<td class=r>{u['price']:,.2f}</td><td>Available</td></tr>" for u in units)
+    return (f"<section class=imanlist><h2>{e(title)}</h2><table><tr><th>Project</th><th>Unit</th><th>Floor</th><th>View</th><th>Bedroom type</th>"
+            f"<th class=r>Suite</th><th class=r>Balcony</th><th class=r>Total sq ft</th><th class=r>Unit price</th><th>Status</th></tr>{rows}</table></section>")
 
 
 NOTE_FILE = os.path.join(SITE, "note.txt")  # Sam's note of the day, shown on the cover
@@ -394,6 +407,12 @@ table.units{{width:calc(100% - 24mm);margin:4px 12mm 0;border-collapse:collapse;
 .r{{text-align:right}} .units th.r{{text-align:right}} .b{{font-weight:700}}
 a.ulink{{display:inline-block;min-width:44px;text-align:center;background:var(--g);color:#fff;border-radius:5px;padding:1px 6px;font-weight:800;text-decoration:none}}
 .note{{margin:12px 12mm 0;font-size:7pt;color:var(--mu);border-top:1px solid var(--ln);padding-top:6px}}
+.imanlist{{break-before:page;padding:7mm 12mm 0}}
+.imanlist h2{{font-size:16pt;margin-bottom:8px;color:var(--g)}}
+.imanlist table{{width:100%;border-collapse:collapse;font-size:7.6pt}}
+.imanlist th{{background:#d9ead3;text-align:left;padding:4px 5px;font-size:7.5pt}}
+.imanlist td{{padding:2px 5px;border-bottom:1px solid var(--ln);font-variant-numeric:tabular-nums}}
+.imanlist tr{{break-inside:avoid}}
 .unitpage{{break-before:page;display:grid;grid-template-columns:100mm 1fr;gap:10mm;padding:9mm 12mm 0;height:199mm}}
 .ucol h1{{font-size:30pt;margin-top:3px}} .utype{{font-size:12pt;font-weight:700;margin-top:3px}}
 a.back{{display:inline-block;font-size:8.5pt;font-weight:800;color:var(--g);border:1.5px solid var(--g);border-radius:99px;padding:3px 12px;text-decoration:none}}
@@ -445,7 +464,7 @@ def main(date):
     SOLD = read_sold()
     folder = os.path.join(REPO, "availability", date)
     pdfs = sorted(f for f in os.listdir(folder) if f.lower().endswith(".pdf") and not f.upper().startswith("IMAN"))
-    parts, sources = [], []
+    parts, sources, typed = [], [], []
     for p in PROJECTS:
         # A project can have several lists on one day, for example the last full list plus a new release.
         fs = [f for f in pdfs if f.upper().startswith(p["match"] + " ") or f.upper().startswith(p["match"] + "-")]
@@ -459,6 +478,10 @@ def main(date):
         if units:
             parts.append((p, units))
             sources += [(os.path.join(folder, f), gone) for f in fs]
+            for f in fs:
+                if os.path.exists(os.path.join(folder, os.path.splitext(f)[0] + ".json")):
+                    keep = [u for u in parse(os.path.join(folder, f)) if u["no"].upper() not in gone]
+                    typed.append(list_table(f"{os.path.splitext(f)[0].split(' - ')[0]} · IMAN availability {os.path.splitext(f)[0].split(' - ')[-1]}", keep))
             print(f"{p['name']}: {len(units)} units from {', '.join(fs)}")
     dt = datetime.date.fromisoformat(date)
     d = dt.strftime("%d.%m.%Y")
@@ -469,7 +492,7 @@ def main(date):
     sections = "".join(section(p, us) for p, us in parts)
     details = "".join(detail(p, u) for p, us in parts for u in sorted(us, key=lambda u: u["price"]))
     page = (f"<!doctype html><html><head><meta charset=utf-8><style>{CSS}</style></head><body>"
-            f"{cover(f'{dt.day} {dt:%B %Y}', parts)}{overview(parts)}{sections}<p class=note>{e(note)}</p>{details}</body></html>")
+            f"{cover(f'{dt.day} {dt:%B %Y}', parts)}{overview(parts)}{sections}<p class=note>{e(note)}{' <a href=#lists>Go to the lists.</a>' if typed else ''}</p>{details}{''.join(typed).replace('<section class=imanlist>', '<section class=imanlist id=lists>', 1)}</body></html>")
     tmp_html = os.path.join(folder, ".offers.html")
     tmp_pdf = os.path.join(folder, ".offers.pdf")
     open(tmp_html, "w").write(page)
@@ -488,8 +511,10 @@ def main(date):
     for p, us in parts:
         toc.append([1, p["name"], names[f"p-{key(p)}"]["page"] + 1])
         toc += [[2, f"Unit {u['no']} · {short(u)}", names[anchor(p, u)]["page"] + 1] for u in sorted(us, key=lambda u: u["price"])]
-    toc.append([1, "Original IMAN lists", made + 1])
+    toc.append([1, "Original IMAN lists", (names["lists"]["page"] + 1) if typed else made + 1])
     for src, gone in sources:
+        if os.path.exists(os.path.splitext(src)[0] + ".json"):
+            continue  # shown as a typed table instead of the picture
         start = len(doc)
         doc.insert_pdf(pymupdf.open(src))
         if gone:
