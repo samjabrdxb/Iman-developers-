@@ -1,583 +1,589 @@
-<title>Недвижимость в Дубае от IMAN Developers · Сэм Джабр</title>
+<title>113 Residences, Дубай · Сэм Джабр</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap">
 <style>
-/* Landing page for Yandex Direct ads: hero with lead form, why Dubai, projects with prices, how to buy, contacts. Russian first, plus English and Arabic. */
+/* Yandex Direct landing page for 113 Residences only. Light, editorial look: warm paper background, thin large headings, square buttons, gold accent. RU first, plus EN and AR. */
 :root{
-  --green:#1d3f2b; --green-2:#264f37; --copper:#c0866d; --copper-ink:#9a5f48;
-  --bg:#f3f5f1; --surface:#ffffff; --ink:#17251c; --muted:#5b6b60; --line:#dde4dc; --chip:#e9eee8;
-  --on-green:#f2f5f0; --on-green-muted:#b9c9bd; --tg:#2aabee;
-  --f-display:"Marcellus","IBM Plex Sans Arabic",Georgia,serif;
-  --f-body:"Figtree","IBM Plex Sans Arabic",system-ui,sans-serif;
-  --r:14px;
+  --paper:#f7f5ef; --paper-2:#efebe1; --ink:#1d211c; --ink-2:#3a3f38; --muted:#77796f; --line:#dcd6c8;
+  --gold:#b8955a; --gold-ink:#8a6a35; --night:#1f2420; --on-night:#f2efe6; --on-night-muted:#a9aa9f;
+  --f:"Manrope","IBM Plex Sans Arabic",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
-  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
-  --on-green:#eef3ee; --on-green-muted:#a9bcae; color-scheme:dark}}
+  --paper:#141714; --paper-2:#1b1f1b; --ink:#ece9df; --ink-2:#cfcbbf; --muted:#9b9b90; --line:#2e332d;
+  --gold:#c9a86c; --gold-ink:#d8b77a; --night:#0f120f; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --green:#16301f; --green-2:#1f3e2b; --copper:#d79e85; --copper-ink:#e2ad95;
-  --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
-  --on-green:#eef3ee; --on-green-muted:#a9bcae; color-scheme:dark}
+  --paper:#141714; --paper-2:#1b1f1b; --ink:#ece9df; --ink-2:#cfcbbf; --muted:#9b9b90; --line:#2e332d;
+  --gold:#c9a86c; --gold-ink:#d8b77a; --night:#0f120f; color-scheme:dark}
+[dir="rtl"]{--f:"IBM Plex Sans Arabic","Manrope",system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
-/* Cyrillic: Marcellus has no Cyrillic, so Russian headings use a serif fallback. */
-:root[lang="ru"]{--f-display:Georgia,"Times New Roman",serif}
-[dir="rtl"]{--f-display:"IBM Plex Sans Arabic",Georgia,serif}
-h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
-[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4{font-weight:600}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-weight:300;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3{letter-spacing:0;font-weight:400;line-height:1.2}
 p{margin:0}
 a{color:inherit}
-img{max-width:100%}
+img{max-width:100%;display:block}
 [hidden]{display:none!important}
-.wrap{max-width:1160px;margin-inline:auto;padding-inline:20px}
-.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-ink);font-weight:600}
-[dir="rtl"] .eyebrow{letter-spacing:0;font-size:13px}
-.num{font-variant-numeric:tabular-nums}
-button,select,input{font:inherit}
+button,select,input{font:inherit;color:inherit}
 button,select{cursor:pointer}
-:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent;font-size:15px;white-space:nowrap}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:24px}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+[dir="rtl"] .k{letter-spacing:0;font-size:13px}
+.k.gold{color:var(--gold-ink)}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;padding:15px 20px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid transparent;white-space:nowrap;border-radius:0;background:none}
+.btn::after{content:"↗";font-size:15px;line-height:1}
+[dir="rtl"] .btn::after{content:"↖"}
+.btn.noarr::after{content:none}
+.btn-gold{background:var(--gold);color:#1b160d}
+.btn-dark{background:var(--night);color:var(--on-night)}
+.btn-line{border-color:currentColor}
 .btn svg{width:18px;height:18px;flex:none}
-.btn-cu{background:var(--copper);color:#1b120d}
-.btn-tg{background:var(--tg);color:#fff}
-.btn-ghost{border-color:currentColor;background:transparent}
-.sub{color:var(--muted);font-size:15px}
-.sec{padding-block:56px}
-.sec h2{font-size:clamp(28px,4vw,40px)}
-.sec .sub{margin-top:8px;max-width:62ch}
+.link{display:inline-flex;gap:14px;align-items:center;font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:8px}
+.link::after{content:"↗"}
 
-/* top + hero */
-.hero{background:var(--green);color:var(--on-green);position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url(../assets/113-residences-main.webp) center/cover;opacity:.18}
-.hero>*{position:relative}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;border-bottom:1px solid rgba(255,255,255,.12)}
-.logo{display:flex;flex-direction:column;line-height:1;color:var(--copper)}
-.logo b{font-family:"Marcellus",serif;font-weight:400;font-size:24px;letter-spacing:.32em}
-.logo small{font-size:9px;letter-spacing:.5em;margin-top:6px;padding-inline-start:2px}
-.tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.tool{background:transparent;color:var(--on-green);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 12px;font-size:14px}
-.tool[aria-pressed="true"]{background:var(--on-green);color:var(--green)}
-.tel-top{color:var(--on-green);text-decoration:none;font-weight:600;direction:ltr;unicode-bidi:isolate;margin-inline-end:8px}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:48px 56px}
-.hero-grid>*{min-width:0}
-.hero .eyebrow{color:var(--copper)}
-.hero h1{font-size:clamp(32px,5vw,54px);margin-top:10px}
-.hero .lead{color:var(--on-green-muted);font-size:18px;margin-top:14px;max-width:56ch}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
-.fact{border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 14px;background:rgba(0,0,0,.12)}
-.fact b{display:block;font-family:"Marcellus",Georgia,serif;font-weight:400;font-size:clamp(22px,3vw,30px);color:var(--copper);line-height:1.1}
-.fact span{display:block;font-size:13px;color:var(--on-green-muted);margin-top:4px}
-.chan{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.chan .btn-ghost{color:var(--on-green)}
+/* header */
+.strip{background:var(--paper-2);color:var(--muted);font-size:12px;text-align:center;padding:7px 16px}
+.strip b{color:var(--gold-ink);font-weight:600}
+header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:76px}
+.logo{display:flex;flex-direction:column;line-height:1;text-decoration:none}
+.logo b{font-size:30px;font-weight:400;letter-spacing:-.04em}
+.logo small{font-size:8.5px;letter-spacing:.42em;margin-top:5px;color:var(--muted);padding-inline-start:12px}
+nav.menu{display:flex;gap:28px;font-size:13px}
+nav.menu a{text-decoration:none;color:var(--ink-2)}
+nav.menu a:hover{color:var(--ink)}
+.right{display:flex;align-items:center;gap:18px}
+.langs{display:flex;gap:10px;font-size:12px}
+.langs button{background:none;border:0;padding:2px 0;color:var(--muted);border-bottom:1px solid transparent}
+.langs button[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.cur{border:1px solid var(--line);background:transparent;border-radius:0;padding:6px 8px;font-size:12px}
 
-/* form card */
-.card{background:var(--surface);color:var(--ink);border-radius:18px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
-.card h3{font-size:26px}
-.card .sub{font-size:14px;margin-top:6px}
-.f{display:grid;gap:12px;margin-top:16px}
-.f label{display:grid;gap:4px;font-size:13px;font-weight:600;color:var(--muted)}
-.f input,.f select{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:11px 12px;font-size:16px}
-.f .pref{display:flex;gap:6px;flex-wrap:wrap}
-.f .pref label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:500;color:var(--ink);cursor:pointer}
-.f .pref input{width:auto;margin:0}
-.f .agree{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:12px}
-.f .agree input{width:auto;margin-top:3px}
-.f button[type=submit]{border:0;width:100%;padding:14px}
-.f .msg{font-size:14px;border-radius:10px;padding:10px 12px}
-.f .msg.ok{background:var(--chip)}
-.f .msg.err{background:#f6dcd3;color:#5a2414}
-.hp{position:absolute;left:-9999px}
+/* hero */
+.hero{position:relative;min-height:min(86vh,780px);display:flex;align-items:flex-end;color:#f6f3ea;overflow:hidden;background:#1f2420}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,21,18,.82) 0%,rgba(18,21,18,.55) 45%,rgba(18,21,18,.1) 80%),linear-gradient(0deg,rgba(18,21,18,.75),rgba(18,21,18,0) 40%)}
+[dir="rtl"] .hero::after{background:linear-gradient(270deg,rgba(18,21,18,.82) 0%,rgba(18,21,18,.55) 45%,rgba(18,21,18,.1) 80%),linear-gradient(0deg,rgba(18,21,18,.75),rgba(18,21,18,0) 40%)}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-block:96px 40px}
+.hero h1{font-size:clamp(44px,7.4vw,104px);margin-top:22px;max-width:12ch}
+.hero .lead{max-width:52ch;color:#ddd9cc;margin-top:24px;font-size:17px}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.hero .btn-line{color:#f6f3ea;border-color:rgba(246,243,234,.45)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:64px;border-top:1px solid rgba(246,243,234,.25)}
+.stats div{padding:18px 18px 0 0}
+[dir="rtl"] .stats div{padding:18px 0 0 18px}
+.stats b{unicode-bidi:plaintext;display:block;font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:-.03em;line-height:1.1}
+.stats span{display:block;font-size:12px;color:#c3c0b4;margin-top:4px}
 
-/* why */
-.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:24px}
-.why div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
-.why b{display:block;font-size:17px}
-.why span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
-.why i{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--green);color:var(--copper);font-style:normal;font-weight:700;margin-bottom:10px}
+/* sections */
+.sec{padding-block:110px;border-bottom:1px solid var(--line)}
+.sec.alt{background:var(--paper-2)}
+.head{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+.head>*{min-width:0}
+.head h2{font-size:clamp(38px,5vw,66px);margin-top:20px}
+.head p{color:var(--muted);max-width:52ch}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.two>*{min-width:0}
+.photo{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo .cap{position:absolute;inset-inline-start:16px;bottom:16px;background:rgba(18,21,18,.75);color:#eee;font-size:11px;padding:5px 10px}
+.feats{list-style:none;margin:28px 0 0;padding:0;display:grid;border-top:1px solid var(--line)}
+.feats li{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.feats li span{color:var(--muted);font-size:12px;padding-top:3px}
+.big{font-size:19px;line-height:1.6;color:var(--ink-2)}
 
-/* projects */
-.pbar{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
-.pbar label{font-size:13px;color:var(--muted);margin-inline-end:6px}
-.pbar select{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:7px 10px}
-.projs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:24px}
-.pc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
-.pc .pi{aspect-ratio:16/10;background:var(--chip);position:relative}
-.pc .pi img{width:100%;height:100%;object-fit:cover;display:block}
-.pc .pi .pill{position:absolute;top:12px;inset-inline-start:12px}
-.pc .pb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
-.pc h3{font-size:26px}
-.meta{font-size:14px;color:var(--muted)}
-.pill{font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;background:var(--chip);color:var(--ink);white-space:nowrap}
-.pill.hot{background:var(--copper);color:#1b120d}
-.tiles{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.tiles span{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
-.price{margin-top:8px;display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap}
-.price small{display:block;font-size:12px;color:var(--muted)}
-.price b{font-size:22px;white-space:nowrap}
-.pc .acts{display:flex;gap:8px;margin-top:auto;padding-top:14px}
-.pc .acts .btn{flex:1;padding:10px 12px;font-size:14px}
-.pc .acts .btn-ghost{color:var(--ink);border-color:var(--line)}
-.others{margin-top:28px;display:flex;flex-wrap:wrap;gap:8px}
-.others span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
-.others span em{font-style:normal;color:var(--muted)}
+/* unit types */
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.type{background:var(--paper);padding:26px 24px;display:flex;flex-direction:column;gap:6px;text-align:start;border:0;cursor:pointer}
+.type:hover{background:var(--paper-2)}
+.type[aria-pressed="true"]{background:var(--night);color:var(--on-night)}
+.type[aria-pressed="true"] .tm{color:var(--on-night-muted)}
+.type h3{font-size:24px;letter-spacing:-.02em;font-weight:400}
+.tm{color:var(--muted);font-size:13px}
+.tp{font-size:22px;font-weight:300;margin-top:10px}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:40px 0 14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:transparent;padding:7px 13px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:start;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--ink)}
+[dir="rtl"] .tbl th{letter-spacing:0}
+.tbl td{padding:15px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl .no{font-size:20px;font-weight:300}
+.tbl .pr{font-weight:600;white-space:nowrap}
+.tbl .pr small{display:block;font-weight:400;color:var(--gold-ink);font-size:12px}
+.tbl .acts{display:flex;gap:6px;justify-content:flex-end}
+.tbl .acts button,.tbl .acts a{border:1px solid var(--line);background:transparent;padding:7px 11px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap}
+.tbl .acts a{background:var(--gold);border-color:var(--gold);color:#1b160d}
+.fine{font-size:12px;color:var(--muted);margin-top:16px}
 
-/* steps */
-.steps{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;counter-reset:s}
-.steps li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;counter-increment:s}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--copper);color:#1b120d;font-weight:700;margin-bottom:10px}
-.steps b{display:block}
-.steps span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+/* payment */
+.night{background:var(--night);color:var(--on-night)}
+.night .head p,.night .fine{color:var(--on-night-muted)}
+.night .k.gold{color:var(--gold)}
+.plan{display:grid;grid-template-columns:2fr 1fr 1fr 6fr;gap:4px}
+.plan div{border-top:3px solid var(--gold);padding-top:16px}
+.plan div:last-child{border-color:#6f7368}
+.plan b{display:block;font-size:clamp(30px,4vw,52px);font-weight:300;letter-spacing:-.03em;line-height:1}
+.plan span{display:block;font-size:13px;color:var(--on-night-muted);margin-top:8px}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(242,239,230,.14);margin-top:64px;border:1px solid rgba(242,239,230,.14)}
+.offers div{background:var(--night);padding:26px 24px}
+.offers b{display:block;font-size:44px;font-weight:300;color:var(--gold);line-height:1}
+.offers span{display:block;font-size:14px;color:var(--on-night-muted);margin-top:10px}
+.calc{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--on-night-muted)}
+.calc select{background:transparent;border:1px solid rgba(242,239,230,.3);border-radius:0;padding:9px 10px;color:var(--on-night)}
+.calc select option{color:#111}
+.sched{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:16px}
+.sched div{border:1px solid rgba(242,239,230,.14);padding:14px 16px}
+.sched span{display:block;font-size:12px;color:var(--on-night-muted)}
+.sched b{font-size:18px;font-weight:500}
+
+/* location */
+.drive{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.drive li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+.drive b{font-weight:500;white-space:nowrap}
 
 /* agent */
-.agent{background:var(--green);color:var(--on-green)}
-.agent-grid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
-.avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:3px solid var(--copper)}
-.agent .sub{color:var(--on-green-muted)}
-.agent .eyebrow{color:var(--copper)}
-.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:22px}
-.contacts a{display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 14px;text-decoration:none;background:rgba(0,0,0,.12)}
-.contacts a svg{width:22px;height:22px;flex:none;color:var(--copper)}
-.contacts small{display:block;font-size:12px;color:var(--on-green-muted)}
-.contacts b{display:block;font-weight:600;direction:ltr;unicode-bidi:isolate;text-align:start;overflow-wrap:anywhere}
+.agent{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center}
+.agent>*{min-width:0}
+.portrait{aspect-ratio:4/5;overflow:hidden;background:var(--paper-2)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.agent h2{font-size:clamp(38px,5vw,64px);margin-top:20px}
+.agent .role{color:var(--gold-ink);font-size:14px;margin-top:14px}
+.agent .big{margin-top:24px}
+.contacts{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1px solid var(--line)}
+.contacts a{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.contacts a:nth-child(odd){padding-inline-end:18px}
+.contacts a:nth-child(even){padding-inline-start:18px;border-inline-start:1px solid var(--line)}
+.contacts small{display:block;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+[dir="rtl"] .contacts small{letter-spacing:0}
+.contacts b{font-weight:500;direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+.contacts a::after{content:"↗";color:var(--muted)}
 
-/* final form */
-.final{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
-.final>*{min-width:0}
-.final .card{box-shadow:none;border:1px solid var(--line)}
+/* form */
+.formgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px}
+.formgrid>*{min-width:0}
+.formgrid h2{font-size:clamp(38px,5vw,64px);margin-top:20px}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.f label{display:grid;gap:6px;font-size:12px;color:var(--ink-2);font-weight:500}
+.f label.full,.f .full{grid-column:1/-1}
+.f input,.f select{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:0;padding:13px 14px;font-size:16px}
+.f .agree{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--muted);font-weight:400}
+.f .agree input{width:auto;margin-top:2px}
+.f button[type=submit]{border:0}
+.f .msg{font-size:14px;padding:12px 14px;border:1px solid var(--line)}
+.f .msg.err{border-color:#c98b6b;background:color-mix(in srgb,#c98b6b 12%,transparent)}
+.f .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0}
+.direct{margin-top:40px;display:grid;gap:12px;justify-items:start}
 
 /* footer */
-.foot{background:var(--green);color:var(--on-green-muted);padding-block:28px 100px;font-size:12px;border-top:1px solid rgba(255,255,255,.12)}
-.foot a{color:var(--on-green)}
-.foot p+p{margin-top:8px}
-.dock{position:fixed;inset-inline:0;bottom:0;z-index:20;display:none;gap:6px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
-.dock .btn{flex:1;padding:11px 8px;font-size:14px}
-.dock .btn-ghost{color:var(--ink)}
+footer{background:var(--night);color:var(--on-night-muted);padding-block:64px 120px;font-size:13px}
+footer .row{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-end}
+footer h2{color:var(--on-night);font-size:clamp(32px,4.4vw,56px)}
+footer .btn-gold{margin-top:28px}
+footer .legal{margin-top:56px;padding-top:20px;border-top:1px solid rgba(242,239,230,.14);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px}
+footer a{color:var(--on-night)}
+.fab{position:fixed;inset-inline-end:22px;bottom:22px;z-index:40;display:flex;gap:10px;align-items:center;background:#2f4a36;color:#fff;border-radius:999px;padding:12px 18px;text-decoration:none;font-size:13px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.fab svg{width:20px;height:20px}
+.dock{position:fixed;inset-inline:0;bottom:0;z-index:40;display:none;gap:1px;background:var(--line);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.dock a{flex:1;text-align:center;padding:15px 6px;font-size:14px;font-weight:600;text-decoration:none;background:var(--paper)}
+.dock a.wa{background:var(--gold);color:#1b160d}
 
-/* dialog */
-dialog{border:0;border-radius:16px;padding:0;max-width:min(860px,calc(100vw - 24px));width:100%;background:var(--surface);color:var(--ink)}
-dialog::backdrop{background:rgba(8,16,11,.7)}
-.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
-.dlg-head button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px}
-.dlg-body{max-height:76vh;overflow:auto;padding:18px}
-.dlg-body .plan-img{display:block;width:100%;background:#f7f8f6;border-radius:10px}
-.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
-.unit{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
-.u-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-.u-no{font-family:"Marcellus",Georgia,serif;font-size:22px;line-height:1}
-.u-type{font-weight:600;margin-top:4px}
-.u-meta{color:var(--muted);font-size:13px}
-.u-price{font-weight:700;font-size:18px;margin-top:6px}
-.u-op{font-size:12px;color:var(--muted)}
-.u-cash{font-size:13px;color:var(--copper-ink);font-weight:600}
-.u-acts{display:flex;gap:6px;margin-top:auto;padding-top:10px}
-.u-acts button,.u-acts a{flex:1;text-align:center;font-size:13px;font-weight:600;border-radius:999px;padding:7px 6px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
-.u-acts .go{background:var(--copper);border-color:var(--copper);color:#1b120d}
-.sched{display:grid;gap:1px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:12px}
-.sched div{display:flex;justify-content:space-between;gap:12px;background:var(--surface);padding:10px 14px}
-.sched span{color:var(--muted);font-size:14px}
-.dnote{font-size:13px;color:var(--muted);margin-top:12px}
+dialog{border:0;padding:0;max-width:min(820px,calc(100vw - 24px));width:100%;background:var(--paper);color:var(--ink);border-radius:0}
+dialog::backdrop{background:rgba(12,14,12,.72)}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dh button{border:1px solid var(--line);background:transparent;padding:6px 14px}
+.db{max-height:78vh;overflow:auto;padding:20px}
+.db img{width:100%;background:#fff}
+.db .rows{display:grid;border-top:1px solid var(--line);margin-top:14px}
+.db .rows div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.db .rows span{color:var(--muted)}
+.db .tot{font-size:40px;font-weight:300;letter-spacing:-.03em}
 
-@media (max-width:900px){
-  .hero-grid,.final{grid-template-columns:1fr;gap:28px;padding-block:32px 40px}
-  .final{padding-block:0}
-  .tel-top{display:none}
-  .dock{display:flex}
-  .agent-grid{grid-template-columns:1fr;text-align:center;justify-items:center}
-  .contacts{text-align:start;width:100%}
-  .avatar{width:110px;height:110px}
-  .sec{padding-block:40px}
+@media (max-width:960px){
+  nav.menu{display:none}
+  .head,.two,.agent,.formgrid{grid-template-columns:1fr;gap:28px}
+  .types{grid-template-columns:1fr 1fr}
+  .sec{padding-block:72px}
+  .head{margin-bottom:36px}
+  .portrait{max-width:420px}
 }
-@media (max-width:520px){
-  .facts{grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .fact{padding:10px}
-  .fact span{font-size:11px}
-  .card{padding:18px}
-  .projs{grid-template-columns:1fr}
+@media (max-width:720px){
+  .wrap{padding-inline:16px}
+  .bar{height:64px}
+  .right .btn{display:none}
+  .stats{grid-template-columns:1fr 1fr;margin-top:40px}
+  .hero .wrap{padding-block:72px 28px}
+  .hero .ctas .btn{flex:1 1 100%}
+  .types{grid-template-columns:1fr}
+  .plan{grid-template-columns:1fr 1fr;gap:20px 8px}
+  .offers{grid-template-columns:1fr}
+  .sched{grid-template-columns:1fr 1fr}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-bottom:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:auto 1fr;gap:2px 14px}
+  .tbl td{border:0;padding:0}
+  .tbl td.no{grid-row:span 3}
+  .tbl td.c-acts{grid-column:1/-1;margin-top:10px}
+  .tbl .acts{justify-content:stretch}
+  .tbl .acts>*{flex:1;text-align:center}
+  .contacts{grid-template-columns:1fr}
+  .contacts a:nth-child(n){padding-inline:0;border-inline-start:0}
+  form.f{grid-template-columns:1fr}
+  .fab{display:none}
+  .dock{display:flex}
+  footer{padding-bottom:110px}
 }
 </style>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="topbar">
-      <div class="logo" aria-label="IMAN Developers"><b>IMAN</b><small>DEVELOPERS</small></div>
-      <div class="tools">
-        <a class="tel-top num" href="tel:+971501752771" data-goal="call">+971 50 175 2771</a>
-        <div role="group" aria-label="Language" style="display:flex;gap:6px">
-          <button class="tool" data-lang="ru" aria-pressed="true">RU</button>
-          <button class="tool" data-lang="en" aria-pressed="false">EN</button>
-          <button class="tool" data-lang="ar" aria-pressed="false">عربي</button>
-        </div>
-      </div>
-    </div>
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow" data-i="heroEye">Дубай · Официальный застройщик</div>
-        <h1 data-i="heroH">Квартиры в Дубае от застройщика IMAN Developers</h1>
-        <p class="lead" data-i="heroP">Новые проекты и строящиеся дома с рассрочкой до сдачи. Цены от застройщика, без переплат. Подберу квартиру под ваш бюджет и цель — для жизни, аренды или ВНЖ.</p>
-        <div class="facts">
-          <div class="fact"><b class="num" id="f-from"></b><span data-i="fFrom">цена от</span></div>
-          <div class="fact"><b>40/60</b><span data-i="fPlan">рассрочка до сдачи</span></div>
-          <div class="fact"><b>0%</b><span data-i="fTax">налог на доход</span></div>
-        </div>
-        <div class="chan">
-          <a class="btn btn-cu" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
-          <a class="btn btn-tg" data-ch="tg" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-tg"/></svg><span>Telegram</span></a>
-          <a class="btn btn-ghost" href="tel:+971501752771" data-goal="call" data-i="call">Позвонить</a>
-        </div>
-      </div>
-      <div class="card" id="form1"></div>
+<div class="strip"><b data-i="stripB">Новый проект IMAN Developers</b> · <span data-i="stripT">Цены и наличие обновляются ежедневно</span></div>
+<header class="top">
+  <div class="wrap bar">
+    <a class="logo" href="#home" aria-label="IMAN Developers"><b>IMAN</b><small>DEVELOPERS</small></a>
+    <nav class="menu">
+      <a href="#about" data-i="nAbout">О проекте</a><a href="#units" data-i="nUnits">Квартиры</a><a href="#pay" data-i="nPay">Оплата</a><a href="#loc" data-i="nLoc">Расположение</a><a href="#contact" data-i="nContact">Контакты</a>
+    </nav>
+    <div class="right">
+      <div class="langs" role="group" aria-label="Language"><button data-lang="ru">RU</button><button data-lang="en">EN</button><button data-lang="ar">عربي</button></div>
+      <select class="cur" id="cur" aria-label="Currency"></select>
+      <a class="btn btn-dark" href="#contact" data-i="ctaTop">Получить цены</a>
     </div>
   </div>
 </header>
 
-<main>
-  <section class="sec wrap">
-    <div class="eyebrow" data-i="whyEye">Почему Дубай</div>
-    <h2 data-i="whyH">Надёжное вложение в одном из самых быстрорастущих городов мира</h2>
-    <div class="why">
-      <div><i>0%</i><b data-i="w1">Нет налога на доход</b><span data-i="w1s">Ни на аренду, ни на продажу. Нет ежегодного налога на недвижимость.</span></div>
-      <div><i>★</i><b data-i="w2">Золотая виза на 10 лет</b><span data-i="w2s">При покупке недвижимости от 2 млн AED — для вас и вашей семьи.</span></div>
-      <div><i>%</i><b data-i="w3">Рассрочка от застройщика</b><span data-i="w3s">Платите частями во время строительства, основная сумма — при сдаче.</span></div>
-      <div><i>⌂</i><b data-i="w4">Покупка удалённо</b><span data-i="w4s">Бронирование и договор онлайн. Прилетать в Дубай не обязательно.</span></div>
-    </div>
-  </section>
-
-  <section class="sec wrap" id="projects" style="padding-top:0">
-    <div class="pbar">
-      <div><div class="eyebrow" id="p-eye"></div><h2 data-i="projH">Проекты IMAN Developers</h2><p class="sub" data-i="projSub">Актуальные цены и свободные квартиры. Нажмите «Квартиры», чтобы увидеть планировки и график платежей.</p></div>
-      <div><label for="cur" data-i="curL">Валюта</label><select id="cur"></select></div>
-    </div>
-    <div class="projs" id="projs"></div>
-    <div style="margin-top:32px">
-      <h3 style="font-size:24px" data-i="othersH">Другие проекты IMAN</h3>
-      <p class="sub" style="margin-top:4px" data-i="othersSub">Готовые и строящиеся дома. Спросите о квартирах на вторичном рынке.</p>
-      <div class="others" id="others"></div>
-    </div>
-  </section>
-
-  <section class="sec wrap" style="padding-top:0">
-    <div class="eyebrow" data-i="howEye">Как купить</div>
-    <h2 data-i="howH">Покупка в 4 шага</h2>
-    <ol class="steps">
-      <li><b data-i="h1">Заявка</b><span data-i="h1s">Оставьте заявку или напишите в WhatsApp / Telegram.</span></li>
-      <li><b data-i="h2">Подбор</b><span data-i="h2s">Пришлю планировки, цены и график платежей под ваш бюджет.</span></li>
-      <li><b data-i="h3">Бронирование</b><span data-i="h3s">Онлайн-показ и бронь квартиры удалённо.</span></li>
-      <li><b data-i="h4">Договор</b><span data-i="h4s">Договор с застройщиком и регистрация в Земельном департаменте Дубая (DLD).</span></li>
-    </ol>
-  </section>
-
-  <section class="agent sec">
-    <div class="wrap agent-grid">
-      <img class="avatar" src="../img/sam-jabr.jpg" alt="Sam Jabr" loading="lazy">
-      <div>
-        <div class="eyebrow" data-i="agEye">Ваш менеджер в IMAN</div>
-        <h2 data-i="agH">Сэм Джабр</h2>
-        <p class="sub" data-i="agP">Старший менеджер по продажам IMAN Developers, 3 года в компании. Отвечу на любые вопросы о проектах, ценах и покупке.</p>
-        <div class="contacts">
-          <a data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span><small>WhatsApp</small><b class="num">+971 50 175 2771</b></span></a>
-          <a data-ch="tg" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-tg"/></svg><span><small>Telegram</small><b id="tg-name"></b></span></a>
-          <a href="tel:+971501752771" data-goal="call"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-ph"/></svg><span><small data-i="call">Позвонить</small><b class="num">+971 50 175 2771</b></span></a>
-          <a data-ch="mail" href="#"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-ml"/></svg><span><small>E-mail</small><b id="mail-name"></b></span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec wrap" id="contact">
-    <div class="final">
-      <div>
-        <div class="eyebrow" data-i="finEye">Бесплатная консультация</div>
-        <h2 data-i="finH">Получите подборку квартир с ценами</h2>
-        <p class="sub" data-i="finP">Отвечу в течение рабочего дня. Пришлю планировки, графики платежей и актуальные акции застройщика.</p>
-      </div>
-      <div class="card" id="form2"></div>
-    </div>
-  </section>
-</main>
-
-<footer class="foot">
+<section class="hero" id="home">
+  <img src="../img/113-residences.jpg" alt="113 Residences, Al Sufouh, Dubai">
   <div class="wrap">
-    <p data-i="fine">Сэм Джабр · Старший менеджер по продажам, IMAN Developers, Дубай, ОАЭ · +971 50 175 2771. Цены, наличие и условия могут меняться; изображения и планировки носят ознакомительный характер. Не является публичной офертой.</p>
-    <p><a href="privacy.html" data-i="privacy">Политика конфиденциальности</a></p>
+    <div class="k" data-i="heroK">113 Residences · Аль-Суфух, Дубай</div>
+    <h1 data-i="heroH">Ваш адрес у парка и пляжа.</h1>
+    <p class="lead" data-i="heroP">113 резиденций от IMAN Developers напротив парка Аль-Суфух: просторные планировки, бассейн на крыше и рассрочка 40/60 до сдачи в 2029 году.</p>
+    <div class="ctas">
+      <a class="btn btn-gold" href="#units" data-i="heroC1">Смотреть квартиры</a>
+      <a class="btn btn-line" href="#contact" data-i="heroC2">Получить планировки и цены</a>
+      <a class="btn btn-line" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="k gold">01 / <span data-i="aK">О проекте</span></div><h2 data-i="aH">Архитектура, созданная для жизни.</h2></div>
+      <p data-i="aP">Плавные линии фасада, большие террасы и отделка премиум-класса. Здание B + G + 9 этажей с видом на парк Аль-Суфух, в нескольких минутах от пляжа, Palm Jumeirah и Dubai Marina.</p>
+    </div>
+    <div class="two">
+      <div class="photo"><img src="../assets/113-residences-main.webp" alt="" loading="lazy"><span class="cap" data-i="cap">Визуализация 113 Residences</span></div>
+      <div>
+        <p class="big" data-i="aBig">113 квартир от 1 до 3 спален: с кабинетом или комнатой для персонала, с балконами и террасами. Сдача — второй квартал 2029 года.</p>
+        <ul class="feats">
+          <li><span>01</span><div data-i="f1">Умные замки Hafele и европейская кухонная техника</div></li>
+          <li><span>02</span><div data-i="f2">Бассейн-лагуна и инфинити-бассейн на крыше</div></li>
+          <li><span>03</span><div data-i="f3">Фитнес-центр и зал для йоги</div></li>
+          <li><span>04</span><div data-i="f4">Напротив парка Аль-Суфух, 3 минуты до пляжа</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="units">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="k gold">02 / <span data-i="uK">Квартиры</span></div><h2 data-i="uH">Выберите свою планировку.</h2></div>
+      <p id="uP"></p>
+    </div>
+    <div class="types" id="types"></div>
+    <div class="tools"><div class="chips" id="chips"></div><span class="fine" id="listDate" style="margin:0"></span></div>
+    <table class="tbl">
+      <thead><tr><th data-i="thNo">№</th><th data-i="thType">Тип</th><th data-i="thArea">Площадь</th><th data-i="thPrice">Цена</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="fine" data-i="uFine">Цены указаны со скидкой 4% на плане 40/60. Без учёта сбора DLD (4%) и регистрации. Уточняйте наличие перед бронированием.</p>
+  </div>
+</section>
+
+<section class="sec night" id="pay">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="k gold">03 / <span data-i="pK">Оплата</span></div><h2 data-i="pH">Рассрочка 40/60 до сдачи.</h2></div>
+      <p data-i="pP">40% вы платите во время строительства, 60% — при получении ключей. Без банков и процентов.</p>
+    </div>
+    <div class="plan">
+      <div><b class="num">20%</b><span data-i="s1">В течение 30 дней после бронирования</span></div>
+      <div><b class="num">10%</b><span data-i="s2">Через 90 дней</span></div>
+      <div><b class="num">10%</b><span data-i="s3">При готовности 40%</span></div>
+      <div><b class="num">60%</b><span data-i="s4">При сдаче, Q2 2029</span></div>
+    </div>
+    <div class="calc"><span data-i="calcL">Рассчитать для квартиры</span><select id="calcSel"></select></div>
+    <div class="sched num" id="calc"></div>
+    <div class="offers">
+      <div><b class="num">4%</b><span data-i="o1">Скидка от цены застройщика на плане 40/60</span></div>
+      <div><b class="num">14%</b><span data-i="o2">Скидка при 100% оплате</span></div>
+      <div><b class="num">10</b><span data-i="o3">лет — золотая виза ОАЭ при покупке от 2 млн AED</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="loc">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="k gold">04 / <span data-i="lK">Расположение</span></div><h2 data-i="lH">В центре Нового Дубая.</h2></div>
+      <p data-i="lP">Аль-Суфух — тихий район между Palm Jumeirah и Dubai Marina, рядом с шоссе Шейха Зайда.</p>
+    </div>
+    <div class="two">
+      <div class="photo" style="aspect-ratio:auto"><img src="../img/113-location.jpg" alt="" loading="lazy"></div>
+      <div><ul class="drive" id="drive"></ul><a class="link" style="margin-top:28px" href="https://www.google.com/maps?cid=6007820903981317149" target="_blank" rel="noopener" data-i="map">Открыть на карте</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap agent">
+    <div class="portrait"><img src="../img/sam-jabr.jpg" alt="Sam Jabr" loading="lazy"></div>
+    <div>
+      <div class="k gold">05 / <span data-i="mK">Ваш менеджер</span></div>
+      <h2 data-i="mH">Сэм Джабр.</h2>
+      <p class="role" data-i="mRole">Старший менеджер по продажам · IMAN Developers</p>
+      <p class="big" data-i="mP">Пришлю планировки, графики платежей и видео квартиры, проведу онлайн-показ и помогу забронировать удалённо — прилетать в Дубай не обязательно.</p>
+      <div class="contacts">
+        <a data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener"><span><small>WhatsApp</small><b class="num">+971 50 175 2771</b></span></a>
+        <a data-ch="tg" href="#" target="_blank" rel="noopener"><span><small>Telegram</small><b id="tg-name"></b></span></a>
+        <a href="tel:+971501752771" data-goal="call"><span><small data-i="phone">Телефон</small><b class="num">+971 50 175 2771</b></span></a>
+        <a data-ch="mail" href="#"><span><small>E-mail</small><b id="mail-name"></b></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="wrap formgrid">
+    <div>
+      <div class="k gold">06 / <span data-i="cK">Следующий шаг</span></div>
+      <h2 data-i="cH">Получите подборку квартир.</h2>
+      <p class="big" style="margin-top:22px" data-i="cP">Оставьте контакты — в течение рабочего дня пришлю цены, планировки и график платежей по свободным квартирам.</p>
+      <div class="direct"><span class="fine" data-i="cOr">Или напишите сразу:</span><a class="btn btn-dark" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener" data-i="waCta">Написать в WhatsApp</a></div>
+    </div>
+    <div id="formbox"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div><div class="k" style="color:var(--gold)" data-i="ftK">113 Residences · IMAN Developers</div><h2 style="margin-top:16px" data-i="ftH">Ваш путь в Дубай начинается с разговора.</h2><a class="btn btn-gold" href="#contact" data-i="ftC">Запросить консультацию</a></div>
+    </div>
+    <div class="legal">
+      <span data-i="fine">Сэм Джабр · Старший менеджер по продажам, IMAN Developers, Дубай, ОАЭ · +971 50 175 2771. Цены, наличие и условия могут меняться; визуализации носят ознакомительный характер. Не является публичной офертой.</span>
+      <a href="privacy.html" data-i="privacy">Политика конфиденциальности</a>
+    </div>
   </div>
 </footer>
 
-<div class="dock">
-  <a class="btn btn-cu" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="btn btn-tg" data-ch="tg" href="#" target="_blank" rel="noopener">Telegram</a>
-  <a class="btn btn-ghost" href="tel:+971501752771" data-goal="call" data-i="callS">Звонок</a>
-</div>
+<a class="fab" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>WhatsApp</a>
+<div class="dock"><a class="wa" data-ch="wa" data-msg="general" href="#" target="_blank" rel="noopener">WhatsApp</a><a data-ch="tg" href="#" target="_blank" rel="noopener">Telegram</a><a href="tel:+971501752771" data-goal="call" data-i="callS">Звонок</a></div>
 
-<dialog id="dlg" aria-labelledby="dlg-title">
-  <div class="dlg-head"><strong id="dlg-title"></strong><button id="dlg-close" data-i="close">Закрыть</button></div>
-  <div class="dlg-body" id="dlg-body"></div>
-</dialog>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
-  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21.9 4.3 18.8 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.4.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 13 2.6 11.6c-1-.3-1-1 .2-1.5L20.5 3.3c.8-.3 1.6.2 1.4 1Z"/></symbol>
-  <symbol id="i-ph" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
-  <symbol id="i-ml" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></symbol>
-</svg>
+<dialog id="dlg" aria-labelledby="dlg-t"><div class="dh"><strong id="dlg-t"></strong><button id="dlg-x" data-i="close">Закрыть</button></div><div class="db" id="dlg-b"></div></dialog>
 
 <script>
 const INV = /*INVENTORY*/;
 const CFG = /*CONFIG*/;
-const WA = CFG.whatsapp;
-const ORDER = ["113-residences","oxford-cove","sierra-by-iman","15-cascade","one-park-square","one-sky-park"];
-const SHOWN = ORDER.filter(id=>INV.projects.some(p=>p.id===id&&p.units.length));
+const P = INV.projects.find(p=>p.id==="113-residences");
 const T = {
- ru:{heroEye:"Дубай · Официальный застройщик",heroH:"Квартиры в Дубае от застройщика IMAN Developers",
-  heroP:"Новые проекты и строящиеся дома с рассрочкой до сдачи. Цены от застройщика, без переплат. Подберу квартиру под ваш бюджет и цель — для жизни, аренды или ВНЖ.",
-  fFrom:"цена от",fPlan:"рассрочка до сдачи",fTax:"налог на доход",call:"Позвонить",callS:"Звонок",
-  whyEye:"Почему Дубай",whyH:"Надёжное вложение в одном из самых быстрорастущих городов мира",
-  w1:"Нет налога на доход",w1s:"Ни на аренду, ни на продажу. Нет ежегодного налога на недвижимость.",
-  w2:"Золотая виза на 10 лет",w2s:"При покупке недвижимости от 2 млн AED — для вас и вашей семьи.",
-  w3:"Рассрочка от застройщика",w3s:"Платите частями во время строительства, основная сумма — при сдаче.",
-  w4:"Покупка удалённо",w4s:"Бронирование и договор онлайн. Прилетать в Дубай не обязательно.",
-  pEye:(n,d)=>`${n} свободных квартир · обновлено ${d}`,projH:"Проекты IMAN Developers",projSub:"Актуальные цены и свободные квартиры. Нажмите «Квартиры», чтобы увидеть планировки и график платежей.",curL:"Валюта",
-  othersH:"Другие проекты IMAN",othersSub:"Готовые и строящиеся дома. Спросите о квартирах на вторичном рынке.",
-  howEye:"Как купить",howH:"Покупка в 4 шага",h1:"Заявка",h1s:"Оставьте заявку или напишите в WhatsApp / Telegram.",h2:"Подбор",h2s:"Пришлю планировки, цены и график платежей под ваш бюджет.",
-  h3:"Бронирование",h3s:"Онлайн-показ и бронь квартиры удалённо.",h4:"Договор",h4s:"Договор с застройщиком и регистрация в Земельном департаменте Дубая (DLD).",
-  agEye:"Ваш менеджер в IMAN",agH:"Сэм Джабр",agP:"Старший менеджер по продажам IMAN Developers, 3 года в компании. Отвечу на любые вопросы о проектах, ценах и покупке.",
-  finEye:"Бесплатная консультация",finH:"Получите подборку квартир с ценами",finP:"Отвечу в течение рабочего дня. Пришлю планировки, графики платежей и актуальные акции застройщика.",
-  fine:"Сэм Джабр · Старший менеджер по продажам, IMAN Developers, Дубай, ОАЭ · +971 50 175 2771. Цены, наличие и условия могут меняться; изображения и планировки носят ознакомительный характер. Не является публичной офертой.",
-  privacy:"Политика конфиденциальности",close:"Закрыть",
-  formH:"Подбор квартиры",formP:"Оставьте контакты — пришлю цены, планировки и график платежей.",fName:"Имя",fPhone:"Телефон (WhatsApp / Telegram)",fBudget:"Бюджет",fProj:"Проект",any:"Любой",
-  fPref:"Как с вами связаться",fAgree:"Я согласен(на) на обработку персональных данных в соответствии с",fAgreeL:"политикой конфиденциальности",
-  fSend:"Получить подборку",fSending:"Отправляю…",fOk:"Спасибо! Заявка отправлена, я свяжусь с вами в ближайшее время.",fErr:"Не удалось отправить. Напишите мне в WhatsApp — откроется сообщение с вашей заявкой.",
-  fNeed:"Укажите имя и телефон.",budgets:["до $300 000","$300 000 – $600 000","$600 000 – $1 000 000","более $1 000 000"],callPref:"Звонок",
-  stNew:"Новый проект",stCon:"Строится",stReady:"Сдан",handover:"Сдача",nUnits:n=>`${n} ${plural(n,["квартира","квартиры","квартир"])}`,from:"от",
-  units:"Квартиры",ask:"Узнать",unitsOf:p=>`${p} · свободные квартиры`,
-  floorPlan:"Планировка",payments:"Платежи",op:"Цена без скидки",sqft:"фут²",unit:"Кв.",payNote:"Без учёта сбора DLD (4%) и регистрации. Уточняйте актуальность перед бронированием.",
-  cashLine:(pc,v)=>`При 100% оплате (−${pc}%): ${v}`,offN:n=>`скидка ${n}%`,
-  t:{o1x:"скидка",o2:"рассрочка",o4:"при 100% оплате",o4ret:"при 100% оплате"},
-  plan:{"113":"40/60 · −4%","40-60-instalments":"40/60 рассрочка","50-50-instalments":"50/50 рассрочка","60-40":"60/40","50-50":"50/50","cash":"100% оплата"},
-  rows:{now:"Первый взнос",inst:"Частями до сдачи",hand:"При сдаче",full:"Полная оплата",s1:"В течение 30 дней после брони",s2:"В течение 90 дней после брони",s3:"При готовности 40%",s4:"При сдаче"},
-  msg:{general:"Здравствуйте, Сэм! Интересуют квартиры IMAN Developers в Дубае. Пришлите, пожалуйста, подборку.",
-   proj:p=>`Здравствуйте, Сэм! Пришлите, пожалуйста, информацию о проекте ${p}.`,unit:(u,p)=>`Здравствуйте, Сэм! Интересует квартира ${u} в ${p}. Она ещё свободна?`,
-   lead:(n,ph,b,p)=>`Здравствуйте, Сэм! Заявка с сайта.\nИмя: ${n}\nТелефон: ${ph}\nБюджет: ${b}\nПроект: ${p}`}},
- en:{heroEye:"Dubai · Direct from the developer",heroH:"Dubai apartments direct from IMAN Developers",
-  heroP:"New launches and off-plan homes with payment plans until handover. Developer prices, no mark-ups. I'll match a home to your budget and goal: living, renting out or residency.",
-  fFrom:"prices from",fPlan:"payment plan",fTax:"income tax",call:"Call",callS:"Call",
-  whyEye:"Why Dubai",whyH:"A secure investment in one of the world's fastest-growing cities",
-  w1:"No income tax",w1s:"None on rent or on resale, and no annual property tax.",
-  w2:"10-year Golden Visa",w2s:"With property from AED 2 million, for you and your family.",
-  w3:"Developer payment plans",w3s:"Pay in parts during construction, most of it on handover.",
-  w4:"Buy remotely",w4s:"Booking and contract online. No need to fly to Dubai.",
-  pEye:(n,d)=>`${n} units available · updated ${d}`,projH:"IMAN Developers projects",projSub:"Current prices and available units. Tap \"Units\" for floor plans and payment schedules.",curL:"Currency",
-  othersH:"More IMAN projects",othersSub:"Completed and under-construction buildings. Ask about resale units.",
-  howEye:"How to buy",howH:"Buying in 4 steps",h1:"Enquiry",h1s:"Leave your details or message me on WhatsApp / Telegram.",h2:"Selection",h2s:"I'll send floor plans, prices and payment schedules for your budget.",
-  h3:"Booking",h3s:"Online viewing and remote booking.",h4:"Contract",h4s:"Contract with the developer and registration with the Dubai Land Department (DLD).",
-  agEye:"Your contact at IMAN",agH:"Sam Jabr",agP:"Senior Sales Manager at IMAN Developers, 3 years with the company. Ask me anything about the projects, prices and buying.",
-  finEye:"Free consultation",finH:"Get a shortlist of units with prices",finP:"I reply within one working day, with floor plans, payment schedules and the developer's current offers.",
-  fine:"Sam Jabr · Senior Sales Manager, IMAN Developers, Dubai, UAE · +971 50 175 2771. Prices, availability and terms may change; images and layouts are representative. This is not a public offer.",
-  privacy:"Privacy policy",close:"Close",
-  formH:"Find your unit",formP:"Leave your details and I'll send prices, floor plans and payment schedules.",fName:"Name",fPhone:"Phone (WhatsApp / Telegram)",fBudget:"Budget",fProj:"Project",any:"Any",
-  fPref:"How should I contact you",fAgree:"I agree to the processing of my personal data under the",fAgreeL:"privacy policy",
-  fSend:"Get my shortlist",fSending:"Sending…",fOk:"Thank you! Your request was sent and I'll be in touch shortly.",fErr:"Couldn't send. Message me on WhatsApp instead; your request will open there.",
-  fNeed:"Please enter your name and phone.",budgets:["up to $300,000","$300,000 – $600,000","$600,000 – $1,000,000","over $1,000,000"],callPref:"Call",
-  stNew:"New launch",stCon:"Under construction",stReady:"Completed",handover:"Handover",nUnits:n=>`${n} units`,from:"from",
-  units:"Units",ask:"Ask",unitsOf:p=>`${p} · available units`,
-  floorPlan:"Floor plan",payments:"Payments",op:"Original price",sqft:"sq ft",unit:"Unit",payNote:"Excludes the DLD fee (4%) and registration. Confirm availability before booking.",
-  cashLine:(pc,v)=>`100% payment (−${pc}%): ${v}`,offN:n=>`${n}% off`,
-  t:{o1x:"off",o2:"payment plan",o4:"on 100% payment",o4ret:"on 100% payment"},
-  plan:{"113":"40/60 · 4% off","40-60-instalments":"40/60 instalments","50-50-instalments":"50/50 instalments","60-40":"60/40","50-50":"50/50","cash":"Cash only"},
-  rows:{now:"Down payment",inst:"Instalments before handover",hand:"On handover",full:"Full payment",s1:"Within 30 days of booking",s2:"Within 90 days of booking",s3:"At 40% construction",s4:"On handover"},
-  msg:{general:"Hi Sam, I'm interested in IMAN Developers apartments in Dubai. Could you send me a shortlist?",
-   proj:p=>`Hi Sam, please send me details for ${p}.`,unit:(u,p)=>`Hi Sam, I'm interested in unit ${u} at ${p}. Is it still available?`,
-   lead:(n,ph,b,p)=>`Hi Sam, enquiry from the website.\nName: ${n}\nPhone: ${ph}\nBudget: ${b}\nProject: ${p}`}},
- ar:{heroEye:"دبي · مباشرة من المطوّر",heroH:"شقق في دبي مباشرة من إيمان للتطوير العقاري",
-  heroP:"مشاريع جديدة وقيد الإنشاء مع خطط دفع لحد التسليم. أسعار المطوّر بدون زيادات. بختارلك الوحدة حسب ميزانيتك وهدفك: سكن، استثمار أو إقامة.",
-  fFrom:"الأسعار من",fPlan:"خطة الدفع",fTax:"ضريبة الدخل",call:"اتصال",callS:"اتصال",
-  whyEye:"ليش دبي",whyH:"استثمار آمن بواحدة من أسرع مدن العالم نمواً",
-  w1:"بدون ضريبة دخل",w1s:"لا على الإيجار ولا على البيع، وبدون ضريبة عقار سنوية.",
-  w2:"إقامة ذهبية 10 سنوات",w2s:"عند شراء عقار من 2 مليون درهم، إلك ولعيلتك.",
-  w3:"خطط دفع من المطوّر",w3s:"بتدفع على دفعات خلال البناء، والجزء الأكبر عند التسليم.",
-  w4:"الشراء عن بُعد",w4s:"الحجز والعقد أونلاين، ما في داعي تسافر لدبي.",
-  pEye:(n,d)=>`${n} وحدة متاحة · آخر تحديث ${d}`,projH:"مشاريع إيمان",projSub:"الأسعار الحالية والوحدات المتاحة. اضغط «الوحدات» لتشوف المخططات وجدول الدفعات.",curL:"العملة",
-  othersH:"مشاريع إيمان الأخرى",othersSub:"مباني مكتملة وقيد الإنشاء. اسأل عن وحدات إعادة البيع.",
-  howEye:"كيف تشتري",howH:"الشراء بـ 4 خطوات",h1:"الطلب",h1s:"اترك بياناتك أو راسلني على واتساب / تيليغرام.",h2:"الاختيار",h2s:"ببعتلك المخططات والأسعار وجدول الدفعات حسب ميزانيتك.",
-  h3:"الحجز",h3s:"معاينة أونلاين وحجز عن بُعد.",h4:"العقد",h4s:"عقد مع المطوّر وتسجيل بدائرة الأراضي والأملاك في دبي (DLD).",
-  agEye:"جهة اتصالك في إيمان",agH:"سام جبر",agP:"مدير مبيعات أول في إيمان للتطوير العقاري، 3 سنوات مع الشركة. اسألني أي شي عن المشاريع والأسعار والشراء.",
-  finEye:"استشارة مجانية",finH:"احصل على قائمة وحدات مع أسعارها",finP:"برد خلال يوم عمل، مع المخططات وجداول الدفع وعروض المطوّر الحالية.",
-  fine:"سام جبر · مدير مبيعات أول، إيمان للتطوير العقاري، دبي، الإمارات · ‎+971 50 175 2771. الأسعار والتوفر والشروط قابلة للتغيير، والصور والمخططات للتوضيح. هذا ليس عرضاً ملزماً.",
-  privacy:"سياسة الخصوصية",close:"إغلاق",
-  formH:"لاقي وحدتك",formP:"اترك بياناتك وببعتلك الأسعار والمخططات وجدول الدفعات.",fName:"الاسم",fPhone:"الهاتف (واتساب / تيليغرام)",fBudget:"الميزانية",fProj:"المشروع",any:"أي مشروع",
-  fPref:"كيف بدك نتواصل",fAgree:"أوافق على معالجة بياناتي الشخصية حسب",fAgreeL:"سياسة الخصوصية",
-  fSend:"ابعتلي القائمة",fSending:"عم يتم الإرسال…",fOk:"شكراً! وصل طلبك وبتواصل معك قريباً.",fErr:"ما زبط الإرسال. راسلني على واتساب، رح ينفتح طلبك هناك.",
-  fNeed:"اكتب اسمك ورقم هاتفك.",budgets:["لحد 300,000$","300,000$ – 600,000$","600,000$ – 1,000,000$","أكثر من 1,000,000$"],callPref:"اتصال",
-  stNew:"إطلاق جديد",stCon:"قيد الإنشاء",stReady:"مكتمل",handover:"التسليم",nUnits:n=>`${n} وحدة`,from:"من",
-  units:"الوحدات",ask:"اسأل",unitsOf:p=>`${p} · الوحدات المتاحة`,
-  floorPlan:"المخطط",payments:"الدفعات",op:"السعر الأصلي",sqft:"قدم²",unit:"وحدة",payNote:"لا يشمل رسوم دائرة الأراضي (4%) والتسجيل. تأكد من التوفر قبل الحجز.",
-  cashLine:(pc,v)=>`الدفع الكامل (خصم ${pc}%): ${v}`,offN:n=>`خصم ${n}%`,
-  t:{o1x:"خصم",o2:"خطة الدفع",o4:"عند الدفع الكامل",o4ret:"عند الدفع الكامل"},
-  plan:{"113":"40/60 · خصم 4%","40-60-instalments":"40/60 أقساط","50-50-instalments":"50/50 أقساط","60-40":"60/40","50-50":"50/50","cash":"كاش فقط"},
-  rows:{now:"دفعة أولى",inst:"أقساط قبل التسليم",hand:"عند التسليم",full:"الدفع كاملاً",s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً من الحجز",s3:"عند إنجاز 40%",s4:"عند التسليم"},
-  msg:{general:"مرحبا سام، مهتم بشقق إيمان في دبي. ممكن تبعتلي قائمة؟",
-   proj:p=>`مرحبا سام، ممكن تبعتلي تفاصيل مشروع ${p}؟`,unit:(u,p)=>`مرحبا سام، مهتم بالوحدة ${u} في ${p}. لسا متاحة؟`,
-   lead:(n,ph,b,p)=>`مرحبا سام، طلب من الموقع.\nالاسم: ${n}\nالهاتف: ${ph}\nالميزانية: ${b}\nالمشروع: ${p}`}}
+ ru:{stripB:"Новый проект IMAN Developers",stripT:"Цены и наличие обновляются ежедневно",nAbout:"О проекте",nUnits:"Квартиры",nPay:"Оплата",nLoc:"Расположение",nContact:"Контакты",ctaTop:"Получить цены",
+  heroK:"113 Residences · Аль-Суфух, Дубай",heroH:"Ваш адрес у парка и пляжа.",heroP:"113 резиденций от IMAN Developers напротив парка Аль-Суфух: просторные планировки, бассейн на крыше и рассрочка 40/60 до сдачи в 2029 году.",
+  heroC1:"Смотреть квартиры",heroC2:"Получить планировки и цены",
+  stats:(f,n)=>[[f,"цена от"],["40/60","рассрочка до сдачи"],["−14%","при 100% оплате"],[n,"свободных квартир"]],
+  aK:"О проекте",aH:"Архитектура, созданная для жизни.",aP:"Плавные линии фасада, большие террасы и отделка премиум-класса. Здание B + G + 9 этажей с видом на парк Аль-Суфух, в нескольких минутах от пляжа, Palm Jumeirah и Dubai Marina.",
+  cap:"Визуализация 113 Residences",aBig:"113 квартир от 1 до 3 спален: с кабинетом или комнатой для персонала, с балконами и террасами. Сдача — второй квартал 2029 года.",
+  f1:"Умные замки Hafele и европейская кухонная техника",f2:"Бассейн-лагуна и инфинити-бассейн на крыше",f3:"Фитнес-центр и зал для йоги",f4:"Напротив парка Аль-Суфух, 3 минуты до пляжа",
+  uK:"Квартиры",uH:"Выберите свою планировку.",uP:(n,d)=>`${n} свободных квартир на ${d}. Нажмите на тип, чтобы отфильтровать список, или откройте планировку и график платежей.`,
+  units:n=>`${n} ${plural(n,["квартира","квартиры","квартир"])}`,from:"от",all:"Все",listOf:d=>`Список застройщика от ${d}`,
+  thNo:"№",thType:"Тип",thArea:"Площадь",thPrice:"Цена",floorPlan:"Планировка",payments:"Платежи",cashL:"при 100% оплате",
+  uFine:"Цены указаны со скидкой 4% на плане 40/60. Без учёта сбора DLD (4%) и регистрации. Уточняйте наличие перед бронированием.",
+  pK:"Оплата",pH:"Рассрочка 40/60 до сдачи.",pP:"40% вы платите во время строительства, 60% — при получении ключей. Без банков и процентов.",
+  s1:"В течение 30 дней после бронирования",s2:"Через 90 дней",s3:"При готовности 40%",s4:"При сдаче, Q2 2029",calcL:"Рассчитать для квартиры",
+  o1:"Скидка от цены застройщика на плане 40/60",o2:"Скидка при 100% оплате",o3:"лет — золотая виза ОАЭ при покупке от 2 млн AED",
+  lK:"Расположение",lH:"В центре Нового Дубая.",lP:"Аль-Суфух — тихий район между Palm Jumeirah и Dubai Marina, рядом с шоссе Шейха Зайда.",map:"Открыть на карте",min:"мин",
+  mK:"Ваш менеджер",mH:"Сэм Джабр.",mRole:"Старший менеджер по продажам · IMAN Developers",mP:"Пришлю планировки, графики платежей и видео квартиры, проведу онлайн-показ и помогу забронировать удалённо — прилетать в Дубай не обязательно.",phone:"Телефон",
+  cK:"Следующий шаг",cH:"Получите подборку квартир.",cP:"Оставьте контакты — в течение рабочего дня пришлю цены, планировки и график платежей по свободным квартирам.",cOr:"Или напишите сразу:",waCta:"Написать в WhatsApp",
+  ftK:"113 Residences · IMAN Developers",ftH:"Ваш путь в Дубай начинается с разговора.",ftC:"Запросить консультацию",
+  fine:"Сэм Джабр · Старший менеджер по продажам, IMAN Developers, Дубай, ОАЭ · +971 50 175 2771. Цены, наличие и условия могут меняться; визуализации носят ознакомительный характер. Не является публичной офертой.",
+  privacy:"Политика конфиденциальности",close:"Закрыть",callS:"Звонок",
+  fName:"Имя *",fPhone:"Телефон (WhatsApp / Telegram) *",fType:"Планировка",any:"Любая",fBudget:"Бюджет",budgets:["до $600 000","$600 000 – $800 000","$800 000 – $1 200 000","более $1 200 000"],
+  fPref:"Способ связи",callPref:"Звонок",fAgree:"Я согласен(на) на обработку персональных данных в соответствии с",fAgreeL:"политикой конфиденциальности",
+  fSend:"Получить подборку",fSending:"Отправляю…",fOk:"Спасибо! Заявка отправлена — я свяжусь с вами в ближайшее время.",fErr:"Не удалось отправить. Откроется WhatsApp с вашей заявкой — просто нажмите «Отправить».",fNeed:"Укажите имя и телефон.",
+  rows:["Бронирование, 20%","Через 90 дней, 10%","При готовности 40%, 10%","При сдаче, 60%"],payNote:"Без учёта сбора DLD (4%) и регистрации.",unit:"Кв.",
+  msg:{general:"Здравствуйте, Сэм! Интересует 113 Residences. Пришлите, пожалуйста, цены и планировки.",unit:u=>`Здравствуйте, Сэм! Интересует квартира ${u} в 113 Residences. Она ещё свободна?`,
+   lead:(n,ph,t,b,c)=>`Здравствуйте, Сэм! Заявка с сайта (113 Residences).\nИмя: ${n}\nТелефон: ${ph}\nПланировка: ${t}\nБюджет: ${b}\nСвязь: ${c}`}},
+ en:{stripB:"New launch by IMAN Developers",stripT:"Prices and availability updated daily",nAbout:"The project",nUnits:"Units",nPay:"Payment",nLoc:"Location",nContact:"Contact",ctaTop:"Get prices",
+  heroK:"113 Residences · Al Sufouh, Dubai",heroH:"Your address by the park and the beach.",heroP:"113 residences by IMAN Developers facing Al Sufouh Community Park: generous layouts, a rooftop pool and a 40/60 payment plan until handover in 2029.",
+  heroC1:"View units",heroC2:"Get floor plans and prices",
+  stats:(f,n)=>[[f,"prices from"],["40/60","payment plan"],["−14%","on 100% payment"],[n,"units available"]],
+  aK:"The project",aH:"Architecture made for living.",aP:"Flowing façade lines, large terraces and premium finishes. A B + G + 9 building facing Al Sufouh Community Park, minutes from the beach, Palm Jumeirah and Dubai Marina.",
+  cap:"113 Residences, rendering",aBig:"113 homes from one to three bedrooms, with study or maid's room options, balconies and terraces. Handover in Q2 2029.",
+  f1:"Hafele smart locks and European kitchen appliances",f2:"Lagoon pool and rooftop infinity pool",f3:"Fitness centre and yoga room",f4:"Facing Al Sufouh Community Park, 3 minutes to the beach",
+  uK:"Units",uH:"Choose your layout.",uP:(n,d)=>`${n} units available as of ${d}. Tap a type to filter the list, or open a floor plan and payment schedule.`,
+  units:n=>`${n} units`,from:"from",all:"All",listOf:d=>`Developer list of ${d}`,
+  thNo:"Unit",thType:"Type",thArea:"Area",thPrice:"Price",floorPlan:"Floor plan",payments:"Payments",cashL:"on 100% payment",
+  uFine:"Prices include the 4% discount on the 40/60 plan. Excludes the DLD fee (4%) and registration. Confirm availability before booking.",
+  pK:"Payment",pH:"40/60 until handover.",pP:"Pay 40% during construction and 60% when you get the keys. No bank, no interest.",
+  s1:"Within 30 days of booking",s2:"Within 90 days",s3:"At 40% construction",s4:"On handover, Q2 2029",calcL:"Calculate for unit",
+  o1:"Off the developer price on the 40/60 plan",o2:"Discount on 100% payment",o3:"year UAE Golden Visa with property from AED 2M",
+  lK:"Location",lH:"At the heart of New Dubai.",lP:"Al Sufouh is a quiet neighbourhood between Palm Jumeirah and Dubai Marina, next to Sheikh Zayed Road.",map:"Open in Maps",min:"min",
+  mK:"Your contact",mH:"Sam Jabr.",mRole:"Senior Sales Manager · IMAN Developers",mP:"I'll send floor plans, payment schedules and unit videos, run an online viewing and help you book remotely. No need to fly to Dubai.",phone:"Phone",
+  cK:"Next step",cH:"Get your shortlist.",cP:"Leave your details and within one working day I'll send prices, floor plans and payment schedules for the available units.",cOr:"Or message me now:",waCta:"Message on WhatsApp",
+  ftK:"113 Residences · IMAN Developers",ftH:"Your move to Dubai starts with a conversation.",ftC:"Request a consultation",
+  fine:"Sam Jabr · Senior Sales Manager, IMAN Developers, Dubai, UAE · +971 50 175 2771. Prices, availability and terms may change; renderings are representative. This is not a public offer.",
+  privacy:"Privacy policy",close:"Close",callS:"Call",
+  fName:"Name *",fPhone:"Phone (WhatsApp / Telegram) *",fType:"Layout",any:"Any",fBudget:"Budget",budgets:["up to $600,000","$600,000 – $800,000","$800,000 – $1,200,000","over $1,200,000"],
+  fPref:"Contact me by",callPref:"Call",fAgree:"I agree to the processing of my personal data under the",fAgreeL:"privacy policy",
+  fSend:"Get my shortlist",fSending:"Sending…",fOk:"Thank you! Your request was sent and I'll be in touch shortly.",fErr:"Couldn't send. WhatsApp will open with your request; just tap Send.",fNeed:"Please enter your name and phone.",
+  rows:["Booking, 20%","Within 90 days, 10%","At 40% construction, 10%","On handover, 60%"],payNote:"Excludes the DLD fee (4%) and registration.",unit:"Unit",
+  msg:{general:"Hi Sam, I'm interested in 113 Residences. Could you send me prices and floor plans?",unit:u=>`Hi Sam, I'm interested in unit ${u} at 113 Residences. Is it still available?`,
+   lead:(n,ph,t,b,c)=>`Hi Sam, enquiry from the website (113 Residences).\nName: ${n}\nPhone: ${ph}\nLayout: ${t}\nBudget: ${b}\nContact: ${c}`}},
+ ar:{stripB:"إطلاق جديد من إيمان للتطوير العقاري",stripT:"الأسعار والتوفر تتحدّث يومياً",nAbout:"المشروع",nUnits:"الوحدات",nPay:"الدفع",nLoc:"الموقع",nContact:"تواصل",ctaTop:"اطلب الأسعار",
+  heroK:"113 Residences · الصفوح، دبي",heroH:"عنوانك جنب الحديقة والبحر.",heroP:"113 وحدة سكنية من إيمان مقابل حديقة الصفوح: مساحات واسعة، مسبح على السطح، وخطة دفع 40/60 لحد التسليم بـ 2029.",
+  heroC1:"شوف الوحدات",heroC2:"اطلب المخططات والأسعار",
+  stats:(f,n)=>[[f,"الأسعار من"],["40/60","خطة الدفع"],["−14%","عند الدفع الكامل"],[n,"وحدة متاحة"]],
+  aK:"المشروع",aH:"عمارة مصمّمة للحياة.",aP:"واجهة انسيابية، تراسات كبيرة وتشطيبات راقية. مبنى قبو + أرضي + 9 طوابق مقابل حديقة الصفوح، دقائق عن البحر ونخلة جميرا ودبي مارينا.",
+  cap:"تصوّر 113 Residences",aBig:"113 وحدة من غرفة لـ 3 غرف نوم، مع مكتب أو غرفة خادمة، وشرفات وتراسات. التسليم بالربع الثاني 2029.",
+  f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون ومسبح لا متناهٍ على السطح",f3:"نادي رياضي وغرفة يوغا",f4:"مقابل حديقة الصفوح، 3 دقائق عن البحر",
+  uK:"الوحدات",uH:"اختار المخطط اللي بيناسبك.",uP:(n,d)=>`${n} وحدة متاحة حسب قائمة ${d}. اضغط على النوع لتفلتر القائمة، أو افتح المخطط وجدول الدفعات.`,
+  units:n=>`${n} وحدة`,from:"من",all:"الكل",listOf:d=>`قائمة المطوّر بتاريخ ${d}`,
+  thNo:"الوحدة",thType:"النوع",thArea:"المساحة",thPrice:"السعر",floorPlan:"المخطط",payments:"الدفعات",cashL:"عند الدفع الكامل",
+  uFine:"الأسعار شاملة خصم 4% على خطة 40/60. لا تشمل رسوم دائرة الأراضي (4%) والتسجيل. تأكد من التوفر قبل الحجز.",
+  pK:"الدفع",pH:"40/60 لحد التسليم.",pP:"بتدفع 40% خلال البناء و60% لما تستلم المفتاح. بدون بنك وبدون فوائد.",
+  s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً",s3:"عند إنجاز 40%",s4:"عند التسليم، Q2 2029",calcL:"احسب لوحدة",
+  o1:"خصم من سعر المطوّر على خطة 40/60",o2:"خصم عند الدفع الكامل",o3:"سنين إقامة ذهبية بالإمارات لعقار من 2 مليون درهم",
+  lK:"الموقع",lH:"بقلب دبي الجديدة.",lP:"الصفوح منطقة هادية بين نخلة جميرا ودبي مارينا، جنب شارع الشيخ زايد.",map:"افتح على الخريطة",min:"د",
+  mK:"جهة اتصالك",mH:"سام جبر.",mRole:"مدير مبيعات أول · إيمان للتطوير العقاري",mP:"ببعتلك المخططات وجداول الدفع وفيديو الوحدة، وبعملك معاينة أونلاين وبساعدك تحجز عن بُعد، ما في داعي تسافر لدبي.",phone:"هاتف",
+  cK:"الخطوة الجاية",cH:"احصل على قائمة الوحدات.",cP:"اترك بياناتك وخلال يوم عمل ببعتلك الأسعار والمخططات وجداول الدفع للوحدات المتاحة.",cOr:"أو راسلني هلق:",waCta:"راسلني على واتساب",
+  ftK:"113 Residences · إيمان للتطوير العقاري",ftH:"طريقك لدبي بيبلّش بحديث.",ftC:"اطلب استشارة",
+  fine:"سام جبر · مدير مبيعات أول، إيمان للتطوير العقاري، دبي، الإمارات · ‎+971 50 175 2771. الأسعار والتوفر والشروط قابلة للتغيير، والصور للتوضيح. هذا ليس عرضاً ملزماً.",
+  privacy:"سياسة الخصوصية",close:"إغلاق",callS:"اتصال",
+  fName:"الاسم *",fPhone:"الهاتف (واتساب / تيليغرام) *",fType:"المخطط",any:"أي مخطط",fBudget:"الميزانية",budgets:["لحد 600,000$","600,000$ – 800,000$","800,000$ – 1,200,000$","أكثر من 1,200,000$"],
+  fPref:"كيف نتواصل",callPref:"اتصال",fAgree:"أوافق على معالجة بياناتي الشخصية حسب",fAgreeL:"سياسة الخصوصية",
+  fSend:"ابعتلي القائمة",fSending:"عم يتم الإرسال…",fOk:"شكراً! وصل طلبك وبتواصل معك قريباً.",fErr:"ما زبط الإرسال. رح ينفتح واتساب وفيه طلبك، بس اضغط إرسال.",fNeed:"اكتب اسمك ورقم هاتفك.",
+  rows:["الحجز، 20%","خلال 90 يوماً، 10%","عند إنجاز 40%، 10%","عند التسليم، 60%"],payNote:"لا يشمل رسوم دائرة الأراضي (4%) والتسجيل.",unit:"وحدة",
+  msg:{general:"مرحبا سام، مهتم بمشروع 113 Residences. ممكن تبعتلي الأسعار والمخططات؟",unit:u=>`مرحبا سام، مهتم بالوحدة ${u} في 113 Residences. لسا متاحة؟`,
+   lead:(n,ph,t,b,c)=>`مرحبا سام، طلب من الموقع (113 Residences).\nالاسم: ${n}\nالهاتف: ${ph}\nالمخطط: ${t}\nالميزانية: ${b}\nالتواصل: ${c}`}}
 };
-const TYPE={ru:{"studio":"Студия","one bedroom":"1 спальня","one bedroom with study":"1 спальня + кабинет","two bedroom":"2 спальни","two bedroom with study":"2 спальни + кабинет","two bedroom with maid":"2 спальни + комната для персонала","three bedroom with study":"3 спальни + кабинет","three bedroom with maid":"3 спальни + комната для персонала","retail":"Коммерческое помещение"},
- en:{"studio":"Studio","one bedroom":"1 Bedroom","one bedroom with study":"1 Bedroom + Study","two bedroom":"2 Bedrooms","two bedroom with study":"2 Bedrooms + Study","two bedroom with maid":"2 Bedrooms + Maid's","three bedroom with study":"3 Bedrooms + Study","three bedroom with maid":"3 Bedrooms + Maid's","retail":"Retail"},
- ar:{"studio":"استوديو","one bedroom":"غرفة نوم","one bedroom with study":"غرفة نوم + مكتب","two bedroom":"غرفتا نوم","two bedroom with study":"غرفتا نوم + مكتب","two bedroom with maid":"غرفتا نوم + غرفة خادمة","three bedroom with study":"3 غرف نوم + مكتب","three bedroom with maid":"3 غرف نوم + غرفة خادمة","retail":"وحدة تجارية"}};
-const AREA={ru:{"Al Sufouh":"Аль-Суфух","Jumeirah Village Circle":"Jumeirah Village Circle (JVC)","Motor City":"Motor City","Arjan":"Арджан","Dubai Hills Estate":"Dubai Hills Estate"},
- ar:{"Al Sufouh":"الصفوح","Jumeirah Village Circle":"قرية جميرا الدائرية","Motor City":"موتور سيتي","Arjan":"أرجان","Dubai Hills Estate":"دبي هيلز إستيت"}};
-const VIEW={ru:{"community view":"вид на квартал","pool view":"вид на бассейн","park view":"вид на парк","pool/community view":"вид на бассейн и квартал","pool/park view":"вид на бассейн и парк","roadside view":"вид на улицу","marina skyline":"вид на Дубай Марину","community/partial park view":"вид на квартал и парк"},
- ar:{"community view":"إطلالة على المجتمع","pool view":"إطلالة على المسبح","park view":"إطلالة على الحديقة","pool/community view":"إطلالة على المسبح والمجتمع","pool/park view":"إطلالة على المسبح والحديقة","roadside view":"على الشارع","marina skyline":"إطلالة على أفق المارينا","community/partial park view":"إطلالة على المجتمع وجزء من الحديقة"}};
-// Indicative rates per 1 AED. AED is pegged to USD; the rest are approximate.
-const CUR=[["USD",1/3.6725],["AED",1],["RUB",22.4],["EUR",0.24],["KZT",137],["GBP",0.206]];
-
+const TYPE={ru:{"one bedroom with study":"1 спальня + кабинет","two bedroom":"2 спальни","two bedroom with study":"2 спальни + кабинет","two bedroom with maid":"2 спальни + комната персонала","three bedroom with study":"3 спальни + кабинет","three bedroom with maid":"3 спальни + комната персонала"},
+ en:{"one bedroom with study":"1 Bedroom + Study","two bedroom":"2 Bedrooms","two bedroom with study":"2 Bedrooms + Study","two bedroom with maid":"2 Bedrooms + Maid's","three bedroom with study":"3 Bedrooms + Study","three bedroom with maid":"3 Bedrooms + Maid's"},
+ ar:{"one bedroom with study":"غرفة نوم + مكتب","two bedroom":"غرفتا نوم","two bedroom with study":"غرفتا نوم + مكتب","two bedroom with maid":"غرفتا نوم + غرفة خادمة","three bedroom with study":"3 غرف نوم + مكتب","three bedroom with maid":"3 غرف نوم + غرفة خادمة"}};
+const TYPE_ORDER=Object.keys(TYPE.en);
+const VIEW={ru:{"community view":"вид на квартал","pool view":"вид на бассейн","park view":"вид на парк","pool/community view":"вид на бассейн и квартал","pool/park view":"вид на бассейн и парк","community/partial park view":"вид на квартал и парк"},
+ ar:{"community view":"إطلالة على المجتمع","pool view":"إطلالة على المسبح","park view":"إطلالة على الحديقة","pool/community view":"إطلالة على المسبح والمجتمع","pool/park view":"إطلالة على المسبح والحديقة","community/partial park view":"إطلالة على المجتمع وجزء من الحديقة"}};
+const DRIVE=[["Парк Аль-Суфух","Al Sufouh Community Park","حديقة الصفوح",1],["Шоссе Шейха Зайда","Sheikh Zayed Road","شارع الشيخ زايد",1],["Пляж Аль-Суфух","Al Sufouh Beach","شاطئ الصفوح",3],["Emirates Golf Club","Emirates Golf Club","نادي الإمارات للغولف",8],["Palm Jumeirah","Palm Jumeirah","نخلة جميرا",8],["Mall of the Emirates","Mall of the Emirates","مول الإمارات",10],["Dubai Marina","Dubai Marina","دبي مارينا",10],["Burj Al Arab","Burj Al Arab","برج العرب",12],["Dubai Mall и Downtown","Dubai Mall & Downtown","دبي مول وداون تاون",18],["Аэропорт DXB","Dubai Int'l Airport (DXB)","مطار دبي الدولي",24]];
+const CUR=[["USD",1/3.6725],["AED",1],["RUB",22.4],["EUR",0.24],["KZT",137]];
 function plural(n,f){const a=n%100,b=n%10;return a>10&&a<20?f[2]:b===1?f[0]:b>1&&b<5?f[1]:f[2]}
-const PROJ=INV.projects;
-const byId=Object.fromEntries(PROJ.map(p=>[p.id,p]));
-const UNITS=PROJ.flatMap(p=>p.units.map(u=>{const d=(u.discount??p.discount)||0,c=(u.cash??p.cash)||0;
-  return {...u,pid:p.id,pname:p.name,key:p.id+"|"+u.no,disc:d,cash:c,p:Math.round(u.op*(1-d)),cashP:c?Math.round(u.op*(1-c)):null}}));
-const st={lang:"ru",cur:"USD"};
-try{const s=JSON.parse(localStorage.getItem("sj-landing")||"{}");st.lang=T[s.lang]?s.lang:st.lang;st.cur=s.cur||st.cur}catch(e){}
+const DISC=P.discount||0,CASH=P.cash||0;
+const UNITS=P.units.map(u=>({...u,t:u.type.toLowerCase(),p:Math.round(u.op*(1-DISC)),c:Math.round(u.op*(1-CASH))}));
+const st={lang:"ru",cur:"USD",f:"all"};
+try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(T[s.lang])st.lang=s.lang;if(s.cur)st.cur=s.cur}catch(e){}
 try{const q=new URLSearchParams(location.search).get("lang");if(T[q])st.lang=q}catch(e){}
-const save=()=>{try{localStorage.setItem("sj-landing",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
+const save=()=>{try{localStorage.setItem("sj-113",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const L=()=>T[st.lang],t=k=>L()[k];
 const fmt=n=>Math.round(n).toLocaleString("en-US");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const money=aed=>{const [c,r]=CUR.find(x=>x[0]===st.cur);return (c==="USD"?"$":c+" ")+fmt(aed*r)};
-const waHref=txt=>"https://wa.me/"+WA+"?text="+encodeURIComponent(txt);
-const tgHref=()=>CFG.telegram?"https://t.me/"+CFG.telegram.replace(/^@/,""):"";
-const asset=p=>p?"../"+p:"";
-const typeName=u=>(TYPE[st.lang]||{})[u.type.toLowerCase()]||u.type;
-const areaName=a=>(AREA[st.lang]||{})[a]||a;
+const waHref=x=>"https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(x);
+const typeName=k=>TYPE[st.lang][k]||k;
 const viewName=v=>v?((VIEW[st.lang]||{})[v.toLowerCase()]||v):"";
-function floorName(f){if(!f)return "";if(st.lang==="en")return f;const g=/ground/i.test(f),m=f.match(/\d+/);
-  if(st.lang==="ru")return g?"1-й этаж (G)":m?m[0]+"-й этаж":f;return g?"الطابق الأرضي":m?"الطابق "+m[0]:f}
+function floorName(f){if(!f)return "";if(st.lang==="en")return f;const g=/ground/i.test(f),m=f.match(/\d+/);if(st.lang==="ru")return g?"Первый этаж (G)":m?m[0]+"-й этаж":f;return g?"الطابق الأرضي":m?"الطابق "+m[0]:f}
 const dateName=iso=>new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":st.lang==="ru"?"ru-RU":"en-GB",{day:"numeric",month:"long",year:"numeric"});
-function goal(name,params){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",name,params)}catch(e){}}
-function statusPill(p){return p.status==="new"?`<span class="pill hot">${t("stNew")}</span>`:p.status==="construction"?`<span class="pill">${t("stCon")}</span>`:`<span class="pill">${t("stReady")}</span>`}
+const sqm=a=>fmt(a*0.092903)+" m²";
+function goal(n,p){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",n,p)}catch(e){}}
+const SPLIT=[20,10,10,60];
+const types=()=>TYPE_ORDER.filter(k=>UNITS.some(u=>u.t===k));
 
-function schedule(u){
-  const r=t("rows");
-  if(u.plan==="113")return [[20,r.s1],[10,r.s2],[10,r.s3],[60,r.s4]];
-  if(u.plan==="cash")return [[100,r.full]];
-  const pl=INV.plans[u.plan]||{};
-  if(pl.beforeHandoverPercent!=null)return [[pl.beforeHandoverPercent,r.inst],[pl.handoverPercent,r.hand]];
-  if(pl.nowPercent!=null)return [[pl.nowPercent,r.now],[pl.handoverPercent,r.hand]];
-  return [];
+function renderTypes(){
+  $("#types").innerHTML=types().map(k=>{const us=UNITS.filter(u=>u.t===k),a0=Math.min(...us.map(u=>u.area)),a1=Math.max(...us.map(u=>u.area));
+    return `<button class="type" data-type="${k}" aria-pressed="${st.f===k}"><span class="tm">${L().units(us.length)}</span><h3>${esc(typeName(k))}</h3>
+      <span class="tm num">${a0===a1?sqm(a0):sqm(a0)+" – "+sqm(a1)}</span><span class="tp num">${t("from")} ${money(Math.min(...us.map(u=>u.p)))}</span></button>`}).join("");
+  $("#chips").innerHTML=[["all",t("all"),UNITS.length],...types().map(k=>[k,typeName(k),UNITS.filter(u=>u.t===k).length])]
+    .map(([k,n,c])=>`<button class="chip" data-type="${k}" aria-pressed="${st.f===k}">${esc(n)} <span style="opacity:.55">${c}</span></button>`).join("");
+  const list=UNITS.filter(u=>st.f==="all"||u.t===st.f).sort((a,b)=>a.p-b.p);
+  $("#rows").innerHTML=list.map(u=>`<tr>
+    <td class="no num">${esc(u.no)}</td>
+    <td><div>${esc(typeName(u.t))}</div><div class="tm">${esc([floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · "))}</div></td>
+    <td class="num">${sqm(u.area)}<div class="tm">${fmt(u.area)} sq ft</div></td>
+    <td class="pr num">${money(u.p)}<small>${money(u.c)} ${t("cashL")}</small></td>
+    <td class="c-acts"><div class="acts">${u.planImg?`<button data-plan="${esc(u.no)}">${t("floorPlan")}</button>`:""}<button data-pay="${esc(u.no)}">${t("payments")}</button><a data-ch="wa" href="${waHref(L().msg.unit(u.no))}" target="_blank" rel="noopener">WhatsApp</a></div></td></tr>`).join("");
 }
-const planTag=u=>(t("plan")[u.plan]||"")+(u.disc&&u.plan!=="113"?" · "+L().offN(Math.round(u.disc*100)):"");
-
-function formHTML(id){
-  const opts=SHOWN.map(i=>`<option>${esc(byId[i].name)}</option>`).join("");
-  const pref=[["wa","WhatsApp"],["tg","Telegram"],["call",t("callPref")]].filter(x=>x[0]!=="tg"||CFG.telegram);
-  return `<h3>${t("formH")}</h3><p class="sub">${t("formP")}</p>
-  <form class="f" data-form="${id}" novalidate>
-    <label>${t("fName")}<input name="name" autocomplete="name" required maxlength="80"></label>
-    <label>${t("fPhone")}<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" placeholder="+7 900 000-00-00" dir="ltr"></label>
+function renderCalc(){
+  const sel=$("#calcSel"),cur=sel.value||UNITS.slice().sort((a,b)=>a.p-b.p)[0].no;
+  sel.innerHTML=UNITS.slice().sort((a,b)=>a.p-b.p).map(u=>`<option value="${esc(u.no)}" ${u.no===cur?"selected":""}>${esc(u.no)} · ${esc(typeName(u.t))} · ${money(u.p)}</option>`).join("");
+  const u=UNITS.find(x=>x.no===cur);
+  $("#calc").innerHTML=SPLIT.map((pc,i)=>`<div><span>${t("rows")[i]}</span><b>${money(u.p*pc/100)}</b></div>`).join("");
+}
+function formHTML(){
+  const pref=[["WhatsApp","WhatsApp"],["Telegram","Telegram"],[t("callPref"),t("callPref")]].filter(x=>x[0]!=="Telegram"||CFG.telegram);
+  return `<form class="f" novalidate>
+    <label>${t("fName")}<input name="name" autocomplete="name" maxlength="80"></label>
+    <label>${t("fPhone")}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="+7 900 000-00-00" dir="ltr"></label>
+    <label>${t("fType")}<select name="type"><option>${t("any")}</option>${types().map(k=>`<option>${esc(typeName(k))}</option>`).join("")}</select></label>
     <label>${t("fBudget")}<select name="budget">${t("budgets").map(b=>`<option>${esc(b)}</option>`).join("")}</select></label>
-    <label>${t("fProj")}<select name="project"><option>${t("any")}</option>${opts}</select></label>
-    <div><div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px">${t("fPref")}</div>
-      <div class="pref">${pref.map((x,i)=>`<label><input type="radio" name="contact" value="${x[1]}" ${i?"":"checked"}>${x[1]}</label>`).join("")}</div></div>
+    <label class="full">${t("fPref")}<select name="contact">${pref.map(p=>`<option>${esc(p[1])}</option>`).join("")}</select></label>
     <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <label class="agree"><input type="checkbox" name="agree" required checked><span>${t("fAgree")} <a href="privacy.html" target="_blank">${t("fAgreeL")}</a></span></label>
-    <button class="btn btn-cu" type="submit">${t("fSend")}</button>
-    <div class="msg" role="status" hidden></div>
-  </form>`;
+    <label class="agree full"><input type="checkbox" name="agree" checked><span>${t("fAgree")} <a href="privacy.html" target="_blank">${t("fAgreeL")}</a></span></label>
+    <button class="btn btn-dark full" type="submit">${t("fSend")}</button>
+    <div class="msg full" role="status" hidden></div></form>`;
 }
-
 async function submitForm(f){
-  const m=f.querySelector(".msg"),b=f.querySelector("button[type=submit]");
-  const d=Object.fromEntries(new FormData(f));
-  const show=(cls,txt)=>{m.className="msg "+cls;m.textContent=txt;m.hidden=false};
+  const d=Object.fromEntries(new FormData(f)),m=f.querySelector(".msg"),b=f.querySelector("[type=submit]");
+  const show=(c,x)=>{m.className="msg full "+c;m.textContent=x;m.hidden=false};
   if(d._honey)return;
-  if(!d.name.trim()||d.phone.replace(/\D/g,"").length<6){show("err",t("fNeed"));return}
+  if(!(d.name||"").trim()||(d.phone||"").replace(/\D/g,"").length<6){show("err",t("fNeed"));return}
   if(!f.agree.checked){f.agree.focus();return}
-  const text=L().msg.lead(d.name.trim(),d.phone.trim(),d.budget,d.project)+"\n"+d.contact;
-  b.disabled=true;b.textContent=t("fSending");
-  let ok=false;
-  if(CFG.email){
-    try{
-      const utm=new URLSearchParams(location.search);
-      const r=await fetch("https://formsubmit.co/ajax/"+encodeURIComponent(CFG.email),{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
-        body:JSON.stringify({_subject:"Yandex lead: "+d.name.trim(),Name:d.name.trim(),Phone:d.phone.trim(),Budget:d.budget,Project:d.project,Contact:d.contact,Language:st.lang,
-          Source:utm.get("utm_source")||"",Campaign:utm.get("utm_campaign")||"",Keyword:utm.get("utm_term")||"",Page:location.href,_template:"table",_captcha:"false"})});
-      const j=await r.json().catch(()=>({}));ok=r.ok&&String(j.success)!=="false";
-    }catch(e){ok=false}
-  }
+  const text=L().msg.lead(d.name.trim(),d.phone.trim(),d.type,d.budget,d.contact);
+  b.disabled=true;b.textContent=t("fSending");let ok=false;
+  if(CFG.email){try{const q=new URLSearchParams(location.search);
+    const r=await fetch("https://formsubmit.co/ajax/"+encodeURIComponent(CFG.email),{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({_subject:"113 Residences lead: "+d.name.trim(),Name:d.name.trim(),Phone:d.phone.trim(),Layout:d.type,Budget:d.budget,Contact:d.contact,Language:st.lang,
+        Source:q.get("utm_source")||"",Campaign:q.get("utm_campaign")||"",Keyword:q.get("utm_term")||"",Page:location.href,_template:"table",_captcha:"false"})});
+    const j=await r.json().catch(()=>({}));ok=r.ok&&String(j.success)!=="false"}catch(e){}}
   b.disabled=false;b.textContent=t("fSend");
-  if(ok){goal("lead_form",{project:d.project});show("ok",t("fOk"));f.reset();f.agree.checked=true;return}
-  goal("lead_wa_fallback");show("err",t("fErr"));
-  window.open(waHref(text),"_blank","noopener");
+  if(ok){goal("lead_form");show("ok",t("fOk"));f.reset();f.agree.checked=true;return}
+  goal("lead_wa_fallback");show("err",t("fErr"));window.open(waHref(text),"_blank","noopener");
 }
-
-function renderProjects(){
-  $("#projs").innerHTML=SHOWN.map(id=>{
-    const p=byId[id],us=UNITS.filter(u=>u.pid===id),min=Math.min(...us.map(u=>u.p));
-    const plans=[...new Set(us.map(u=>u.plan))].map(k=>t("plan")[k]).filter(Boolean);
-    const disc=p.discount?L().offN(Math.round(p.discount*100)):"";
-    const cash=p.cash?`−${Math.round(p.cash*100)}% ${t("t").o4}`:"";
-    const meta=[areaName(p.area),p.handover&&p.handover!=="To be confirmed"?`${t("handover")} ${p.handover}`:""].filter(Boolean).join(" · ");
-    const img=id==="113-residences"?"../img/113-residences.jpg":asset(p.image);
-    return `<article class="pc"><div class="pi"><img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy">${statusPill(p)}</div>
-      <div class="pb"><h3>${esc(p.name)}</h3><span class="meta">${esc(meta)}</span>
-      <div class="tiles">${[...plans,disc,cash].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join("")}</div>
-      <div class="price"><div><small>${t("from")}</small><b class="num">${money(min)}</b></div><span class="meta">${L().nUnits(us.length)}</span></div>
-      <div class="acts"><button class="btn btn-ghost" data-units="${id}">${t("units")}</button><a class="btn btn-cu" data-ch="wa" href="${waHref(L().msg.proj(p.name))}" target="_blank" rel="noopener">${t("ask")}</a></div></div></article>`}).join("");
-  $("#others").innerHTML=PROJ.filter(p=>!SHOWN.includes(p.id)).map(p=>`<span>${esc(p.name)} <em>· ${esc(areaName(p.area))}${p.handover&&p.handover!=="To be confirmed"?" · "+esc(p.handover):""}</em></span>`).join("");
-}
-
-function unitsDlg(id){
-  const p=byId[id],us=UNITS.filter(u=>u.pid===id).sort((a,b)=>a.p-b.p);
-  openDlg(L().unitsOf(p.name),`<p class="meta">${esc(areaName(p.area))}${p.listDate?" · "+dateName(p.listDate):""}</p><div class="units">${us.map(u=>{
-    const meta=[floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · ");
-    return `<article class="unit"><div class="u-top"><span class="u-no num">${esc(u.no)}</span><span class="pill">${esc(planTag(u))}</span></div>
-      <span class="u-type">${esc(typeName(u))}</span>${meta?`<span class="u-meta">${esc(meta)}</span>`:""}
-      <span class="u-meta num">${fmt(u.area*0.092903)} m² · ${fmt(u.area)} ${t("sqft")}</span>
-      <span class="u-price num">${money(u.p)}</span>${u.disc?`<span class="u-op num">${t("op")} <s>${money(u.op)}</s></span>`:""}
-      ${u.cashP?`<span class="u-cash num">${L().cashLine(Math.round(u.cash*100),money(u.cashP))}</span>`:""}
-      <div class="u-acts">${u.planImg?`<button data-plan="${esc(u.key)}">${t("floorPlan")}</button>`:""}<button data-pay="${esc(u.key)}">${t("payments")}</button>
-      <a class="go" data-ch="wa" href="${waHref(L().msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">WhatsApp</a></div></article>`}).join("")}</div>
-    <p class="dnote">${t("payNote")}</p>`);
-  goal("open_units",{project:p.name});
-}
-function payDlg(u){
-  openDlg(`${u.pname} · ${t("unit")} ${u.no}`,`<span class="pill">${esc(planTag(u))}</span>
-    <div class="u-price num" style="font-size:30px">${money(u.p)}</div>${u.disc?`<span class="u-op num">${t("op")} <s>${money(u.op)}</s></span>`:""}
-    <div class="sched num">${schedule(u).map(([pc,l])=>`<div><span>${pc}% · ${esc(l)}</span><b>${money(u.p*pc/100)}</b></div>`).join("")}</div>
-    ${u.cashP?`<p class="u-cash num" style="margin-top:10px">${L().cashLine(Math.round(u.cash*100),money(u.cashP))}</p>`:""}
-    <p class="dnote">${t("payNote")}</p>
-    <div class="u-acts" style="max-width:260px"><a class="go" data-ch="wa" href="${waHref(L().msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">WhatsApp</a></div>`);
-}
-function openDlg(title,body){$("#dlg-title").textContent=title;$("#dlg-body").innerHTML=body;$("#dlg-body").scrollTop=0;const d=$("#dlg");if(!d.open){d.showModal?d.showModal():d.setAttribute("open","")}}
+function openDlg(title,body){$("#dlg-t").textContent=title;$("#dlg-b").innerHTML=body;$("#dlg-b").scrollTop=0;const d=$("#dlg");if(!d.open)d.showModal?d.showModal():d.setAttribute("open","")}
 
 function render(forms=true){
-  const ar=st.lang==="ar";
-  document.documentElement.lang=st.lang;document.documentElement.dir=ar?"rtl":"ltr";
+  const ar=st.lang==="ar";document.documentElement.lang=st.lang;document.documentElement.dir=ar?"rtl":"ltr";
   $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===st.lang));
   $$("[data-i]").forEach(el=>{const v=t(el.dataset.i);if(typeof v==="string")el.textContent=v});
-  document.title=t("heroH")+" · Sam Jabr";
+  document.title="113 Residences · "+(ar?"دبي":st.lang==="ru"?"Дубай":"Dubai")+" · Sam Jabr";
   $("#cur").innerHTML=CUR.map(([c])=>`<option ${c===st.cur?"selected":""}>${c}</option>`).join("");
-  $("#f-from").textContent=money(Math.min(...UNITS.filter(u=>SHOWN.includes(u.pid)).map(u=>u.p)));
-  $("#p-eye").textContent=L().pEye(UNITS.length,dateName(INV.inventoryDate));
-  renderProjects();
-  if(forms){$("#form1").innerHTML=formHTML(1);$("#form2").innerHTML=formHTML(2)}
+  const min=Math.min(...UNITS.map(u=>u.p));
+  $("#stats").innerHTML=L().stats(money(min),UNITS.length).map(([b,s])=>`<div><b class="num">${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
+  $("#uP").textContent=L().uP(UNITS.length,dateName(P.listDate||INV.inventoryDate));
+  $("#listDate").textContent=L().listOf(dateName(P.listDate||INV.inventoryDate));
+  $("#drive").innerHTML=DRIVE.map(d=>`<li><span>${esc(d[st.lang==="ru"?0:st.lang==="en"?1:2])}</span><b class="num">${d[3]} ${t("min")}</b></li>`).join("");
+  renderTypes();renderCalc();
+  if(forms)$("#formbox").innerHTML=formHTML();
   $$("a[data-ch=wa][data-msg]").forEach(a=>a.href=waHref(L().msg[a.dataset.msg]));
-  $$("a[data-ch=tg]").forEach(a=>{a.hidden=!CFG.telegram;a.href=tgHref()});
+  $$("a[data-ch=tg]").forEach(a=>{a.hidden=!CFG.telegram;a.href=CFG.telegram?"https://t.me/"+CFG.telegram.replace(/^@/,""):"#"});
   $$("a[data-ch=mail]").forEach(a=>{a.hidden=!CFG.email;a.href="mailto:"+CFG.email});
-  $("#tg-name").textContent=CFG.telegram?"@"+CFG.telegram.replace(/^@/,""):"";
-  $("#mail-name").textContent=CFG.email;
+  $("#tg-name").textContent=CFG.telegram?"@"+CFG.telegram.replace(/^@/,""):"";$("#mail-name").textContent=CFG.email;
 }
-
 document.addEventListener("click",e=>{
   const lg=e.target.closest("[data-lang]");if(lg){st.lang=lg.dataset.lang;save();render();return}
   const ch=e.target.closest("a[data-ch],a[data-goal]");if(ch)goal(ch.dataset.goal||{wa:"click_whatsapp",tg:"click_telegram",mail:"click_email"}[ch.dataset.ch]);
-  const un=e.target.closest("[data-units]");if(un){unitsDlg(un.dataset.units);return}
-  const pl=e.target.closest("[data-plan]");if(pl){const u=UNITS.find(x=>x.key===pl.dataset.plan);
-    openDlg(`${u.pname} · ${t("unit")} ${u.no} · ${typeName(u)}`,`<img class="plan-img" src="${esc(asset(u.planImg))}" alt="${esc(t("floorPlan"))} ${esc(u.no)}"><p class="dnote"><button class="btn btn-ghost" style="padding:6px 14px;font-size:13px" data-units="${u.pid}">← ${t("units")}</button></p>`);return}
-  const pa=e.target.closest("[data-pay]");if(pa){payDlg(UNITS.find(x=>x.key===pa.dataset.pay));return}
+  const ty=e.target.closest("[data-type]");if(ty){st.f=st.f===ty.dataset.type&&ty.classList.contains("type")?"all":ty.dataset.type;renderTypes();if(ty.classList.contains("type"))$(".tools").scrollIntoView({behavior:"smooth",block:"start"});return}
+  const pl=e.target.closest("[data-plan]");if(pl){const u=UNITS.find(x=>x.no===pl.dataset.plan);goal("open_plan");
+    openDlg(`113 Residences · ${t("unit")} ${u.no} · ${typeName(u.t)}`,`<img src="../${esc(u.planImg)}" alt=""><p class="fine">${sqm(u.area)} · ${fmt(u.area)} sq ft${u.balcony?` (${fmt(u.suite)} + ${fmt(u.balcony)})`:""}</p>`);return}
+  const pa=e.target.closest("[data-pay]");if(pa){const u=UNITS.find(x=>x.no===pa.dataset.pay);
+    openDlg(`113 Residences · ${t("unit")} ${u.no}`,`<div class="tm">${esc(typeName(u.t))} · 40/60</div><div class="tot num">${money(u.p)}</div>
+      <div class="rows num">${SPLIT.map((pc,i)=>`<div><span>${t("rows")[i]}</span><b>${money(u.p*pc/100)}</b></div>`).join("")}<div><span>${t("o2")}</span><b>${money(u.c)}</b></div></div>
+      <p class="fine">${t("payNote")}</p><p style="margin-top:16px"><a class="btn btn-gold" data-ch="wa" href="${waHref(L().msg.unit(u.no))}" target="_blank" rel="noopener">WhatsApp</a></p>`);return}
 });
-document.addEventListener("submit",e=>{const f=e.target.closest("[data-form]");if(f){e.preventDefault();submitForm(f)}});
-$("#dlg-close").onclick=()=>{const d=$("#dlg");d.close?d.close():d.removeAttribute("open")};
+document.addEventListener("submit",e=>{if(e.target.matches("form.f")){e.preventDefault();submitForm(e.target)}});
+$("#calcSel").onchange=renderCalc;
+$("#dlg-x").onclick=()=>{const d=$("#dlg");d.close?d.close():d.removeAttribute("open")};
 $("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
 $("#cur").onchange=e=>{st.cur=e.target.value;save();render(false)};
 render();

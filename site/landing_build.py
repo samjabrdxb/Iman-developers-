@@ -1,4 +1,4 @@
-"""Build the Yandex Direct landing page from inventory.json.
+"""Build the Yandex Direct landing page for 113 Residences from inventory.json.
 
 Writes site/ru/index.html (the landing page) and site/ru/privacy.html (privacy
 policy, required by Yandex Direct for pages that collect personal data).
@@ -38,7 +38,7 @@ ym({mid},"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webviso
 <noscript><div><img src="https://mc.yandex.ru/watch/{mid}" style="position:absolute;left:-9999px" alt=""></div></noscript>
 """
 
-desc = "Квартиры в Дубае от застройщика IMAN Developers: актуальные цены, рассрочка 40/60, скидки при 100% оплате. Консультация в WhatsApp и Telegram."
+desc = "113 Residences от IMAN Developers в Аль-Суфух, Дубай: квартиры у парка и пляжа, рассрочка 40/60, скидка 14% при 100% оплате. Цены и планировки в WhatsApp."
 head = f"""<!doctype html>
 <html lang="ru">
 <head>
@@ -46,7 +46,7 @@ head = f"""<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Квартиры в Дубае от IMAN Developers">
+<meta property="og:title" content="113 Residences · Дубай · IMAN Developers">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{SITE_URL}">
 <meta property="og:image" content="{SITE_URL}../img/113-residences.jpg">
