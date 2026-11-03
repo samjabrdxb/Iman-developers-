@@ -12,7 +12,7 @@ import json, os
 CONFIG = {
     "whatsapp": "971501752771",   # WhatsApp number, digits only
     "telegram": "",               # Telegram username without @ (empty hides the Telegram buttons)
-    "email": "",                  # Email that receives the form leads (empty: the form opens WhatsApp instead)
+    "email": "Sami@imandevelopers.com",  # Email that receives the form leads (empty: the form opens WhatsApp instead)
     "metrika": 0,                 # Yandex Metrica counter ID (0: no counter)
 }
 SITE_URL = "https://samjabrdxb.github.io/Iman-developers-/ru/"
