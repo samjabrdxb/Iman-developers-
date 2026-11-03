@@ -1,4 +1,4 @@
-"""Yandex Direct ad images in Russian, built from site/inventory.json.
+"""Yandex Direct ad images in Russian for 113 Residences, built from site/inventory.json.
 
 Five designs, each in the three shapes Yandex Direct takes:
   1x1 1080x1080 (standard), 16x9 1920x1080 (wide), 3x4 1080x1440 (vertical).
@@ -27,30 +27,33 @@ def from_usd(ids):
     return "$" + f"{int(lo * USD) // 1000 * 1000:,}".replace(",", " ")
 
 
-LIVE = [i for i in ["113-residences", "sierra-by-iman", "15-cascade", "one-park-square", "one-sky-park"] if byId[i]["units"]]
+R = byId["113-residences"]
+FROM = from_usd(["113-residences"])
+CASH = "$" + f"{int(min(u['op'] for u in R['units']) * (1 - R['cash']) * USD) // 1000 * 1000:,}".replace(",", " ")
 img = lambda rel: "file://" + os.path.join(SITE, rel)
+EB = "113 Residences · Аль-Суфух, Дубай"
 
 ADS = [
-    dict(slug="01-dubai-general", photo=img("img/113-residences.jpg"), pos="50% 60%",
-         eb="Дубай · от застройщика", h="Квартиры в Дубае<br>от <span>IMAN Developers</span>",
-         chips=["Рассрочка 40/60", "0% налога на доход", "Покупка удалённо"],
-         price=("цена от", from_usd(LIVE)), cta="Получить подборку"),
-    dict(slug="02-113-residences", photo=img("img/113-residences.jpg"), pos="50% 40%",
-         eb="113 Residences · Аль-Суфух", h="Новый проект<br>у <span>парка и пляжа</span>",
-         chips=["Рассрочка 40/60", "−14% при 100% оплате", "Сдача Q2 2029"],
-         price=("цена от", from_usd(["113-residences"])), cta="Узнать цены"),
-    dict(slug="03-one-park-square", photo=img(byId["one-park-square"]["image"]), pos="50% 50%",
-         eb="One Park Square · JVC", h="Квартиры в Дубае<br><span>50% до сдачи</span>",
-         chips=["Студии и 1–2 спальни", "Сдача Q2 2028", "Рассрочка 50/50"],
-         price=("цена от", from_usd(["one-park-square"])), cta="Смотреть квартиры"),
-    dict(slug="04-15-cascade", photo=img(byId["15-cascade"]["image"]), pos="50% 50%",
-         eb="15 Cascade · Motor City", h="Студии и 1 спальня<br><span>с рассрочкой</span>",
-         chips=["Рассрочка 60/40", "Сдача Q4 2028", "От застройщика"],
-         price=("цена от", from_usd(["15-cascade"])), cta="Узнать цены"),
-    dict(slug="05-manager", photo=img("assets/one-sky-park-main.webp"), pos="50% 50%", sam=True,
-         eb="Ваш менеджер в Дубае", h="Подберу квартиру<br>под <span>ваш бюджет</span>",
-         chips=["Сэм Джабр · IMAN Developers", "WhatsApp · Telegram", "Онлайн-показ квартир"],
-         price=None, cta="Написать в WhatsApp"),
+    dict(slug="01-113-hero", photo=img("img/113-residences.jpg"), pos="50% 45%",
+         eb=EB, h="Квартиры у парка<br>и <span>пляжа в Дубае</span>",
+         chips=["От застройщика IMAN", "Рассрочка 40/60", "Сдача Q2 2029"],
+         price=("цена от", FROM), cta="Получить цены"),
+    dict(slug="02-113-plan", photo=img("img/113-residences.jpg"), pos="50% 30%",
+         eb=EB, h="Рассрочка <span>40/60</span><br>и скидка 4%",
+         chips=["20% при бронировании", "+10% через 90 дней", "+10% на 40% стройки", "60% при сдаче"],
+         price=("цена от", FROM), cta="Рассчитать платежи"),
+    dict(slug="03-113-cash", photo=img("assets/113-residences-main.webp"), pos="66% 50%",
+         eb=EB, h="Скидка <span>14%</span><br>при 100% оплате",
+         chips=["1–3 спальни", "Смарт-замки Hafele", "Бассейн на крыше"],
+         price=("цена от", CASH), cta="Узнать цены"),
+    dict(slug="04-113-location", photo=img("assets/113-residences-main.webp"), pos="0% 50%",
+         eb=EB, h="1 минута до парка,<br><span>3 минуты до пляжа</span>",
+         chips=["8 мин до Palm Jumeirah", "10 мин до Dubai Marina", "10 мин до Mall of the Emirates"],
+         price=("цена от", FROM), cta="Смотреть квартиры"),
+    dict(slug="05-113-manager", photo=img("img/113-residences.jpg"), pos="50% 45%", sam=True,
+         eb="Ваш менеджер в IMAN Developers", h="Подберу квартиру<br>в <span>113 Residences</span>",
+         chips=["Сэм Джабр", "WhatsApp · Telegram", "Онлайн-показ"],
+         price=("цена от", FROM), cta="Написать в WhatsApp"),
 ]
 SIZES = [("1x1", 1080, 1080), ("16x9", 1920, 1080), ("3x4", 1080, 1440)]
 
@@ -74,7 +77,7 @@ h1 span{color:#e2ad95}
 .cta{background:#c0866d;color:#1b120d;font-weight:800;border-radius:99px;padding:.85em 1.5em;font-size:calc(var(--u)*2.8);white-space:nowrap}
 .sam{position:absolute;z-index:1;object-fit:cover;object-position:50% 10%;border:calc(var(--u)*.6) solid #c0866d;border-radius:50%}
 /* square + vertical: text at the bottom over a dark fade */
-.tall .shade{background:linear-gradient(180deg,rgba(14,28,19,.55) 0%,rgba(14,28,19,0) 22%,rgba(14,28,19,.25) 42%,rgba(14,28,19,.92) 68%,#10241a 100%)}
+.tall .shade{background:linear-gradient(180deg,rgba(14,28,19,.75) 0%,rgba(14,28,19,0) 24%,rgba(14,28,19,.25) 42%,rgba(14,28,19,.92) 68%,#10241a 100%)}
 .tall .box{left:var(--pad);right:var(--pad);bottom:var(--pad)}
 /* wide: text on the left over a side fade */
 .wide .shade{background:linear-gradient(90deg,#10241a 0%,rgba(16,36,26,.94) 38%,rgba(16,36,26,.35) 62%,rgba(16,36,26,0) 80%),linear-gradient(180deg,rgba(14,28,19,.45),rgba(14,28,19,0) 25%)}
