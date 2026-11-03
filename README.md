@@ -13,10 +13,18 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 - `site/note.txt`: Sam's note of the day. It shows at the top of the unit finder and on the cover of the partner PDF; change it when Sam asks and rebuild both.
 
+## Yandex Direct landing page
+
+- `site/landing.tpl.html`, `site/landing_build.py`: landing page for Yandex Direct ads, in Russian (default), English and Arabic, with a lead form, WhatsApp, Telegram, call and e-mail. It writes `site/ru/index.html` and `site/ru/privacy.html` (privacy policy, needed for the form).
+- Address: https://samjabrdxb.github.io/Iman-developers-/ru/ (GitHub Pages publishes the `site/` folder on every push to `main`, see `.github/workflows/pages.yml`).
+- Telegram username, lead e-mail and the Yandex Metrica counter ID are set at the top of `site/landing_build.py`. Without an e-mail, the form opens WhatsApp with the lead filled in.
+- Metrica goals for Yandex Direct: `lead_form`, `lead_wa_fallback`, `click_whatsapp`, `click_telegram`, `click_email`, `call`, `open_units`.
+- Run `python3 site/landing_build.py` after updating the inventory (step 2 of the daily update).
+
 ## Daily update
 
 1. Update the units in `site/inventory.json` from the new inventory lists, and set `inventoryDate`.
-2. Run `python3 site/build.py`.
+2. Run `python3 site/build.py` and `python3 site/landing_build.py`.
 3. Publish `site/sam-jabr.html` with its images, and commit.
 
 ## Availability lists and offers
