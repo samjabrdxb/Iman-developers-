@@ -14,6 +14,8 @@
 :root[data-theme="dark"]{
   --paper:#141714; --paper-2:#1b1f1b; --ink:#ece9df; --ink-2:#cfcbbf; --muted:#9b9b90; --line:#2e332d;
   --gold:#c9a86c; --gold-ink:#d8b77a; --night:#0f120f; color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-dark{background:var(--gold);color:#1b160d}}
+:root[data-theme="dark"] .btn-dark{background:var(--gold);color:#1b160d}
 [dir="rtl"]{--f:"IBM Plex Sans Arabic","Manrope",system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
