@@ -13,7 +13,7 @@ CONFIG = {
     "whatsapp": "971501752771",   # WhatsApp number, digits only
     "telegram": "",               # Telegram username without @ (empty hides the Telegram buttons)
     "email": "Sami@imandevelopers.com",  # Email that receives the form leads (empty: the form opens WhatsApp instead)
-    "metrika": 0,                 # Yandex Metrica counter ID (0: no counter)
+    "metrika": 114052212,         # Yandex Metrica counter ID (0: no counter)
 }
 SITE_URL = "https://samjabrdxb.github.io/Iman-developers-/ru/"
 # ---------------------------------------------------------------------------
@@ -33,8 +33,8 @@ if CONFIG["metrika"]:
     mid = int(CONFIG["metrika"])
     metrika = f"""<script>(function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};m[i].l=1*new Date();
 for(var j=0;j<document.scripts.length;j++){{if(document.scripts[j].src===r)return}}
-k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-ym({mid},"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}});</script>
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id={mid}","ym");
+ym({mid},"init",{{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",accurateTrackBounce:true,trackLinks:true}});</script>
 <noscript><div><img src="https://mc.yandex.ru/watch/{mid}" style="position:absolute;left:-9999px" alt=""></div></noscript>
 """
 
