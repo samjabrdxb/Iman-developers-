@@ -13,6 +13,7 @@ CONFIG = {
     "whatsapp": "971501752771",   # WhatsApp number, digits only
     "telegram": "",               # Telegram username without @ (empty hides the Telegram buttons)
     "email": "Sami@imandevelopers.com",  # Email that receives the form leads (empty: the form opens WhatsApp instead)
+    "web3forms": "",              # Web3Forms access key (sent to the lead e-mail from web3forms.com); used instead of FormSubmit when set
     "metrika": 114052212,         # Yandex Metrica counter ID (0: no counter)
 }
 SITE_URL = "https://samjabrdxb.github.io/Iman-developers-/ru/"

@@ -543,11 +543,16 @@ async function submitForm(f){
   if(!f.agree.checked){f.agree.focus();return}
   const text=L().msg.lead(d.name.trim(),d.phone.trim(),d.type,d.budget,d.contact);
   b.disabled=true;b.textContent=t("fSending");let ok=false;
-  if(CFG.email){try{const q=new URLSearchParams(location.search);
-    const r=await fetch("https://formsubmit.co/ajax/"+encodeURIComponent(CFG.email),{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
-      body:JSON.stringify({_subject:"113 Residences lead: "+d.name.trim(),Name:d.name.trim(),Phone:d.phone.trim(),Layout:d.type,Budget:d.budget,Contact:d.contact,Language:st.lang,
-        Source:q.get("utm_source")||"",Campaign:q.get("utm_campaign")||"",Keyword:q.get("utm_term")||"",Page:location.href,_template:"table",_captcha:"false"})});
-    const j=await r.json().catch(()=>({}));ok=r.ok&&String(j.success)!=="false"}catch(e){}}
+  const q=new URLSearchParams(location.search);
+  const lead={Name:d.name.trim(),Phone:d.phone.trim(),Layout:d.type,Budget:d.budget,Contact:d.contact,Language:st.lang,
+    Source:q.get("utm_source")||"",Campaign:q.get("utm_campaign")||"",Keyword:q.get("utm_term")||"",Page:location.href};
+  const subject="113 Residences lead: "+d.name.trim();
+  // Web3Forms when an access key is set, otherwise FormSubmit to CFG.email.
+  const send=CFG.web3forms?["https://api.web3forms.com/submit",{access_key:CFG.web3forms,subject,from_name:"113 Residences website",...lead}]
+    :CFG.email?["https://formsubmit.co/ajax/"+encodeURIComponent(CFG.email),{_subject:subject,_template:"table",_captcha:"false",...lead}]:null;
+  if(send){try{const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),12000);
+    const r=await fetch(send[0],{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(send[1]),signal:ctl.signal});
+    clearTimeout(tm);const j=await r.json().catch(()=>({}));ok=r.ok&&String(j.success)!=="false"}catch(e){}}
   b.disabled=false;b.textContent=t("fSend");
   if(ok){goal("lead_form");show("ok",t("fOk"));f.reset();f.agree.checked=true;return}
   goal("lead_wa_fallback");show("err",t("fErr"));window.open(waHref(text),"_blank","noopener");
