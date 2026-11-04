@@ -169,12 +169,15 @@ h1{font-weight:400;font-size:34px;line-height:1.2}
 h2{font-size:18px;margin-top:28px}
 small{color:var(--muted)} a{color:inherit}"""
 
+# The Japanese page is its own link: no language buttons, and the ru/en/ar pages do not link to it.
+GROUP = lambda lang: [lang] if lang == "ja" else ["ru", "en", "ar"]
+
 for lang, L in LANGS.items():
     url = BASE + lang + "/"
     out = os.path.join(HERE, lang)
     os.makedirs(out, exist_ok=True)
-    page = tpl.replace("/*INVENTORY*/", js(inv)).replace("/*CONFIG*/", js({**CONFIG, "lang": lang}))
-    alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{BASE}{l}/">\n' for l in LANGS)
+    page = tpl.replace("/*INVENTORY*/", js(inv)).replace("/*CONFIG*/", js({**CONFIG, "lang": lang, "langs": GROUP(lang)}))
+    alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{BASE}{l}/">\n' for l in GROUP(lang))
     head = f"""<!doctype html>
 <html lang="{lang}" dir="{L['dir']}">
 <head>

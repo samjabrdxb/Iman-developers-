@@ -517,7 +517,9 @@ const UNITS=P.units.filter(u=>LAYOUTS.includes(u.type.toLowerCase())).map(u=>({.
 const st={lang:T[CFG.lang]?CFG.lang:"ru",cur:"USD",f:"all"};
 if(st.lang==="ja")st.cur="JPY";
 try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(s.cur)st.cur=s.cur}catch(e){}
-try{const q=new URLSearchParams(location.search).get("lang");if(T[q])st.lang=q}catch(e){}
+// CFG.langs: the languages this page offers. The Japanese page stands alone; ru/en/ar switch between each other.
+const LANGS=(CFG.langs||Object.keys(T)).filter(l=>T[l]);
+try{const q=new URLSearchParams(location.search).get("lang");if(LANGS.includes(q))st.lang=q}catch(e){}
 const save=()=>{try{localStorage.setItem("sj-113",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const L=()=>T[st.lang],t=k=>L()[k];
@@ -594,7 +596,8 @@ function openDlg(title,body){$("#dlg-t").textContent=title;$("#dlg-b").innerHTML
 
 function render(forms=true){
   const ar=st.lang==="ar";document.documentElement.lang=st.lang;document.documentElement.dir=ar?"rtl":"ltr";
-  $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===st.lang));
+  $$("[data-lang]").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.lang===st.lang);b.hidden=!LANGS.includes(b.dataset.lang)});
+  $(".langs").hidden=LANGS.length<2;
   $$("[data-i]").forEach(el=>{const v=t(el.dataset.i);if(typeof v==="string")el.textContent=v});
   document.title="113 Residences · "+(ar?"دبي":st.lang==="ru"?"Дубай":st.lang==="ja"?"ドバイ":"Dubai")+" · Sam Jabr";
   $("#cur").innerHTML=CUR.map(([c])=>`<option ${c===st.cur?"selected":""}>${c}</option>`).join("");
