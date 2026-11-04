@@ -13,12 +13,15 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 - `site/note.txt`: Sam's note of the day. It shows at the top of the unit finder and on the cover of the partner PDF; change it when Sam asks and rebuild both.
 
-## Yandex Direct landing page
+## 113 Residences landing page (Yandex Direct and Google Ads)
 
-- `site/landing.tpl.html`, `site/landing_build.py`: landing page for Yandex Direct ads about 113 Residences only (five layouts, 2BR to 3BR + maid, with "from" prices; no unit list), in Russian (default), English and Arabic, with a lead form, WhatsApp, Telegram, call and e-mail. It writes `site/ru/index.html` and `site/ru/privacy.html` (privacy policy, needed for the form).
-- Address: https://samjabrdxb.github.io/Iman-developers-/ru/ (GitHub Pages publishes the `site/` folder on every push to `main`, see `.github/workflows/pages.yml`).
-- Telegram username, lead e-mail and the Yandex Metrica counter ID are set at the top of `site/landing_build.py`. Without an e-mail, the form opens WhatsApp with the lead filled in.
-- Metrica goals for Yandex Direct: `lead_form`, `lead_wa_fallback`, `click_whatsapp`, `click_telegram`, `click_email`, `call`, `open_units`.
+- `site/landing.tpl.html`, `site/landing_build.py`: landing page about 113 Residences only (five layouts, 2BR to 3BR + maid, with "from" prices; no unit list), built into one folder per language, each with its own privacy policy:
+  - `site/ru/`: Russian, for Yandex Direct: https://samjabrdxb.github.io/Iman-developers-/ru/
+  - `site/en/`: English, for Google Ads: https://samjabrdxb.github.io/Iman-developers-/en/
+  - `site/ar/`: Arabic, for Google Ads: https://samjabrdxb.github.io/Iman-developers-/ar/
+- GitHub Pages publishes the `site/` folder on every push to `main` (`.github/workflows/pages.yml`).
+- Settings at the top of `site/landing_build.py`: Telegram username, lead e-mail, Web3Forms key, Yandex Metrica counter (114052212) and Google Ads tag and conversion labels (`gads`).
+- Conversion events: `lead_form`, `lead_wa_fallback`, `click_whatsapp`, `click_telegram`, `click_email`, `call`, `open_plan`. Each goes to Metrica and, when a label is set in `gads`, to Google Ads.
 - Run `python3 site/landing_build.py` after updating the inventory (step 2 of the daily update).
 
 ## Daily update

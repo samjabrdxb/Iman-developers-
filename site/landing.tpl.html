@@ -483,8 +483,9 @@ const DISC=P.discount||0,CASH=P.cash||0;
 // Only these layouts are shown; single units are not listed.
 const LAYOUTS=["two bedroom","two bedroom with study","two bedroom with maid","three bedroom with study","three bedroom with maid"];
 const UNITS=P.units.filter(u=>LAYOUTS.includes(u.type.toLowerCase())).map(u=>({...u,t:u.type.toLowerCase(),p:Math.round(u.op*(1-DISC)),c:Math.round(u.op*(1-CASH))}));
-const st={lang:"ru",cur:"USD",f:"all"};
-try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(T[s.lang])st.lang=s.lang;if(s.cur)st.cur=s.cur}catch(e){}
+// Each folder (ru/, en/, ar/) opens in its own language; ?lang= overrides it.
+const st={lang:T[CFG.lang]?CFG.lang:"ru",cur:"USD",f:"all"};
+try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(s.cur)st.cur=s.cur}catch(e){}
 try{const q=new URLSearchParams(location.search).get("lang");if(T[q])st.lang=q}catch(e){}
 const save=()=>{try{localStorage.setItem("sj-113",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
@@ -498,7 +499,9 @@ const viewName=v=>v?((VIEW[st.lang]||{})[v.toLowerCase()]||v):"";
 function floorName(f){if(!f)return "";if(st.lang==="en")return f;const g=/ground/i.test(f),m=f.match(/\d+/);if(st.lang==="ru")return g?"Первый этаж (G)":m?m[0]+"-й этаж":f;return g?"الطابق الأرضي":m?"الطابق "+m[0]:f}
 const dateName=iso=>new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":st.lang==="ru"?"ru-RU":"en-GB",{day:"numeric",month:"long",year:"numeric"});
 const sqm=a=>fmt(a*0.092903)+" m²";
-function goal(n,p){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",n,p)}catch(e){}}
+function goal(n,p){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",n,p)}catch(e){}
+  // Google Ads conversions: CFG.gads = {"id":"AW-…","lead_form":"AW-…/label",…}
+  try{if(CFG.gads&&window.gtag){const c=CFG.gads[n];if(c)gtag("event","conversion",{send_to:c})}}catch(e){}}
 const SPLIT=[20,10,10,60];
 const types=()=>LAYOUTS.filter(k=>UNITS.some(u=>u.t===k));
 // The cheapest unit of a layout stands for it: its price is the "from" price and its plan the typical plan.
