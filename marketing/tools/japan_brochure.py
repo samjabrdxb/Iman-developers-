@@ -2,7 +2,7 @@
 
 Usage:  python3 marketing/tools/japan_brochure.py
 
-Writes marketing/japan/iman-japan-partner-guide.pdf (A4 portrait, 8 pages).
+Writes marketing/japan/iman-japan-partner-guide.pdf (A4 portrait, 2 pages).
 Prices come from site/inventory.json (113 Residences and Sierra retail); the
 offers below follow availability/OFFERS.md. Yen is a guide only (JPY below).
 """
@@ -85,7 +85,7 @@ DATE = f"{int(d[0])}年{int(d[1])}月{int(d[2])}日"
 
 
 def foot(n):
-    return f"""<div class=foot><span>サム・ジャブル（Sam Jabr）· IMAN Developers · WhatsApp +971 50 175 2771</span><span>{n} / 8</span></div>"""
+    return f"""<div class=foot><span>サム・ジャブル（Sam Jabr）· IMAN Developers · WhatsApp +971 50 175 2771</span><span>{n} / 2</span></div>"""
 
 
 def head(k, h, sub=""):
@@ -93,215 +93,142 @@ def head(k, h, sub=""):
 
 
 pages = []
+gv = ("113 Residencesは40/60プランなら全住戸が200万AED以上。" if min(l["p"] for l in layouts) >= 2e6 else "113 Residencesの多くの住戸が対象。")
 
-# 1. Cover
-pages.append(f"""<section class="page cover">
- <div class=cimg style="background-image:url('{src('img/113-residences.jpg')}')"><div class=logo>IMAN<small>DEVELOPERS</small></div></div>
- <div class=cbody>
-  <div class=eb>日本の不動産会社・仲介パートナー様向け</div>
-  <h1>IMANを売るための<br>パートナーガイド</h1>
-  <p class=cp>ドバイの新築レジデンスを、日本のお客様へ。物件の魅力、お客様への伝え方、購入の流れ、パートナー条件をこの一冊にまとめました。</p>
-  <ul class=hl>
-   <li><b>7%</b>仲介手数料</li><li><b>40/60</b>金利なしの分割払い</li><li><b>10年</b>ゴールデンビザ（200万AED〜）</li>
-  </ul>
-  <div class=me><img src="{src('img/sam-jabr.jpg')}"><div><b>サム・ジャブル（Sam Jabr）</b><span>シニア・セールスマネージャー · IMAN Developers</span>
-   <a href="https://wa.me/{WA}">WhatsApp +971 50 175 2771</a></div><span class=dt>{DATE}版</span></div>
- </div></section>""")
+# Page 1: why Dubai, IMAN, 113 Residences
+why = [("外国人でも完全所有", "フリーホールド地区では外国人も100%所有。登記はドバイ土地局（DLD）。"),
+       ("UAEでは個人所得税なし", "所得税・キャピタルゲイン税なし。※日本居住者は日本で課税（税理士にご確認を）。"),
+       ("米ドル連動の通貨", "1米ドル＝3.6725 AEDで固定。円以外の資産への分散に。"),
+       ("10年のゴールデンビザ", "200万AED以上の不動産購入で申請対象。"),
+       ("前払い金はエスクローで保護", "完成前物件の支払いはRERA監督の専用口座へ。"),
+       ("ローン不要・金利なし", "デベロッパーへの直接分割払い。海外送金でOK。")]
+rows = "".join(f"<tr><td>{e(l['name'])}</td><td>{sqm(l['a0'])}{'' if l['a0'] == l['a1'] else '–' + sqm(l['a1'])} m²</td><td>AED {aed(l['p'])}〜 <small>約{yen(l['p'])}〜</small></td><td>AED {aed(l['c'])}〜 <small>約{yen(l['c'])}〜</small></td></tr>" for l in layouts)
+pages.append(f"""<section class=page>
+ <div class=top><div class=tl><div class=logo>IMAN<small>DEVELOPERS</small></div>
+   <div class=eb>日本の不動産会社・仲介パートナー様向け</div><h1>IMANを売るための<br>パートナーガイド</h1>
+   <ul class=hl><li><b>7%</b>仲介手数料</li><li><b>40/60</b>金利なしの分割払い</li><li><b>10年</b>ゴールデンビザ</li></ul></div>
+  <div class=ti style="background-image:url('{src('img/113-residences.jpg')}')"></div></div>
+ <h3 class=sh>なぜドバイか：日本のお客様に勧める6つの理由</h3>
+ <div class=grid3>{''.join(f'<div class=card><h3><span class=no>{i+1:02d}</span>{e(t)}</h3><p>{e(x)}</p></div>' for i, (t, x) in enumerate(why))}</div>
+ <h3 class=sh>IMAN Developers：完成・引き渡しの実績</h3>
+ <div class=stats><div><b>{len(ready)}</b><span>引き渡し済み<br>（2017年〜）</span></div><div><b>{len(building)}</b><span>建設中</span></div>
+  <div><b>完売</b><span>Oxford Cove・<br>Sierra（住宅）</span></div>
+  <p>ドバイの住宅デベロッパー。JVC、アルジャン、ドバイ・ヒルズ・エステートなどで完成済み。日本のお客様が気にする「本当に完成するのか」に、実績で答えられます。</p></div>
+ <h3 class=sh>主力物件：113 Residences（アル・スフー）</h3>
+ <div class=r113><img src="{src('img/113-residences.jpg')}"><div>
+  <p>アル・スフー・コミュニティパークの目の前、ビーチまで車で3分。パーム・ジュメイラとドバイ・マリーナまで8〜10分。B＋G＋9階・全113邸、2029年Q2引き渡し予定。屋上インフィニティプール、ラグーンプール、フィットネス、Hafeleスマートロック。</p>
+  <table class=t><thead><tr><th>間取り</th><th>面積</th><th>40/60プラン（4%割引）</th><th>一括払い（14%割引）</th></tr></thead><tbody>{rows}</tbody></table></div></div>
+ <p class=fine>{DATE}時点の「〜から」の最低価格。円は1 AED ≈ {JPY}円の目安。DLD登録料（4%）と登記費用は別途。税制・ビザの要件は変更される場合があります。</p>
+ {foot(1)}</section>""")
 
-# 2. Why Dubai
-why = [("外国人でも完全所有", "指定エリア（フリーホールド）では、外国人も土地・建物を100%所有でき、登記はドバイ土地局（DLD）が管理します。"),
-       ("UAEでは個人所得税なし", "UAEには個人の所得税・キャピタルゲイン税がありません。※日本居住者は日本で課税されます。詳しくは税理士にご確認ください。"),
-       ("米ドルに連動する通貨", "UAEディルハムは1米ドル＝3.6725 AEDで固定。円以外の資産を持ちたいお客様の分散先になります。"),
-       ("10年のゴールデンビザ", "200万AED以上の不動産購入で、UAEの10年居住ビザ（ゴールデンビザ）の申請対象になります。"),
-       ("前払い金はエスクローで保護", "完成前物件の支払いは、ドバイの規制当局（RERA）が監督するプロジェクト専用のエスクロー口座に入ります。"),
-       ("ローン不要の分割払い", "デベロッパーへの直接分割払いで、銀行審査も金利もありません。海外からの送金で支払えます。")]
-pages.append(f"""<section class=page>{head("01 · なぜドバイか", "日本のお客様に<br>ドバイを勧める理由", "円安・資産分散・海外拠点づくり。ドバイ不動産は、日本の投資家が求める条件をそろえています。")}
- <div class=grid2>{''.join(f'<div class=card><span class=no>{i+1:02d}</span><h3>{e(t)}</h3><p>{e(x)}</p></div>' for i, (t, x) in enumerate(why))}</div>
- <p class=fine>税制・ビザの要件は変更される場合があります。お客様には最新情報をご確認のうえご案内ください。</p>{foot(2)}</section>""")
-
-# 3. About IMAN
-ready_li = "".join(f"<li><b>{e(p['name'])}</b><span>{e(AREA_JA.get(p['area'], p['area']))} · {e(p['handover'])}年</span></li>" for p in ready)
-build_li = "".join(f"<li><b>{e(p['name'])}</b><span>{e(AREA_JA.get(p['area'], p['area']))} · 進捗{p['progress']}%</span></li>" for p in building)
-pics = ["the-grove-by-iman", "oxford-gardens", "oxford-terraces-2"]
-pages.append(f"""<section class=page>{head("02 · IMAN Developersについて", "完成・引き渡しの<br>実績があるデベロッパー",
-  f"IMAN Developersはドバイの住宅デベロッパーです。2017年以降に{len(ready)}つのプロジェクトを引き渡し、現在{len(building)}つが建設中。日本のお客様が最も気にする「本当に完成するのか」に、実績で答えられます。")}
- <div class=pics>{''.join(f'<figure><img src="{src(P[k]["image"])}"><figcaption>{e(P[k]["name"])} · 完成済み</figcaption></figure>' for k in pics)}</div>
- <div class=cols><div><h3 class=sh>引き渡し済み（{len(ready)}件）</h3><ul class=plist>{ready_li}</ul></div>
-  <div><h3 class=sh>建設中（{len(building)}件）</h3><ul class=plist>{build_li}</ul>
-  <h3 class=sh style="margin-top:14px">新規販売</h3><ul class=plist><li><b>113 Residences</b><span>アル・スフー · 販売中</span></li>
-   <li><b>Oxford Cove</b><span>JVC · 完売</span></li><li><b>Sierra by Iman</b><span>モーターシティ · 住宅は完売、店舗のみ販売中</span></li></ul></div></div>
- <div class=tip><b>セールスのポイント</b>Oxford CoveとSierraの住宅は完売しました。人気のある物件は早く売れることを、お客様にお伝えください。</div>
- {foot(3)}</section>""")
-
-# 4. 113 Residences
-rows = "".join(f"<tr><td>{e(l['name'])}</td><td>{sqm(l['a0'])}{'' if l['a0'] == l['a1'] else '–' + sqm(l['a1'])} m²</td><td>AED {aed(l['p'])}〜<small>約{yen(l['p'])}〜</small></td><td>AED {aed(l['c'])}〜<small>約{yen(l['c'])}〜</small></td></tr>" for l in layouts)
-pages.append(f"""<section class=page>{head("03 · 主力物件", "113 Residences<br>公園とビーチのそばに")}
- <div class=hero113><img src="{src('img/113-residences.jpg')}"><div class=facts>
-  <div><b>アル・スフー</b><span>パーム・ジュメイラとドバイ・マリーナの間</span></div><div><b>B＋G＋9階</b><span>全113邸</span></div>
-  <div><b>2029年Q2</b><span>引き渡し予定</span></div><div><b>{len(r113['units'])}戸</b><span>販売中（{DATE}時点）</span></div></div></div>
- <p class=lead style="margin-top:12px">アル・スフー・コミュニティパークの目の前。流れるようなファサード、広いテラス、上質な仕上げ。Hafeleのスマートロック、欧州製キッチン家電、ラグーンプールと屋上インフィニティプール、フィットネスセンターとヨガルーム。</p>
- <table class=t><thead><tr><th>間取り</th><th>面積</th><th>40/60プラン（4%割引）</th><th>一括払い（14%割引）</th></tr></thead><tbody>{rows}</tbody></table>
- <div class=cols><div><h3 class=sh>車での所要時間</h3><ul class=drive>{''.join(f'<li><span>{e(n)}</span><b>{m}分</b></li>' for n, m in DRIVE)}</ul></div>
-  <div><h3 class=sh>こんなお客様に</h3><ul class=dots><li>ビーチと公園のそばで、ゆとりのある広さを求める方</li><li>200万AED以上でゴールデンビザも視野に入れたい方</li>
-   <li>2029年の完成まで、金利なしで少しずつ支払いたい方</li><li>パーム・ジュメイラやマリーナに近い立地で賃貸も考える方</li></ul></div></div>
- <p class=fine>価格は「〜から」の最低価格（AED）。円は1 AED ≈ {JPY}円の目安です。DLD登録料（4%）と登記費用は別途です。</p>{foot(4)}</section>""")
-
-# 5. Payment plans
+# Page 2: payment, how to sell, buying steps, partner terms
 sch = [(20, "予約から30日以内"), (10, "予約から90日以内"), (10, "工事進捗40%時"), (60, "引き渡し時（2029年Q2）")]
-gv = ("113 Residencesは40/60プランなら全住戸が200万AED以上です。" if min(l["p"] for l in layouts) >= 2e6
-      else "113 Residencesの多くの住戸が対象です。")
 bars = "".join(f"<div class=bar style='flex:{pc + 18}'><b>{pc}%</b><span>{e(t)}</span><i>AED {aed(ex['p'] * pc / 100)}<br>約{yen(ex['p'] * pc / 100)}</i></div>" for pc, t in sch)
-rt = "".join(f"<tr><td>{e(u['no'])}</td><td>{round(u['area'] * 0.092903)} m²</td><td>AED {aed(u['op'] * (1 - RD))}</td><td>AED {aed(u['op'] * (1 - RC))}</td></tr>" for u in retail)
-pages.append(f"""<section class=page>{head("04 · お支払い", "40/60プランで<br>完成まで6割を後払いに", "建設中に40%、鍵の引き渡し時に60%。銀行ローンも金利もありません。")}
- <h3 class=sh>例：2ベッドルーム（AED {aed(ex['p'])}〜、約{yen(ex['p'])}〜）</h3>
+qa = [("現地を見に行けない", "オンライン内覧・動画・間取り図をサムがお送りします。契約まですべてリモートで、渡航は不要です。"),
+      ("完成前の物件は不安", f"支払いはRERA監督のエスクロー口座へ。IMANには{len(ready)}件の引き渡し実績があります。"),
+      ("為替が心配", "AEDは米ドルに固定。40/60なら支払いが2029年まで分散されます。"),
+      ("税金は？", "UAE側では個人の所得税なし。日本の税務はお客様の税理士にご確認ください。")]
+steps = ["住戸を選ぶ", "予約（パスポート＋予約フォーム）", "売買契約（SPA）に電子署名", "DLD登録（Oqood・4%）", "分割払い（海外送金）", "引き渡し・権利証"]
+tools = [("住戸検索ページ", "パートナー様向け・本日の全空室", FINDER), ("お客様向け日本語ページ", "113 Residences紹介", LANDING), ("販売資料", "画像・動画（Google ドライブ）", MKT_113)]
+pages.append(f"""<section class=page>
+ <h3 class=sh style="margin-top:0">お支払い：40/60プラン（例：2ベッドルーム AED {aed(ex['p'])}〜、約{yen(ex['p'])}〜）</h3>
  <div class=bars>{bars}</div>
- <div class=grid3><div class=card><h3>一括払い</h3><p>定価から<b class=big>14%</b>割引。最も大きな割引です。2ベッドルームならAED {aed(ex['c'])}〜。</p></div>
-  <div class=card><h3>購入時の諸費用</h3><p>ドバイ土地局（DLD）登録料 <b class=big>4%</b> と登記手数料。売買価格とは別にお支払いいただきます。</p></div>
-  <div class=card><h3>ゴールデンビザ</h3><p>200万AED以上の物件が対象（購入価格で判定）。{gv}</p></div></div>
- <h3 class=sh style="margin-top:18px">Sierra by Iman · 店舗（モーターシティ）</h3>
- <p class=lead>商業用の投資物件をお探しのお客様に。40/60プランで{round(RD * 100)}%割引、一括払いで{round(RC * 100)}%割引。</p>
- <table class=t><thead><tr><th>店舗</th><th>面積</th><th>40/60プラン</th><th>一括払い</th></tr></thead><tbody>{rt}</tbody></table>
- <div class=tip><b>近日公開</b>The Element by IMAN（ドバイ・サイエンスパーク）：スタジオ〜2ベッドルームの170邸と店舗。EOI（購入意向登録）の詳細は発表待ちです。ご興味のあるお客様はお早めにサムまで。</div>
- {foot(5)}</section>""")
-
-# 6. How to sell
-who = [("資産を分散したい経営者・富裕層", "円以外の通貨・海外の実物資産を持ちたい方。米ドル連動のAED建て資産として提案できます。"),
-       ("ドバイ移住・二拠点生活を考える方", "200万AED以上の購入でゴールデンビザの申請対象に。住まいとビザを同時に検討できます。"),
-       ("海外で賃貸運用をしたい投資家", "観光客・駐在員の多いドバイで、ビーチやマリーナに近い立地は貸しやすいエリアです。"),
-       ("ご家族のセカンドホームに", "教育や休暇でドバイに滞在するご家族に。2〜3ベッドルームの広い間取りが合います。")]
-qa = [("現地を見に行けない", "オンライン内覧、住戸の動画、間取り図、支払い表をサムがお送りします。契約まですべてリモートで完結し、ドバイへの渡航は不要です。"),
-      ("完成前の物件は不安", "支払いはRERAが監督するエスクロー口座へ。IMANには{n}件の引き渡し実績があり、建設中の物件も工事が進んでいます。".format(n=len(ready))),
-      ("為替が心配", "AEDは米ドルに固定されています。40/60プランなら支払いが2029年まで分散され、為替のタイミングも分けられます。"),
-      ("税金はどうなるのか", "UAE側では個人の所得税・キャピタルゲイン税はありません。日本の税務については、お客様の税理士にご確認いただくようお伝えください。")]
-pages.append(f"""<section class=page>{head("05 · 売り方", "日本のお客様への<br>伝え方")}
- <h3 class=sh>おすすめのお客様像</h3>
- <div class=grid2>{''.join(f'<div class=card><h3>{e(t)}</h3><p>{e(x)}</p></div>' for t, x in who)}</div>
- <h3 class=sh style="margin-top:16px">よくある質問と答え方</h3>
- <div class=qa>{''.join(f'<div><b>「{e(q)}」</b><p>{e(a)}</p></div>' for q, a in qa)}</div>
- <div class=tip><b>3つのキーワード</b>「米ドル連動の資産」「金利なしの分割払い」「完成実績のあるデベロッパー」。最初の説明はこの3点に絞ると伝わりやすくなります。</div>
- {foot(6)}</section>""")
-
-# 7. Buying process
-steps = [("住戸を選ぶ", "住戸検索ページで、ご予算・間取り・支払いプランから住戸を選びます。空室はサムにWhatsAppで確認。"),
-         ("予約する", "お客様のパスポートのコピーと予約フォームで住戸を押さえます。最初の20%は予約から30日以内のお支払いです。"),
-         ("売買契約（SPA）", "デベロッパーとの売買契約書に署名します。電子署名・リモートで対応できます。"),
-         ("DLDに登録", "ドバイ土地局に購入を登録（Oqood）。登録料4%と登記手数料をお支払いいただきます。"),
-         ("分割払い", "プランに沿って、海外送金で残りをお支払い。サムが支払い時期をご案内します。"),
-         ("引き渡し", "完成後、残金を支払い鍵を受け取ります。権利証（タイトルディード）が発行されます。")]
-pages.append(f"""<section class=page>{head("06 · 購入の流れ", "日本にいながら<br>6ステップで購入", "すべてリモートで進められます。各ステップでサムがお客様とパートナー様をサポートします。")}
- <ol class=steps>{''.join(f'<li><span class=sn>{i+1}</span><div><h3>{e(t)}</h3><p>{e(x)}</p></div></li>' for i, (t, x) in enumerate(steps))}</ol>
- <div class=tip><b>パートナー様の役割</b>お客様のご紹介と日本語でのフォロー。物件資料、価格、契約手続き、デベロッパーとのやり取りはサムが担当します。</div>
- {foot(7)}</section>""")
-
-# 8. Partner terms and tools
-tools = [("住戸検索ページ（パートナー様向け）", "本日の全空室を、ご予算・エリア・支払いプランで検索。お客様用の日本語説明をワンタップでコピーできます。", FINDER),
-         ("お客様向け日本語ページ", "113 Residencesの日本語紹介ページ。お客様にそのまま送れます。", LANDING),
-         ("113 Residences 販売資料", "パンフレット・画像・動画（Google ドライブ）。", MKT_113)]
-pages.append(f"""<section class=page>{head("07 · パートナー条件", "一緒に売るための<br>条件とツール")}
- <div class=terms><div><b>7%</b><span>仲介手数料<br>（販売中の全物件）</span></div><div><b>AED 50K</b><span>ボーナス：3戸成約<br>（113 Residences）</span></div><div><b>AED 100K</b><span>ボーナス：5戸成約<br>（113 Residences）</span></div></div>
- <p class=fine style="margin-top:6px">手数料の支払い時期・条件は、パートナー契約の際にご確認ください。ボーナスの条件は変更される場合があります。</p>
- <h3 class=sh style="margin-top:16px">営業ツール</h3>
+ <p class=note>一括払いなら定価から<b>14%割引</b>（AED {aed(ex['c'])}〜）。ゴールデンビザは200万AED以上が対象（購入価格で判定）、{gv}</p>
+ <h3 class=sh>日本のお客様への売り方</h3>
+ <div class=cols><div><b class=st>おすすめのお客様像</b><ul class=dots>
+   <li><b>資産分散したい経営者・富裕層</b>：米ドル連動のAED建て資産として</li><li><b>ドバイ移住・二拠点生活</b>：住まいとゴールデンビザを同時に</li>
+   <li><b>海外で賃貸運用したい投資家</b>：ビーチ・マリーナに近い貸しやすい立地</li><li><b>ご家族のセカンドホーム</b>：2〜3ベッドルームの広い間取り</li></ul>
+   <div class=tip><b>3つのキーワード</b>「米ドル連動の資産」「金利なしの分割払い」「完成実績のあるデベロッパー」</div></div>
+  <div><b class=st>よくある質問と答え方</b><div class=qa>{''.join(f'<div><b>「{e(q)}」</b><p>{e(a)}</p></div>' for q, a in qa)}</div></div></div>
+ <h3 class=sh>購入の流れ：日本にいながら6ステップ</h3>
+ <ol class=steps>{''.join(f'<li><span class=sn>{i+1}</span>{e(t)}</li>' for i, t in enumerate(steps))}</ol>
+ <p class=note>最初の20%は予約から30日以内。資料・価格・契約・デベロッパーとのやり取りはサムが担当し、パートナー様はお客様のご紹介と日本語でのフォローをお願いします。</p>
+ <h3 class=sh>パートナー条件とツール</h3>
+ <div class=terms><div><b>7%</b><span>仲介手数料（販売中の全物件）</span></div><div><b>AED 50K</b><span>ボーナス：3戸成約（113 Residences）</span></div><div><b>AED 100K</b><span>ボーナス：5戸成約（113 Residences）</span></div></div>
  <div class=tools>{''.join(f'<a class=tool href="{e(u)}"><img src="{qr(u)}"><div><h3>{e(t)}</h3><p>{e(x)}</p></div></a>' for t, x, u in tools)}</div>
- <div class=contact><img src="{src('img/sam-jabr.jpg')}"><div><span class=eb style="color:var(--c)">担当</span><h2>サム・ジャブル（Sam Jabr）</h2>
-  <p>シニア・セールスマネージャー · IMAN Developers · ドバイ</p><p class=ph>WhatsApp +971 50 175 2771</p><p>英語・アラビア語で対応します。空室確認、価格、オンライン内覧、契約まで、お気軽にご連絡ください。</p></div>
+ <div class=contact><img src="{src('img/sam-jabr.jpg')}"><div><span class=eb>担当</span><h2>サム・ジャブル（Sam Jabr）</h2>
+  <p>シニア・セールスマネージャー · IMAN Developers · ドバイ</p><p class=ph>WhatsApp +971 50 175 2771</p><p>空室確認・価格・オンライン内覧・契約まで、お気軽にご連絡ください（英語・アラビア語で対応）。</p></div>
   <img class=qr src="{qr('https://wa.me/' + WA)}"></div>
- <p class=fine>価格・空室・特典は{DATE}時点のもので、予約時に確定します。画像はイメージです。円換算は1 AED ≈ {JPY}円の目安です。本資料は販売の申込みではありません。</p>
- {foot(8)}</section>""")
+ <p class=fine>手数料の支払い時期・条件はパートナー契約の際にご確認ください。価格・空室・特典は{DATE}時点のもので、予約時に確定します。画像はイメージです。本資料は販売の申込みではありません。</p>
+ {foot(2)}</section>""")
 
 CSS = """
 @page{size:A4;margin:0}
 :root{--g:#1d3f2b;--g2:#264f37;--c:#c0866d;--cd:#9a5f48;--ink:#17251c;--mut:#5d6b61;--line:#dfe3dc;--bg2:#f3f1ea}
 *{box-sizing:border-box}
-body{margin:0;font:9.2pt/1.6 Figtree,'Noto Sans JP',sans-serif;color:var(--ink)}
+body{margin:0;font:8.4pt/1.5 Figtree,'Noto Sans JP',sans-serif;color:var(--ink)}
 h1,h2,h3{margin:0;font-weight:700;line-height:1.3}
 p{margin:0}
-.page{width:210mm;height:297mm;padding:16mm 15mm 18mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
-.eb{font-size:7.5pt;letter-spacing:.12em;color:var(--cd);font-weight:700}
-h2{font-size:21pt;margin-top:6px;color:var(--g)}
-.lead{color:var(--mut);margin-top:8px;font-size:9.6pt}
-.foot{position:absolute;left:15mm;right:15mm;bottom:8mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--mut);border-top:1px solid var(--line);padding-top:5px}
-.fine{font-size:7pt;color:var(--mut);margin-top:10px}
-.sh{font-size:10pt;color:var(--g);margin-top:14px;margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid var(--c);display:inline-block}
-.card{background:var(--bg2);border-radius:8px;padding:11px 13px}
-.card h3{font-size:10.5pt;color:var(--g);margin-bottom:4px}
-.card p{font-size:8.6pt;color:#36443a}
-.card .no{font-family:Marcellus,serif;color:var(--c);font-size:13pt;display:block;margin-bottom:2px}
-.big{font-size:12pt;color:var(--cd)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px}
-.tip{margin-top:14px;background:var(--g);color:#eef3ee;border-radius:8px;padding:10px 14px;font-size:8.8pt}
-.tip b{display:block;color:var(--c);font-size:8pt;letter-spacing:.1em;margin-bottom:2px}
-/* cover */
-.cover{padding:0}
-.cimg{height:150mm;background-size:cover;background-position:center 40%;position:relative}
-.cimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,14,.55),rgba(10,20,14,0) 40%)}
-.logo{position:absolute;z-index:1;left:15mm;top:14mm;color:#fff;font-family:Marcellus,serif;letter-spacing:.42em;font-size:20pt;line-height:1}
-.logo small{display:block;font-size:6pt;letter-spacing:.62em;margin-top:6px}
-.cbody{background:var(--g);color:#f2f5f0;height:147mm;padding:12mm 15mm}
-.cbody .eb{color:var(--c)}
-.cover h1{font-size:28pt;margin:8px 0 10px;color:#fff}
-.cp{color:#c9d6cc;font-size:10pt;max-width:150mm}
-.hl{list-style:none;padding:0;margin:14px 0 0;display:flex;gap:8px}
-.hl li{border:1px solid #8a6a55;border-radius:8px;padding:7px 12px;font-size:8pt;color:#c9d6cc;flex:1}
-.hl b{display:block;font-family:Marcellus,serif;font-size:20pt;color:var(--c);font-weight:400;line-height:1.2}
-.me{display:flex;gap:12px;align-items:center;margin-top:16px;background:var(--g2);border-radius:10px;padding:10px 12px}
-.me img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 15%}
-.me b{display:block;font-size:11pt}.me span{display:block;color:#c9d6cc;font-size:8pt}.me a{color:#fff;font-weight:700;text-decoration:none;font-size:9.5pt}
-.me .dt{margin-left:auto;align-self:flex-end}
-/* about */
-.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.pics figure{margin:0}.pics img{width:100%;height:36mm;object-fit:cover;border-radius:6px;display:block}
-.pics figcaption{font-size:7.5pt;color:var(--mut);margin-top:3px}
-.plist{list-style:none;padding:0;margin:0}
-.plist li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:3.5px 0;font-size:8.6pt}
-.plist span{color:var(--mut)}
+.page{width:210mm;height:297mm;padding:12mm 13mm 15mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.eb{font-size:7pt;letter-spacing:.12em;color:var(--c);font-weight:700}
+.foot{position:absolute;left:13mm;right:13mm;bottom:7mm;display:flex;justify-content:space-between;font-size:6.8pt;color:var(--mut);border-top:1px solid var(--line);padding-top:4px}
+.fine{font-size:6.6pt;color:var(--mut);margin-top:6px}
+.note{font-size:8pt;color:#36443a;margin-top:5px}.note b{color:var(--cd)}
+.sh{font-size:9.6pt;color:var(--g);margin:11px 0 6px;padding-bottom:3px;border-bottom:2px solid var(--c);display:inline-block}
+.card{background:var(--bg2);border-radius:7px;padding:7px 10px}
+.card h3{font-size:8.8pt;color:var(--g);margin-bottom:2px}
+.card p{font-size:7.6pt;color:#36443a}
+.no{font-family:Marcellus,serif;color:var(--c);font-weight:400;margin-right:6px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.st{display:block;color:var(--g);font-size:8.6pt;margin-bottom:3px}
+.tip{margin-top:7px;background:var(--g);color:#eef3ee;border-radius:7px;padding:7px 11px;font-size:8pt}
+.tip b{display:block;color:var(--c);font-size:7pt;letter-spacing:.1em}
+/* top band */
+.top{display:grid;grid-template-columns:1.1fr 1fr;background:var(--g);color:#f2f5f0;border-radius:10px;overflow:hidden;height:68mm}
+.tl{padding:9mm 9mm 8mm}
+.ti{background-size:cover;background-position:center 35%}
+.logo{color:var(--c);font-family:Marcellus,serif;letter-spacing:.42em;font-size:15pt;line-height:1;margin-bottom:9mm}
+.logo small{display:block;font-size:5pt;letter-spacing:.62em;margin-top:5px}
+h1{font-size:19pt;margin:5px 0 0;color:#fff}
+.hl{list-style:none;padding:0;margin:10px 0 0;display:flex;gap:6px}
+.hl li{border:1px solid #8a6a55;border-radius:7px;padding:4px 8px;font-size:7pt;color:#c9d6cc;flex:1}
+.hl b{display:block;font-family:Marcellus,serif;font-size:15pt;color:var(--c);font-weight:400;line-height:1.2}
+/* IMAN stats */
+.stats{display:grid;grid-template-columns:auto auto auto 1fr;gap:6px;align-items:stretch}
+.stats>div{background:var(--g);color:#fff;border-radius:7px;padding:6px 12px}
+.stats b{display:block;font-family:Marcellus,'Noto Sans JP',serif;font-weight:400;font-size:17pt;color:var(--c);line-height:1.15}
+.stats span{font-size:7pt;color:#c9d6cc;line-height:1.35;display:block}
+.stats p{font-size:7.8pt;color:#36443a;padding-left:6px;align-self:center}
 /* 113 */
-.hero113{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:12px}
-.hero113 img{width:100%;height:58mm;object-fit:cover;border-radius:8px}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.facts div{background:var(--bg2);border-radius:8px;padding:8px 10px}
-.facts b{display:block;font-size:12pt;color:var(--g)}.facts span{font-size:7.6pt;color:var(--mut)}
-.t{width:100%;border-collapse:collapse;margin-top:12px;font-size:8.6pt}
-.t th{text-align:left;background:var(--g);color:#fff;font-weight:500;padding:5px 8px;font-size:8pt}
-.t td{border-bottom:1px solid var(--line);padding:5px 8px;vertical-align:top}
-.t td small{display:block;color:var(--mut);font-size:7.3pt}
-.drive{list-style:none;padding:0;margin:0}
-.drive li{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:2.5px 0;font-size:8.4pt}
-.dots{margin:0;padding-left:16px;font-size:8.6pt}.dots li{margin:3px 0}
+.r113{display:grid;grid-template-columns:52mm 1fr;gap:9px}
+.r113 img{width:100%;height:100%;max-height:78mm;object-fit:cover;border-radius:7px}
+.r113 p{font-size:7.8pt;color:#36443a}
+.t{width:100%;border-collapse:collapse;margin-top:6px;font-size:7.6pt}
+.t th{text-align:left;background:var(--g);color:#fff;font-weight:500;padding:3px 6px;font-size:7pt}
+.t td{border-bottom:1px solid var(--line);padding:4px 6px;vertical-align:top}
+.t td small{display:block;color:var(--mut);font-size:6.8pt}
+.t td{white-space:nowrap}.t td:first-child{white-space:normal}
 /* payment */
-.bars{display:flex;gap:4px;margin-top:4px}
-.bar{background:var(--bg2);border-top:4px solid var(--c);border-radius:4px;padding:8px 9px;min-width:0}
-.bar:last-child{background:var(--g);color:#fff;border-top-color:var(--c)}
-.bar b{display:block;font-size:15pt;font-family:Marcellus,serif;font-weight:400;color:var(--cd)}
+.bars{display:flex;gap:4px}
+.bar{background:var(--bg2);border-top:3px solid var(--c);border-radius:4px;padding:5px 8px;min-width:0}
+.bar:last-child{background:var(--g);color:#fff}
+.bar b{display:block;font-size:13pt;font-family:Marcellus,serif;font-weight:400;color:var(--cd);line-height:1.2}
 .bar:last-child b{color:var(--c)}
-.bar span{display:block;font-size:7.8pt}
-.bar i{display:block;font-style:normal;font-size:7.6pt;margin-top:5px;opacity:.85}
-/* how to sell */
-.qa{display:grid;gap:6px}
-.qa div{border-left:3px solid var(--c);padding:3px 0 3px 10px}
-.qa b{color:var(--g);font-size:9.4pt}.qa p{font-size:8.6pt;color:#36443a}
-/* steps */
-.steps{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:9px}
-.steps li{display:flex;gap:12px;align-items:flex-start;background:var(--bg2);border-radius:8px;padding:11px 13px}
-.sn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-weight:700;font-size:11pt}
-.steps h3{font-size:11pt;color:var(--g)}.steps p{font-size:8.8pt;color:#36443a}
-/* terms */
-.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.terms div{background:var(--g);color:#fff;border-radius:8px;padding:11px 13px}
-.terms b{display:block;font-family:Marcellus,serif;font-weight:400;font-size:21pt;color:var(--c);line-height:1.15}
-.terms span{font-size:8pt;color:#c9d6cc}
-.tools{display:grid;gap:7px}
-.tool{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:7px 10px;text-decoration:none;color:inherit}
-.tool img{width:21mm;height:21mm;flex:none}
-.tool h3{font-size:9.6pt;color:var(--g)}.tool p{font-size:8.2pt;color:var(--mut)}
-.contact{display:flex;gap:14px;align-items:center;margin-top:14px;background:var(--bg2);border-radius:10px;padding:12px 14px}
-.contact>img:first-child{width:24mm;height:24mm;border-radius:50%;object-fit:cover;object-position:50% 15%}
-.contact h2{font-size:14pt;margin-top:2px}.contact p{font-size:8.4pt;color:#36443a}
-.contact .ph{font-weight:700;font-size:10.5pt;color:var(--g)}
-.contact .qr{width:24mm;height:24mm;margin-left:auto}
+.bar span{display:block;font-size:7.4pt}
+.bar i{display:block;font-style:normal;font-size:7pt;opacity:.85;white-space:nowrap}
+.dots{margin:0;padding-left:14px;font-size:7.8pt}.dots li{margin:2px 0}.dots b{color:var(--g)}
+.qa{display:grid;gap:4px}
+.qa div{border-left:3px solid var(--c);padding:1px 0 1px 8px}
+.qa b{color:var(--g);font-size:8.2pt}.qa p{font-size:7.6pt;color:#36443a}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.steps li{background:var(--bg2);border-radius:7px;padding:6px 7px;font-size:7.6pt;font-weight:500;color:var(--g);line-height:1.35}
+.sn{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--g);color:#fff;font-size:8pt;font-weight:700;margin-bottom:3px}
+/* terms and tools */
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.terms div{background:var(--g);color:#fff;border-radius:7px;padding:6px 11px}
+.terms b{display:block;font-family:Marcellus,serif;font-weight:400;font-size:16pt;color:var(--c);line-height:1.2}
+.terms span{font-size:7pt;color:#c9d6cc}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.tool{display:flex;gap:7px;align-items:center;border:1px solid var(--line);border-radius:7px;padding:5px 7px;text-decoration:none;color:inherit}
+.tool img{width:17mm;height:17mm;flex:none}
+.tool h3{font-size:8.2pt;color:var(--g)}.tool p{font-size:7pt;color:var(--mut)}
+.contact{display:flex;gap:12px;align-items:center;margin-top:7px;background:var(--bg2);border-radius:9px;padding:8px 12px}
+.contact>img:first-child{width:19mm;height:19mm;border-radius:50%;object-fit:cover;object-position:50% 15%}
+.contact h2{font-size:12pt;color:var(--g)}.contact p{font-size:7.6pt;color:#36443a}
+.contact .ph{font-weight:700;font-size:9.5pt;color:var(--g)}
+.contact .qr{width:19mm;height:19mm;margin-left:auto}
 """
-
 
 def main():
     at = os.path.join(REPO, "availability", "tools")

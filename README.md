@@ -29,7 +29,7 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 ## Japanese partner brochure
 
-- `marketing/tools/japan_brochure.py` writes `marketing/japan/iman-japan-partner-guide.pdf`: an 8-page A4 guide in Japanese for brokers in Japan on how to sell IMAN (why Dubai, IMAN's track record, 113 Residences, payment plans, how to talk to Japanese clients, the buying steps, partner terms and tools with QR codes). Prices come from `site/inventory.json`; rerun it after updating the inventory. It needs `pip install playwright pymupdf qrcode` and downloads Noto Sans JP once into `/tmp/iman-fonts-jp`.
+- `marketing/tools/japan_brochure.py` writes `marketing/japan/iman-japan-partner-guide.pdf`: a 2-page A4 guide in Japanese for brokers in Japan on how to sell IMAN (page 1: why Dubai, IMAN's track record, 113 Residences with prices; page 2: payment plan, how to talk to Japanese clients, buying steps, partner terms, tools with QR codes and contact). Prices come from `site/inventory.json`; rerun it after updating the inventory. It needs `pip install playwright pymupdf qrcode` and downloads Noto Sans JP once into `/tmp/iman-fonts-jp`.
 
 ## Daily update
 
