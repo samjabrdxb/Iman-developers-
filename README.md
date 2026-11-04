@@ -31,6 +31,8 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 - `marketing/tools/japan_brochure.py` writes `marketing/japan/iman-japan-partner-guide.pdf`: a 2-page A4 guide in Japanese for brokers in Japan on how to sell IMAN (page 1: why Dubai, IMAN's track record, 113 Residences with prices; page 2: payment plan, how to talk to Japanese clients, buying steps, partner terms, tools with QR codes and contact). Prices come from `site/inventory.json`; rerun it after updating the inventory. It needs `pip install playwright pymupdf qrcode` and downloads Noto Sans JP once into `/tmp/iman-fonts-jp`.
 
+- `marketing/tools/japan_strategy.py` writes `marketing/japan/iman-japan-sales-strategy.pdf`: Sam's sales strategy for Japanese brokers (affordable luxury, quality over quantity) in Japanese, 2 pages A4. The track record numbers (18 launched, 9 delivered, 2 more in December 2026, about 550 units in the 2026 boutique pipeline) are at the top of the script.
+
 ## Daily update
 
 1. Update the units in `site/inventory.json` from the new inventory lists, and set `inventoryDate`.
