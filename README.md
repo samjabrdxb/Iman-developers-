@@ -10,8 +10,10 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 - `site/img/`, `site/assets/`: photos, project images and floor plans.
 
 - `site/finder.tpl.html`, `site/finder_build.py`: the unit finder for brokers (budget, location, payment plan), published as its own artifact: https://claude.ai/artifact/Eg5NZJCZRwriTRGYLCwTb7. Run `python3 site/finder_build.py` after updating the inventory and publish `site/finder.html` with its images.
+- `site/finder-ja.html`: the same unit finder in Japanese (with an English button), for brokers in Japan; prices in AED with a yen guide (1 AED ≈ ¥41.5, `JPY` in `site/finder.tpl.html`): https://claude.ai/artifact/T6RPFxW5jAsAzdhcXZzqXX. `site/finder_build.py` writes both pages; publish both after each update.
 
 - `site/note.txt`: Sam's note of the day. It shows at the top of the unit finder and on the cover of the partner PDF; change it when Sam asks and rebuild both.
+- `site/note.ja.txt`: the same note in Japanese, for the Japanese unit finder; update it together with `site/note.txt`.
 
 ## 113 Residences landing page (Yandex Direct and Google Ads)
 

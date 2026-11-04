@@ -1,7 +1,7 @@
 <title>IMAN Unit Finder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: compact green header, a filter panel (budget, location, payment plan, bedrooms), a sticky results bar with sort, then compact unit rows that open for the full payment schedule. */
 :root{
@@ -21,6 +21,10 @@
   --bg:#0e1712; --surface:#15211a; --ink:#e6ece6; --muted:#9fb0a4; --line:#26362c; --chip:#1d2b22;
   --on-green:#eef3ee; --on-green-muted:#a9bcae; --ok:#8fcfa4; --warn:#e2ad95; color-scheme:dark}
 [dir="rtl"]{--f-display:"IBM Plex Sans Arabic",Georgia,serif}
+:lang(ja){--f-display:"Noto Sans JP","Hiragino Sans",sans-serif;--f-body:"Figtree","Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif}
+:lang(ja) h1,:lang(ja) h2,:lang(ja) h3{font-weight:500;line-height:1.3;line-break:strict}
+:lang(ja) .ql{letter-spacing:.04em;font-size:13px}
+.yen{font-size:12px;color:var(--muted);margin-top:2px}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
 .wrap{max-width:760px;margin:0 auto;padding-inline:16px}
@@ -129,7 +133,7 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
 </style>
 
 <header class="top"><div class="wrap">
-  <div class="bar"><div class="logo">IMAN<small>DEVELOPERS</small></div><button class="lang" id="lang" type="button">العربية</button></div>
+  <div class="bar"><div class="logo">IMAN<small>DEVELOPERS</small></div><button class="lang" id="lang" type="button"></button></div>
   <div class="hero"><div><h1 id="t-h1"></h1><p id="t-sub"></p></div>
     <div class="me"><img src="img/sam-jabr.jpg" alt="Sam Jabr">
       <div><b>Sam Jabr</b><br><span id="t-role"></span><br>
@@ -159,10 +163,10 @@ dialog img{display:block;width:100%;height:auto;background:#fff}
 <div class="toast" id="toast" hidden></div>
 
 <script>
-const D={"note":"113 Residences: 40/60 · 4% discount · 14% off full cash | Sierra retail: 40/60 · 4% discount, extra discount subject to approval | 7% commission | Oxford Cove: sold out","date":"2026-11-02","projects":{"113-residences":{"name":"113 Residences","loc":"sufouh","plan":"40/60","handover":"Q2 2029","schedule":[[20,"Within 30 days of booking","خلال 30 يوم من الحجز"],[10,"Within 90 days of booking","خلال 90 يوم من الحجز"],[10,"At 40% construction","عند إنجاز 40% من البناء"],[60,"On handover","عند التسليم"]],"image":"assets/113-residences-main.webp"},"oxford-cove":{"name":"Oxford Cove","loc":"jvc","plan":"50/50","handover":null,"schedule":[[50,"In instalments before handover","أقساط قبل التسليم"],[50,"On handover","عند التسليم"]],"image":"assets/oxford-cove-main.webp"},"sierra-by-iman":{"name":"Sierra by Iman","loc":"motorcity","plan":"40/60","handover":null,"schedule":[[40,"In instalments during construction","أقساط خلال البناء"],[60,"On handover","عند التسليم"]],"image":"assets/sierra-by-iman-main.webp"}},"units":[{"pid":"113-residences","no":"G01","type":"Two Bedroom with study","floor":"Ground Floor","view":"Community View","area":1369.0,"op":3012409.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G01.webp"},{"pid":"113-residences","no":"G02","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G02.webp"},{"pid":"113-residences","no":"G04","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G04.webp"},{"pid":"113-residences","no":"102","type":"Three Bedroom with Maid","floor":"1st Floor","view":"Pool/Park View","area":1690.0,"op":3803562.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-102.webp"},{"pid":"113-residences","no":"105","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1136.0,"op":2761321.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-105.webp"},{"pid":"113-residences","no":"107","type":"Two Bedroom with Maid","floor":"1st Floor","view":"Community View","area":1309.0,"op":3181129.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-107.webp"},{"pid":"113-residences","no":"108","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1119.0,"op":2720255.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-108.webp"},{"pid":"113-residences","no":"110","type":"Two Bedroom with Study","floor":"1st Floor","view":"Pool View","area":1188.0,"op":3028609.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-110.webp"},{"pid":"113-residences","no":"205","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1283.0,"op":3015945.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-205.webp"},{"pid":"113-residences","no":"206","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1117.0,"op":2737370.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-206.webp"},{"pid":"113-residences","no":"207","type":"Two Bedroom with Maid","floor":"2nd Floor","view":"Community View","area":1278.0,"op":3132153.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-207.webp"},{"pid":"113-residences","no":"209","type":"Three Bedroom with Study","floor":"2nd Floor","view":"Pool/Community View","area":2059.0,"op":4323508.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-209.webp"},{"pid":"113-residences","no":"310","type":"Two Bedroom","floor":"3rd Floor","view":"Community View","area":1126.0,"op":2793579.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-310.webp"},{"pid":"113-residences","no":"312","type":"Two Bedroom with study","floor":"3rd Floor","view":"Pool View","area":1209.0,"op":3178827.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-312.webp"},{"pid":"113-residences","no":"409","type":"Two Bedroom","floor":"4th Floor","view":"Community View","area":1099.0,"op":2748026.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-409.webp"},{"pid":"113-residences","no":"410","type":"Three Bedroom with Study","floor":"4th Floor","view":"Pool/Community View","area":2010.0,"op":4302434.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-410.webp"},{"pid":"113-residences","no":"606","type":"Two Bedroom","floor":"6th Floor","view":"Community View","area":1148.0,"op":2915300.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-606.webp"},{"pid":"113-residences","no":"710","type":"Two Bedroom with study","floor":"7th Floor","view":"Pool View","area":1209.0,"op":3311782.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-710.webp"},{"pid":"113-residences","no":"708","type":"Two Bedroom","floor":"7th Floor","view":"Community View","area":1099.0,"op":2824694.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-708.webp"},{"pid":"113-residences","no":"808","type":"Two Bedroom with Maid","floor":"8th Floor","view":"Community View","area":1228.0,"op":3179267.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-808.webp"},{"pid":"113-residences","no":"809","type":"Two Bedroom","floor":"8th Floor","view":"Community View","area":1126.0,"op":2917488.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-809.webp"},{"pid":"113-residences","no":"G07","type":"Two Bedroom with Study","floor":"Ground Floor","view":"Park View","area":1369.0,"op":3038600.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G07.webp"},{"pid":"113-residences","no":"502","type":"Three Bedroom with Maid","floor":"5th Floor","view":"Pool/Park View","area":1662.0,"op":3889462.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-502.webp"},{"pid":"113-residences","no":"509","type":"Two Bedroom","floor":"5th Floor","view":"Community View","area":1076.0,"op":2712234.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-509.webp"},{"pid":"113-residences","no":"607","type":"Two Bedroom with Maid","floor":"6th Floor","view":"Community View","area":1309.0,"op":3323764.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-607.webp"},{"pid":"113-residences","no":"111","type":"Two Bedroom with Study","floor":"1st Floor","view":"Pool View","area":1214.0,"op":3095307.75,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-111.webp"},{"pid":"113-residences","no":"203","type":"Two Bedroom","floor":"2nd Floor","view":"Park View","area":1148.0,"op":2835488.48,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-203.webp"},{"pid":"113-residences","no":"204","type":"Two Bedroom","floor":"2nd Floor","view":"Park View","area":1072.0,"op":2647785.26,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-204.webp"},{"pid":"113-residences","no":"301","type":"Two Bedroom","floor":"3rd Floor","view":"Pool View","area":1031.0,"op":2680235.22,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-301.webp"},{"pid":"113-residences","no":"303","type":"Two Bedroom","floor":"3rd Floor","view":"Park View","area":1071.0,"op":2678599.1,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-303.webp"},{"pid":"113-residences","no":"802","type":"Three Bedroom with Study","floor":"8th Floor","view":"Pool/Park View","area":1662.0,"op":3972569.68,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-802.webp"},{"pid":"113-residences","no":"805","type":"Two Bedroom","floor":"8th Floor","view":"Community View","area":1068.0,"op":2766107.54,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-805.webp"},{"pid":"sierra-by-iman","no":"RETAIL-2","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2873.96,"op":7919913.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-2.webp"},{"pid":"sierra-by-iman","no":"RETAIL-3","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2987.42,"op":8261387.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-3.webp"},{"pid":"sierra-by-iman","no":"RETAIL-4","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3075.46,"op":8484112.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-4.webp"},{"pid":"sierra-by-iman","no":"RETAIL-5","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3933.35,"op":10079595.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-5.webp"}]};
+const D={"note":"113 Residences: 40/60 · 4% discount · 14% off full cash | Sierra retail: 40/60 · 4% discount, extra discount subject to approval | 7% commission | Oxford Cove: sold out","noteJa":"113 Residences：40/60・4%割引・一括払いで14%割引 | Sierra 店舗：40/60・4%割引、追加割引は承認次第 | 仲介手数料7% | Oxford Cove：完売","date":"2026-11-02","projects":{"113-residences":{"name":"113 Residences","loc":"sufouh","plan":"40/60","handover":"Q2 2029","schedule":[[20,"Within 30 days of booking","خلال 30 يوم من الحجز","予約から30日以内"],[10,"Within 90 days of booking","خلال 90 يوم من الحجز","予約から90日以内"],[10,"At 40% construction","عند إنجاز 40% من البناء","工事進捗40%時"],[60,"On handover","عند التسليم","引き渡し時"]],"image":"assets/113-residences-main.webp"},"oxford-cove":{"name":"Oxford Cove","loc":"jvc","plan":"50/50","handover":null,"schedule":[[50,"In instalments before handover","أقساط قبل التسليم","引き渡し前に分割"],[50,"On handover","عند التسليم","引き渡し時"]],"image":"assets/oxford-cove-main.webp"},"sierra-by-iman":{"name":"Sierra by Iman","loc":"motorcity","plan":"40/60","handover":null,"schedule":[[40,"In instalments during construction","أقساط خلال البناء","建設期間中に分割"],[60,"On handover","عند التسليم","引き渡し時"]],"image":"assets/sierra-by-iman-main.webp"}},"units":[{"pid":"113-residences","no":"G01","type":"Two Bedroom with study","floor":"Ground Floor","view":"Community View","area":1369.0,"op":3012409.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G01.webp"},{"pid":"113-residences","no":"G02","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G02.webp"},{"pid":"113-residences","no":"G04","type":"One Bedroom with study","floor":"Ground Floor","view":"Community View","area":913.0,"op":2191188.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G04.webp"},{"pid":"113-residences","no":"102","type":"Three Bedroom with Maid","floor":"1st Floor","view":"Pool/Park View","area":1690.0,"op":3803562.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-102.webp"},{"pid":"113-residences","no":"105","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1136.0,"op":2761321.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-105.webp"},{"pid":"113-residences","no":"107","type":"Two Bedroom with Maid","floor":"1st Floor","view":"Community View","area":1309.0,"op":3181129.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-107.webp"},{"pid":"113-residences","no":"108","type":"Two Bedroom","floor":"1st Floor","view":"Community View","area":1119.0,"op":2720255.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-108.webp"},{"pid":"113-residences","no":"110","type":"Two Bedroom with Study","floor":"1st Floor","view":"Pool View","area":1188.0,"op":3028609.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-110.webp"},{"pid":"113-residences","no":"205","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1283.0,"op":3015945.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-205.webp"},{"pid":"113-residences","no":"206","type":"Two Bedroom","floor":"2nd Floor","view":"Community View","area":1117.0,"op":2737370.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-206.webp"},{"pid":"113-residences","no":"207","type":"Two Bedroom with Maid","floor":"2nd Floor","view":"Community View","area":1278.0,"op":3132153.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-207.webp"},{"pid":"113-residences","no":"209","type":"Three Bedroom with Study","floor":"2nd Floor","view":"Pool/Community View","area":2059.0,"op":4323508.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-209.webp"},{"pid":"113-residences","no":"310","type":"Two Bedroom","floor":"3rd Floor","view":"Community View","area":1126.0,"op":2793579.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-310.webp"},{"pid":"113-residences","no":"312","type":"Two Bedroom with study","floor":"3rd Floor","view":"Pool View","area":1209.0,"op":3178827.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-312.webp"},{"pid":"113-residences","no":"409","type":"Two Bedroom","floor":"4th Floor","view":"Community View","area":1099.0,"op":2748026.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-409.webp"},{"pid":"113-residences","no":"410","type":"Three Bedroom with Study","floor":"4th Floor","view":"Pool/Community View","area":2010.0,"op":4302434.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-410.webp"},{"pid":"113-residences","no":"606","type":"Two Bedroom","floor":"6th Floor","view":"Community View","area":1148.0,"op":2915300.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-606.webp"},{"pid":"113-residences","no":"710","type":"Two Bedroom with study","floor":"7th Floor","view":"Pool View","area":1209.0,"op":3311782.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-710.webp"},{"pid":"113-residences","no":"708","type":"Two Bedroom","floor":"7th Floor","view":"Community View","area":1099.0,"op":2824694.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-708.webp"},{"pid":"113-residences","no":"808","type":"Two Bedroom with Maid","floor":"8th Floor","view":"Community View","area":1228.0,"op":3179267.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-808.webp"},{"pid":"113-residences","no":"809","type":"Two Bedroom","floor":"8th Floor","view":"Community View","area":1126.0,"op":2917488.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-809.webp"},{"pid":"113-residences","no":"G07","type":"Two Bedroom with Study","floor":"Ground Floor","view":"Park View","area":1369.0,"op":3038600.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-G07.webp"},{"pid":"113-residences","no":"502","type":"Three Bedroom with Maid","floor":"5th Floor","view":"Pool/Park View","area":1662.0,"op":3889462.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-502.webp"},{"pid":"113-residences","no":"509","type":"Two Bedroom","floor":"5th Floor","view":"Community View","area":1076.0,"op":2712234.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-509.webp"},{"pid":"113-residences","no":"607","type":"Two Bedroom with Maid","floor":"6th Floor","view":"Community View","area":1309.0,"op":3323764.0,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-607.webp"},{"pid":"113-residences","no":"111","type":"Two Bedroom with Study","floor":"1st Floor","view":"Pool View","area":1214.0,"op":3095307.75,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-111.webp"},{"pid":"113-residences","no":"203","type":"Two Bedroom","floor":"2nd Floor","view":"Park View","area":1148.0,"op":2835488.48,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-203.webp"},{"pid":"113-residences","no":"204","type":"Two Bedroom","floor":"2nd Floor","view":"Park View","area":1072.0,"op":2647785.26,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-204.webp"},{"pid":"113-residences","no":"301","type":"Two Bedroom","floor":"3rd Floor","view":"Pool View","area":1031.0,"op":2680235.22,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-301.webp"},{"pid":"113-residences","no":"303","type":"Two Bedroom","floor":"3rd Floor","view":"Park View","area":1071.0,"op":2678599.1,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-303.webp"},{"pid":"113-residences","no":"802","type":"Three Bedroom with Study","floor":"8th Floor","view":"Pool/Park View","area":1662.0,"op":3972569.68,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-802.webp"},{"pid":"113-residences","no":"805","type":"Two Bedroom","floor":"8th Floor","view":"Community View","area":1068.0,"op":2766107.54,"disc":0.04,"cash":0.14,"img":"assets/plans/113-residences-805.webp"},{"pid":"sierra-by-iman","no":"RETAIL-2","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2873.96,"op":7919913.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-2.webp"},{"pid":"sierra-by-iman","no":"RETAIL-3","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":2987.42,"op":8261387.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-3.webp"},{"pid":"sierra-by-iman","no":"RETAIL-4","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3075.46,"op":8484112.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-4.webp"},{"pid":"sierra-by-iman","no":"RETAIL-5","type":"Retail","floor":"Ground Floor","view":"Roadside View","area":3933.35,"op":10079595.0,"disc":0.04,"cash":0.18,"img":"assets/plans/sierra-by-iman-RETAIL-5.webp"}]};
 const WA="971501752771", COMM=0.07;
 const T={
- en:{dir:"ltr",other:"العربية",h1:"Find the right unit",noteL:"Today",sub:"Every IMAN unit available today, filtered for your client.",
+ en:{dir:"ltr",other:"English",h1:"Find the right unit",noteL:"Today",sub:"Every IMAN unit available today, filtered for your client.",
   role:"Senior Sales Manager",ask:"Your client's needs",reset:"Reset",budget:"Budget",loc:"Location",plan:"Payment plan",beds:"Bedrooms",
   any:"Any",cash:"Full cash",clear:"Clear",upTo:"Up to ",
   planHint:{"40/60":"40% before handover","50/50":"50% before handover",cash:"Biggest discount"},
@@ -178,7 +182,7 @@ const T={
   floor:"Floor",sqft:"sq ft",handover:"Handover",
   foot:"Prices in AED from IMAN's latest availability lists. Instalments are worked out on the discounted price. Prices, availability and offers are confirmed at booking; DLD and registration fees are extra.",
   waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it."},
- ar:{dir:"rtl",other:"English",h1:"لاقي الوحدة المناسبة لعميلك",noteL:"اليوم",sub:"كل وحدات إيمان المتاحة اليوم، حسب طلب عميلك.",
+ ar:{dir:"rtl",other:"العربية",h1:"لاقي الوحدة المناسبة لعميلك",noteL:"اليوم",sub:"كل وحدات إيمان المتاحة اليوم، حسب طلب عميلك.",
   role:"Senior Sales Manager",ask:"طلب العميل",reset:"مسح الكل",budget:"الميزانية",loc:"المنطقة",plan:"طريقة الدفع",beds:"عدد الغرف",
   any:"الكل",cash:"كاش كامل",clear:"مسح",upTo:"لحد ",
   planHint:{"40/60":"40% قبل التسليم","50/50":"50% قبل التسليم",cash:"أعلى خصم"},
@@ -193,7 +197,23 @@ const T={
   plan2:"المخطط",copy:"نسخ للعميل",wa:"اسأل سام",copied:"انتسخت. الصقها للعميل.",copyFail:"ما زبط النسخ على هالجهاز.",
   floor:"الطابق",sqft:"قدم²",handover:"التسليم",
   foot:"الأسعار بالدرهم من آخر قوائم إيمان. الأقساط محسوبة على السعر بعد الخصم. الأسعار والتوفر والعروض بتتأكد عند الحجز، ورسوم الأراضي والتسجيل مش محسوبة.",
-  waMsg:(u,p)=>"مرحبا سام، الوحدة "+u+" بمشروع "+p+" لسا متاحة؟ عندي عميل إلها."}
+  waMsg:(u,p)=>"مرحبا سام، الوحدة "+u+" بمشروع "+p+" لسا متاحة؟ عندي عميل إلها."},
+ ja:{dir:"ltr",other:"日本語",h1:"お客様に合う住戸を探す",noteL:"本日",sub:"本日販売中のIMAN全住戸を、お客様のご希望で絞り込めます。",
+  role:"シニア・セールスマネージャー",ask:"お客様のご希望",reset:"リセット",budget:"ご予算（AED）",loc:"エリア",plan:"支払いプラン",beds:"ベッドルーム",
+  any:"すべて",cash:"一括払い",clear:"クリア",upTo:"〜",
+  planHint:{"40/60":"引き渡し前に40%","50/50":"引き渡し前に50%",cash:"最大割引"},
+  locs:{sufouh:["アル・スフー・ガーデンズ","113 Residences"],jvc:["JVC","Oxford Cove"],motorcity:["モーターシティ","Sierra by Iman"]},
+  bedsL:{0:"スタジオ",1:"1ベッド",2:"2ベッド",3:"3ベッド",4:"4ベッド",r:"店舗"},
+  n:k=>k+"戸",none:"すべての条件に合う住戸はありません。",showCheapest:(v)=>"予算をAED "+v+"に上げる",
+  anyBudget:"予算指定なし",near:"予算を少し超える住戸（10%以内）",asof:d=>d+" 時点の空室",
+  sort:{price:"価格：安い順",priceD:"価格：高い順",size:"面積：広い順"},edit:"絞り込み",
+  planP:p=>p+"プラン",cashP:"一括払い",off:d=>d+"%割引",list:"定価",
+  onlyCash:"一括払いなら予算内",comm:v=>"仲介手数料7%：AED "+v,cashPill:(v,d)=>"一括 "+v+"（"+d+"%割引）",
+  details:"支払いスケジュール",total:"合計",save:"定価からの割引額",
+  plan2:"間取り図",copy:"お客様用にコピー",wa:"サムに問い合わせ",copied:"コピーしました。お客様に貼り付けてください。",copyFail:"この端末ではコピーできませんでした。",
+  floor:"階",sqft:"sq ft",handover:"引き渡し",
+  foot:"価格はIMANの最新空室リストに基づくAED建てです。円換算（1 AED ≈ ¥"+41.5+"）は目安です。分割払いは割引後の価格で計算しています。価格・空室・特典はご予約時に確定します。DLD登録料および登記費用は別途です。階数はUAE表記です（G＝地上階、1F＝その上の階）。",
+  waMsg:(u,p)=>"Hi Sam, is unit "+u+" at "+p+" still available? I have a client for it. (Japan)"}
 };
 T.ar.n=k=>k===1?"وحدة":k===2?"وحدتين":k+" وحدات";
 const TYPE={"one bedroom":"1 BR","one bedroom with study":"1 BR + Study","two bedroom":"2 BR","two bedroom with study":"2 BR + Study",
@@ -201,12 +221,21 @@ const TYPE={"one bedroom":"1 BR","one bedroom with study":"1 BR + Study","two be
  "four bedroom duplex with pool":"4 BR Duplex + Pool",studio:"Studio",retail:"Retail shop"};
 const TYPE_AR={"1 BR":"غرفة نوم","1 BR + Study":"غرفة + مكتب","2 BR":"غرفتين نوم","2 BR + Study":"غرفتين + مكتب","2 BR + Maid":"غرفتين + خادمة",
  "3 BR + Study":"3 غرف + مكتب","3 BR + Maid":"3 غرف + خادمة","4 BR Duplex + Pool":"دوبلكس 4 غرف + مسبح",Studio:"ستوديو","Retail shop":"محل تجاري"};
+const TYPE_JA={"1 BR":"1ベッドルーム","1 BR + Study":"1ベッドルーム＋書斎","2 BR":"2ベッドルーム","2 BR + Study":"2ベッドルーム＋書斎","2 BR + Maid":"2ベッドルーム＋メイドルーム",
+ "3 BR + Study":"3ベッドルーム＋書斎","3 BR + Maid":"3ベッドルーム＋メイドルーム","4 BR Duplex + Pool":"4ベッドルーム・デュプレックス＋プール",Studio:"スタジオ","Retail shop":"店舗"};
+const VIEW_JA={Community:"コミュニティビュー",Pool:"プールビュー",Park:"パークビュー","Pool/Park":"プール・パークビュー","Pool/Community":"プール・コミュニティビュー",Roadside:"道路側"};
+// Floors in the UAE way: G is street level, 1F the floor above it.
+const floorJa=f=>/^ground/i.test(f)?"G（地上階）":(f.match(/\d+/)||[f])[0]+"F";
+const JPY=41.5; // yen per dirham, shown as a guide on the Japanese page
 const VIEW_AR={Community:"المجمع",Pool:"المسبح",Park:"الحديقة","Pool/Park":"المسبح والحديقة","Pool/Community":"المسبح والمجمع",Roadside:"الشارع"};
 const fmt=n=>Math.round(n).toLocaleString("en-US");
 const mill=n=>n>=1e6?(Math.round(n/1e4)/100).toString()+"M":Math.round(n/1e3)+"K";
 const DEF={budget:null,loc:"any",plan:"any",beds:"any",sort:"price"};
-const st={lang:"en",...DEF};
-try{const l=localStorage.getItem("finder-lang");if(l==="ar"||l==="en")st.lang=l}catch(e){}
+// The page's two languages: ["en","ar"] for the main finder, ["ja","en"] for the Japanese one. The first opens by default.
+const LANGS=["en", "ar"];
+const st={lang:LANGS[0],...DEF};
+try{const l=localStorage.getItem("finder-lang-"+LANGS[0]);if(LANGS.includes(l))st.lang=l}catch(e){}
+const NOTE=()=>st.lang==="ja"&&D.noteJa?D.noteJa:D.note;
 
 const bedsOf=t=>{t=t.toLowerCase();if(t==="retail")return "r";if(t.startsWith("studio"))return "0";
   for(const [w,n] of [["one",1],["two",2],["three",3],["four",4]])if(t.startsWith(w))return String(n);return "?"};
@@ -231,19 +260,19 @@ function chips(el,opts,cur,onPick,cls=""){el.innerHTML="";for(const o of opts){c
   b.className="chip "+cls+(o.c===0?" zero":"");b.setAttribute("aria-pressed",String(o.v===cur));
   b.innerHTML=`${o.l}${o.c!=null?`<i class="num">${o.c}</i>`:""}${o.h?`<small>${o.h}</small>`:""}`;b.onclick=()=>onPick(o.v);el.append(b)}}
 
-function unitCard(u,f){const L=T[st.lang],ar=st.lang==="ar";
+function unitCard(u,f){const L=T[st.lang],ar=st.lang==="ar",ja=st.lang==="ja";
   const cashMain=st.plan==="cash"||f==="cash";
   const main=cashMain?u.cashPrice:u.planPrice;
-  const type=ar?(TYPE_AR[u.t]||u.t):u.t;
-  const fl=u.floor.replace(/ Floor$/,"").replace(/^Ground$/,ar?"أرضي":"Ground");
+  const type=ar?(TYPE_AR[u.t]||u.t):ja?(TYPE_JA[u.t]||u.t):u.t;
+  const fl=ja?floorJa(u.floor):u.floor.replace(/ Floor$/,"").replace(/^Ground$/,ar?"أرضي":"Ground");
   const v=u.view.replace(/ View$/,"");
-  const sch=u.p.schedule.map(([pc,en,a])=>`<tr><td>${pc}%</td><td>${ar?a:en}</td><td>AED ${fmt(u.planPrice*pc/100)}</td></tr>`).join("");
+  const sch=u.p.schedule.map(([pc,en,a,j])=>`<tr><td>${pc}%</td><td>${ar?a:ja?(j||en):en}</td><td>AED ${fmt(u.planPrice*pc/100)}</td></tr>`).join("");
   return `<article class="unit">
    <div class="row1"><div><div class="eb">${u.p.name} · ${L.locs[u.p.loc][0]}</div>
      <div class="uh"><h3 dir="ltr">${u.no}</h3><span class="ut">${type}</span></div></div>
     <div class="price"><div class="k">${cashMain?L.cashP:L.planP(u.planName)} · ${L.off(Math.round((cashMain?u.cash:u.disc)*100))}</div>
-     <div class="v">AED ${fmt(main)}</div><s class="num">${L.list} ${fmt(u.op)}</s></div></div>
-   <div class="meta"><span>${L.floor} <b>${fl}</b></span><span><b>${ar?(VIEW_AR[v]||v):v}</b></span><span><b class="num">${fmt(u.area)}</b> ${L.sqft}</span>${u.p.handover?`<span>${L.handover} <b>${u.p.handover}</b></span>`:""}</div>
+     <div class="v">AED ${fmt(main)}</div>${ja?`<div class="yen num">≈ ¥${fmt(main*JPY)}</div>`:""}<s class="num">${L.list} ${fmt(u.op)}</s></div></div>
+   <div class="meta"><span>${L.floor} <b>${fl}</b></span><span><b>${ar?(VIEW_AR[v]||v):ja?(VIEW_JA[v]||v):v}</b></span><span><b class="num">${fmt(u.area)}</b> ${L.sqft}</span>${u.p.handover?`<span>${L.handover} <b>${u.p.handover}</b></span>`:""}</div>
    <div class="pills">${f==="cash"?`<span class="pill warn">${L.onlyCash}</span>`:""}
     ${!cashMain?`<span class="pill cash num">${L.cashPill(fmt(u.cashPrice),Math.round(u.cash*100))}</span>`:""}
     <span class="pill comm num">${L.comm(fmt(main*COMM))}</span></div>
@@ -257,11 +286,11 @@ function unitCard(u,f){const L=T[st.lang],ar=st.lang==="ar";
 function render(){const L=T[st.lang];
   document.documentElement.lang=st.lang;document.documentElement.dir=L.dir;
   for(const k of ["h1","sub","role","ask","budget","loc","plan","beds"])document.getElementById("t-"+k).textContent=L[k];
-  const nt=document.getElementById("note");nt.hidden=!D.note;document.getElementById("notetext").textContent=D.note;document.getElementById("t-note").textContent=L.noteL;
-  document.getElementById("lang").textContent=L.other;document.getElementById("reset").textContent=L.reset;
+  const nt=document.getElementById("note");nt.hidden=!NOTE();document.getElementById("notetext").textContent=NOTE();document.getElementById("t-note").textContent=L.noteL;
+  document.getElementById("lang").textContent=T[LANGS.find(l=>l!==st.lang)].other;document.getElementById("reset").textContent=L.reset;
   document.getElementById("edit").textContent=L.edit;
   const clr=document.getElementById("clear");clr.textContent=L.clear;clr.hidden=!st.budget;
-  chips(document.getElementById("quick"),[1,1.5,2,3,4,6].map(m=>({v:m*1e6,l:L.upTo+m+"M"})),st.budget,v=>{st.budget=st.budget===v?null:v;
+  chips(document.getElementById("quick"),[1,1.5,2,3,4,6].map(m=>({v:m*1e6,l:st.lang==="ja"?m+"M"+L.upTo.replace("〜","まで"):L.upTo+m+"M"})),st.budget,v=>{st.budget=st.budget===v?null:v;
     document.getElementById("budget").value=st.budget?fmt(st.budget):"";render()},"sm");
   chips(document.getElementById("locs"),[{v:"any",l:L.any,c:countWith({loc:"any"})},
     ...Object.keys(L.locs).filter(k=>U.some(u=>u.p.loc===k)).map(k=>({v:k,l:L.locs[k][0],h:L.locs[k][1],c:countWith({loc:k})}))],st.loc,v=>{st.loc=v;render()});
@@ -276,7 +305,7 @@ function render(){const L=T[st.lang];
   const rows=U.map(u=>({u,f:fit(u)})).filter(r=>r.f).sort((a,b)=>key(a)-key(b));
   const yes=rows.filter(r=>r.f!=="near"),near=rows.filter(r=>r.f==="near");
   document.getElementById("count").textContent=L.n(yes.length);
-  const bits=[st.budget?L.upTo+"AED "+mill(st.budget):L.anyBudget];
+  const bits=[st.budget?(st.lang==="ja"?"AED "+mill(st.budget)+"まで":L.upTo+"AED "+mill(st.budget)):L.anyBudget];
   if(st.loc!=="any")bits.push(L.locs[st.loc][0]);if(st.plan!=="any")bits.push(st.plan==="cash"?L.cash:st.plan);if(st.beds!=="any")bits.push(L.bedsL[st.beds]);
   const [y,m,d]=D.date.split("-");
   document.getElementById("sumline").textContent=bits.join(" · ")+"  ·  "+L.asof(`${d}.${m}.${y}`);
@@ -286,16 +315,25 @@ function render(){const L=T[st.lang];
       <button type="button" class="reset" data-reset="1">${L.reset}</button></div>`}
   if(near.length)html+=`<div class="sec">${L.near}</div>`+near.map(r=>unitCard(r.u,r.f)).join("");
   document.getElementById("list").innerHTML=html;
-  document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr</b> · Senior Sales Manager · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
+  document.getElementById("foot").innerHTML=`${L.foot}<br><b>Sam Jabr${st.lang==="ja"?"（サム・ジャブル）":""}</b> · Senior Sales Manager · IMAN Developers · <span dir="ltr">+971 50 175 2771</span>`;
 }
 
 const find=k=>{const [pid,no]=k.split("|");return U.find(u=>u.pid===pid&&u.no===no)};
-function clientText(u){const L=T[st.lang];
+function clientText(u){const L=T[st.lang];if(st.lang==="ja")return clientTextJa(u);
   const lines=[`${u.p.name} · ${T.en.locs[u.p.loc][0]}`,`Unit ${u.no} · ${u.t} · ${u.floor} · ${u.view} · ${fmt(u.area)} sq ft`];
   if(st.plan!=="cash"){lines.push(`${u.planName} payment plan, ${Math.round(u.disc*100)}% off: AED ${fmt(u.planPrice)}`);
     for(const [pc,en] of u.p.schedule)lines.push(`  ${pc}% ${en}: AED ${fmt(u.planPrice*pc/100)}`)}
   lines.push(`Full cash, ${Math.round(u.cash*100)}% off: AED ${fmt(u.cashPrice)}`);
   if(u.p.handover)lines.push(`Handover ${u.p.handover}`);
+  lines.push("","Sam Jabr · Senior Sales Manager · IMAN Developers · WhatsApp +971 50 175 2771");return lines.join("\n")}
+// Text a Japanese broker pastes to the client: in Japanese, with yen as a guide.
+function clientTextJa(u){const J=T.ja,y=v=>`AED ${fmt(v)}（約¥${fmt(v*JPY)}）`;
+  const lines=[`${u.p.name} · ${J.locs[u.p.loc][0]}（ドバイ）`,`住戸 ${u.no} · ${TYPE_JA[u.t]||u.t} · ${floorJa(u.floor)} · ${VIEW_JA[u.view.replace(/ View$/,"")]||u.view} · ${fmt(u.area)} sq ft（約${fmt(u.area*0.092903)} m²）`];
+  if(st.plan!=="cash"){lines.push(`${u.planName}支払いプラン、${Math.round(u.disc*100)}%割引：${y(u.planPrice)}`);
+    for(const [pc,en,a,j] of u.p.schedule)lines.push(`  ${pc}% ${j||en}：${y(u.planPrice*pc/100)}`)}
+  lines.push(`一括払い、${Math.round(u.cash*100)}%割引：${y(u.cashPrice)}`);
+  if(u.p.handover)lines.push(`引き渡し：${u.p.handover.replace(/^Q(\d) (\d{4})$/,"$2年第$1四半期")}`);
+  lines.push(`円換算は1 AED ≈ ¥${JPY}の目安です。DLD登録料（4%）および登記費用は別途です。`);
   lines.push("","Sam Jabr · Senior Sales Manager · IMAN Developers · WhatsApp +971 50 175 2771");return lines.join("\n")}
 let tt;function toast(s){const t=document.getElementById("toast");t.textContent=s;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
 const bi=document.getElementById("budget");
@@ -317,6 +355,6 @@ document.getElementById("reset").onclick=resetAll;
 document.getElementById("sort").onchange=e=>{st.sort=e.target.value;render()};
 document.getElementById("edit").onclick=()=>document.getElementById("f").scrollIntoView({behavior:"smooth",block:"start"});
 document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();bi.blur();document.getElementById("rbar").scrollIntoView({behavior:"smooth"})});
-document.getElementById("lang").onclick=()=>{st.lang=st.lang==="en"?"ar":"en";try{localStorage.setItem("finder-lang",st.lang)}catch(e){}render()};
+document.getElementById("lang").onclick=()=>{st.lang=LANGS.find(l=>l!==st.lang);try{localStorage.setItem("finder-lang-"+LANGS[0],st.lang)}catch(e){}render()};
 render();
 </script>
