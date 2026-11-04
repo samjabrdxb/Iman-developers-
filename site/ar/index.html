@@ -13,6 +13,7 @@
 <link rel="alternate" hreflang="ru" href="https://samjabrdxb.github.io/Iman-developers-/ru/">
 <link rel="alternate" hreflang="en" href="https://samjabrdxb.github.io/Iman-developers-/en/">
 <link rel="alternate" hreflang="ar" href="https://samjabrdxb.github.io/Iman-developers-/ar/">
+<link rel="alternate" hreflang="ja" href="https://samjabrdxb.github.io/Iman-developers-/ja/">
 <script>(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
 for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r)return}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=114052212","ym");
@@ -22,7 +23,7 @@ ym(114052212,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 <body>
 <title>113 Residences, Дубай · Сэм Джабр</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&display=swap">
 <style>
 /* Yandex Direct landing page for 113 Residences only. Light, editorial look: warm paper background, thin large headings, square buttons, gold accent. RU first, plus EN and AR. */
 :root{
@@ -39,6 +40,8 @@ ym(114052212,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-dark{background:var(--gold);color:#1b160d}}
 :root[data-theme="dark"] .btn-dark{background:var(--gold);color:#1b160d}
 [dir="rtl"]{--f:"IBM Plex Sans Arabic","Manrope",system-ui,sans-serif}
+:lang(ja){--f:"Manrope","Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif}
+:lang(ja) h1,:lang(ja) h2,:lang(ja) h3{letter-spacing:0;font-weight:400;line-height:1.3;line-break:strict}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--f);-webkit-font-smoothing:antialiased}
@@ -272,7 +275,7 @@ dialog::backdrop{background:rgba(12,14,12,.72)}
       <a href="#about" data-i="nAbout">О проекте</a><a href="#units" data-i="nUnits">Квартиры</a><a href="#pay" data-i="nPay">Оплата</a><a href="#loc" data-i="nLoc">Расположение</a><a href="#contact" data-i="nContact">Контакты</a>
     </nav>
     <div class="right">
-      <div class="langs" role="group" aria-label="Language"><button data-lang="ru">RU</button><button data-lang="en">EN</button><button data-lang="ar">عربي</button></div>
+      <div class="langs" role="group" aria-label="Language"><button data-lang="ru">RU</button><button data-lang="en">EN</button><button data-lang="ar">عربي</button><button data-lang="ja">日本語</button></div>
       <select class="cur" id="cur" aria-label="Currency"></select>
       <a class="btn btn-dark" href="#contact" data-i="ctaTop">Получить цены</a>
     </div>
@@ -490,23 +493,52 @@ const T = {
   fSend:"ابعتلي القائمة",fSending:"عم يتم الإرسال…",fOk:"شكراً! وصل طلبك وبتواصل معك قريباً.",fErr:"ما زبط الإرسال. رح ينفتح واتساب وفيه طلبك، بس اضغط إرسال.",fNeed:"اكتب اسمك ورقم هاتفك.",
   rows:["الحجز، 20%","خلال 90 يوماً، 10%","عند إنجاز 40%، 10%","عند التسليم، 60%"],payNote:"لا يشمل رسوم دائرة الأراضي (4%) والتسجيل.",unit:"وحدة",
   msg:{general:"مرحبا سام، مهتم بمشروع 113 Residences. ممكن تبعتلي الأسعار والمخططات؟",unit:u=>`مرحبا سام، مهتم بمخطط «${u}» في 113 Residences. ممكن تبعتلي الوحدات المتاحة وأسعارها؟`,
-   lead:(n,ph,t,b,c)=>`مرحبا سام، طلب من الموقع (113 Residences).\nالاسم: ${n}\nالهاتف: ${ph}\nالمخطط: ${t}\nالميزانية: ${b}\nالتواصل: ${c}`}}
+   lead:(n,ph,t,b,c)=>`مرحبا سام، طلب من الموقع (113 Residences).\nالاسم: ${n}\nالهاتف: ${ph}\nالمخطط: ${t}\nالميزانية: ${b}\nالتواصل: ${c}`}},
+ ja:{stripB:"IMAN Developersの新規プロジェクト",stripT:"価格と空室状況は毎日更新",nAbout:"プロジェクト",nUnits:"住戸",nPay:"お支払い",nLoc:"立地",nContact:"お問い合わせ",ctaTop:"価格を見る",
+  heroK:"113 Residences · アル・スフー、ドバイ",heroH:"公園とビーチのそばに、あなたの住まいを。",heroP:"アル・スフー・コミュニティパークの目の前に建つIMAN Developersの113邸。ゆとりある間取り、屋上プール、そして2029年の引き渡しまで40/60の分割払い。",
+  heroC1:"住戸を見る",heroC2:"間取りと価格を受け取る",
+  stats:f=>[[f,"価格（〜から）"],["40/60","分割払いプラン"],["−14%","一括払いの場合"],["2–3","ベッドルーム"]],
+  aK:"プロジェクト",aH:"暮らしのためにデザインされた建築。",aP:"流れるようなファサード、広いテラス、上質な仕上げ。地下1階・地上1階＋9階建て、アル・スフー・コミュニティパークに面し、ビーチ、パーム・ジュメイラ、ドバイ・マリーナまで数分。",
+  cap:"113 Residences 完成予想図",aBig:"書斎またはメイドルーム付きの2ベッドルーム・3ベッドルーム。バルコニー・テラス付き。引き渡しは2029年第2四半期。",
+  f1:"Hafeleのスマートロックと欧州製キッチン家電",f2:"ラグーンプールと屋上インフィニティプール",f3:"フィットネスセンターとヨガルーム",f4:"アル・スフー・コミュニティパークの目の前、ビーチまで3分",
+  uK:"住戸",uH:"お好みの間取りをお選びください。",uP:"2ベッドルームと3ベッドルームの5つの間取り。代表的な間取り図と支払いスケジュールをご覧いただけます。最新の空室状況はWhatsAppでお送りします。",tpl:"代表的な間取り図",tplNote:"このタイプの間取り例です。すべてのバリエーションと空いている階はWhatsAppでお送りします。",ask:"空室を問い合わせる",helpH:"どれを選べばよいか迷っていますか？",helpP:"ご予算とご希望をお聞かせください。最適な間取りと階をご提案します。",
+  units:n=>`${n}戸`,from:"〜から",all:"すべて",listOf:d=>`デベロッパーリスト（${d}）`,
+  thNo:"住戸",thType:"タイプ",thArea:"面積",thPrice:"価格",floorPlan:"間取り図",payments:"支払い",cashL:"（一括払い）",
+  uFine:"「〜から」の価格は40/60プランの4%割引を含み、DLD登録料（4%）および登記費用は含みません。個別住戸の空室状況と価格はお問い合わせください。",
+  pK:"お支払い",pH:"引き渡しまで40/60。",pP:"建設期間中に40%、鍵の引き渡し時に60%をお支払い。銀行ローン不要、金利なし。",
+  s1:"予約から30日以内",s2:"90日以内",s3:"工事進捗40%時",s4:"引き渡し時、2029年Q2",calcL:"間取りごとに計算",
+  o1:"40/60プランでのデベロッパー価格からの割引",o2:"一括払いの場合の割引",o3:"年 — 200万AED以上の物件購入でUAEゴールデンビザ",
+  lK:"立地",lH:"ニュー・ドバイの中心に。",lP:"アル・スフーは、パーム・ジュメイラとドバイ・マリーナの間にある静かな住宅地。シェイク・ザイード・ロードのすぐそばです。",map:"地図で開く",min:"分",
+  mK:"担当者",mH:"サム・ジャブル",mRole:"シニア・セールスマネージャー · IMAN Developers",mP:"間取り図、支払いスケジュール、住戸の動画をお送りし、オンライン内覧やリモートでのご予約もサポートします。ドバイへお越しいただく必要はありません。",phone:"電話",
+  cK:"次のステップ",cH:"おすすめ住戸リストを受け取る。",cP:"ご連絡先をご入力ください。1営業日以内に、空いている住戸の価格・間取り図・支払いスケジュールをお送りします。",cOr:"今すぐメッセージを送る：",waCta:"WhatsAppでメッセージ",
+  ftK:"113 Residences · IMAN Developers",ftH:"ドバイへの第一歩は、ひとつの会話から。",ftC:"相談を申し込む",
+  fine:"サム・ジャブル · シニア・セールスマネージャー、IMAN Developers、ドバイ、UAE · +971 50 175 2771。価格・空室状況・条件は変更される場合があります。画像はイメージです。本ページは公式な販売申込みではありません。",
+  privacy:"プライバシーポリシー",close:"閉じる",callS:"電話",
+  fName:"お名前 *",fPhone:"電話番号（WhatsApp / Telegram）*",fType:"間取り",any:"指定なし",fBudget:"ご予算",budgets:["$600,000まで","$600,000 – $800,000","$800,000 – $1,200,000","$1,200,000以上"],
+  fPref:"ご希望の連絡方法",callPref:"電話",fAgree:"次の内容に従って個人情報を取り扱うことに同意します：",fAgreeL:"プライバシーポリシー",
+  fSend:"リストを受け取る",fSending:"送信中…",fOk:"ありがとうございます。お問い合わせを受け付けました。まもなくご連絡いたします。",fErr:"送信できませんでした。お問い合わせ内容を入れたWhatsAppが開きますので、送信ボタンを押してください。",fNeed:"お名前と電話番号をご入力ください。",
+  rows:["予約時、20%","90日以内、10%","工事進捗40%時、10%","引き渡し時、60%"],payNote:"DLD登録料（4%）および登記費用は含みません。",unit:"住戸",
+  msg:{general:"こんにちは、サムさん。113 Residencesに興味があります。価格と間取り図を送っていただけますか？",unit:u=>`こんにちは、サムさん。113 Residencesの「${u}」に興味があります。空いている住戸と価格を送っていただけますか？`,
+   lead:(n,ph,t,b,c)=>`こんにちは、サムさん。ウェブサイトからのお問い合わせ（113 Residences）。\nお名前：${n}\n電話番号：${ph}\n間取り：${t}\nご予算：${b}\n連絡方法：${c}`}}
 };
 const TYPE={ru:{"one bedroom with study":"1 спальня + кабинет","two bedroom":"2 спальни","two bedroom with study":"2 спальни + кабинет","two bedroom with maid":"2 спальни + комната персонала","three bedroom with study":"3 спальни + кабинет","three bedroom with maid":"3 спальни + комната персонала"},
  en:{"one bedroom with study":"1 Bedroom + Study","two bedroom":"2 Bedrooms","two bedroom with study":"2 Bedrooms + Study","two bedroom with maid":"2 Bedrooms + Maid's","three bedroom with study":"3 Bedrooms + Study","three bedroom with maid":"3 Bedrooms + Maid's"},
- ar:{"one bedroom with study":"غرفة نوم + مكتب","two bedroom":"غرفتا نوم","two bedroom with study":"غرفتا نوم + مكتب","two bedroom with maid":"غرفتا نوم + غرفة خادمة","three bedroom with study":"3 غرف نوم + مكتب","three bedroom with maid":"3 غرف نوم + غرفة خادمة"}};
+ ar:{"one bedroom with study":"غرفة نوم + مكتب","two bedroom":"غرفتا نوم","two bedroom with study":"غرفتا نوم + مكتب","two bedroom with maid":"غرفتا نوم + غرفة خادمة","three bedroom with study":"3 غرف نوم + مكتب","three bedroom with maid":"3 غرف نوم + غرفة خادمة"},
+ ja:{"one bedroom with study":"1ベッドルーム＋書斎","two bedroom":"2ベッドルーム","two bedroom with study":"2ベッドルーム＋書斎","two bedroom with maid":"2ベッドルーム＋メイドルーム","three bedroom with study":"3ベッドルーム＋書斎","three bedroom with maid":"3ベッドルーム＋メイドルーム"}};
 const TYPE_ORDER=Object.keys(TYPE.en);
 const VIEW={ru:{"community view":"вид на квартал","pool view":"вид на бассейн","park view":"вид на парк","pool/community view":"вид на бассейн и квартал","pool/park view":"вид на бассейн и парк","community/partial park view":"вид на квартал и парк"},
- ar:{"community view":"إطلالة على المجتمع","pool view":"إطلالة على المسبح","park view":"إطلالة على الحديقة","pool/community view":"إطلالة على المسبح والمجتمع","pool/park view":"إطلالة على المسبح والحديقة","community/partial park view":"إطلالة على المجتمع وجزء من الحديقة"}};
-const DRIVE=[["Парк Аль-Суфух","Al Sufouh Community Park","حديقة الصفوح",1],["Шоссе Шейха Зайда","Sheikh Zayed Road","شارع الشيخ زايد",1],["Пляж Аль-Суфух","Al Sufouh Beach","شاطئ الصفوح",3],["Emirates Golf Club","Emirates Golf Club","نادي الإمارات للغولف",8],["Palm Jumeirah","Palm Jumeirah","نخلة جميرا",8],["Mall of the Emirates","Mall of the Emirates","مول الإمارات",10],["Dubai Marina","Dubai Marina","دبي مارينا",10],["Burj Al Arab","Burj Al Arab","برج العرب",12],["Dubai Mall и Downtown","Dubai Mall & Downtown","دبي مول وداون تاون",18],["Аэропорт DXB","Dubai Int'l Airport (DXB)","مطار دبي الدولي",24]];
-const CUR=[["USD",1/3.6725],["AED",1],["RUB",22.4],["EUR",0.24],["KZT",137]];
+ ar:{"community view":"إطلالة على المجتمع","pool view":"إطلالة على المسبح","park view":"إطلالة على الحديقة","pool/community view":"إطلالة على المسبح والمجتمع","pool/park view":"إطلالة على المسبح والحديقة","community/partial park view":"إطلالة على المجتمع وجزء من الحديقة"},
+ ja:{"community view":"コミュニティビュー","pool view":"プールビュー","park view":"パークビュー","pool/community view":"プール・コミュニティビュー","pool/park view":"プール・パークビュー","community/partial park view":"コミュニティ・一部パークビュー"}};
+const DRIVE=[["Парк Аль-Суфух","Al Sufouh Community Park","حديقة الصفوح",1,"アル・スフー・コミュニティパーク"],["Шоссе Шейха Зайда","Sheikh Zayed Road","شارع الشيخ زايد",1,"シェイク・ザイード・ロード"],["Пляж Аль-Суфух","Al Sufouh Beach","شاطئ الصفوح",3,"アル・スフー・ビーチ"],["Emirates Golf Club","Emirates Golf Club","نادي الإمارات للغولف",8,"エミレーツ・ゴルフクラブ"],["Palm Jumeirah","Palm Jumeirah","نخلة جميرا",8,"パーム・ジュメイラ"],["Mall of the Emirates","Mall of the Emirates","مول الإمارات",10,"モール・オブ・ジ・エミレーツ"],["Dubai Marina","Dubai Marina","دبي مارينا",10,"ドバイ・マリーナ"],["Burj Al Arab","Burj Al Arab","برج العرب",12,"ブルジュ・アル・アラブ"],["Dubai Mall и Downtown","Dubai Mall & Downtown","دبي مول وداون تاون",18,"ドバイモール＆ダウンタウン"],["Аэропорт DXB","Dubai Int'l Airport (DXB)","مطار دبي الدولي",24,"ドバイ国際空港（DXB）"]];
+const CUR=[["USD",1/3.6725],["AED",1],["RUB",22.4],["EUR",0.24],["KZT",137],["JPY",41.5]];
 function plural(n,f){const a=n%100,b=n%10;return a>10&&a<20?f[2]:b===1?f[0]:b>1&&b<5?f[1]:f[2]}
 const DISC=P.discount||0,CASH=P.cash||0;
 // Only these layouts are shown; single units are not listed.
 const LAYOUTS=["two bedroom","two bedroom with study","two bedroom with maid","three bedroom with study","three bedroom with maid"];
 const UNITS=P.units.filter(u=>LAYOUTS.includes(u.type.toLowerCase())).map(u=>({...u,t:u.type.toLowerCase(),p:Math.round(u.op*(1-DISC)),c:Math.round(u.op*(1-CASH))}));
-// Each folder (ru/, en/, ar/) opens in its own language; ?lang= overrides it.
+// Each folder (ru/, en/, ar/, ja/) opens in its own language; ?lang= overrides it.
 const st={lang:T[CFG.lang]?CFG.lang:"ru",cur:"USD",f:"all"};
+if(st.lang==="ja")st.cur="JPY";
 try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(s.cur)st.cur=s.cur}catch(e){}
 try{const q=new URLSearchParams(location.search).get("lang");if(T[q])st.lang=q}catch(e){}
 const save=()=>{try{localStorage.setItem("sj-113",JSON.stringify({lang:st.lang,cur:st.cur}))}catch(e){}};
@@ -514,12 +546,14 @@ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const L=()=>T[st.lang],t=k=>L()[k];
 const fmt=n=>Math.round(n).toLocaleString("en-US");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const money=aed=>{const [c,r]=CUR.find(x=>x[0]===st.cur);return (c==="USD"?"$":c+" ")+fmt(aed*r)};
+const money=aed=>{const [c,r]=CUR.find(x=>x[0]===st.cur);return (c==="USD"?"$":c==="JPY"?"¥":c+" ")+fmt(aed*r)};
 const waHref=x=>"https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(x);
 const typeName=k=>TYPE[st.lang][k]||k;
 const viewName=v=>v?((VIEW[st.lang]||{})[v.toLowerCase()]||v):"";
-function floorName(f){if(!f)return "";if(st.lang==="en")return f;const g=/ground/i.test(f),m=f.match(/\d+/);if(st.lang==="ru")return g?"Первый этаж (G)":m?m[0]+"-й этаж":f;return g?"الطابق الأرضي":m?"الطابق "+m[0]:f}
-const dateName=iso=>new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":st.lang==="ru"?"ru-RU":"en-GB",{day:"numeric",month:"long",year:"numeric"});
+function floorName(f){if(!f)return "";if(st.lang==="en")return f;const g=/ground/i.test(f),m=f.match(/\d+/);if(st.lang==="ru")return g?"Первый этаж (G)":m?m[0]+"-й этаж":f;if(st.lang==="ja")return g?"1階（G）":m?m[0]+"階":f;return g?"الطابق الأرضي":m?"الطابق "+m[0]:f}
+const dateName=iso=>new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?"ar-AE-u-nu-latn":st.lang==="ru"?"ru-RU":st.lang==="ja"?"ja-JP":"en-GB",{day:"numeric",month:"long",year:"numeric"});
+// "from" price: before the amount, or after it in Japanese (¥X〜).
+const fromP=x=>st.lang==="ja"?x+"〜":t("from")+" "+x;
 const sqm=a=>fmt(a*0.092903)+" m²";
 function goal(n,p){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",n,p)}catch(e){}
   // Google Ads conversions: CFG.gads = {"id":"AW-…","lead_form":"AW-…/label",…}
@@ -532,15 +566,15 @@ const rep=k=>UNITS.filter(u=>u.t===k).sort((a,b)=>a.p-b.p)[0];
 function renderTypes(){
   $("#types").innerHTML=types().map(k=>{const us=UNITS.filter(u=>u.t===k),r=rep(k),a0=Math.min(...us.map(u=>u.area)),a1=Math.max(...us.map(u=>u.area));
     return `<div class="type"><h3>${esc(typeName(k))}</h3>
-      <span class="tm num">${a0===a1?sqm(a0):sqm(a0)+" – "+sqm(a1)}</span><span class="tp num">${t("from")} ${money(r.p)}</span>
-      <span class="cash num">${t("from")} ${money(Math.min(...us.map(u=>u.c)))} ${t("cashL")}</span>
+      <span class="tm num">${a0===a1?sqm(a0):sqm(a0)+" – "+sqm(a1)}</span><span class="tp num">${fromP(money(r.p))}</span>
+      <span class="cash num">${fromP(money(Math.min(...us.map(u=>u.c))))} ${t("cashL")}</span>
       <div class="acts">${r.planImg?`<button data-plan="${k}">${t("floorPlan")}</button>`:""}<button data-pay="${k}">${t("payments")}</button><a data-ch="wa" href="${waHref(L().msg.unit(typeName(k)))}" target="_blank" rel="noopener">${t("ask")}</a></div></div>`}).join("")
     +`<div class="type" style="background:var(--night);color:var(--on-night)"><h3>${t("helpH")}</h3><span class="tm" style="color:var(--on-night-muted)">${t("helpP")}</span>
       <div class="acts"><a data-ch="wa" data-msg="general" href="${waHref(L().msg.general)}" target="_blank" rel="noopener">WhatsApp</a></div></div>`;
 }
 function renderCalc(){
   const sel=$("#calcSel"),cur=sel.value||types()[0];
-  sel.innerHTML=types().map(k=>`<option value="${k}" ${k===cur?"selected":""}>${esc(typeName(k))} · ${t("from")} ${money(rep(k).p)}</option>`).join("");
+  sel.innerHTML=types().map(k=>`<option value="${k}" ${k===cur?"selected":""}>${esc(typeName(k))} · ${fromP(money(rep(k).p))}</option>`).join("");
   const u=rep(cur);
   $("#calc").innerHTML=SPLIT.map((pc,i)=>`<div><span>${t("rows")[i]}</span><b>${money(u.p*pc/100)}</b></div>`).join("");
 }
@@ -548,7 +582,7 @@ function formHTML(){
   const pref=[["WhatsApp","WhatsApp"],["Telegram","Telegram"],[t("callPref"),t("callPref")]].filter(x=>x[0]!=="Telegram"||CFG.telegram);
   return `<form class="f" novalidate>
     <label>${t("fName")}<input name="name" autocomplete="name" maxlength="80"></label>
-    <label>${t("fPhone")}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="+7 900 000-00-00" dir="ltr"></label>
+    <label>${t("fPhone")}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="${st.lang==="ja"?"+81 90 0000 0000":"+7 900 000-00-00"}" dir="ltr"></label>
     <label>${t("fType")}<select name="type"><option>${t("any")}</option>${types().map(k=>`<option>${esc(typeName(k))}</option>`).join("")}</select></label>
     <label>${t("fBudget")}<select name="budget">${t("budgets").map(b=>`<option>${esc(b)}</option>`).join("")}</select></label>
     <label class="full">${t("fPref")}<select name="contact">${pref.map(p=>`<option>${esc(p[1])}</option>`).join("")}</select></label>
@@ -585,12 +619,12 @@ function render(forms=true){
   const ar=st.lang==="ar";document.documentElement.lang=st.lang;document.documentElement.dir=ar?"rtl":"ltr";
   $$("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===st.lang));
   $$("[data-i]").forEach(el=>{const v=t(el.dataset.i);if(typeof v==="string")el.textContent=v});
-  document.title="113 Residences · "+(ar?"دبي":st.lang==="ru"?"Дубай":"Dubai")+" · Sam Jabr";
+  document.title="113 Residences · "+(ar?"دبي":st.lang==="ru"?"Дубай":st.lang==="ja"?"ドバイ":"Dubai")+" · Sam Jabr";
   $("#cur").innerHTML=CUR.map(([c])=>`<option ${c===st.cur?"selected":""}>${c}</option>`).join("");
   const min=Math.min(...UNITS.map(u=>u.p));
   $("#stats").innerHTML=L().stats(money(min)).map(([b,s])=>`<div><b class="num">${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
   $("#uP").textContent=t("uP");
-  $("#drive").innerHTML=DRIVE.map(d=>`<li><span>${esc(d[st.lang==="ru"?0:st.lang==="en"?1:2])}</span><b class="num">${d[3]} ${t("min")}</b></li>`).join("");
+  $("#drive").innerHTML=DRIVE.map(d=>`<li><span>${esc(d[st.lang==="ru"?0:st.lang==="en"?1:st.lang==="ja"?4:2])}</span><b class="num">${d[3]} ${t("min")}</b></li>`).join("");
   renderTypes();renderCalc();
   if(forms)$("#formbox").innerHTML=formHTML();
   $$("a[data-ch=wa][data-msg]").forEach(a=>a.href=waHref(L().msg[a.dataset.msg]));

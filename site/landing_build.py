@@ -3,6 +3,7 @@
   site/ru/  Russian, for Yandex Direct    https://samjabrdxb.github.io/Iman-developers-/ru/
   site/en/  English, for Google Ads       https://samjabrdxb.github.io/Iman-developers-/en/
   site/ar/  Arabic, for Google Ads        https://samjabrdxb.github.io/Iman-developers-/ar/
+  site/ja/  Japanese, for Google Ads      https://samjabrdxb.github.io/Iman-developers-/ja/
 
 Each folder gets index.html (the page, opening in its language; the language
 buttons still switch) and privacy.html (privacy policy in that language, which
@@ -132,6 +133,32 @@ LANGS = {
 <h2>8. التواصل</h2>
 <p>سام جبر، إيمان للتطوير العقاري، دبي، الإمارات. {contact("هاتف")}.</p>""",
   ptitle="سياسة الخصوصية · سام جبر"),
+ "ja": dict(dir="ltr",
+  desc="IMAN Developersの113 Residences（ドバイ、アル・スフー）：公園とビーチのそばの2・3ベッドルーム、40/60の分割払い、一括払いで14%割引。価格と間取り図はWhatsAppで。",
+  og="113 Residences · ドバイ · IMAN Developers",
+  privacy=lambda url: f"""<p><a href="./">← ページに戻る</a></p>
+<h1>プライバシーポリシー</h1>
+<p><small>{inv['inventoryDate']} 版</small></p>
+<p>本ポリシーは、IMAN Developers（UAE・ドバイ）のシニア・セールスマネージャーであるサム・ジャブル（以下「当方」）が、ウェブサイト {url} の訪問者の個人情報をどのように取り扱うかを説明するものです。</p>
+<h2>1. 収集する情報</h2>
+<ul><li>お問い合わせフォームにご入力いただくお名前、電話番号、ご予算、ご希望の間取り、ご希望の連絡方法。</li>
+<li>Google AdsおよびYandex Metricaが収集する訪問に関する技術情報（Cookie、IPアドレス、ブラウザ・端末の情報、参照元）。</li></ul>
+<h2>2. 利用目的</h2>
+<ul><li>ご連絡およびお問い合わせへの回答（物件のご提案、価格・間取り図・支払い条件の送付）。</li>
+<li>アクセス解析、ならびにウェブサイトと広告の改善。</li></ul>
+<h2>3. 法的根拠</h2>
+<p>フォームの送信によりいただいたご同意に基づいて個人情報を取り扱います。ご同意は、当方へご連絡いただくことでいつでも撤回できます。</p>
+<h2>4. 第三者への提供</h2>
+<p>個人情報を販売することはなく、ウェブサイトの運営に必要なサービス（フォームの内容をメールで届けるサービス、ご連絡に使われた場合のWhatsAppおよびTelegram、Google Ads、Yandex Metrica）を除き、第三者に提供することはありません。ご購入の際は、手続きに必要な範囲で、IMAN DevelopersおよびUAEの関係当局（ドバイ土地局）に提供される場合があります。</p>
+<h2>5. 保存期間</h2>
+<p>利用目的の達成またはご同意の撤回まで保存し、最後のご連絡から3年を超えて保存することはありません。</p>
+<h2>6. お客様の権利</h2>
+<p>当方が保有するご自身の情報の開示、訂正または削除を求めること、およびご同意を撤回することができます。</p>
+<h2>7. Cookie</h2>
+<p>本ウェブサイトはGoogleおよびYandex MetricaのCookieを使用しています。ブラウザの設定でCookieを無効にしても、ウェブサイトは引き続きご利用いただけます。</p>
+<h2>8. お問い合わせ先</h2>
+<p>サム・ジャブル、IMAN Developers、UAE・ドバイ。{contact("電話")}。</p>""",
+  ptitle="プライバシーポリシー · サム・ジャブル"),
 }
 
 PRIV_CSS = """:root{--bg:#f7f5ef;--ink:#1d211c;--muted:#77796f}

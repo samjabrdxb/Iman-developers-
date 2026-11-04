@@ -19,6 +19,7 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
   - `site/ru/`: Russian, for Yandex Direct: https://samjabrdxb.github.io/Iman-developers-/ru/
   - `site/en/`: English, for Google Ads: https://samjabrdxb.github.io/Iman-developers-/en/
   - `site/ar/`: Arabic, for Google Ads: https://samjabrdxb.github.io/Iman-developers-/ar/
+  - `site/ja/`: Japanese, for Google Ads: https://samjabrdxb.github.io/Iman-developers-/ja/ (prices open in JPY)
 - GitHub Pages publishes the `site/` folder on every push to `main` (`.github/workflows/pages.yml`).
 - Settings at the top of `site/landing_build.py`: Telegram username, lead e-mail, Web3Forms key, Yandex Metrica counter (114052212) and Google Ads tag and conversion labels (`gads`).
 - Conversion events: `lead_form`, `lead_wa_fallback`, `click_whatsapp`, `click_telegram`, `click_email`, `call`, `open_plan`. Each goes to Metrica and, when a label is set in `gads`, to Google Ads.
