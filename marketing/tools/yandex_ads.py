@@ -28,8 +28,12 @@ def from_usd(ids):
 
 
 R = byId["113-residences"]
-FROM = from_usd(["113-residences"])
-CASH = "$" + f"{int(min(u['op'] for u in R['units']) * (1 - R['cash']) * USD) // 1000 * 1000:,}".replace(",", " ")
+# Same layouts as the landing page: 2 and 3 bedrooms only.
+LAYOUTS = {"two bedroom", "two bedroom with study", "two bedroom with maid", "three bedroom with study", "three bedroom with maid"}
+SHOWN = [u for u in R["units"] if u["type"].lower() in LAYOUTS]
+usd = lambda aed: "$" + f"{int(aed * USD) // 1000 * 1000:,}".replace(",", " ")
+FROM = usd(min(price(u, R) for u in SHOWN))
+CASH = usd(min(u["op"] for u in SHOWN) * (1 - R["cash"]))
 img = lambda rel: "file://" + os.path.join(SITE, rel)
 EB = "113 Residences · Аль-Суфух, Дубай"
 
@@ -44,7 +48,7 @@ ADS = [
          price=("цена от", FROM), cta="Рассчитать платежи"),
     dict(slug="03-113-cash", photo=img("assets/113-residences-main.webp"), pos="66% 50%",
          eb=EB, h="Скидка <span>14%</span><br>при 100% оплате",
-         chips=["1–3 спальни", "Смарт-замки Hafele", "Бассейн на крыше"],
+         chips=["2–3 спальни", "Смарт-замки Hafele", "Бассейн на крыше"],
          price=("цена от", CASH), cta="Узнать цены"),
     dict(slug="04-113-location", photo=img("assets/113-residences-main.webp"), pos="0% 50%",
          eb=EB, h="1 минута до парка,<br><span>3 минуты до пляжа</span>",

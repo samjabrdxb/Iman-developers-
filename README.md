@@ -15,7 +15,7 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 ## Yandex Direct landing page
 
-- `site/landing.tpl.html`, `site/landing_build.py`: landing page for Yandex Direct ads about 113 Residences only, in Russian (default), English and Arabic, with a lead form, WhatsApp, Telegram, call and e-mail. It writes `site/ru/index.html` and `site/ru/privacy.html` (privacy policy, needed for the form).
+- `site/landing.tpl.html`, `site/landing_build.py`: landing page for Yandex Direct ads about 113 Residences only (five layouts, 2BR to 3BR + maid, with "from" prices; no unit list), in Russian (default), English and Arabic, with a lead form, WhatsApp, Telegram, call and e-mail. It writes `site/ru/index.html` and `site/ru/privacy.html` (privacy policy, needed for the form).
 - Address: https://samjabrdxb.github.io/Iman-developers-/ru/ (GitHub Pages publishes the `site/` folder on every push to `main`, see `.github/workflows/pages.yml`).
 - Telegram username, lead e-mail and the Yandex Metrica counter ID are set at the top of `site/landing_build.py`. Without an e-mail, the form opens WhatsApp with the lead filled in.
 - Metrica goals for Yandex Direct: `lead_form`, `lead_wa_fallback`, `click_whatsapp`, `click_telegram`, `click_email`, `call`, `open_units`.

@@ -116,8 +116,11 @@ nav.menu a:hover{color:var(--ink)}
 
 /* unit types */
 .types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.type{background:var(--paper);padding:26px 24px;display:flex;flex-direction:column;gap:6px;text-align:start;border:0;cursor:pointer}
-.type:hover{background:var(--paper-2)}
+.type{background:var(--paper);padding:26px 24px;display:flex;flex-direction:column;gap:6px;text-align:start;border:0}
+.type .acts{display:flex;gap:6px;margin-top:auto;padding-top:18px;flex-wrap:wrap}
+.type .acts button,.type .acts a{flex:1;border:1px solid var(--line);background:transparent;padding:9px 10px;font-size:12px;font-weight:600;text-decoration:none;text-align:center;white-space:nowrap}
+.type .acts a{background:var(--gold);border-color:var(--gold);color:#1b160d}
+.type .cash{font-size:13px;color:var(--gold-ink)}
 .type[aria-pressed="true"]{background:var(--night);color:var(--on-night)}
 .type[aria-pressed="true"] .tm{color:var(--on-night-muted)}
 .type h3{font-size:24px;letter-spacing:-.02em;font-weight:400}
@@ -316,12 +319,7 @@ dialog::backdrop{background:rgba(12,14,12,.72)}
       <p id="uP"></p>
     </div>
     <div class="types" id="types"></div>
-    <div class="tools"><div class="chips" id="chips"></div><span class="fine" id="listDate" style="margin:0"></span></div>
-    <table class="tbl">
-      <thead><tr><th data-i="thNo">№</th><th data-i="thType">Тип</th><th data-i="thArea">Площадь</th><th data-i="thPrice">Цена</th><th></th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
-    <p class="fine" data-i="uFine">Цены указаны со скидкой 4% на плане 40/60. Без учёта сбора DLD (4%) и регистрации. Уточняйте наличие перед бронированием.</p>
+    <p class="fine" data-i="uFine"></p>
   </div>
 </section>
 
@@ -337,7 +335,7 @@ dialog::backdrop{background:rgba(12,14,12,.72)}
       <div><b class="num">10%</b><span data-i="s3">При готовности 40%</span></div>
       <div><b class="num">60%</b><span data-i="s4">При сдаче, Q2 2029</span></div>
     </div>
-    <div class="calc"><span data-i="calcL">Рассчитать для квартиры</span><select id="calcSel"></select></div>
+    <div class="calc"><span data-i="calcL">Рассчитать для планировки</span><select id="calcSel"></select></div>
     <div class="sched num" id="calc"></div>
     <div class="offers">
       <div><b class="num">4%</b><span data-i="o1">Скидка от цены застройщика на плане 40/60</span></div>
@@ -415,16 +413,16 @@ const T = {
  ru:{stripB:"Новый проект IMAN Developers",stripT:"Цены и наличие обновляются ежедневно",nAbout:"О проекте",nUnits:"Квартиры",nPay:"Оплата",nLoc:"Расположение",nContact:"Контакты",ctaTop:"Получить цены",
   heroK:"113 Residences · Аль-Суфух, Дубай",heroH:"Ваш адрес у парка и пляжа.",heroP:"113 резиденций от IMAN Developers напротив парка Аль-Суфух: просторные планировки, бассейн на крыше и рассрочка 40/60 до сдачи в 2029 году.",
   heroC1:"Смотреть квартиры",heroC2:"Получить планировки и цены",
-  stats:(f,n)=>[[f,"цена от"],["40/60","рассрочка до сдачи"],["−14%","при 100% оплате"],[n,"свободных квартир"]],
+  stats:f=>[[f,"цена от"],["40/60","рассрочка до сдачи"],["−14%","при 100% оплате"],["2–3","спальни"]],
   aK:"О проекте",aH:"Архитектура, созданная для жизни.",aP:"Плавные линии фасада, большие террасы и отделка премиум-класса. Здание B + G + 9 этажей с видом на парк Аль-Суфух, в нескольких минутах от пляжа, Palm Jumeirah и Dubai Marina.",
-  cap:"Визуализация 113 Residences",aBig:"113 квартир от 1 до 3 спален: с кабинетом или комнатой для персонала, с балконами и террасами. Сдача — второй квартал 2029 года.",
+  cap:"Визуализация 113 Residences",aBig:"Квартиры с 2 и 3 спальнями: с кабинетом или комнатой для персонала, с балконами и террасами. Сдача — второй квартал 2029 года.",
   f1:"Умные замки Hafele и европейская кухонная техника",f2:"Бассейн-лагуна и инфинити-бассейн на крыше",f3:"Фитнес-центр и зал для йоги",f4:"Напротив парка Аль-Суфух, 3 минуты до пляжа",
-  uK:"Квартиры",uH:"Выберите свою планировку.",uP:(n,d)=>`${n} свободных квартир на ${d}. Нажмите на тип, чтобы отфильтровать список, или откройте планировку и график платежей.`,
+  uK:"Квартиры",uH:"Выберите свою планировку.",uP:"Пять планировок с 2 и 3 спальнями. Откройте типовую планировку и график платежей, а актуальное наличие пришлю в WhatsApp.",tpl:"Типовая планировка",tplNote:"Пример планировки этого типа. Все варианты и свободные этажи пришлю в WhatsApp.",ask:"Узнать наличие",helpH:"Не знаете, что выбрать?",helpP:"Расскажите о бюджете и задачах — подберу планировку и этаж.",
   units:n=>`${n} ${plural(n,["квартира","квартиры","квартир"])}`,from:"от",all:"Все",listOf:d=>`Список застройщика от ${d}`,
   thNo:"№",thType:"Тип",thArea:"Площадь",thPrice:"Цена",floorPlan:"Планировка",payments:"Платежи",cashL:"при 100% оплате",
-  uFine:"Цены указаны со скидкой 4% на плане 40/60. Без учёта сбора DLD (4%) и регистрации. Уточняйте наличие перед бронированием.",
+  uFine:"Цены «от» указаны со скидкой 4% на плане 40/60, без учёта сбора DLD (4%) и регистрации. Наличие и цены конкретных квартир — по запросу.",
   pK:"Оплата",pH:"Рассрочка 40/60 до сдачи.",pP:"40% вы платите во время строительства, 60% — при получении ключей. Без банков и процентов.",
-  s1:"В течение 30 дней после бронирования",s2:"Через 90 дней",s3:"При готовности 40%",s4:"При сдаче, Q2 2029",calcL:"Рассчитать для квартиры",
+  s1:"В течение 30 дней после бронирования",s2:"Через 90 дней",s3:"При готовности 40%",s4:"При сдаче, Q2 2029",calcL:"Рассчитать для планировки",
   o1:"Скидка от цены застройщика на плане 40/60",o2:"Скидка при 100% оплате",o3:"лет — золотая виза ОАЭ при покупке от 2 млн AED",
   lK:"Расположение",lH:"В центре Нового Дубая.",lP:"Аль-Суфух — тихий район между Palm Jumeirah и Dubai Marina, рядом с шоссе Шейха Зайда.",map:"Открыть на карте",min:"мин",
   mK:"Ваш менеджер",mH:"Сэм Джабр.",mRole:"Старший менеджер по продажам · IMAN Developers",mP:"Пришлю планировки, графики платежей и видео квартиры, проведу онлайн-показ и помогу забронировать удалённо — прилетать в Дубай не обязательно.",phone:"Телефон",
@@ -436,21 +434,21 @@ const T = {
   fPref:"Способ связи",callPref:"Звонок",fAgree:"Я согласен(на) на обработку персональных данных в соответствии с",fAgreeL:"политикой конфиденциальности",
   fSend:"Получить подборку",fSending:"Отправляю…",fOk:"Спасибо! Заявка отправлена — я свяжусь с вами в ближайшее время.",fErr:"Не удалось отправить. Откроется WhatsApp с вашей заявкой — просто нажмите «Отправить».",fNeed:"Укажите имя и телефон.",
   rows:["Бронирование, 20%","Через 90 дней, 10%","При готовности 40%, 10%","При сдаче, 60%"],payNote:"Без учёта сбора DLD (4%) и регистрации.",unit:"Кв.",
-  msg:{general:"Здравствуйте, Сэм! Интересует 113 Residences. Пришлите, пожалуйста, цены и планировки.",unit:u=>`Здравствуйте, Сэм! Интересует квартира ${u} в 113 Residences. Она ещё свободна?`,
+  msg:{general:"Здравствуйте, Сэм! Интересует 113 Residences. Пришлите, пожалуйста, цены и планировки.",unit:u=>`Здравствуйте, Сэм! Интересует планировка «${u}» в 113 Residences. Пришлите, пожалуйста, свободные квартиры и цены.`,
    lead:(n,ph,t,b,c)=>`Здравствуйте, Сэм! Заявка с сайта (113 Residences).\nИмя: ${n}\nТелефон: ${ph}\nПланировка: ${t}\nБюджет: ${b}\nСвязь: ${c}`}},
  en:{stripB:"New launch by IMAN Developers",stripT:"Prices and availability updated daily",nAbout:"The project",nUnits:"Units",nPay:"Payment",nLoc:"Location",nContact:"Contact",ctaTop:"Get prices",
   heroK:"113 Residences · Al Sufouh, Dubai",heroH:"Your address by the park and the beach.",heroP:"113 residences by IMAN Developers facing Al Sufouh Community Park: generous layouts, a rooftop pool and a 40/60 payment plan until handover in 2029.",
   heroC1:"View units",heroC2:"Get floor plans and prices",
-  stats:(f,n)=>[[f,"prices from"],["40/60","payment plan"],["−14%","on 100% payment"],[n,"units available"]],
+  stats:f=>[[f,"prices from"],["40/60","payment plan"],["−14%","on 100% payment"],["2–3","bedrooms"]],
   aK:"The project",aH:"Architecture made for living.",aP:"Flowing façade lines, large terraces and premium finishes. A B + G + 9 building facing Al Sufouh Community Park, minutes from the beach, Palm Jumeirah and Dubai Marina.",
-  cap:"113 Residences, rendering",aBig:"113 homes from one to three bedrooms, with study or maid's room options, balconies and terraces. Handover in Q2 2029.",
+  cap:"113 Residences, rendering",aBig:"Two- and three-bedroom homes with study or maid's room options, balconies and terraces. Handover in Q2 2029.",
   f1:"Hafele smart locks and European kitchen appliances",f2:"Lagoon pool and rooftop infinity pool",f3:"Fitness centre and yoga room",f4:"Facing Al Sufouh Community Park, 3 minutes to the beach",
-  uK:"Units",uH:"Choose your layout.",uP:(n,d)=>`${n} units available as of ${d}. Tap a type to filter the list, or open a floor plan and payment schedule.`,
+  uK:"Units",uH:"Choose your layout.",uP:"Five layouts with two and three bedrooms. Open a typical floor plan and payment schedule; I'll send current availability on WhatsApp.",tpl:"Typical floor plan",tplNote:"A sample plan of this type. I'll send every variant and the available floors on WhatsApp.",ask:"Ask availability",helpH:"Not sure which to choose?",helpP:"Tell me your budget and plans and I'll match a layout and floor.",
   units:n=>`${n} units`,from:"from",all:"All",listOf:d=>`Developer list of ${d}`,
   thNo:"Unit",thType:"Type",thArea:"Area",thPrice:"Price",floorPlan:"Floor plan",payments:"Payments",cashL:"on 100% payment",
-  uFine:"Prices include the 4% discount on the 40/60 plan. Excludes the DLD fee (4%) and registration. Confirm availability before booking.",
+  uFine:"\"From\" prices include the 4% discount on the 40/60 plan and exclude the DLD fee (4%) and registration. Availability and prices of specific units on request.",
   pK:"Payment",pH:"40/60 until handover.",pP:"Pay 40% during construction and 60% when you get the keys. No bank, no interest.",
-  s1:"Within 30 days of booking",s2:"Within 90 days",s3:"At 40% construction",s4:"On handover, Q2 2029",calcL:"Calculate for unit",
+  s1:"Within 30 days of booking",s2:"Within 90 days",s3:"At 40% construction",s4:"On handover, Q2 2029",calcL:"Calculate for layout",
   o1:"Off the developer price on the 40/60 plan",o2:"Discount on 100% payment",o3:"year UAE Golden Visa with property from AED 2M",
   lK:"Location",lH:"At the heart of New Dubai.",lP:"Al Sufouh is a quiet neighbourhood between Palm Jumeirah and Dubai Marina, next to Sheikh Zayed Road.",map:"Open in Maps",min:"min",
   mK:"Your contact",mH:"Sam Jabr.",mRole:"Senior Sales Manager · IMAN Developers",mP:"I'll send floor plans, payment schedules and unit videos, run an online viewing and help you book remotely. No need to fly to Dubai.",phone:"Phone",
@@ -462,21 +460,21 @@ const T = {
   fPref:"Contact me by",callPref:"Call",fAgree:"I agree to the processing of my personal data under the",fAgreeL:"privacy policy",
   fSend:"Get my shortlist",fSending:"Sending…",fOk:"Thank you! Your request was sent and I'll be in touch shortly.",fErr:"Couldn't send. WhatsApp will open with your request; just tap Send.",fNeed:"Please enter your name and phone.",
   rows:["Booking, 20%","Within 90 days, 10%","At 40% construction, 10%","On handover, 60%"],payNote:"Excludes the DLD fee (4%) and registration.",unit:"Unit",
-  msg:{general:"Hi Sam, I'm interested in 113 Residences. Could you send me prices and floor plans?",unit:u=>`Hi Sam, I'm interested in unit ${u} at 113 Residences. Is it still available?`,
+  msg:{general:"Hi Sam, I'm interested in 113 Residences. Could you send me prices and floor plans?",unit:u=>`Hi Sam, I'm interested in the ${u} layout at 113 Residences. Could you send me the available units and prices?`,
    lead:(n,ph,t,b,c)=>`Hi Sam, enquiry from the website (113 Residences).\nName: ${n}\nPhone: ${ph}\nLayout: ${t}\nBudget: ${b}\nContact: ${c}`}},
  ar:{stripB:"إطلاق جديد من إيمان للتطوير العقاري",stripT:"الأسعار والتوفر تتحدّث يومياً",nAbout:"المشروع",nUnits:"الوحدات",nPay:"الدفع",nLoc:"الموقع",nContact:"تواصل",ctaTop:"اطلب الأسعار",
   heroK:"113 Residences · الصفوح، دبي",heroH:"عنوانك جنب الحديقة والبحر.",heroP:"113 وحدة سكنية من إيمان مقابل حديقة الصفوح: مساحات واسعة، مسبح على السطح، وخطة دفع 40/60 لحد التسليم بـ 2029.",
   heroC1:"شوف الوحدات",heroC2:"اطلب المخططات والأسعار",
-  stats:(f,n)=>[[f,"الأسعار من"],["40/60","خطة الدفع"],["−14%","عند الدفع الكامل"],[n,"وحدة متاحة"]],
+  stats:f=>[[f,"الأسعار من"],["40/60","خطة الدفع"],["−14%","عند الدفع الكامل"],["2–3","غرف نوم"]],
   aK:"المشروع",aH:"عمارة مصمّمة للحياة.",aP:"واجهة انسيابية، تراسات كبيرة وتشطيبات راقية. مبنى قبو + أرضي + 9 طوابق مقابل حديقة الصفوح، دقائق عن البحر ونخلة جميرا ودبي مارينا.",
-  cap:"تصوّر 113 Residences",aBig:"113 وحدة من غرفة لـ 3 غرف نوم، مع مكتب أو غرفة خادمة، وشرفات وتراسات. التسليم بالربع الثاني 2029.",
+  cap:"تصوّر 113 Residences",aBig:"شقق بغرفتين و3 غرف نوم، مع مكتب أو غرفة خادمة، وشرفات وتراسات. التسليم بالربع الثاني 2029.",
   f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون ومسبح لا متناهٍ على السطح",f3:"نادي رياضي وغرفة يوغا",f4:"مقابل حديقة الصفوح، 3 دقائق عن البحر",
-  uK:"الوحدات",uH:"اختار المخطط اللي بيناسبك.",uP:(n,d)=>`${n} وحدة متاحة حسب قائمة ${d}. اضغط على النوع لتفلتر القائمة، أو افتح المخطط وجدول الدفعات.`,
+  uK:"الوحدات",uH:"اختار المخطط اللي بيناسبك.",uP:"خمس مخططات بغرفتين و3 غرف نوم. افتح المخطط النموذجي وجدول الدفعات، والوحدات المتاحة ببعتلك ياها على واتساب.",tpl:"مخطط نموذجي",tplNote:"مثال عن مخطط هالنوع. ببعتلك كل الخيارات والطوابق المتاحة على واتساب.",ask:"اسأل عن التوفر",helpH:"محتار شو تختار؟",helpP:"قلّي ميزانيتك وهدفك وبختارلك المخطط والطابق.",
   units:n=>`${n} وحدة`,from:"من",all:"الكل",listOf:d=>`قائمة المطوّر بتاريخ ${d}`,
   thNo:"الوحدة",thType:"النوع",thArea:"المساحة",thPrice:"السعر",floorPlan:"المخطط",payments:"الدفعات",cashL:"عند الدفع الكامل",
-  uFine:"الأسعار شاملة خصم 4% على خطة 40/60. لا تشمل رسوم دائرة الأراضي (4%) والتسجيل. تأكد من التوفر قبل الحجز.",
+  uFine:"أسعار «من» شاملة خصم 4% على خطة 40/60، ولا تشمل رسوم دائرة الأراضي (4%) والتسجيل. توفر وأسعار الوحدات بالتحديد عند الطلب.",
   pK:"الدفع",pH:"40/60 لحد التسليم.",pP:"بتدفع 40% خلال البناء و60% لما تستلم المفتاح. بدون بنك وبدون فوائد.",
-  s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً",s3:"عند إنجاز 40%",s4:"عند التسليم، Q2 2029",calcL:"احسب لوحدة",
+  s1:"خلال 30 يوماً من الحجز",s2:"خلال 90 يوماً",s3:"عند إنجاز 40%",s4:"عند التسليم، Q2 2029",calcL:"احسب لمخطط",
   o1:"خصم من سعر المطوّر على خطة 40/60",o2:"خصم عند الدفع الكامل",o3:"سنين إقامة ذهبية بالإمارات لعقار من 2 مليون درهم",
   lK:"الموقع",lH:"بقلب دبي الجديدة.",lP:"الصفوح منطقة هادية بين نخلة جميرا ودبي مارينا، جنب شارع الشيخ زايد.",map:"افتح على الخريطة",min:"د",
   mK:"جهة اتصالك",mH:"سام جبر.",mRole:"مدير مبيعات أول · إيمان للتطوير العقاري",mP:"ببعتلك المخططات وجداول الدفع وفيديو الوحدة، وبعملك معاينة أونلاين وبساعدك تحجز عن بُعد، ما في داعي تسافر لدبي.",phone:"هاتف",
@@ -488,7 +486,7 @@ const T = {
   fPref:"كيف نتواصل",callPref:"اتصال",fAgree:"أوافق على معالجة بياناتي الشخصية حسب",fAgreeL:"سياسة الخصوصية",
   fSend:"ابعتلي القائمة",fSending:"عم يتم الإرسال…",fOk:"شكراً! وصل طلبك وبتواصل معك قريباً.",fErr:"ما زبط الإرسال. رح ينفتح واتساب وفيه طلبك، بس اضغط إرسال.",fNeed:"اكتب اسمك ورقم هاتفك.",
   rows:["الحجز، 20%","خلال 90 يوماً، 10%","عند إنجاز 40%، 10%","عند التسليم، 60%"],payNote:"لا يشمل رسوم دائرة الأراضي (4%) والتسجيل.",unit:"وحدة",
-  msg:{general:"مرحبا سام، مهتم بمشروع 113 Residences. ممكن تبعتلي الأسعار والمخططات؟",unit:u=>`مرحبا سام، مهتم بالوحدة ${u} في 113 Residences. لسا متاحة؟`,
+  msg:{general:"مرحبا سام، مهتم بمشروع 113 Residences. ممكن تبعتلي الأسعار والمخططات؟",unit:u=>`مرحبا سام، مهتم بمخطط «${u}» في 113 Residences. ممكن تبعتلي الوحدات المتاحة وأسعارها؟`,
    lead:(n,ph,t,b,c)=>`مرحبا سام، طلب من الموقع (113 Residences).\nالاسم: ${n}\nالهاتف: ${ph}\nالمخطط: ${t}\nالميزانية: ${b}\nالتواصل: ${c}`}}
 };
 const TYPE={ru:{"one bedroom with study":"1 спальня + кабинет","two bedroom":"2 спальни","two bedroom with study":"2 спальни + кабинет","two bedroom with maid":"2 спальни + комната персонала","three bedroom with study":"3 спальни + кабинет","three bedroom with maid":"3 спальни + комната персонала"},
@@ -501,7 +499,9 @@ const DRIVE=[["Парк Аль-Суфух","Al Sufouh Community Park","حديق�
 const CUR=[["USD",1/3.6725],["AED",1],["RUB",22.4],["EUR",0.24],["KZT",137]];
 function plural(n,f){const a=n%100,b=n%10;return a>10&&a<20?f[2]:b===1?f[0]:b>1&&b<5?f[1]:f[2]}
 const DISC=P.discount||0,CASH=P.cash||0;
-const UNITS=P.units.map(u=>({...u,t:u.type.toLowerCase(),p:Math.round(u.op*(1-DISC)),c:Math.round(u.op*(1-CASH))}));
+// Only these layouts are shown; single units are not listed.
+const LAYOUTS=["two bedroom","two bedroom with study","two bedroom with maid","three bedroom with study","three bedroom with maid"];
+const UNITS=P.units.filter(u=>LAYOUTS.includes(u.type.toLowerCase())).map(u=>({...u,t:u.type.toLowerCase(),p:Math.round(u.op*(1-DISC)),c:Math.round(u.op*(1-CASH))}));
 const st={lang:"ru",cur:"USD",f:"all"};
 try{const s=JSON.parse(localStorage.getItem("sj-113")||"{}");if(T[s.lang])st.lang=s.lang;if(s.cur)st.cur=s.cur}catch(e){}
 try{const q=new URLSearchParams(location.search).get("lang");if(T[q])st.lang=q}catch(e){}
@@ -519,26 +519,23 @@ const dateName=iso=>new Date(iso+"T00:00:00").toLocaleDateString(st.lang==="ar"?
 const sqm=a=>fmt(a*0.092903)+" m²";
 function goal(n,p){try{if(CFG.metrika&&window.ym)ym(CFG.metrika,"reachGoal",n,p)}catch(e){}}
 const SPLIT=[20,10,10,60];
-const types=()=>TYPE_ORDER.filter(k=>UNITS.some(u=>u.t===k));
+const types=()=>LAYOUTS.filter(k=>UNITS.some(u=>u.t===k));
+// The cheapest unit of a layout stands for it: its price is the "from" price and its plan the typical plan.
+const rep=k=>UNITS.filter(u=>u.t===k).sort((a,b)=>a.p-b.p)[0];
 
 function renderTypes(){
-  $("#types").innerHTML=types().map(k=>{const us=UNITS.filter(u=>u.t===k),a0=Math.min(...us.map(u=>u.area)),a1=Math.max(...us.map(u=>u.area));
-    return `<button class="type" data-type="${k}" aria-pressed="${st.f===k}"><span class="tm">${L().units(us.length)}</span><h3>${esc(typeName(k))}</h3>
-      <span class="tm num">${a0===a1?sqm(a0):sqm(a0)+" – "+sqm(a1)}</span><span class="tp num">${t("from")} ${money(Math.min(...us.map(u=>u.p)))}</span></button>`}).join("");
-  $("#chips").innerHTML=[["all",t("all"),UNITS.length],...types().map(k=>[k,typeName(k),UNITS.filter(u=>u.t===k).length])]
-    .map(([k,n,c])=>`<button class="chip" data-type="${k}" aria-pressed="${st.f===k}">${esc(n)} <span style="opacity:.55">${c}</span></button>`).join("");
-  const list=UNITS.filter(u=>st.f==="all"||u.t===st.f).sort((a,b)=>a.p-b.p);
-  $("#rows").innerHTML=list.map(u=>`<tr>
-    <td class="no num">${esc(u.no)}</td>
-    <td><div>${esc(typeName(u.t))}</div><div class="tm">${esc([floorName(u.floor),viewName(u.view)].filter(Boolean).join(" · "))}</div></td>
-    <td class="num">${sqm(u.area)}<div class="tm">${fmt(u.area)} sq ft</div></td>
-    <td class="pr num">${money(u.p)}<small>${money(u.c)} ${t("cashL")}</small></td>
-    <td class="c-acts"><div class="acts">${u.planImg?`<button data-plan="${esc(u.no)}">${t("floorPlan")}</button>`:""}<button data-pay="${esc(u.no)}">${t("payments")}</button><a data-ch="wa" href="${waHref(L().msg.unit(u.no))}" target="_blank" rel="noopener">WhatsApp</a></div></td></tr>`).join("");
+  $("#types").innerHTML=types().map(k=>{const us=UNITS.filter(u=>u.t===k),r=rep(k),a0=Math.min(...us.map(u=>u.area)),a1=Math.max(...us.map(u=>u.area));
+    return `<div class="type"><h3>${esc(typeName(k))}</h3>
+      <span class="tm num">${a0===a1?sqm(a0):sqm(a0)+" – "+sqm(a1)}</span><span class="tp num">${t("from")} ${money(r.p)}</span>
+      <span class="cash num">${t("from")} ${money(Math.min(...us.map(u=>u.c)))} ${t("cashL")}</span>
+      <div class="acts">${r.planImg?`<button data-plan="${k}">${t("floorPlan")}</button>`:""}<button data-pay="${k}">${t("payments")}</button><a data-ch="wa" href="${waHref(L().msg.unit(typeName(k)))}" target="_blank" rel="noopener">${t("ask")}</a></div></div>`}).join("")
+    +`<div class="type" style="background:var(--night);color:var(--on-night)"><h3>${t("helpH")}</h3><span class="tm" style="color:var(--on-night-muted)">${t("helpP")}</span>
+      <div class="acts"><a data-ch="wa" data-msg="general" href="${waHref(L().msg.general)}" target="_blank" rel="noopener">WhatsApp</a></div></div>`;
 }
 function renderCalc(){
-  const sel=$("#calcSel"),cur=sel.value||UNITS.slice().sort((a,b)=>a.p-b.p)[0].no;
-  sel.innerHTML=UNITS.slice().sort((a,b)=>a.p-b.p).map(u=>`<option value="${esc(u.no)}" ${u.no===cur?"selected":""}>${esc(u.no)} · ${esc(typeName(u.t))} · ${money(u.p)}</option>`).join("");
-  const u=UNITS.find(x=>x.no===cur);
+  const sel=$("#calcSel"),cur=sel.value||types()[0];
+  sel.innerHTML=types().map(k=>`<option value="${k}" ${k===cur?"selected":""}>${esc(typeName(k))} · ${t("from")} ${money(rep(k).p)}</option>`).join("");
+  const u=rep(cur);
   $("#calc").innerHTML=SPLIT.map((pc,i)=>`<div><span>${t("rows")[i]}</span><b>${money(u.p*pc/100)}</b></div>`).join("");
 }
 function formHTML(){
@@ -585,9 +582,8 @@ function render(forms=true){
   document.title="113 Residences · "+(ar?"دبي":st.lang==="ru"?"Дубай":"Dubai")+" · Sam Jabr";
   $("#cur").innerHTML=CUR.map(([c])=>`<option ${c===st.cur?"selected":""}>${c}</option>`).join("");
   const min=Math.min(...UNITS.map(u=>u.p));
-  $("#stats").innerHTML=L().stats(money(min),UNITS.length).map(([b,s])=>`<div><b class="num">${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
-  $("#uP").textContent=L().uP(UNITS.length,dateName(P.listDate||INV.inventoryDate));
-  $("#listDate").textContent=L().listOf(dateName(P.listDate||INV.inventoryDate));
+  $("#stats").innerHTML=L().stats(money(min)).map(([b,s])=>`<div><b class="num">${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
+  $("#uP").textContent=t("uP");
   $("#drive").innerHTML=DRIVE.map(d=>`<li><span>${esc(d[st.lang==="ru"?0:st.lang==="en"?1:2])}</span><b class="num">${d[3]} ${t("min")}</b></li>`).join("");
   renderTypes();renderCalc();
   if(forms)$("#formbox").innerHTML=formHTML();
@@ -599,13 +595,13 @@ function render(forms=true){
 document.addEventListener("click",e=>{
   const lg=e.target.closest("[data-lang]");if(lg){st.lang=lg.dataset.lang;save();render();return}
   const ch=e.target.closest("a[data-ch],a[data-goal]");if(ch)goal(ch.dataset.goal||{wa:"click_whatsapp",tg:"click_telegram",mail:"click_email"}[ch.dataset.ch]);
-  const ty=e.target.closest("[data-type]");if(ty){st.f=st.f===ty.dataset.type&&ty.classList.contains("type")?"all":ty.dataset.type;renderTypes();if(ty.classList.contains("type"))$(".tools").scrollIntoView({behavior:"smooth",block:"start"});return}
-  const pl=e.target.closest("[data-plan]");if(pl){const u=UNITS.find(x=>x.no===pl.dataset.plan);goal("open_plan");
-    openDlg(`113 Residences · ${t("unit")} ${u.no} · ${typeName(u.t)}`,`<img src="../${esc(u.planImg)}" alt=""><p class="fine">${sqm(u.area)} · ${fmt(u.area)} sq ft${u.balcony?` (${fmt(u.suite)} + ${fmt(u.balcony)})`:""}</p>`);return}
-  const pa=e.target.closest("[data-pay]");if(pa){const u=UNITS.find(x=>x.no===pa.dataset.pay);
-    openDlg(`113 Residences · ${t("unit")} ${u.no}`,`<div class="tm">${esc(typeName(u.t))} · 40/60</div><div class="tot num">${money(u.p)}</div>
+  const pl=e.target.closest("[data-plan]");if(pl){const u=rep(pl.dataset.plan);goal("open_plan");
+    openDlg(`113 Residences · ${typeName(u.t)} · ${t("tpl")}`,`<img src="../${esc(u.planImg)}" alt=""><p class="fine">${sqm(u.area)} · ${fmt(u.area)} sq ft. ${t("tplNote")}</p>
+      <p style="margin-top:16px"><a class="btn btn-gold" data-ch="wa" href="${waHref(L().msg.unit(typeName(u.t)))}" target="_blank" rel="noopener">${t("ask")}</a></p>`);return}
+  const pa=e.target.closest("[data-pay]");if(pa){const u=rep(pa.dataset.pay);
+    openDlg(`113 Residences · ${typeName(u.t)}`,`<div class="tm">40/60 · ${t("from")}</div><div class="tot num">${money(u.p)}</div>
       <div class="rows num">${SPLIT.map((pc,i)=>`<div><span>${t("rows")[i]}</span><b>${money(u.p*pc/100)}</b></div>`).join("")}<div><span>${t("o2")}</span><b>${money(u.c)}</b></div></div>
-      <p class="fine">${t("payNote")}</p><p style="margin-top:16px"><a class="btn btn-gold" data-ch="wa" href="${waHref(L().msg.unit(u.no))}" target="_blank" rel="noopener">WhatsApp</a></p>`);return}
+      <p class="fine">${t("payNote")}</p><p style="margin-top:16px"><a class="btn btn-gold" data-ch="wa" href="${waHref(L().msg.unit(typeName(u.t)))}" target="_blank" rel="noopener">${t("ask")}</a></p>`);return}
 });
 document.addEventListener("submit",e=>{if(e.target.matches("form.f")){e.preventDefault();submitForm(e.target)}});
 $("#calcSel").onchange=renderCalc;
