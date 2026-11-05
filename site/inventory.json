@@ -533,6 +533,21 @@
      "planImg": "assets/plans/113-residences-805.webp",
      "planSrc": "https://drive.google.com/file/d/144lJd42fCeVuxHPmNKXdCYvbY85eHozo/view?usp=drivesdk",
      "status": "Available"
+    },
+    {
+     "no": "106",
+     "floor": "1st Floor",
+     "cat": "Apartment",
+     "type": "Four Bedroom Duplex with pool",
+     "view": "Community View",
+     "suite": 2074.0,
+     "balcony": 458.0,
+     "area": 2532.0,
+     "op": 5443094.0,
+     "plan": "113",
+     "planImg": "assets/plans/113-residences-106.webp",
+     "planSrc": "https://drive.google.com/file/d/14I4QaxLJqaMbk2KAaDpvrCWl3zK3YP-B/view?usp=drivesdk",
+     "status": "Available"
     }
    ],
    "discount": 0.04,

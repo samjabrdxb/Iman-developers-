@@ -1,5 +1,5 @@
 {
- "source": "IMAN availability list for 113 Residences, received as an image on 22 October 2026 (transcribed).",
+ "source": "IMAN availability list for 113 Residences, received as an image on 22 October 2026 (transcribed). Unit 106 added on 5 November 2026 (Sam: available again), with its price from IMAN's list of 7 October 2026.",
  "units": [
   {
    "no": "G01",
@@ -330,6 +330,16 @@
    "balcony": 138,
    "total": 1068,
    "price": 2766107.54
+  },
+  {
+   "no": "106",
+   "floor": "1st Floor",
+   "view": "Community View",
+   "type": "Four Bedroom Duplex with pool",
+   "suite": 2074,
+   "balcony": 458,
+   "total": 2532,
+   "price": 5443094.0
   }
  ]
 }
