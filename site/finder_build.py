@@ -34,7 +34,13 @@ for p in inv["projects"]:
                           cash=u.get("cash", p.get("cash") or 0), img=u.get("planImg")))
 read = lambda f: open(os.path.join(HERE, f)).read().strip() if os.path.exists(os.path.join(HERE, f)) else ""
 note, note_ja = read("note.txt"), read("note.ja.txt")  # note.ja.txt: the same note in Japanese, for finder-ja.html
-data = dict(note=note, noteJa=note_ja, date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
+featured = []  # site/featured.txt: Sam's best units, by bedroom count
+for line in read("featured.txt").splitlines():
+    line = line.split("#")[0].strip()
+    if ":" in line:
+        k, v = line.split(":", 1)
+        featured.append(dict(beds=k.strip().split()[0], units=[x.strip() for x in v.split(",") if x.strip()]))
+data = dict(featured=featured, note=note, noteJa=note_ja, date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
                                                  for k, v in FINDER.items()}, units=units)
 tpl = open(os.path.join(HERE, "finder.tpl.html")).read()
 assert tpl.count("/*DATA*/") == 1
