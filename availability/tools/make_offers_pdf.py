@@ -30,7 +30,7 @@ PROJECTS = [
          schedule=[(20, "Within 30 days of booking", "20% booking"), (10, "Within 90 days of booking", "10% at 90 days"),
                    (10, "At 40% construction", "10% at 40% built"), (60, "On handover", "60% handover")],
          loc="https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9",
-         mkt="https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing"),
+         mkt="https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ"),
     dict(match="OXFORD COVE", name="Oxford Cove", area="Jumeirah Village Circle (JVC)", img="assets/oxford-cove-main.webp",
          offer=["4% discount", "50/50 payment plan", "14% off full cash", "7% commission"],
          plan="50/50", cash=0.14, plans="oxford-cove", loc="https://maps.app.goo.gl/orznbkhTdke94kGM7",

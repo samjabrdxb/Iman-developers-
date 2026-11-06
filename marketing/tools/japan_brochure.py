@@ -20,7 +20,7 @@ JPY = 41.5                     # yen per dirham, a guide only
 WA = "971501752771"
 FINDER = "https://claude.ai/artifact/T6RPFxW5jAsAzdhcXZzqXX"          # Japanese unit finder for brokers
 LANDING = "https://samjabrdxb.github.io/Iman-developers-/ja/"         # Japanese page for clients
-MKT_113 = "https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing"
+MKT_113 = "https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ"
 
 e = html.escape
 aed = lambda n: f"{round(n):,}"

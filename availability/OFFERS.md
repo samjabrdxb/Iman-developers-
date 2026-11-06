@@ -20,7 +20,7 @@ Last updated: 1 October 2026. When an offer changes, update this file and `site/
 - Bonus: 3 units = AED 50K, 5 units = AED 100K.
 - Handover: Q2 2029.
 - Location: https://maps.app.goo.gl/WCMSqZvg8h2uBqjL9
-- Marketing: https://drive.google.com/drive/folders/1kE-KUHmkLYhNm5r71XLE72S3g4WZqRBJ?usp=sharing
+- Marketing: https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ
 
 ## Oxford Cove, JVC: sold out
 
