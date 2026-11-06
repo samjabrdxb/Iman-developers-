@@ -11,6 +11,7 @@ inv = json.load(open(os.path.join(HERE, "inventory.json")))
 
 FINDER = {
     "113-residences": dict(name="113 Residences", loc="sufouh", plan="40/60", handover="Q2 2029",
+                           mkt="https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ",
                            schedule=[[20, "Within 30 days of booking", "خلال 30 يوم من الحجز", "予約から30日以内"],
                                      [10, "Within 90 days of booking", "خلال 90 يوم من الحجز", "予約から90日以内"],
                                      [10, "At 40% construction", "عند إنجاز 40% من البناء", "工事進捗40%時"],
