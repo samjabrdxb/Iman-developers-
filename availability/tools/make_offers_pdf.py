@@ -322,7 +322,8 @@ def overview(parts):
       <a href="{WA}?text={urllib.parse.quote('Hi Sam, please let me know when the EOI for The Element by IMAN, Dubai Science Park opens.')}">Ask Sam to notify you →</a></div></div>
     <div class=how>{f"<div class=bonus>{e(bonus)} (113 Residences)</div>" if bonus else ''}
       <div class=ok>How to use this file</div><ol><li>Tap a project card.</li><li>Tap any unit number to open its payment schedule, cash price, your commission and floor plan.</li>
-      <li>Tap the green bar at the foot of any page to WhatsApp Sam.</li></ol></div>
+      <li>Tap the green bar at the foot of any page to WhatsApp Sam.</li></ol>
+      <a class=allmkt href="https://drive.google.com/drive/folders/1LbabUTGbian6qUDhNoAPbbHC9Aelw4uq">All IMAN projects: sales &amp; marketing materials ↗</a></div>
   </div></section>"""
 
 
@@ -378,6 +379,7 @@ a.toc{{color:#f2f5f0;font-weight:700;font-size:8.5pt;text-decoration:none;border
 .soon img{{width:42%;object-fit:cover}} .soon>div{{padding:10px 12px 10px 0}} .soon h3{{font-size:14pt;margin:3px 0 4px}}
 .soon ul{{margin:0;padding-left:15px;font-size:8.5pt}} .soon a{{display:inline-block;margin-top:7px;font-weight:800;color:var(--cd);text-decoration:none}}
 .how{{border:1px solid var(--ln);border-radius:12px;padding:11px 13px}} .how ol{{margin:5px 0 0;padding-left:16px;font-size:8.5pt}}
+.allmkt{{display:block;margin-top:8px;background:var(--g);color:#f2f5f0;border-radius:8px;padding:6px 10px;font-weight:800;font-size:8.5pt;text-decoration:none}}
 .ok{{font-size:7pt;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--cd)}}
 .bonus{{background:var(--c);color:#1b120d;border-radius:8px;padding:6px 10px;font-weight:800;font-size:9pt;margin-bottom:9px;display:inline-block}}
 .offerbox .bonus{{margin:8px 0 0}}

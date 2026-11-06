@@ -41,7 +41,8 @@ for line in read("featured.txt").splitlines():
     if ":" in line:
         k, v = line.split(":", 1)
         featured.append(dict(beds=k.strip().split()[0], units=[x.strip() for x in v.split(",") if x.strip()]))
-data = dict(featured=featured, note=note, noteJa=note_ja, date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
+ALL_MKT = "https://drive.google.com/drive/folders/1LbabUTGbian6qUDhNoAPbbHC9Aelw4uq"  # IMAN sales & marketing folder, all projects
+data = dict(allMkt=ALL_MKT, featured=featured, note=note, noteJa=note_ja, date=inv["inventoryDate"], projects={k: {**v, "image": next(p["image"] for p in inv["projects"] if p["id"] == k)}
                                                  for k, v in FINDER.items()}, units=units)
 tpl = open(os.path.join(HERE, "finder.tpl.html")).read()
 assert tpl.count("/*DATA*/") == 1
