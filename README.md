@@ -33,6 +33,7 @@ Sam Jabr's IMAN Developers portfolio page: projects, prices and available units,
 
 - `marketing/tools/japan_strategy.py` writes `marketing/japan/iman-japan-sales-strategy.pdf`: Sam's sales strategy for Japanese brokers (affordable luxury, quality over quantity) in Japanese, 2 pages A4. The track record numbers (18 launched, 9 delivered, 2 more in December 2026, about 550 units in the 2026 boutique pipeline) are at the top of the script.
 - `marketing/tools/strategy_en.py` writes `marketing/japan/iman-sales-strategy-en.pdf`: the same strategy in English, same layout and numbers (it reads them from `japan_strategy.py`).
+- `marketing/tools/strategy_fr.py` writes `marketing/japan/iman-sales-strategy-fr.pdf`: the same strategy in French.
 
 - `site/featured.txt`: the "Best units" Sam picks, shown under the note on both unit finders (one line per bedroom count). The finders also search by unit number.
 
