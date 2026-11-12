@@ -12,7 +12,7 @@ css = f"""
 *{{box-sizing:border-box;margin:0}}
 body{{width:var(--w);height:var(--h);background:#0f241a;color:#f2f5f0;font-family:Figtree,sans-serif;overflow:hidden;display:flex;flex-direction:column}}
 .hero{{flex:none;height:var(--img);position:relative;overflow:hidden}}
-.hero img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center var(--pos);transform:scale(1.15);transform-origin:0 var(--pos)}}
+.hero img{{position:absolute;inset:0;width:100%;height:auto;min-height:100%;object-fit:cover;object-position:center top}}
 .hero:after{{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,36,26,0) 35%,rgba(15,36,26,.55) 62%,#0f241a 100%)}}
 .head{{position:absolute;z-index:1;left:var(--pad);right:var(--pad);bottom:var(--hb)}}
 .kick{{display:inline-block;color:#d79e85;font-weight:800;letter-spacing:.3em;text-transform:uppercase;font-size:var(--eb);border-bottom:2px solid #c0866d;padding-bottom:8px;margin-bottom:18px}}
@@ -38,10 +38,10 @@ body = f"""<div class=hero><img src="file://{HERO}" alt="">
  <div class=p><small>Location</small><b>Al Sufouh</b><span>Facing Al Sufouh Park, 10 min to Dubai Marina</span></div>
 </div>
 <div class=foot><img src="file://{SAM}" alt=""><div><div class=n>Sam Jabr</div><div class=r>Senior Sales Manager · IMAN Developers</div></div>
- <div class=ph><b>+971 50 175 2771</b><span>113 Residences · 7% commission</span></div></div>"""
+ <div class=ph><b>+971 50 175 2771</b><span>113 Residences · Al Sufouh</span></div></div>"""
 SIZES = {
- "post": dict(w=1080, h=1350, img=900, pos="72%", pad="52px", hb="36px", gap="30px", eb="17px", h1="74px", ps="15px", pv="34px", pt="18px", av="70px", an="25px", phs="27px"),
- "story": dict(w=1080, h=1920, img=1250, pos="35%", pad="60px", hb="50px", gap="44px", eb="20px", h1="92px", ps="17px", pv="40px", pt="21px", av="86px", an="30px", phs="32px"),
+ "post": dict(w=1080, h=1350, img=860, pad="52px", hb="36px", gap="30px", eb="17px", h1="74px", ps="15px", pv="34px", pt="18px", av="70px", an="25px", phs="27px"),
+ "story": dict(w=1080, h=1920, img=1180, pad="60px", hb="50px", gap="44px", eb="20px", h1="92px", ps="17px", pv="40px", pt="21px", av="86px", an="30px", phs="32px"),
 }
 with sync_playwright() as pw:
     b = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium")
