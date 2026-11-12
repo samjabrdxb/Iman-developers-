@@ -37,7 +37,7 @@ body = f"""<div class=hero><img src="file://{HERO}" alt="">
  <div class=p><small>Price</small><b>From AED 2.1M</b><span>40/60 payment plan, 4% off, 14% off on cash</span></div>
  <div class=p><small>Location</small><b>Al Sufouh</b><span>Facing Al Sufouh Park, 10 min to Dubai Marina</span></div>
 </div>
-<div class=foot><img src="file://{SAM}" alt=""><div><div class=n>Sam Jabr</div><div class=r>Senior Sales Manager · IMAN Developers</div></div>
+<div class=foot><img src="file://{SAM}" alt=""><div><div class=n>IMAN Developers</div><div class=r>Senior Sales Manager</div></div>
  <div class=ph><b>+971 50 175 2771</b><span>113 Residences · Al Sufouh</span></div></div>"""
 SIZES = {
  "post": dict(w=1080, h=1350, img=860, pad="52px", hb="36px", gap="30px", eb="17px", h1="74px", ps="15px", pv="34px", pt="18px", av="70px", an="25px", phs="27px"),
