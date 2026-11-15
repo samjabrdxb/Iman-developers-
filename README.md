@@ -71,3 +71,4 @@ When Sam asks to update all links and the availability:
 7. Write the message of the day for broker groups: short, WhatsApp style (*bold*), with the unit finder link and the signature "*Sam Jabr* · IMAN Developers · +971 50 175 2771". Sam prefers short messages, and replies to him in Levantine Arabic.
 
 PDF tools need `pip install pymupdf playwright qrcode pillow`.
+- 113 Residences 802 is a 3 BR + Maid, the same type as 102 and 502 (Sam, 15 November 2026). IMAN's list calls it "Three Bedroom with Study": correct it whenever a new list is typed in.
