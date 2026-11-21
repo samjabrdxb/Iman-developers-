@@ -63,11 +63,13 @@ SIZES = {
 }
 with sync_playwright() as pw:
     b = pw.chromium.launch(executable_path="/opt/pw-browsers/chromium")
-    for k, v in SIZES.items():
+    TILE = '<div class=s><b>7%</b><span>Broker commission</span></div>'
+    VARIANTS = {"": body, " - no commission": body.replace(TILE, "").replace("<div class=stats>", '<div class=stats style="grid-template-columns:repeat(2,1fr)">')}
+    for (suf, bd), (k, v) in [(x, y) for x in VARIANTS.items() for y in SIZES.items()]:
         vars_ = ";".join(f"--{a}:{x}px" if isinstance(x, int) else f"--{a}:{x}" for a, x in v.items())
-        f = os.path.join(OUT, f"element-{k}.html")
-        open(f, "w").write(f"<!doctype html><html><head><meta charset=utf-8><style>:root{{{vars_}}}{css}</style></head><body>{body}</body></html>")
+        f = os.path.join(OUT, f"element-{k}{suf}.html")
+        open(f, "w").write(f"<!doctype html><html><head><meta charset=utf-8><style>:root{{{vars_}}}{css}</style></head><body>{bd}</body></html>")
         pg = b.new_page(viewport={"width": v["w"], "height": v["h"]}); pg.goto("file://" + f); pg.wait_for_timeout(700)
-        pg.screenshot(path=os.path.join(OUT, f"The Element EOI - Sam Jabr - {k}.jpg"), type="jpeg", quality=92)
+        pg.screenshot(path=os.path.join(OUT, f"The Element EOI - Sam Jabr - {k}{suf}.jpg"), type="jpeg", quality=92)
     b.close()
 print("ok")
