@@ -24,6 +24,11 @@ WA = "https://wa.me/971501752771"
 # match: start of the inventory PDF file name. disc: discount on the payment plan (default 4%). cash: discount on 100% payment.
 # schedule: payment plan milestones as (percent, long label, short column label). plans: floor plan file prefix in site/assets/plans/.
 PROJECTS = [
+    dict(match="ELEMENT", name="The Element by IMAN", area="Dubai Science Park", img="img/the-element.jpg",
+         offer=["EOI now open", "4% pre-launch discount", "40/60 payment plan", "7% commission"],
+         eoi="EOI AED 50K, refundable", bonus="EOI: AED 50,000 · 100% refundable · first come, first served",
+         plan="40/60", cash=None, plans="the-element", loc="https://www.google.com/maps/search/?api=1&query=Dubai+Science+Park", mkt=None,
+         schedule=[(40, "In instalments during construction", "40% construction"), (60, "On handover", "60% handover")]),
     dict(match="113", name="113 Residences", area="Al Sufouh Gardens", img="img/113-residences.jpg", handover="Q2 2029",
          offer=["4% discount", "40/60 payment plan", "14% off full cash", "7% commission"],
          bonus="Bonus: 3 units = AED 50K · 5 units = AED 100K", plan="40/60", cash=0.14, plans="113-residences",
@@ -47,7 +52,9 @@ PROJECTS = [
 ]
 COMMISSION = 0.07
 COMING = dict(name="The Element by IMAN", area="Dubai Science Park", img="img/dsp-teaser.jpg",
-              points=["Coming soon: be ready for EOI", "EOI details to be announced", "170 homes: studio, 1 and 2 bedrooms", "Plus retail units"])
+              tag="EOI now open", points=["EOI: AED 50,000, 100% refundable", "Priority: first come, first served", "4% pre-launch discount · 40/60 plan",
+                                          "Studios from AED 684K · 1 and 2 bedrooms"],
+              msg="Hi Sam, I'd like to book an EOI for The Element by IMAN, Dubai Science Park.", cta="Book an EOI with Sam →")
 
 TYPE = {"one bedroom with study": "1 BR + Study", "two bedroom": "2 BR", "two bedroom with study": "2 BR + Study",
         "two bedroom with maid": "2 BR + Maid", "three bedroom with study": "3 BR + Study", "three bedroom with maid": "3 BR + Maid",
@@ -111,6 +118,8 @@ def parse(path):
     if os.path.exists(sidecar):
         return json.load(open(sidecar))["units"]
     lines = [l.strip() for p in pymupdf.open(path) for l in p.get_text("text").split("\n") if l.strip()]
+    if lines and lines[0] == "Unit#":
+        return parse_unit_first(path)
     units = []
     if any(l.startswith("RETAIL-") for l in lines):  # retail layout: unit, floor, B/R, view, internal, total, price, status
         for i, l in enumerate(lines):
@@ -128,6 +137,28 @@ def parse(path):
             units.append(dict(no=no, floor=fl, view=view, type=typ, suite=whole(num(s)), balcony=whole(num(b)),
                               total=whole(num(tot)), price=num(price)))
         i += 11
+    return units
+
+
+def parse_unit_first(path):
+    """IMAN lists with the unit number first (The Element): unit, floor, category, view, type, suite, balcony, total, AED, price, status, project.
+    Text cells come from the table grid; the four amounts per row are read in order from the page text."""
+    import re
+    doc = pymupdf.open(path)
+    rows = [[(c or "").replace("\n", " ").strip() for c in r] for pg in doc for t in pg.find_tables().tables for r in t.extract()]
+    rows = [r for r in rows if r and re.fullmatch(r"[A-Z]?-?\d+", r[0])]
+    nums = [num(x) for x in re.findall(r"\d[\d,]*\.\d\d", "\n".join(pg.get_text() for pg in doc))]
+    assert len(nums) == 4 * len(rows), (path, len(rows), len(nums))
+    squash = lambda v: re.sub(r"\s+", "", v).lower()
+    types = {squash(k): k.title().replace(" With ", " with ") for k in TYPE}
+    whole = lambda v: int(v) if v == int(v) else v
+    units = []
+    for i, r in enumerate(rows):
+        suite, balcony, total, price = nums[4 * i:4 * i + 4]
+        assert abs(suite + balcony - total) < 1.5, r
+        if r[10].lower() == "available":
+            units.append(dict(no=r[0], floor=r[1], view=re.sub(r"(?<=[a-z])View", " View", r[3]), type=types.get(squash(r[4]), r[4]),
+                              suite=whole(suite), balcony=whole(balcony), total=whole(total), price=price))
     return units
 
 
@@ -172,7 +203,7 @@ def stats(p, units):
         name = lambda n: "Studio" if n == 0 else f"{n} BR"
         kind = "Apartments"
         rng = name(b[0]) if len(b) == 1 else f"{name(b[0])} to {name(b[-1])}"
-    return dict(n=len(units), kind=kind, rng=rng, offer=low * (1 - d), cash=low * (1 - p["cash"]))
+    return dict(n=len(units), kind=kind, rng=rng, offer=low * (1 - d), cash=low * (1 - p["cash"]) if p.get("cash") else None)
 
 
 def card(p, units):
@@ -200,8 +231,8 @@ def table(p, units):
     head = ("<tr><th>Unit</th><th>Floor</th>" + ("" if retail else "<th>Type</th>") + "<th>View</th><th class=r>Sq ft</th>"
             f"<th class=r>List price</th><th class='r hl'>Offer −{round(d * 100)}%</th>"
             + "".join(f"<th class=r>{e(sh)}</th>" for _, _, sh in p["schedule"])
-            + f"<th class='r ca'>Full cash −{round(p['cash'] * 100)}%</th><th class='r co'>Your {round(COMMISSION * 100)}%</th></tr>")
-    cols = (8 if retail else 9) + len(p["schedule"])
+            + (f"<th class='r ca'>Full cash −{round(p['cash'] * 100)}%</th>" if p.get("cash") else "") + f"<th class='r co'>Your {round(COMMISSION * 100)}%</th></tr>")
+    cols = (8 if retail else 9) + len(p["schedule"]) - (0 if p.get("cash") else 1)
     groups = {}
     for u in sorted(units, key=lambda u: u["price"]):
         groups.setdefault(short(u), []).append(u)
@@ -216,15 +247,15 @@ def table(p, units):
                         + ("" if retail else f"<td>{e(short(u))}</td>") + f"<td>{e(u['view'])}</td>"
                         f"<td class=r>{u['total']:,.0f}</td><td class='r lp'>{aed(u['price'])}</td><td class='r hl'>{aed(o)}</td>"
                         + "".join(f"<td class=r>{aed(o * pc / 100)}</td>" for pc, _, _ in p["schedule"])
-                        + f"<td class='r ca'>{aed(u['price'] * (1 - p['cash']))}</td><td class='r co'>{aed(o * COMMISSION)}</td></tr>")
+                        + (f"<td class='r ca'>{aed(u['price'] * (1 - p['cash']))}</td>" if p.get("cash") else "") + f"<td class='r co'>{aed(o * COMMISSION)}</td></tr>")
     return f"<table class=units><thead>{head}</thead><tbody>{''.join(rows)}</tbody></table>"
 
 
 def section(p, units):
     s = stats(p, units)
     links = [f"<a href='{p['loc']}'>Location ↗</a>"] + ([f"<a href='{p['mkt']}'>Brochure &amp; marketing ↗</a>"] if p["mkt"] else [])
-    facts = [(s["n"], "Units available"), (s["rng"], s["kind"]), ("AED " + money(s["offer"]), f"From, {p['plan']} offer price"),
-             ("AED " + money(s["cash"]), "From, full cash price")]
+    facts = [(s["n"], "Units available"), (s["rng"], s["kind"]), ("AED " + money(s["offer"]), f"From, {p['plan']} offer price")] + ([
+             ("AED " + money(s["cash"]), "From, full cash price")] if s["cash"] else [])
     if p.get("handover"):
         facts.append((p["handover"], "Handover"))
     return f"""<section class=proj id="p-{key(p)}">
@@ -246,7 +277,7 @@ def detail(p, u):
     retail = u["type"] == "Retail"
     pd = p.get("disc", DISC)
     offer = u["price"] * (1 - pd)
-    cash = u["price"] * (1 - p["cash"])
+    cash = u["price"] * (1 - p["cash"]) if p.get("cash") else None
     facts = [("Floor", u["floor"]), ("View", u["view"])]
     if retail:
         facts.append(("Area", f"{u['total']:,.2f} sq ft"))
@@ -257,6 +288,8 @@ def detail(p, u):
     rows = "".join(f"<tr><td class=pc>{pc}%</td><td>{e(label)}</td><td class='r b'>AED {aed(offer * pc / 100)}</td></tr>" for pc, label, _ in p["schedule"])
     msg = f"Hi Sam, I'm interested in unit {u['no']} at {p['name']}. Is it still available?"
     wa = WA + "?text=" + html.escape(urllib.parse.quote(msg))
+    cashcard = (f"<div class='card alt'><div class=ck>Full cash · {round(p['cash'] * 100)}% off</div>"
+                f"<div class=cv>AED {aed(cash)}</div><div class=cs>You save AED {aed(u['price'] - cash)}</div></div>") if cash else ""
     plan = (f'<img src="{jpg(plan_img, 1100)}" alt="">' if os.path.isfile(plan_img) else "<p class=noplan>Floor plan available on request.</p>")
     return f"""<section class=unitpage id="{anchor(p, u)}">
   <div class=ucol>
@@ -267,9 +300,8 @@ def detail(p, u):
     <div class=card><div class=ck>{p['plan']} payment plan · {round(pd * 100)}% off</div>
       <div class=cv>AED {aed(offer)}</div><div class=cs>List price <s>AED {aed(u['price'])}</s> · you save AED {aed(u['price'] - offer)}</div>
       <table class=sch><tbody>{rows}</tbody></table></div>
-    <div class='card alt'><div class=ck>Full cash · {round(p['cash'] * 100)}% off</div>
-      <div class=cv>AED {aed(cash)}</div><div class=cs>You save AED {aed(u['price'] - cash)}</div></div>
-    <div class=comm>Your commission ({round(COMMISSION * 100)}%): <b>AED {aed(offer * COMMISSION)}</b> on the plan price · <b>AED {aed(cash * COMMISSION)}</b> on cash</div>
+    {cashcard}
+    <div class=comm>Your commission ({round(COMMISSION * 100)}%): <b>AED {aed(offer * COMMISSION)}</b> on the plan price{f" · <b>AED {aed(cash * COMMISSION)}</b> on cash" if cash else ""}</div>
     <a class=ask href="{wa}">Reserve unit {e(u['no'])} with Sam on WhatsApp</a>
   </div>
   <div class=plan>{plan}</div>
@@ -286,7 +318,7 @@ def cover(date_long, parts):
     for ps in byproj.values():
         title = ps[0]["name"].split(" · ")[0] if len(ps) > 1 else ps[0]["name"]
         lines = "".join(f"<div>{e(p['name'].split(' · ')[1]) + ': ' if len(ps) > 1 else ''}<b>{round(p.get('disc', DISC) * 100)}% off</b> on {p['plan']}"
-                        f" · <b>{round(p['cash'] * 100)}% off</b> full cash</div>" for p in ps)
+                        + (f" · <b>{round(p['cash'] * 100)}% off</b> full cash" if p.get("cash") else f" · {e(p['eoi'])}" if p.get("eoi") else "") + "</div>" for p in ps)
         panels.append(f"<a class=cpanel href='#p-{key(ps[0])}'><img src=\"{jpg(os.path.join(SITE, ps[0]['img']), 1000)}\" alt=''>"
                       f"<div class=cap><b class=cn>{e(title)}</b>{lines}</div></a>")
     return f"""<section class=cover><div class=stack>{''.join(panels)}</div>
@@ -312,15 +344,15 @@ def overview(parts):
   <div class=pcb><div class=eb>{e(p['area'])}</div><h3>{e(p['name'].split(' · ')[0])}</h3><div class=so>Sold out</div>
   <div class=pn>Ask Sam about upcoming releases</div></div></div>""" for p in gone)
     c = COMING
-    bonus = next((p["bonus"] for p, _ in parts if p.get("bonus")), None)
+    live_el = any(p["match"] == "ELEMENT" for p, _ in parts)
+    soon = "" if live_el else f"""<div class=soon><img src="{jpg(os.path.join(SITE, c['img']), 900)}" alt=""><div><div class=eb>{e(c['tag'])} · {e(c['area'])}</div>
+      <h3>{e(c['name'])}</h3><ul>{''.join(f'<li>{e(x)}</li>' for x in c['points'])}</ul>
+      <a href="{WA}?text={urllib.parse.quote(c['msg'])}">{e(c['cta'])}</a></div></div>"""
+    bonus = "".join(f"<div class=bonus>{e(p['bonus'])} ({e(p['name'].split(' · ')[0])})</div>" for p, _ in parts if p.get("bonus") and not p.get("eoi"))
     return f"""<section class=over id=overview>
   <div class=band><div><h2>Today's offers at a glance</h2><div class=bs>Tap a project to see its units</div></div></div>
   <div class=cards>{cards}</div>
-  <div class=row2>
-    <div class=soon><img src="{jpg(os.path.join(SITE, c['img']), 900)}" alt=""><div><div class=eb>Coming soon · {e(c['area'])}</div>
-      <h3>{e(c['name'])}</h3><ul>{''.join(f'<li>{e(x)}</li>' for x in c['points'])}</ul>
-      <a href="{WA}?text={urllib.parse.quote('Hi Sam, please let me know when the EOI for The Element by IMAN, Dubai Science Park opens.')}">Ask Sam to notify you →</a></div></div>
-    <div class=how>{f"<div class=bonus>{e(bonus)} (113 Residences)</div>" if bonus else ''}
+  <div class=row2{" one" if live_el else ""}>{soon}<div class=how>{bonus}
       <div class=ok>How to use this file</div><ol><li>Tap a project card.</li><li>Tap any unit number to open its payment schedule, cash price, your commission and floor plan.</li>
       <li>Tap the green bar at the foot of any page to WhatsApp Sam.</li></ol>
       <a class=allmkt href="https://drive.google.com/drive/folders/1LbabUTGbian6qUDhNoAPbbHC9Aelw4uq">All IMAN projects: sales &amp; marketing materials ↗</a></div>
@@ -374,7 +406,7 @@ a.toc{{color:#f2f5f0;font-weight:700;font-size:8.5pt;text-decoration:none;border
 .chips li{{background:#eaf0e9;color:var(--g);border-radius:99px;padding:2px 8px;font-weight:700;font-size:7.5pt}}
 .chips li:first-child{{background:var(--c);color:#1b120d}}
 .go{{margin-top:8px;font-weight:800;color:var(--cd);font-size:8.5pt}}
-.row2{{display:grid;grid-template-columns:1.45fr 1fr;gap:9px;padding:9px 12mm 0}}
+.row2{{display:grid;grid-template-columns:1.45fr 1fr;gap:9px;padding:9px 12mm 0}} .row2.one{{grid-template-columns:1fr}}
 .soon{{display:flex;gap:12px;border:1px solid var(--ln);border-radius:12px;overflow:hidden;background:var(--cr)}}
 .soon img{{width:42%;object-fit:cover}} .soon>div{{padding:10px 12px 10px 0}} .soon h3{{font-size:14pt;margin:3px 0 4px}}
 .soon ul{{margin:0;padding-left:15px;font-size:8.5pt}} .soon a{{display:inline-block;margin-top:7px;font-weight:800;color:var(--cd);text-decoration:none}}

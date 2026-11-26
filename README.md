@@ -60,7 +60,7 @@ To make the PDF for partners, put the day's IMAN lists in `availability/YYYY-MM-
 When Sam asks to update all links and the availability:
 
 1. `git fetch origin main` and start from the latest `main`.
-2. Put any new IMAN lists in `availability/YYYY-MM-DD/`. If none came, copy the newest day's lists (113 RESIDENCES `.json` and `.pdf`, SIERRA RETAIL `.pdf`) into today's folder with today's date in the file names.
+2. Put any new IMAN lists in `availability/YYYY-MM-DD/`. If none came, copy the newest day's lists (ELEMENT `.pdf`, 113 RESIDENCES `.json` and `.pdf`, SIERRA RETAIL `.pdf`) into today's folder with today's date in the file names.
 3. Update `site/inventory.json` (units and `inventoryDate`), `availability/sold.txt` and the offers if they changed.
 4. Run `python3 site/build.py`, `python3 site/finder_build.py`, `python3 site/landing_build.py` (when prices change) and `python3 availability/tools/make_offers_pdf.py YYYY-MM-DD`.
 5. Publish the three artifacts to their existing links:

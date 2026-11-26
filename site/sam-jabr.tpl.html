@@ -259,15 +259,15 @@ dialog::backdrop{background:rgba(8,16,11,.7)}
 
   <details class="proj" id="dsp">
     <summary>
-      <span class="thumb"><img src="img/dsp-teaser.jpg" alt=""></span>
+      <span class="thumb"><img src="img/the-element.jpg" alt=""></span>
       <span class="s-main"><h3>The Element <span data-i="byIman">by IMAN</span></h3><span class="s-meta" data-i="dspLoc">Dubai Science Park</span>
-        <span class="s-tags"><span class="pill hot" data-i="stLaunch">New launch · Coming soon</span><span class="pill" data-i="eoiPill">Be ready for EOI</span></span></span>
-      <span class="s-side"><span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span></span>
+        <span class="s-tags"><span class="pill hot" data-i="stLaunch">New launch · EOI now open</span><span class="pill" id="dsp-n"></span></span></span>
+      <span class="s-side"><span class="s-from" data-i="from">From</span><span class="s-price num" id="dsp-from"></span><span class="chev" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 6 4 4 4-4"/></svg></span></span>
     </summary>
     <div class="p-body">
       <div class="split">
         <div>
-          <div class="hero-img"><img src="img/dsp-teaser.jpg" alt="Dubai Science Park at sunset, coming soon by IMAN Developers" loading="lazy"></div>
+          <div class="hero-img"><img src="img/the-element.jpg" alt="The Element by IMAN, Dubai Science Park" loading="lazy"></div>
           <h4 class="h4" style="margin-top:22px" data-i="nearH">A connected neighbourhood</h4>
           <p class="sub" data-i="plot">Dubai Science Park · Plot 6727698</p>
           <ul class="landmarks" id="landmarks"></ul>
@@ -280,10 +280,11 @@ dialog::backdrop{background:rgba(8,16,11,.7)}
             <div><dt data-i="dspMix">Studio · 1BR · 2BR</dt><dd data-i="dspRetail">Plus retail units</dd></div>
           </dl>
           <div class="eoi">
-            <div class="eoi-k" data-i="eoiK">Coming soon</div>
-            <div class="eoi-v" data-i="eoiV">Be ready for EOI</div>
-            <p class="sub" style="margin-top:8px" data-i="eoiSub">EOI details will be announced soon. Message Sam now and be the first to know when it opens.</p>
+            <div class="eoi-k" data-i="eoiK">Expression of interest</div>
+            <div class="eoi-v">AED 50,000</div>
+            <p class="sub" style="margin-top:8px" data-i="eoiSub">100% refundable. Priority: first come, first served.</p>
           </div>
+          <div class="offer"><div class="ot"><b>4%</b><span data-i="o1pre">Pre-launch discount</span></div><div class="ot"><b>40/60</b><span data-i="o2">Payment plan</span></div><div class="ot"><b>7%</b><span data-i="o3">Broker commission</span></div></div>
           <div class="ctarow" style="margin-top:20px">
             <a class="btn btn-wa wa" data-msg="dsp" href="#" target="_blank" rel="noopener" data-i="dspCta">Notify me on WhatsApp</a>
             <a class="btn btn-ghost" href="https://maps.app.goo.gl/sZcS6qLsnVLauBM56" target="_blank" rel="noopener" data-i="viewLoc">View location</a>
@@ -291,6 +292,7 @@ dialog::backdrop{background:rgba(8,16,11,.7)}
           <p class="fine-s" style="margin-top:12px" data-i="dspFine">Unit prices, payment plans and EOI details are yet to be announced.</p>
         </div>
       </div>
+      <div id="dsp-units" style="margin-top:28px"></div>
     </div>
   </details>
 
@@ -335,12 +337,12 @@ const SHOWN = ORDER.filter(id=>INV.projects.some(p=>p.id===id&&p.units.length));
 const T = {
  en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
   listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · updated ${d}`,curL:"Currency",
-  byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · Coming soon",eoiPill:"Be ready for EOI",
-  nearH:"A connected neighbourhood",plot:"Dubai Science Park · Plot 6727698",dspEye:"The next chapter by IMAN · Launching soon",
-  dspLead:"A new address. An early opportunity. Coming soon.",dspUnits:"Residential units",dspMix:"Studio · 1BR · 2BR",dspRetail:"Plus retail units",
-  eoiK:"Coming soon",eoiV:"Be ready for EOI",eoiSub:"EOI details will be announced soon. Message Sam now and be the first to know when it opens.",
-  dspCta:"Notify me on WhatsApp",viewLoc:"View location",
-  dspFine:"Unit prices, payment plans and EOI details are yet to be announced.",
+  byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · EOI now open",o1pre:"Pre-launch discount",discEl:"Prices include the 4% pre-launch discount on the 40/60 plan.",
+  nearH:"A connected neighbourhood",plot:"Dubai Science Park · Plot 6727698",dspEye:"The next chapter by IMAN · EOI now open",
+  dspLead:"A new address. An early opportunity. Studios from AED 684K.",dspUnits:"Residential units",dspMix:"Studio · 1BR · 2BR",dspRetail:"Plus retail units",
+  eoiK:"Expression of interest",eoiSub:"100% refundable. Priority: first come, first served.",
+  dspCta:"Book my EOI on WhatsApp",viewLoc:"View location",
+  dspFine:"EOI AED 50,000, 100% refundable. Final price and availability are confirmed at booking.",
   stNew:"New release",stCon:"Under construction",stReady:"Completed",handover:"Handover",built:p=>`${p}% built`,nUnits:n=>`${n} units available`,from:"From",
   r113about:"A collection of 113 residences in Al Sufouh combining fluid architecture, expansive layouts and refined finishes, facing Al Sufouh Community Park. Building: B + G + 9.",
   f1:"Hafele smart door locks and European kitchen appliances",f2:"Lagoon pool, rooftop infinity pool, fitness centre and yoga room",
@@ -355,17 +357,17 @@ const T = {
   fine:"Sam Jabr · Senior Sales Manager, IMAN Developers · +971 50 175 2771. Prices, availability and offers are subject to change; images and layouts are representative.",
   plan:{"113":"40/60 · 4% off","40-60-instalments":"40/60 instalments","50-50-instalments":"50/50 instalments","60-40":"60/40 plan","50-50":"50/50 plan","cash":"Cash only"},
   rows:{now:"Down payment",inst:"In instalments before handover",hand:"On handover",full:"Full payment"},
-  msg:{general:"Hi Sam, I'm interested in IMAN projects. Can you send me more details?",dsp:"Hi Sam, please let me know when the EOI for The Element by IMAN, Dubai Science Park opens.",
+  msg:{general:"Hi Sam, I'm interested in IMAN projects. Can you send me more details?",dsp:"Hi Sam, I'd like to book an EOI for The Element by IMAN, Dubai Science Park.",
    unit:(u,p)=>`Hi Sam, I'm interested in unit ${u} at ${p}. Is it still available?`,proj:p=>`Hi Sam, please send me details for ${p} by IMAN.`}
  },
  ar:{contactAt:"جهة اتصالك في إيمان",name:"سام جبر",role:"مدير مبيعات أول · إيمان للتطوير العقاري",exp:"3 سنوات مع إيمان",copy:"نسخ",copied:"تم النسخ",waCta:"راسلني على واتساب",waShort:"واتساب",call:"اتصال",
   listH:"مشاريع إيمان",listSub:"اضغط على أي مشروع لتشوف تفاصيله وأسعاره والوحدات المتاحة.",listEye:(n,d)=>`${n} وحدة متاحة · آخر تحديث ${d}`,curL:"العملة",
-  byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · قريباً",eoiPill:"جهّز حالك للـ EOI",
-  nearH:"حيّ متصل بكل شيء",plot:"دبي ساينس بارك · قطعة 6727698",dspEye:"الفصل الجديد من إيمان · إطلاق قريب",
-  dspLead:"عنوان جديد. وفرصة مبكرة. قريباً.",dspUnits:"وحدة سكنية",dspMix:"استوديو · غرفة · غرفتين",dspRetail:"بالإضافة إلى وحدات تجارية",
-  eoiK:"قريباً",eoiV:"جهّز حالك للـ EOI",eoiSub:"تفاصيل الـ EOI رح تنعلن قريباً. راسل سام هلق لتكون أول واحد بيعرف لما يفتح.",
-  dspCta:"خبرني عالواتساب",viewLoc:"شوف الموقع",
-  dspFine:"أسعار الوحدات وخطط الدفع وتفاصيل الـ EOI لسا ما انعلنت.",
+  byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · الـ EOI مفتوح",o1pre:"خصم ما قبل الإطلاق",discEl:"الأسعار شاملة خصم 4% ما قبل الإطلاق على خطة 40/60.",
+  nearH:"حيّ متصل بكل شيء",plot:"دبي ساينس بارك · قطعة 6727698",dspEye:"الفصل الجديد من إيمان · الـ EOI مفتوح",
+  dspLead:"عنوان جديد. وفرصة مبكرة. الاستوديو من 684 ألف درهم.",dspUnits:"وحدة سكنية",dspMix:"استوديو · غرفة · غرفتين",dspRetail:"بالإضافة إلى وحدات تجارية",
+  eoiK:"إبداء اهتمام (EOI)",eoiSub:"قابل للاسترداد 100%. الأولوية لأول واحد بيحجز.",
+  dspCta:"احجز الـ EOI عالواتساب",viewLoc:"شوف الموقع",
+  dspFine:"الـ EOI بـ 50,000 درهم وقابل للاسترداد 100%. السعر النهائي والتوفر بيتأكدوا عند الحجز.",
   stNew:"إطلاق جديد",stCon:"قيد الإنشاء",stReady:"مكتمل",handover:"التسليم",built:p=>`نسبة الإنجاز ${p}%`,nUnits:n=>`${n} وحدة متاحة`,from:"ابتداءً من",
   r113about:"مجموعة من 113 وحدة سكنية في الصفوح، تجمع بين العمارة الانسيابية والمساحات الواسعة والتشطيبات الراقية، مقابل حديقة الصفوح المجتمعية. المبنى: قبو + أرضي + 9.",
   f1:"أقفال ذكية من Hafele وأجهزة مطبخ أوروبية",f2:"مسبح لاجون، مسبح لا متناهٍ على السطح، نادٍ رياضي وغرفة يوغا",
@@ -380,7 +382,7 @@ const T = {
   fine:"سام جبر · مدير مبيعات أول، إيمان للتطوير العقاري · ‎+971 50 175 2771. الأسعار والتوفر والعروض قابلة للتغيير، والصور والمخططات للتوضيح.",
   plan:{"113":"40/60 · خصم 4%","40-60-instalments":"40/60 أقساط","50-50-instalments":"50/50 أقساط","60-40":"خطة 60/40","50-50":"خطة 50/50","cash":"كاش فقط"},
   rows:{now:"دفعة أولى",inst:"أقساط قبل التسليم",hand:"عند التسليم",full:"الدفع كاملاً"},
-  msg:{general:"مرحبا سام، مهتم بمشاريع إيمان. ممكن ترسلي تفاصيل أكثر؟",dsp:"مرحبا سام، خبرني لما يفتح الـ EOI لمشروع The Element من إيمان في دبي ساينس بارك.",
+  msg:{general:"مرحبا سام، مهتم بمشاريع إيمان. ممكن ترسلي تفاصيل أكثر؟",dsp:"مرحبا سام، بدي احجز EOI بمشروع The Element من إيمان في دبي ساينس بارك.",
    unit:(u,p)=>`مرحبا سام، مهتم بالوحدة ${u} في ${p}. هل لسا متاحة؟`,proj:p=>`مرحبا سام، ممكن ترسلي تفاصيل مشروع ${p} من إيمان؟`}
  }
 };
@@ -450,7 +452,7 @@ function unitsBlock(p){
         ${u.planImg?`<button data-plan="${esc(u.key)}">${t("floorPlan")}</button>`:""}
         <button data-pay="${esc(u.key)}">${t("payments")}</button>
         <a href="${waHref(T[st.lang].msg.unit(u.no,u.pname))}" target="_blank" rel="noopener">${t("wa")}</a>
-      </div></article>`}).join("")}</div><p class="note">${p.id==="113-residences"?t("disc113")+" ":p.id==="sierra-by-iman"?t("discSierra")+" ":p.discount?t("discOC")+" ":""}${t("projNote")}</p></div>`;
+      </div></article>`}).join("")}</div><p class="note">${p.id==="113-residences"?t("disc113")+" ":p.id==="the-element"?t("discEl")+" ":p.id==="sierra-by-iman"?t("discSierra")+" ":p.discount?t("discOC")+" ":""}${t("projNote")}</p></div>`;
 }
 
 function intro113(){
@@ -479,7 +481,13 @@ function introGeneric(p){
     ${unitsBlock(p)}`;
 }
 
+function renderDsp(){
+  const p=byId["the-element"];if(!p)return;const us=UNITS.filter(u=>u.pid===p.id);
+  $("#dsp-n").textContent=T[st.lang].nUnits(us.length);$("#dsp-from").textContent=money(Math.min(...us.map(u=>u.p)));
+  $("#dsp-units").innerHTML=unitsBlock(p);
+}
 function renderProjects(){
+  renderDsp();
   $("#projects").innerHTML=SHOWN.map(id=>{
     const p=byId[id];const us=UNITS.filter(u=>u.pid===id);const min=Math.min(...us.map(u=>u.p));
     const meta=[areaName(p.area),p.handover&&p.handover!=="To be confirmed"?`${t("handover")} ${p.handover}`:""].filter(Boolean).join(" · ");
@@ -492,7 +500,7 @@ function renderProjects(){
 }
 
 function renderOthers(){
-  const rest=PROJ.filter(p=>!SHOWN.includes(p.id));
+  const rest=PROJ.filter(p=>!SHOWN.includes(p.id)&&p.id!=="the-element");
   $("#others-sub").textContent=T[st.lang].othersSub(rest.filter(p=>p.status==="construction").length,rest.filter(p=>p.status==="ready").length);
   $("#others").innerHTML=rest.map(p=>`<article class="oc"><div class="oi"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy"></div><div class="ob">
     ${statusPill(p)}<h4>${esc(p.name)}</h4><span class="s-meta">${esc(areaName(p.area))}${p.handover?` · ${t("handover")} ${esc(p.handover)}`:""}</span>
@@ -526,7 +534,7 @@ function openDlg(title,body,foot){
 }
 document.addEventListener("click",e=>{
   const f=e.target.closest("[data-f]");
-  if(f){const [pid,k]=f.dataset.f.split("|");st.filter[pid]=k;const d=$("#p-"+pid);const body=d.querySelector(".p-body");
+  if(f){const [pid,k]=f.dataset.f.split("|");st.filter[pid]=k;if(pid==="the-element"){renderDsp();return}const d=$("#p-"+pid);const body=d.querySelector(".p-body");
     body.innerHTML=pid==="113-residences"?intro113():introGeneric(byId[pid]);return}
   const pl=e.target.closest("[data-plan]");
   if(pl){const u=UNITS.find(x=>x.key===pl.dataset.plan);

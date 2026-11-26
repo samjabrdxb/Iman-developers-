@@ -10,6 +10,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 inv = json.load(open(os.path.join(HERE, "inventory.json")))
 
 FINDER = {
+    "the-element": dict(name="The Element by IMAN", loc="dsp", plan="40/60", handover=None,
+                        schedule=[[40, "In instalments during construction", "أقساط خلال البناء", "建設期間中に分割"],
+                                  [60, "On handover", "عند التسليم", "引き渡し時"]]),
     "113-residences": dict(name="113 Residences", loc="sufouh", plan="40/60", handover="Q2 2029",
                            mkt="https://drive.google.com/drive/folders/123km8i0fk4-WMbpkqIHhTNS4DhTcpuOZ",
                            schedule=[[20, "Within 30 days of booking", "خلال 30 يوم من الحجز", "予約から30日以内"],
