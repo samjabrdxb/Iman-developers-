@@ -68,7 +68,7 @@ When Sam asks to update all links and the availability:
    - Portfolio `site/sam-jabr.html`: https://claude.ai/artifact/L3BLfuLHr1aSWo6WKdnBmU
    - Unit finder `site/finder.html`: https://claude.ai/artifact/Eg5NZJCZRwriTRGYLCwTb7
    - Japanese unit finder `site/finder-ja.html`: https://claude.ai/artifact/T6RPFxW5jAsAzdhcXZzqXX
-   - 113 floor plans `site/fp113.html`: https://claude.ai/artifact/KU6Q5Wyz8Cp9gsmMk1ed4n
+   - 113 floor plans `site/fp113.html`: https://claude.ai/artifact/KU6Q5Wyz8Cp9gsmMk1ed4n (also on GitHub Pages, with Sam's name in the link: https://samjabrdxb.github.io/Iman-developers-/sam-jabr-113/)
 6. Commit, push to `main` (GitHub Pages), and send Sam `availability/YYYY-MM-DD/IMAN-Availability-Sam-Jabr-DD.MM.YYYY.pdf`.
 7. Write the message of the day for broker groups: short, WhatsApp style (*bold*), with the unit finder link and the signature "*Sam Jabr* · IMAN Developers · +971 50 175 2771". Sam prefers short messages, and replies to him in Levantine Arabic.
 
