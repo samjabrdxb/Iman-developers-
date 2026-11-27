@@ -279,12 +279,12 @@ dialog::backdrop{background:rgba(8,16,11,.7)}
             <div><dt class="num">170</dt><dd data-i="dspUnits">Residential units</dd></div>
             <div><dt data-i="dspMix">Studio · 1BR · 2BR</dt><dd data-i="dspRetail">Plus retail units</dd></div>
           </dl>
-          <div class="eoi">
+          <div class="eoi" id="dsp-eoi">
             <div class="eoi-k" data-i="eoiK">Expression of interest</div>
             <div class="eoi-v">AED 50,000</div>
             <p class="sub" style="margin-top:8px" data-i="eoiSub">100% refundable. Priority: first come, first served.</p>
           </div>
-          <div class="offer"><div class="ot"><b>4%</b><span data-i="o1pre">Pre-launch discount</span></div><div class="ot"><b>40/60</b><span data-i="o2">Payment plan</span></div><div class="ot"><b>7%</b><span data-i="o3">Broker commission</span></div></div>
+          <div class="offer" id="dsp-offer"><div class="ot"><b>4%</b><span data-i="o1pre">Pre-launch discount</span></div><div class="ot"><b>40/60</b><span data-i="o2">Payment plan</span></div><div class="ot"><b>7%</b><span data-i="o3">Broker commission</span></div></div>
           <div class="ctarow" style="margin-top:20px">
             <a class="btn btn-wa wa" data-msg="dsp" href="#" target="_blank" rel="noopener" data-i="dspCta">Notify me on WhatsApp</a>
             <a class="btn btn-ghost" href="https://maps.app.goo.gl/sZcS6qLsnVLauBM56" target="_blank" rel="noopener" data-i="viewLoc">View location</a>
@@ -337,7 +337,7 @@ const SHOWN = ORDER.filter(id=>INV.projects.some(p=>p.id===id&&p.units.length));
 const T = {
  en:{contactAt:"Your contact at IMAN",name:"Sam Jabr",role:"Senior Sales Manager · IMAN Developers",exp:"3 years with IMAN",copy:"Copy",copied:"Copied",waCta:"Message on WhatsApp",waShort:"WhatsApp",call:"Call",
   listH:"IMAN projects",listSub:"Tap a project to see its details, prices and available units.",listEye:(n,d)=>`${n} units available · updated ${d}`,curL:"Currency",
-  byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · EOI now open",o1pre:"Pre-launch discount",discEl:"Prices include the 4% pre-launch discount on the 40/60 plan.",
+  byIman:"by IMAN",dspLoc:"Dubai Science Park",stLaunch:"New launch · EOI now open",o1pre:"Pre-launch discount",elSoldPill:"Sold out at launch",elSoldEye:"The next chapter by IMAN · Sold out",elSoldLead:"Every unit was allocated at launch. Message Sam to be first in line for IMAN's next release.",elSoldCta:"Notify me of the next launch",elSoldFine:"The Element by IMAN sold out on 26 November 2026.",discEl:"Prices include the 4% pre-launch discount on the 40/60 plan.",
   nearH:"A connected neighbourhood",plot:"Dubai Science Park · Plot 6727698",dspEye:"The next chapter by IMAN · EOI now open",
   dspLead:"A new address. An early opportunity. Studios from AED 684K.",dspUnits:"Residential units",dspMix:"Studio · 1BR · 2BR",dspRetail:"Plus retail units",
   eoiK:"Expression of interest",eoiSub:"100% refundable. Priority: first come, first served.",
@@ -357,12 +357,12 @@ const T = {
   fine:"Sam Jabr · Senior Sales Manager, IMAN Developers · +971 50 175 2771. Prices, availability and offers are subject to change; images and layouts are representative.",
   plan:{"113":"40/60 · 4% off","40-60-instalments":"40/60 instalments","50-50-instalments":"50/50 instalments","60-40":"60/40 plan","50-50":"50/50 plan","cash":"Cash only"},
   rows:{now:"Down payment",inst:"In instalments before handover",hand:"On handover",full:"Full payment"},
-  msg:{general:"Hi Sam, I'm interested in IMAN projects. Can you send me more details?",dsp:"Hi Sam, I'd like to book an EOI for The Element by IMAN, Dubai Science Park.",
+  msg:{general:"Hi Sam, I'm interested in IMAN projects. Can you send me more details?",dsp:"Hi Sam, I'd like to book an EOI for The Element by IMAN, Dubai Science Park.",dspNext:"Hi Sam, The Element sold out. Please let me know about IMAN's next launch.",
    unit:(u,p)=>`Hi Sam, I'm interested in unit ${u} at ${p}. Is it still available?`,proj:p=>`Hi Sam, please send me details for ${p} by IMAN.`}
  },
  ar:{contactAt:"جهة اتصالك في إيمان",name:"سام جبر",role:"مدير مبيعات أول · إيمان للتطوير العقاري",exp:"3 سنوات مع إيمان",copy:"نسخ",copied:"تم النسخ",waCta:"راسلني على واتساب",waShort:"واتساب",call:"اتصال",
   listH:"مشاريع إيمان",listSub:"اضغط على أي مشروع لتشوف تفاصيله وأسعاره والوحدات المتاحة.",listEye:(n,d)=>`${n} وحدة متاحة · آخر تحديث ${d}`,curL:"العملة",
-  byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · الـ EOI مفتوح",o1pre:"خصم ما قبل الإطلاق",discEl:"الأسعار شاملة خصم 4% ما قبل الإطلاق على خطة 40/60.",
+  byIman:"من إيمان",dspLoc:"دبي ساينس بارك",stLaunch:"إطلاق جديد · الـ EOI مفتوح",o1pre:"خصم ما قبل الإطلاق",elSoldPill:"انباع كله بالإطلاق",elSoldEye:"الفصل الجديد من إيمان · انباع كله",elSoldLead:"كل الوحدات انوزعت بالإطلاق. راسل سام لتكون أول واحد بالإطلاق الجاي من إيمان.",elSoldCta:"خبرني بالإطلاق الجاي",elSoldFine:"مشروع The Element من إيمان انباع بالكامل بـ 26 نوفمبر 2026.",discEl:"الأسعار شاملة خصم 4% ما قبل الإطلاق على خطة 40/60.",
   nearH:"حيّ متصل بكل شيء",plot:"دبي ساينس بارك · قطعة 6727698",dspEye:"الفصل الجديد من إيمان · الـ EOI مفتوح",
   dspLead:"عنوان جديد. وفرصة مبكرة. الاستوديو من 684 ألف درهم.",dspUnits:"وحدة سكنية",dspMix:"استوديو · غرفة · غرفتين",dspRetail:"بالإضافة إلى وحدات تجارية",
   eoiK:"إبداء اهتمام (EOI)",eoiSub:"قابل للاسترداد 100%. الأولوية لأول واحد بيحجز.",
@@ -382,7 +382,7 @@ const T = {
   fine:"سام جبر · مدير مبيعات أول، إيمان للتطوير العقاري · ‎+971 50 175 2771. الأسعار والتوفر والعروض قابلة للتغيير، والصور والمخططات للتوضيح.",
   plan:{"113":"40/60 · خصم 4%","40-60-instalments":"40/60 أقساط","50-50-instalments":"50/50 أقساط","60-40":"خطة 60/40","50-50":"خطة 50/50","cash":"كاش فقط"},
   rows:{now:"دفعة أولى",inst:"أقساط قبل التسليم",hand:"عند التسليم",full:"الدفع كاملاً"},
-  msg:{general:"مرحبا سام، مهتم بمشاريع إيمان. ممكن ترسلي تفاصيل أكثر؟",dsp:"مرحبا سام، بدي احجز EOI بمشروع The Element من إيمان في دبي ساينس بارك.",
+  msg:{general:"مرحبا سام، مهتم بمشاريع إيمان. ممكن ترسلي تفاصيل أكثر؟",dsp:"مرحبا سام، بدي احجز EOI بمشروع The Element من إيمان في دبي ساينس بارك.",dspNext:"مرحبا سام، The Element انباع كله. خبرني بالإطلاق الجاي من إيمان.",
    unit:(u,p)=>`مرحبا سام، مهتم بالوحدة ${u} في ${p}. هل لسا متاحة؟`,proj:p=>`مرحبا سام، ممكن ترسلي تفاصيل مشروع ${p} من إيمان؟`}
  }
 };
@@ -483,6 +483,13 @@ function introGeneric(p){
 
 function renderDsp(){
   const p=byId["the-element"];if(!p)return;const us=UNITS.filter(u=>u.pid===p.id);
+  const sold=!us.length;$("#dsp-eoi").hidden=sold;$("#dsp-offer").hidden=sold;$("#dsp-from").previousElementSibling.hidden=sold;$("#dsp-n").hidden=sold;
+  if(sold){ // The Element sold out at launch: keep the project, show it as sold out
+    $("#dsp-from").textContent="";
+    for(const [k,v] of [["stLaunch","elSoldPill"],["dspEye","elSoldEye"],["dspLead","elSoldLead"],["dspCta","elSoldCta"],["dspFine","elSoldFine"]])
+      document.querySelectorAll(`#dsp [data-i="${k}"]`).forEach(el=>el.textContent=t(v));
+    $('#dsp a.wa[data-msg="dsp"]').href=waHref(T[st.lang].msg.dspNext);
+    $("#dsp-units").innerHTML="";return}
   $("#dsp-n").textContent=T[st.lang].nUnits(us.length);$("#dsp-from").textContent=money(Math.min(...us.map(u=>u.p)));
   $("#dsp-units").innerHTML=unitsBlock(p);
 }

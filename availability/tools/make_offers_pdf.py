@@ -344,7 +344,8 @@ def overview(parts):
   <div class=pcb><div class=eb>{e(p['area'])}</div><h3>{e(p['name'].split(' · ')[0])}</h3><div class=so>Sold out</div>
   <div class=pn>Ask Sam about upcoming releases</div></div></div>""" for p in gone)
     c = COMING
-    live_el = any(p["match"] == "ELEMENT" for p, _ in parts)
+    # The Element is in PROJECTS now: live it has its own card, sold out it shows in the sold-out cards, so no "coming soon" box.
+    live_el = any(p["match"] == "ELEMENT" for p in PROJECTS)
     soon = "" if live_el else f"""<div class=soon><img src="{jpg(os.path.join(SITE, c['img']), 900)}" alt=""><div><div class=eb>{e(c['tag'])} · {e(c['area'])}</div>
       <h3>{e(c['name'])}</h3><ul>{''.join(f'<li>{e(x)}</li>' for x in c['points'])}</ul>
       <a href="{WA}?text={urllib.parse.quote(c['msg'])}">{e(c['cta'])}</a></div></div>"""
