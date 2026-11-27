@@ -1,0 +1,236 @@
+<title>113 Residences Floor Plans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: espresso header with unit search, offer band, floor and type filters, the floor drawing with every unit
+   coloured by type (sold units greyed), a floor summary beside it, then the unit table. Tapping a unit opens its plan. */
+:root{
+  --ink:#2a1f17; --ink-2:#3a2c21; --bronze:#a8763e; --bronze-2:#c4955a; --gold:#d9b27c;
+  --bg:#f6f1e9; --surface:#ffffff; --line:#e3d6c2; --muted:#8a7560; --chip:#efe6d8; --on-ink:#f6f1e9; --on-ink-muted:#bfae98;
+  --ok:#2f7a4a; --sold:#b9aea0; --shade:rgba(20,14,10,.62);
+  --f-display:"Marcellus",Georgia,serif; --f-body:"Figtree",system-ui,sans-serif; --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17120e; --surface:#211a14; --line:#3a2e24; --muted:#b7a48f; --chip:#2c231b; --ink:#f3ebdf; --ok:#7fcf9b; --sold:#6d6257; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17120e; --surface:#211a14; --line:#3a2e24; --muted:#b7a48f; --chip:#2c231b; --ink:#f3ebdf; --ok:#7fcf9b; --sold:#6d6257; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body)}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.1}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px}
+
+.top{background:#2a1f17;color:var(--on-ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:24px;letter-spacing:.08em}
+.brand b span{color:var(--gold)}
+.brand small{color:var(--on-ink-muted);font-size:13px;letter-spacing:.1em}
+.find{display:flex;gap:6px;flex:1 1 220px;max-width:320px}
+.find input{flex:1;min-width:0;background:#3a2c21;border:1px solid #5a4636;color:var(--on-ink);border-radius:10px;padding:8px 12px}
+.find input::placeholder{color:var(--on-ink-muted)}
+.find button{background:var(--gold);color:#2a1f17;border:0;border-radius:10px;padding:8px 14px;font-weight:800}
+.band{background:linear-gradient(90deg,#a8763e,#c4955a);color:#fff}
+.band .wrap{display:flex;gap:8px 18px;flex-wrap:wrap;align-items:center;padding-block:9px;font-size:14px}
+.band b{letter-spacing:.16em;font-size:12.5px}
+.band span{font-weight:600}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:14px;display:grid;gap:10px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lbl{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--muted);min-width:52px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:7px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip .dot{width:10px;height:10px;border-radius:50%}
+.chip .c{font-size:11.5px;font-weight:800;background:var(--chip);color:var(--ink);border-radius:99px;padding:0 6px}
+.chip[aria-pressed="true"] .c{background:var(--bronze-2);color:#fff}
+.chip.fl{min-width:44px;justify-content:center}
+.chip.fl.none{opacity:.55}
+
+.main{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.plan svg{display:block;width:100%;height:auto;background:#fff;border-radius:8px}
+.plan polygon{cursor:pointer;transition:fill-opacity .15s}
+.plan polygon:hover{fill-opacity:.75}
+.plan polygon.dim{fill-opacity:.06;stroke-opacity:.25}
+.plan text{font:800 22px var(--f-body);fill:#2a1f17;paint-order:stroke;stroke:#fff;stroke-width:5px;pointer-events:none;text-anchor:middle;dominant-baseline:middle}
+.plan text.sold{fill:#8a7f73;font-weight:600}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;position:sticky;top:10px}
+.side h2{font-size:28px}
+.side .sub{color:var(--muted);font-size:14px}
+.tl{display:grid;gap:2px}
+.tl div{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.tl div:last-child{border:0}
+.tl .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:9px}
+.tl b{font-size:13px}
+.tl .av{color:var(--ok)}
+.offer{background:var(--chip);border-radius:12px;padding:10px 12px;font-size:13.5px;display:grid;gap:3px}
+.offer b{color:var(--bronze)}
+.wa{display:inline-flex;justify-content:center;align-items:center;gap:8px;background:var(--bronze);color:#fff;border-radius:99px;padding:10px 16px;font-weight:800;text-decoration:none}
+.hint{font-size:13px;color:var(--muted)}
+
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-block:14px 10px;overflow:hidden}
+.tbl .head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tbl h3{font-size:22px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:start;font-size:11.5px;letter-spacing:.1em;color:var(--muted);font-weight:800;padding:9px 12px;white-space:nowrap;cursor:pointer;user-select:none;border-bottom:1px solid var(--line)}
+td{padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr.u{cursor:pointer} tr.u:hover td{background:var(--chip)}
+td .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:7px}
+.st{font-size:12px;font-weight:800;border-radius:99px;padding:2px 9px}
+.st.a{background:#e3f2e8;color:#1f5e37} .st.s{background:var(--chip);color:var(--muted)}
+.r{text-align:end}
+.foot{color:var(--muted);font-size:12.5px;padding-block:6px 30px}
+.foot b{color:var(--ink)}
+
+dialog{border:0;border-radius:16px;padding:0;width:min(980px,96vw);max-height:92vh;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:var(--shade)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);gap:10px}
+.dh h3{font-size:24px}
+.dh button{border:0;background:var(--chip);border-radius:99px;width:34px;height:34px;font-size:20px;flex:none}
+.db{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;padding:16px;overflow:auto;max-height:calc(92vh - 60px)}
+.db img{width:100%;height:auto;background:#fff;border-radius:10px;border:1px solid var(--line)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:0}
+.facts dt{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:800}
+.facts dd{margin:0;font-weight:700}
+.price{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+.price .k{font-size:11.5px;letter-spacing:.12em;color:var(--bronze);font-weight:800}
+.price .v{font-family:var(--f-display);font-size:30px;line-height:1.15}
+.price s{color:var(--muted);font-size:13px}
+.sch{width:100%;margin-top:8px;font-size:13.5px}
+.sch td{padding:5px 0;border-bottom:1px solid var(--line)}
+.sch td:last-child{text-align:end;font-weight:700}
+.bon{margin-top:10px;background:#2a1f17;color:#f6f1e9;border-radius:10px;padding:9px 12px;font-weight:700;font-size:14px}
+.bon b{color:var(--gold)}
+.soldbox{margin-top:12px;background:var(--chip);border-radius:12px;padding:12px 14px;color:var(--muted);font-weight:600}
+@media (max-width:860px){.main{grid-template-columns:1fr}.side{position:static}.db{grid-template-columns:1fr}.plan text{font-size:40px;stroke-width:8px}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><b>113 <span>RESIDENCES</span></b><small>by IMAN · Al Sufouh</small></div>
+  <form class="find" id="find"><input id="q" placeholder="Unit no., e.g. 206" inputmode="text" autocomplete="off" aria-label="Unit number"><button>Go</button></form>
+</div></header>
+<div class="band"><div class="wrap"><b id="bandk">LIVE AVAILABILITY</b><span id="bandv"></span></div></div>
+
+<main class="wrap">
+  <section class="panel">
+    <div class="row"><span class="lbl">FLOOR</span><div class="row" id="floors"></div></div>
+    <div class="row"><span class="lbl">TYPE</span><div class="row" id="types"></div></div>
+    <div class="row"><span class="lbl">SHOW</span><div class="row" id="shows"></div></div>
+  </section>
+
+  <div class="main">
+    <section class="plan"><svg id="svg" role="img" aria-label="Floor plan"></svg>
+      <div class="legend" id="legend"></div></section>
+    <aside class="side" id="side"></aside>
+  </div>
+
+  <section class="tbl">
+    <div class="head"><h3 id="th"></h3><div class="row" id="scope"></div></div>
+    <div class="scroll"><table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+  <p class="foot" id="foot"></p>
+</main>
+
+<dialog id="dlg"><div class="dh"><h3 id="dt"></h3><button type="button" id="dx" aria-label="Close">×</button></div><div class="db" id="dbody"></div></dialog>
+
+<script>
+const D={"floors":[{"id":"G","name":"Ground Floor","size":[1078,810],"units":[{"no":"G01","type":"2 Bedroom + Study","suite":1016,"balcony":353,"total":1369,"poly":[[394,514],[394,680],[542,680],[542,514]],"view":"Community View"},{"no":"G02","type":"1 Bedroom + Study","suite":678,"balcony":235,"total":913,"poly":[[537,514],[537,683],[637,684],[638,514]],"view":"Community View"},{"no":"G03","type":"1 Bedroom + Study","suite":678,"balcony":235,"total":913,"poly":[[631,516],[631,685],[732,685],[732,516]]},{"no":"G04","type":"1 Bedroom + Study","suite":678,"balcony":235,"total":913,"poly":[[729,516],[728,685],[830,685],[830,516]],"view":"Community View"},{"no":"G05","type":"1 Bedroom + Study","suite":679,"balcony":236,"total":915,"poly":[[847,368],[847,466],[1009,466],[1009,368]]},{"no":"G06","type":"1 Bedroom + Study","suite":678,"balcony":235,"total":913,"poly":[[837,271],[837,372],[1008,372],[1008,271]]},{"no":"G07","type":"2 Bedroom + Study","suite":1016,"balcony":353,"total":1369,"poly":[[848,129],[849,276],[1008,276],[1008,129]],"view":"Park View"}]},{"id":"1","name":"1st Floor","size":[1078,810],"units":[{"no":"101","type":"1 Bedroom","suite":622,"balcony":140,"total":762,"poly":[[684,166],[684,299],[853,299],[853,166]]},{"no":"102","type":"3 Bedroom + Maid","suite":1403,"balcony":287,"total":1690,"poly":[[682,34],[682,168],[1055,169],[1055,34]],"view":"Pool/Park View"},{"no":"103","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[882,165],[883,362],[1055,362],[1055,165]]},{"no":"104","type":"2 Bedroom","suite":931,"balcony":190,"total":1121,"poly":[[882,354],[882,550],[1052,551],[1052,354]]},{"no":"105","type":"2 Bedroom","suite":931,"balcony":205,"total":1136,"poly":[[662,561],[662,735],[864,735],[863,561]],"view":"Community View"},{"no":"106","type":"4 Bedroom Duplex + Pool","suite":2074,"balcony":458,"total":2532,"poly":[[409,560],[409,733],[664,733],[664,560]],"view":"Community View"},{"no":"107","type":"2 Bedroom + Maid","suite":1095,"balcony":214,"total":1309,"poly":[[146,580],[146,656],[214,657],[214,735],[413,735],[412,559],[218,559],[216,580]],"view":"Community View"},{"no":"108","type":"2 Bedroom","suite":909,"balcony":210,"total":1119,"poly":[[77,388],[77,584],[221,583],[222,564],[253,563],[253,388]],"view":"Community View"},{"no":"109","type":"3 Bedroom + Study","suite":1513,"balcony":273,"total":1786,"poly":[[77,194],[77,391],[318,391],[318,331],[365,330],[365,264],[335,264],[335,194]]},{"no":"110","type":"2 Bedroom + Study","suite":1019,"balcony":169,"total":1188,"poly":[[534,349],[381,350],[380,378],[340,379],[340,532],[534,532]],"view":"Pool View"},{"no":"111","type":"2 Bedroom + Study","suite":996,"balcony":218,"total":1214,"poly":[[529,349],[529,531],[727,530],[726,348]],"view":"Pool View"}]},{"id":"2","name":"2nd Floor","size":[1078,810],"units":[{"no":"201","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[624,203],[624,302],[652,302],[652,387],[786,387],[786,202]]},{"no":"202","type":"3 Bedroom + Maid","suite":1404,"balcony":289,"total":1693,"poly":[[621,78],[622,205],[979,204],[978,78]]},{"no":"203","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[810,200],[809,385],[978,385],[978,201]],"view":"Park View"},{"no":"204","type":"2 Bedroom","suite":931,"balcony":141,"total":1072,"poly":[[805,378],[805,563],[978,563],[979,379]],"view":"Park View"},{"no":"205","type":"2 Bedroom","suite":889,"balcony":394,"total":1283,"poly":[[785,559],[785,735],[979,734],[979,559]],"view":"Community View"},{"no":"206","type":"2 Bedroom","suite":931,"balcony":186,"total":1117,"poly":[[605,571],[605,733],[790,733],[790,571]],"view":"Community View"},{"no":"207","type":"2 Bedroom + Maid","suite":1095,"balcony":183,"total":1278,"poly":[[124,590],[124,664],[185,665],[185,736],[372,736],[372,570],[188,570],[187,590]],"view":"Community View"},{"no":"208","type":"2 Bedroom","suite":909,"balcony":140,"total":1049,"poly":[[222,410],[58,411],[59,595],[194,594],[195,575],[222,574]]},{"no":"209","type":"3 Bedroom + Study","suite":1551,"balcony":508,"total":2059,"poly":[[57,195],[57,415],[304,414],[305,306],[333,305],[333,194]],"view":"Pool/Community View"},{"no":"210","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[304,368],[304,544],[486,544],[488,368]]},{"no":"211","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[482,368],[482,544],[666,544],[666,407],[612,407],[610,367]]}]},{"id":"3","name":"3rd Floor","size":[1078,810],"units":[{"no":"301","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[679,181],[678,282],[707,284],[707,369],[843,369],[843,182]],"view":"Pool View"},{"no":"302","type":"3 Bedroom + Maid","suite":1404,"balcony":184,"total":1588,"poly":[[676,117],[676,185],[1039,184],[1038,56],[704,56],[703,116]]},{"no":"303","type":"2 Bedroom","suite":930,"balcony":141,"total":1071,"poly":[[861,181],[861,370],[1041,370],[1041,181]],"view":"Park View"},{"no":"304","type":"1 Bedroom","suite":624,"balcony":149,"total":773,"poly":[[861,363],[861,491],[1041,491],[1040,363]]},{"no":"305","type":"4 Bedroom Duplex + Pool","suite":2543,"balcony":707,"total":3250,"poly":[[781,562],[781,731],[1043,730],[1042,489],[874,489],[872,562]]},{"no":"306","type":"1 Bedroom","suite":623,"balcony":67,"total":690,"poly":[[660,550],[660,730],[787,730],[787,550]]},{"no":"307","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[537,549],[537,729],[665,729],[665,549]]},{"no":"308","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[415,549],[415,729],[543,729],[543,549]]},{"no":"309","type":"2 Bedroom + Maid","suite":1095,"balcony":214,"total":1309,"poly":[[163,582],[163,653],[227,654],[228,731],[420,730],[420,551],[231,551],[229,582]]},{"no":"310","type":"2 Bedroom","suite":909,"balcony":217,"total":1126,"poly":[[97,395],[96,586],[235,587],[236,565],[265,565],[265,395]],"view":"Community View"},{"no":"311","type":"3 Bedroom + Study","suite":1551,"balcony":445,"total":1996,"poly":[[95,177],[95,399],[348,399],[348,286],[378,285],[377,177]]},{"no":"312","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[348,352],[348,541],[537,542],[538,353]],"view":"Pool View"},{"no":"313","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[531,352],[531,541],[720,542],[721,352]]}]},{"id":"4","name":"4th Floor","size":[1078,810],"units":[{"no":"401","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[688,179],[688,286],[718,287],[719,377],[861,377],[861,179]]},{"no":"402","type":"3 Bedroom + Maid","suite":1404,"balcony":184,"total":1588,"poly":[[1072,44],[684,44],[684,186],[1071,187]]},{"no":"403","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[1077,178],[894,179],[895,377],[1077,378]]},{"no":"404","type":"1 Bedroom","suite":624,"balcony":118,"total":742,"poly":[[895,373],[894,508],[1077,509],[1077,373]]},{"no":"405","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[667,583],[667,762],[802,762],[802,583]]},{"no":"406","type":"1 Bedroom","suite":622,"balcony":67,"total":689,"poly":[[536,583],[536,762],[671,762],[671,583]]},{"no":"407","type":"1 Bedroom","suite":629,"balcony":145,"total":774,"poly":[[407,583],[406,762],[542,762],[542,583]]},{"no":"408","type":"2 Bedroom + Maid","suite":1095,"balcony":183,"total":1278,"poly":[[138,603],[138,682],[206,683],[207,763],[412,762],[411,583],[211,583],[210,603]]},{"no":"409","type":"2 Bedroom","suite":909,"balcony":190,"total":1099,"poly":[[64,407],[64,611],[214,611],[216,587],[247,586],[247,407]],"view":"Community View"},{"no":"410","type":"3 Bedroom + Study","suite":1550,"balcony":460,"total":2010,"poly":[[66,174],[66,373],[97,374],[97,415],[336,415],[337,293],[366,292],[366,174]],"view":"Pool/Community View"},{"no":"411","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[336,357],[336,552],[536,552],[536,356]]},{"no":"412","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[531,357],[532,554],[731,553],[731,404],[672,404],[671,357]]}]},{"id":"5","name":"5th Floor","size":[1078,810],"units":[{"no":"501","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[688,179],[688,286],[718,287],[718,377],[862,378],[862,179]]},{"no":"502","type":"3 Bedroom + Maid","suite":1404,"balcony":258,"total":1662,"poly":[[684,46],[684,188],[1060,188],[1059,45]],"view":"Pool/Park View"},{"no":"503","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[888,182],[888,371],[1060,371],[1060,183]]},{"no":"504","type":"2 Bedroom","suite":931,"balcony":141,"total":1072,"poly":[[888,370],[887,559],[1059,559],[1059,370]],"view":"Park View"},{"no":"505","type":"2 Bedroom","suite":889,"balcony":394,"total":1283,"poly":[[857,556],[857,744],[1065,744],[1065,555]]},{"no":"506","type":"2 Bedroom","suite":930,"balcony":140,"total":1070,"poly":[[670,567],[670,742],[862,742],[861,566]]},{"no":"507","type":"4 Bedroom Duplex + Pool","suite":2079,"balcony":430,"total":2509,"poly":[[422,566],[422,741],[674,741],[673,565]]},{"no":"508","type":"2 Bedroom + Maid","suite":1095,"balcony":214,"total":1309,"poly":[[167,589],[167,661],[234,662],[234,737],[426,737],[426,561],[236,561],[234,589]]},{"no":"509","type":"2 Bedroom","suite":909,"balcony":167,"total":1076,"poly":[[98,397],[98,595],[236,596],[240,595],[241,572],[272,572],[272,397]],"view":"Community View"},{"no":"510","type":"3 Bedroom + Study","suite":1554,"balcony":427,"total":1981,"poly":[[98,178],[98,406],[355,404],[355,291],[385,290],[384,178]]},{"no":"511","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[357,355],[357,539],[545,539],[545,355]]},{"no":"512","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[542,355],[543,539],[732,539],[732,396],[676,396],[675,355]],"view":"Pool View"}]},{"id":"6","name":"6th Floor","size":[1078,810],"units":[{"no":"601","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[689,179],[689,286],[719,287],[719,377],[863,378],[863,179]],"view":"Pool View"},{"no":"602","type":"3 Bedroom + Maid","suite":1404,"balcony":286,"total":1690,"poly":[[696,56],[696,187],[1057,187],[1057,56]]},{"no":"603","type":"4 Bedroom Duplex + Pool","suite":2074,"balcony":459,"total":2533,"poly":[[884,181],[884,428],[1056,428],[1056,181]]},{"no":"604","type":"1 Bedroom","suite":622,"balcony":67,"total":689,"poly":[[888,423],[888,547],[1055,547],[1055,423]]},{"no":"605","type":"2 Bedroom","suite":889,"balcony":394,"total":1283,"poly":[[858,544],[858,724],[1058,724],[1058,543]]},{"no":"606","type":"2 Bedroom","suite":930,"balcony":218,"total":1148,"poly":[[677,556],[677,724],[864,724],[864,556]],"view":"Community View"},{"no":"607","type":"2 Bedroom + Maid","suite":1095,"balcony":214,"total":1309,"poly":[[188,576],[188,650],[253,651],[254,722],[443,721],[442,553],[257,553],[255,576]],"view":"Community View"},{"no":"608","type":"2 Bedroom","suite":909,"balcony":140,"total":1049,"poly":[[124,394],[124,583],[260,583],[261,558],[290,558],[289,394]]},{"no":"609","type":"3 Bedroom + Study","suite":1551,"balcony":508,"total":2059,"poly":[[120,177],[121,397],[374,397],[374,287],[401,286],[400,176]],"view":"Pool/Community View"},{"no":"610","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[373,351],[373,529],[557,529],[558,350]]},{"no":"611","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[553,351],[554,529],[738,529],[738,350]],"view":"Pool View"}]},{"id":"7","name":"7th Floor","size":[1078,810],"units":[{"no":"701","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[689,179],[689,286],[719,287],[719,377],[863,378],[863,179]],"view":"Pool View"},{"no":"702","type":"3 Bedroom + Maid","suite":1404,"balcony":258,"total":1662,"poly":[[696,56],[696,187],[1057,187],[1057,56]]},{"no":"703","type":"4 Bedroom Duplex + Pool","suite":2264,"balcony":622,"total":2886,"poly":[[889,424],[889,558],[860,559],[860,692],[913,692],[915,731],[1056,731],[1056,424]]},{"no":"704","type":"2 Bedroom","suite":930,"balcony":167,"total":1097,"poly":[[864,559],[678,559],[678,726],[864,726]],"view":"Community View"},{"no":"705","type":"1 Bedroom","suite":622,"balcony":118,"total":740,"poly":[[557,557],[557,725],[683,725],[683,557]]},{"no":"706","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[561,559],[436,559],[435,726],[561,726]]},{"no":"707","type":"2 Bedroom + Maid","suite":1095,"balcony":214,"total":1309,"poly":[[188,576],[188,650],[253,651],[254,722],[443,721],[442,553],[257,553],[255,576]]},{"no":"708","type":"2 Bedroom","suite":909,"balcony":190,"total":1099,"poly":[[124,394],[124,583],[260,583],[261,557],[290,557],[290,394]],"view":"Community View"},{"no":"709","type":"3 Bedroom + Study","suite":1550,"balcony":460,"total":2010,"poly":[[120,177],[121,397],[373,396],[374,287],[401,286],[400,176]],"view":"Pool/Community View"},{"no":"710","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[373,350],[374,529],[558,528],[557,350]],"view":"Pool View"},{"no":"711","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[553,351],[554,528],[739,528],[738,350]]}]},{"id":"8","name":"8th Floor","size":[1078,810],"units":[{"no":"801","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[689,179],[689,286],[719,287],[719,377],[863,378],[863,179]]},{"no":"802","type":"3 Bedroom + Maid","suite":1404,"balcony":258,"total":1662,"poly":[[695,56],[695,187],[1056,187],[1056,56]],"view":"Pool/Park View"},{"no":"803","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[1055,181],[889,183],[889,369],[1056,368]]},{"no":"804","type":"1 Bedroom","suite":623,"balcony":145,"total":768,"poly":[[890,363],[889,489],[1056,488],[1055,363]]},{"no":"805","type":"2 Bedroom","suite":930,"balcony":138,"total":1068,"poly":[[677,559],[676,727],[864,727],[863,559]],"view":"Community View"},{"no":"806","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[555,559],[555,727],[681,727],[681,560]]},{"no":"807","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[434,559],[433,727],[560,727],[559,559]]},{"no":"808","type":"2 Bedroom + Maid","suite":1095,"balcony":133,"total":1228,"poly":[[183,579],[183,651],[247,653],[247,727],[438,727],[437,559],[252,559],[251,579]],"view":"Community View"},{"no":"809","type":"2 Bedroom","suite":909,"balcony":217,"total":1126,"poly":[[116,395],[116,583],[253,583],[254,563],[283,563],[283,395]],"view":"Community View"},{"no":"810","type":"3 Bedroom + Study","suite":1551,"balcony":508,"total":2059,"poly":[[118,178],[118,399],[368,398],[369,288],[397,287],[397,178]]},{"no":"811","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[366,352],[366,532],[555,532],[554,351]]},{"no":"812","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[551,351],[551,532],[740,531],[740,352]]}]},{"id":"9","name":"9th Floor","size":[1078,810],"units":[{"no":"901","type":"2 Bedroom","suite":914,"balcony":117,"total":1031,"poly":[[689,179],[689,286],[719,287],[719,377],[863,378],[863,179]]},{"no":"902","type":"3 Bedroom + Maid","suite":1404,"balcony":184,"total":1588,"poly":[[695,56],[695,187],[1056,187],[1056,56]],"view":"Pool/Park View"},{"no":"903","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[890,181],[889,368],[1055,369],[1055,181]]},{"no":"904","type":"2 Bedroom","suite":931,"balcony":141,"total":1072,"poly":[[889,363],[889,554],[1055,555],[1055,363]]},{"no":"905","type":"2 Bedroom","suite":889,"balcony":394,"total":1283,"poly":[[860,551],[861,731],[1058,731],[1058,551]],"view":"Community View"},{"no":"906","type":"2 Bedroom","suite":931,"balcony":217,"total":1148,"poly":[[675,563],[676,731],[864,731],[864,562]]},{"no":"907","type":"1 Bedroom","suite":622,"balcony":145,"total":767,"poly":[[553,562],[553,731],[681,731],[682,562]]},{"no":"908","type":"1 Bedroom","suite":622,"balcony":67,"total":689,"poly":[[431,562],[431,731],[559,731],[560,562]]},{"no":"909","type":"2 Bedroom + Maid","suite":1094,"balcony":214,"total":1308,"poly":[[180,582],[180,657],[244,658],[245,731],[436,731],[436,562],[247,562],[246,582]]},{"no":"910","type":"2 Bedroom","suite":909,"balcony":141,"total":1050,"poly":[[113,397],[113,590],[252,590],[254,566],[281,566],[281,397]]},{"no":"911","type":"3 Bedroom + Study","suite":1551,"balcony":439,"total":1990,"poly":[[112,178],[112,403],[366,402],[367,291],[394,290],[394,178]]},{"no":"912","type":"2 Bedroom + Study","suite":1019,"balcony":190,"total":1209,"poly":[[366,352],[366,532],[555,532],[554,351]]},{"no":"913","type":"2 Bedroom + Study","suite":996,"balcony":145,"total":1141,"poly":[[551,354],[551,534],[740,534],[739,354]]}]}],"avail":{"G01":{"op":3012409.0,"view":"Community View"},"G04":{"op":2191188.0,"view":"Community View"},"102":{"op":3803562.0,"view":"Pool/Park View"},"105":{"op":2761321.0,"view":"Community View"},"107":{"op":3181129.0,"view":"Community View"},"110":{"op":3028609.0,"view":"Pool View"},"206":{"op":2737370.0,"view":"Community View"},"209":{"op":4323508.0,"view":"Pool/Community View"},"310":{"op":2793579.0,"view":"Community View"},"312":{"op":3178827.0,"view":"Pool View"},"409":{"op":2748026.0,"view":"Community View"},"410":{"op":4302434.0,"view":"Pool/Community View"},"809":{"op":2917488.0,"view":"Community View"},"802":{"op":3972569.68,"view":"Pool/Park View"},"106":{"op":5443094.0,"view":"Community View"}},"date":"2026-11-27"};
+const WA="971501752771";
+const COLORS={"1 Bedroom":"#4f86d9","1 Bedroom + Study":"#2f9e8f","2 Bedroom":"#e3a12f","2 Bedroom + Study":"#d9603b","2 Bedroom + Maid":"#8b6a3e","3 Bedroom + Maid":"#8e5cc2","3 Bedroom + Study":"#c2508a","4 Bedroom Duplex + Pool":"#1f7a7a"};
+const TYPES=Object.keys(COLORS);
+const SCHED=[[20,"Within 30 days of booking"],[10,"Within 90 days of booking"],[10,"At 40% construction"],[60,"On handover"]];
+const bonusOf=t=>t.startsWith("2 ")?25000:t.startsWith("3 ")?35000:t.startsWith("4 ")?50000:0;
+const fmt=n=>Math.round(n).toLocaleString("en-US");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $=s=>document.querySelector(s);
+const U=D.floors.flatMap(f=>f.units.map(u=>{const a=D.avail[u.no];return {...u,floor:f.id,floorName:f.name,avail:!!a,view:(a&&a.view)||u.view||"",op:a?a.op:null}}));
+const byNo=Object.fromEntries(U.map(u=>[u.no,u]));
+const AV=U.filter(u=>u.avail);
+const st={floor:null,types:new Set(),only:false,scope:"floor",sort:"no",dir:1};
+// Open on the floor in the link, else the first floor with an available unit.
+(()=>{const m=location.hash.match(/floor\/(\w+)/);st.floor=m&&D.floors.some(f=>f.id===m[1])?m[1]:(AV[0]||U[0]).floor})();
+const shown=u=>(!st.types.size||st.types.has(u.type))&&(!st.only||u.avail);
+const waHref=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
+const [y,mo,da]=D.date.split("-");const dateTxt=new Date(+y,mo-1,+da).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+
+function chip(html,pressed,on,cls=""){const b=document.createElement("button");b.type="button";b.className="chip "+cls;b.setAttribute("aria-pressed",String(pressed));b.innerHTML=html;b.onclick=on;return b}
+function render(){
+  $("#bandv").textContent=`${AV.length} of ${U.length} units available · 6% off on 40/60 · 16% off full cash · Agency bonus up to AED 50K · Updated ${dateTxt}`;
+  const fls=$("#floors");fls.innerHTML="";
+  for(const f of D.floors){const n=f.units.filter(u=>byNo[u.no].avail).length;
+    fls.append(chip(`${f.id}${n?`<span class="c">${n}</span>`:""}`,f.id===st.floor,()=>{st.floor=f.id;history.replaceState(null,"","#/floor/"+f.id);render()},"fl"+(n?"":" none")))}
+  const ty=$("#types");ty.innerHTML="";
+  for(const t of TYPES){const n=AV.filter(u=>u.type===t).length;
+    ty.append(chip(`<span class="dot" style="background:${COLORS[t]}"></span>${t}${n?`<span class="c">${n}</span>`:""}`,st.types.has(t),()=>{st.types.has(t)?st.types.delete(t):st.types.add(t);render()}))}
+  const sh=$("#shows");sh.innerHTML="";
+  sh.append(chip("All units",!st.only,()=>{st.only=false;render()}),chip(`Available only<span class="c">${AV.length}</span>`,st.only,()=>{st.only=true;render()}));
+  drawFloor();drawSide();drawTable();
+  $("#foot").innerHTML=`Plans from IMAN's 113 Residences brochure; prices from IMAN's list of ${dateTxt}. Plans, areas and prices are indicative and confirmed at booking; DLD and registration fees are extra.<br><b>Sam Jabr</b> · Senior Sales Manager · IMAN Developers · <a href="https://wa.me/${WA}">WhatsApp +971 50 175 2771</a>`;
+}
+function drawFloor(){
+  const f=D.floors.find(x=>x.id===st.floor);const [w,h]=f.size;const svg=$("#svg");
+  svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+  let s=`<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#d9d2c8"/><line x1="0" y1="0" x2="0" y2="10" stroke="#b9aea0" stroke-width="4"/></pattern></defs>`;
+  s+=`<image href="assets/fp113/floor-${f.id}.webp" width="${w}" height="${h}"/>`;
+  let labels="";
+  for(const u0 of f.units){const u=byNo[u0.no];const pts=u0.poly.map(p=>p.join(",")).join(" ");
+    const cx=u0.poly.reduce((a,p)=>a+p[0],0)/u0.poly.length,cy=u0.poly.reduce((a,p)=>a+p[1],0)/u0.poly.length;
+    const c=u.avail?COLORS[u.type]:"url(#hatch)";
+    s+=`<polygon data-no="${u.no}" points="${pts}" fill="${c}" fill-opacity="${u.avail?.5:.55}" stroke="${u.avail?COLORS[u.type]:"#a99d8f"}" stroke-width="${u.avail?4:2}" class="${shown(u)?"":"dim"}"><title>${u.no} · ${u.type} · ${u.avail?"Available":"Sold"}</title></polygon>`;
+    labels+=`<text x="${cx}" y="${cy}" class="${u.avail?"":"sold"}">${u.no}</text>`}
+  svg.innerHTML=s+labels;
+  $("#legend").innerHTML=`<span><i style="background:#4f86d9;opacity:.6"></i>Available (colour = type)</span><span><i style="background:repeating-linear-gradient(45deg,#d9d2c8 0 3px,#b9aea0 3px 5px)"></i>Sold</span><span>Neighbour at the top · roads on the other three sides</span>`;
+}
+function drawSide(){
+  const f=D.floors.find(x=>x.id===st.floor);const us=f.units.map(u=>byNo[u.no]);const av=us.filter(u=>u.avail);
+  const types=TYPES.filter(t=>us.some(u=>u.type===t));
+  $("#side").innerHTML=`<div><h2>${f.name}</h2><div class="sub"><b class="num">${us.length}</b> units · <b class="num" style="color:var(--ok)">${av.length}</b> available${av.length?` · from AED ${fmt(Math.min(...av.map(u=>u.op*.94)))}`:""}</div></div>
+    <div class="tl">${types.map(t=>{const all=us.filter(u=>u.type===t),a=all.filter(u=>u.avail);
+      return `<div><span><span class="dot" style="background:${COLORS[t]}"></span>${t}</span><span class="num">${a.length?`<b class="av">${a.length} available</b> · `:""}${all.length}</span></div>`}).join("")}</div>
+    <div class="offer"><span><b>6%</b> off on the 40/60 plan · <b>16%</b> off full cash · <b>7%</b> commission</span>
+      <span>Agency cash bonus: 2 BR <b>AED 25K</b> · 3 BR <b>AED 35K</b> · 4 BR <b>AED 50K</b></span></div>
+    <p class="hint">Tap a unit on the plan or in the table to open its floor plan${av.length?" and prices":""}.</p>
+    <a class="wa" href="${waHref(`Hi Sam, I'm looking at the ${f.name} of 113 Residences. Can you send me details?`)}" target="_blank" rel="noopener">Ask Sam on WhatsApp</a>`;
+}
+const COLS=[["no","UNIT"],["type","TYPE"],["floor","FLOOR"],["view","VIEW"],["suite","SUITE",1],["balcony","BALCONY",1],["total","TOTAL SQFT",1],["price","PRICE −6%",1],["status","STATUS"]];
+function drawTable(){
+  const list=(st.scope==="floor"?U.filter(u=>u.floor===st.floor):U).filter(shown);
+  const key={no:u=>(u.floor==="G"?0:+u.floor)*1000+parseInt(u.no.replace(/\D/g,"").slice(-2)),type:u=>TYPES.indexOf(u.type),floor:u=>u.floor==="G"?0:+u.floor,view:u=>u.view,suite:u=>u.suite,balcony:u=>u.balcony,total:u=>u.total,price:u=>u.avail?u.op:9e9,status:u=>u.avail?0:1}[st.sort];
+  list.sort((a,b)=>{const x=key(a),y=key(b);return (x>y?1:x<y?-1:0)*st.dir});
+  $("#th").textContent=st.scope==="floor"?`Units · ${D.floors.find(f=>f.id===st.floor).name}`:"Units · All floors";
+  const sc=$("#scope");sc.innerHTML="";sc.append(chip("This floor",st.scope==="floor",()=>{st.scope="floor";drawTable()}),chip("All floors",st.scope==="all",()=>{st.scope="all";drawTable()}));
+  $("#thead").innerHTML=COLS.map(([k,l,r])=>`<th class="${r?"r":""}" data-k="${k}">${l}${st.sort===k?(st.dir>0?" ▲":" ▼"):""}</th>`).join("");
+  $("#tbody").innerHTML=list.length?list.map(u=>`<tr class="u" data-no="${u.no}"><td><b>${u.no}</b></td><td><span class="dot" style="background:${COLORS[u.type]}"></span>${u.type}</td><td>${u.floor}</td><td>${esc(u.view||"–")}</td>
+    <td class="r num">${fmt(u.suite)}</td><td class="r num">${fmt(u.balcony)}</td><td class="r num">${fmt(u.total)}</td><td class="r num">${u.avail?"AED "+fmt(u.op*.94):"–"}</td>
+    <td><span class="st ${u.avail?"a":"s"}">${u.avail?"Available":"Sold"}</span></td></tr>`).join(""):`<tr><td colspan="9" class="hint">No unit matches these filters.</td></tr>`;
+}
+function openUnit(no){
+  const u=byNo[no];if(!u)return false;
+  $("#dt").textContent=`Unit ${u.no} · ${u.type}`;
+  const facts=[["FLOOR",u.floorName],["VIEW",u.view||"–"],["SUITE",fmt(u.suite)+" sq ft"],["BALCONY / TERRACE",fmt(u.balcony)+" sq ft"],["TOTAL",`${fmt(u.total)} sq ft · ${fmt(u.total*.092903)} m²`],["STATUS",u.avail?"Available":"Sold"]];
+  let money="";
+  if(u.avail){const o=u.op*.94,c=u.op*.84,b=bonusOf(u.type);
+    money=`<div class="price"><div class="k">40/60 PAYMENT PLAN · 6% OFF</div><div class="v num">AED ${fmt(o)}</div><s class="num">List price AED ${fmt(u.op)}</s>
+      <table class="sch"><tbody>${SCHED.map(([p,l])=>`<tr><td>${p}% · ${l}</td><td class="num">AED ${fmt(o*p/100)}</td></tr>`).join("")}</tbody></table></div>
+      <div class="price"><div class="k">FULL CASH · 16% OFF</div><div class="v num">AED ${fmt(c)}</div></div>
+      <div class="bon">Your 7% commission: <b class="num">AED ${fmt(o*.07)}</b>${b?`<br>+ Agency cash bonus: <b class="num">AED ${fmt(b)}</b>`:""}</div>
+      <p style="margin-top:12px"><a class="wa" href="${waHref(`Hi Sam, is unit ${u.no} at 113 Residences still available? I have a client for it.`)}" target="_blank" rel="noopener">Reserve unit ${u.no} with Sam</a></p>`}
+  else money=`<div class="soldbox">This unit is sold. <a href="${waHref("Hi Sam, which 113 Residences units are still available?")}" target="_blank" rel="noopener">Ask Sam about available units</a></div>`;
+  $("#dbody").innerHTML=`<div><img src="assets/fp113/${u.no}.webp" alt="Floor plan of unit ${u.no}"></div><div><dl class="facts">${facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>${money}</div>`;
+  $("#dlg").showModal();return true;
+}
+$("#svg").addEventListener("click",e=>{const p=e.target.closest("polygon");if(p)openUnit(p.dataset.no)});
+$("#tbody").addEventListener("click",e=>{const r=e.target.closest("tr[data-no]");if(r)openUnit(r.dataset.no)});
+$("#thead").addEventListener("click",e=>{const th=e.target.closest("th");if(!th)return;const k=th.dataset.k;st.dir=st.sort===k?-st.dir:1;st.sort=k;drawTable()});
+$("#dx").onclick=()=>$("#dlg").close();
+$("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
+$("#find").addEventListener("submit",e=>{e.preventDefault();const q=$("#q").value.trim().toUpperCase().replace(/\s/g,"");const u=byNo[q]||byNo[q.replace(/^G(\d)$/,"G0$1")];
+  if(!u){$("#q").value="";$("#q").placeholder="No unit "+q;return}st.floor=u.floor;render();openUnit(u.no)});
+render();
+</script>

@@ -1,0 +1,236 @@
+<title>113 Residences Floor Plans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: espresso header with unit search, offer band, floor and type filters, the floor drawing with every unit
+   coloured by type (sold units greyed), a floor summary beside it, then the unit table. Tapping a unit opens its plan. */
+:root{
+  --ink:#2a1f17; --ink-2:#3a2c21; --bronze:#a8763e; --bronze-2:#c4955a; --gold:#d9b27c;
+  --bg:#f6f1e9; --surface:#ffffff; --line:#e3d6c2; --muted:#8a7560; --chip:#efe6d8; --on-ink:#f6f1e9; --on-ink-muted:#bfae98;
+  --ok:#2f7a4a; --sold:#b9aea0; --shade:rgba(20,14,10,.62);
+  --f-display:"Marcellus",Georgia,serif; --f-body:"Figtree",system-ui,sans-serif; --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17120e; --surface:#211a14; --line:#3a2e24; --muted:#b7a48f; --chip:#2c231b; --ink:#f3ebdf; --ok:#7fcf9b; --sold:#6d6257; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17120e; --surface:#211a14; --line:#3a2e24; --muted:#b7a48f; --chip:#2c231b; --ink:#f3ebdf; --ok:#7fcf9b; --sold:#6d6257; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body)}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;line-height:1.1}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px}
+
+.top{background:#2a1f17;color:var(--on-ink)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:24px;letter-spacing:.08em}
+.brand b span{color:var(--gold)}
+.brand small{color:var(--on-ink-muted);font-size:13px;letter-spacing:.1em}
+.find{display:flex;gap:6px;flex:1 1 220px;max-width:320px}
+.find input{flex:1;min-width:0;background:#3a2c21;border:1px solid #5a4636;color:var(--on-ink);border-radius:10px;padding:8px 12px}
+.find input::placeholder{color:var(--on-ink-muted)}
+.find button{background:var(--gold);color:#2a1f17;border:0;border-radius:10px;padding:8px 14px;font-weight:800}
+.band{background:linear-gradient(90deg,#a8763e,#c4955a);color:#fff}
+.band .wrap{display:flex;gap:8px 18px;flex-wrap:wrap;align-items:center;padding-block:9px;font-size:14px}
+.band b{letter-spacing:.16em;font-size:12.5px}
+.band span{font-weight:600}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:14px;display:grid;gap:10px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lbl{font-size:11.5px;font-weight:800;letter-spacing:.14em;color:var(--muted);min-width:52px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:7px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip .dot{width:10px;height:10px;border-radius:50%}
+.chip .c{font-size:11.5px;font-weight:800;background:var(--chip);color:var(--ink);border-radius:99px;padding:0 6px}
+.chip[aria-pressed="true"] .c{background:var(--bronze-2);color:#fff}
+.chip.fl{min-width:44px;justify-content:center}
+.chip.fl.none{opacity:.55}
+
+.main{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.plan svg{display:block;width:100%;height:auto;background:#fff;border-radius:8px}
+.plan polygon{cursor:pointer;transition:fill-opacity .15s}
+.plan polygon:hover{fill-opacity:.75}
+.plan polygon.dim{fill-opacity:.06;stroke-opacity:.25}
+.plan text{font:800 22px var(--f-body);fill:#2a1f17;paint-order:stroke;stroke:#fff;stroke-width:5px;pointer-events:none;text-anchor:middle;dominant-baseline:middle}
+.plan text.sold{fill:#8a7f73;font-weight:600}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;position:sticky;top:10px}
+.side h2{font-size:28px}
+.side .sub{color:var(--muted);font-size:14px}
+.tl{display:grid;gap:2px}
+.tl div{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.tl div:last-child{border:0}
+.tl .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:9px}
+.tl b{font-size:13px}
+.tl .av{color:var(--ok)}
+.offer{background:var(--chip);border-radius:12px;padding:10px 12px;font-size:13.5px;display:grid;gap:3px}
+.offer b{color:var(--bronze)}
+.wa{display:inline-flex;justify-content:center;align-items:center;gap:8px;background:var(--bronze);color:#fff;border-radius:99px;padding:10px 16px;font-weight:800;text-decoration:none}
+.hint{font-size:13px;color:var(--muted)}
+
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-block:14px 10px;overflow:hidden}
+.tbl .head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.tbl h3{font-size:22px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:start;font-size:11.5px;letter-spacing:.1em;color:var(--muted);font-weight:800;padding:9px 12px;white-space:nowrap;cursor:pointer;user-select:none;border-bottom:1px solid var(--line)}
+td{padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr.u{cursor:pointer} tr.u:hover td{background:var(--chip)}
+td .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:7px}
+.st{font-size:12px;font-weight:800;border-radius:99px;padding:2px 9px}
+.st.a{background:#e3f2e8;color:#1f5e37} .st.s{background:var(--chip);color:var(--muted)}
+.r{text-align:end}
+.foot{color:var(--muted);font-size:12.5px;padding-block:6px 30px}
+.foot b{color:var(--ink)}
+
+dialog{border:0;border-radius:16px;padding:0;width:min(980px,96vw);max-height:92vh;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:var(--shade)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);gap:10px}
+.dh h3{font-size:24px}
+.dh button{border:0;background:var(--chip);border-radius:99px;width:34px;height:34px;font-size:20px;flex:none}
+.db{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;padding:16px;overflow:auto;max-height:calc(92vh - 60px)}
+.db img{width:100%;height:auto;background:#fff;border-radius:10px;border:1px solid var(--line)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:0}
+.facts dt{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:800}
+.facts dd{margin:0;font-weight:700}
+.price{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+.price .k{font-size:11.5px;letter-spacing:.12em;color:var(--bronze);font-weight:800}
+.price .v{font-family:var(--f-display);font-size:30px;line-height:1.15}
+.price s{color:var(--muted);font-size:13px}
+.sch{width:100%;margin-top:8px;font-size:13.5px}
+.sch td{padding:5px 0;border-bottom:1px solid var(--line)}
+.sch td:last-child{text-align:end;font-weight:700}
+.bon{margin-top:10px;background:#2a1f17;color:#f6f1e9;border-radius:10px;padding:9px 12px;font-weight:700;font-size:14px}
+.bon b{color:var(--gold)}
+.soldbox{margin-top:12px;background:var(--chip);border-radius:12px;padding:12px 14px;color:var(--muted);font-weight:600}
+@media (max-width:860px){.main{grid-template-columns:1fr}.side{position:static}.db{grid-template-columns:1fr}.plan text{font-size:40px;stroke-width:8px}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><b>113 <span>RESIDENCES</span></b><small>by IMAN · Al Sufouh</small></div>
+  <form class="find" id="find"><input id="q" placeholder="Unit no., e.g. 206" inputmode="text" autocomplete="off" aria-label="Unit number"><button>Go</button></form>
+</div></header>
+<div class="band"><div class="wrap"><b id="bandk">LIVE AVAILABILITY</b><span id="bandv"></span></div></div>
+
+<main class="wrap">
+  <section class="panel">
+    <div class="row"><span class="lbl">FLOOR</span><div class="row" id="floors"></div></div>
+    <div class="row"><span class="lbl">TYPE</span><div class="row" id="types"></div></div>
+    <div class="row"><span class="lbl">SHOW</span><div class="row" id="shows"></div></div>
+  </section>
+
+  <div class="main">
+    <section class="plan"><svg id="svg" role="img" aria-label="Floor plan"></svg>
+      <div class="legend" id="legend"></div></section>
+    <aside class="side" id="side"></aside>
+  </div>
+
+  <section class="tbl">
+    <div class="head"><h3 id="th"></h3><div class="row" id="scope"></div></div>
+    <div class="scroll"><table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table></div>
+  </section>
+  <p class="foot" id="foot"></p>
+</main>
+
+<dialog id="dlg"><div class="dh"><h3 id="dt"></h3><button type="button" id="dx" aria-label="Close">×</button></div><div class="db" id="dbody"></div></dialog>
+
+<script>
+const D=/*DATA*/;
+const WA="971501752771";
+const COLORS={"1 Bedroom":"#4f86d9","1 Bedroom + Study":"#2f9e8f","2 Bedroom":"#e3a12f","2 Bedroom + Study":"#d9603b","2 Bedroom + Maid":"#8b6a3e","3 Bedroom + Maid":"#8e5cc2","3 Bedroom + Study":"#c2508a","4 Bedroom Duplex + Pool":"#1f7a7a"};
+const TYPES=Object.keys(COLORS);
+const SCHED=[[20,"Within 30 days of booking"],[10,"Within 90 days of booking"],[10,"At 40% construction"],[60,"On handover"]];
+const bonusOf=t=>t.startsWith("2 ")?25000:t.startsWith("3 ")?35000:t.startsWith("4 ")?50000:0;
+const fmt=n=>Math.round(n).toLocaleString("en-US");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $=s=>document.querySelector(s);
+const U=D.floors.flatMap(f=>f.units.map(u=>{const a=D.avail[u.no];return {...u,floor:f.id,floorName:f.name,avail:!!a,view:(a&&a.view)||u.view||"",op:a?a.op:null}}));
+const byNo=Object.fromEntries(U.map(u=>[u.no,u]));
+const AV=U.filter(u=>u.avail);
+const st={floor:null,types:new Set(),only:false,scope:"floor",sort:"no",dir:1};
+// Open on the floor in the link, else the first floor with an available unit.
+(()=>{const m=location.hash.match(/floor\/(\w+)/);st.floor=m&&D.floors.some(f=>f.id===m[1])?m[1]:(AV[0]||U[0]).floor})();
+const shown=u=>(!st.types.size||st.types.has(u.type))&&(!st.only||u.avail);
+const waHref=t=>"https://wa.me/"+WA+"?text="+encodeURIComponent(t);
+const [y,mo,da]=D.date.split("-");const dateTxt=new Date(+y,mo-1,+da).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+
+function chip(html,pressed,on,cls=""){const b=document.createElement("button");b.type="button";b.className="chip "+cls;b.setAttribute("aria-pressed",String(pressed));b.innerHTML=html;b.onclick=on;return b}
+function render(){
+  $("#bandv").textContent=`${AV.length} of ${U.length} units available · 6% off on 40/60 · 16% off full cash · Agency bonus up to AED 50K · Updated ${dateTxt}`;
+  const fls=$("#floors");fls.innerHTML="";
+  for(const f of D.floors){const n=f.units.filter(u=>byNo[u.no].avail).length;
+    fls.append(chip(`${f.id}${n?`<span class="c">${n}</span>`:""}`,f.id===st.floor,()=>{st.floor=f.id;history.replaceState(null,"","#/floor/"+f.id);render()},"fl"+(n?"":" none")))}
+  const ty=$("#types");ty.innerHTML="";
+  for(const t of TYPES){const n=AV.filter(u=>u.type===t).length;
+    ty.append(chip(`<span class="dot" style="background:${COLORS[t]}"></span>${t}${n?`<span class="c">${n}</span>`:""}`,st.types.has(t),()=>{st.types.has(t)?st.types.delete(t):st.types.add(t);render()}))}
+  const sh=$("#shows");sh.innerHTML="";
+  sh.append(chip("All units",!st.only,()=>{st.only=false;render()}),chip(`Available only<span class="c">${AV.length}</span>`,st.only,()=>{st.only=true;render()}));
+  drawFloor();drawSide();drawTable();
+  $("#foot").innerHTML=`Plans from IMAN's 113 Residences brochure; prices from IMAN's list of ${dateTxt}. Plans, areas and prices are indicative and confirmed at booking; DLD and registration fees are extra.<br><b>Sam Jabr</b> · Senior Sales Manager · IMAN Developers · <a href="https://wa.me/${WA}">WhatsApp +971 50 175 2771</a>`;
+}
+function drawFloor(){
+  const f=D.floors.find(x=>x.id===st.floor);const [w,h]=f.size;const svg=$("#svg");
+  svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+  let s=`<defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#d9d2c8"/><line x1="0" y1="0" x2="0" y2="10" stroke="#b9aea0" stroke-width="4"/></pattern></defs>`;
+  s+=`<image href="assets/fp113/floor-${f.id}.webp" width="${w}" height="${h}"/>`;
+  let labels="";
+  for(const u0 of f.units){const u=byNo[u0.no];const pts=u0.poly.map(p=>p.join(",")).join(" ");
+    const cx=u0.poly.reduce((a,p)=>a+p[0],0)/u0.poly.length,cy=u0.poly.reduce((a,p)=>a+p[1],0)/u0.poly.length;
+    const c=u.avail?COLORS[u.type]:"url(#hatch)";
+    s+=`<polygon data-no="${u.no}" points="${pts}" fill="${c}" fill-opacity="${u.avail?.5:.55}" stroke="${u.avail?COLORS[u.type]:"#a99d8f"}" stroke-width="${u.avail?4:2}" class="${shown(u)?"":"dim"}"><title>${u.no} · ${u.type} · ${u.avail?"Available":"Sold"}</title></polygon>`;
+    labels+=`<text x="${cx}" y="${cy}" class="${u.avail?"":"sold"}">${u.no}</text>`}
+  svg.innerHTML=s+labels;
+  $("#legend").innerHTML=`<span><i style="background:#4f86d9;opacity:.6"></i>Available (colour = type)</span><span><i style="background:repeating-linear-gradient(45deg,#d9d2c8 0 3px,#b9aea0 3px 5px)"></i>Sold</span><span>Neighbour at the top · roads on the other three sides</span>`;
+}
+function drawSide(){
+  const f=D.floors.find(x=>x.id===st.floor);const us=f.units.map(u=>byNo[u.no]);const av=us.filter(u=>u.avail);
+  const types=TYPES.filter(t=>us.some(u=>u.type===t));
+  $("#side").innerHTML=`<div><h2>${f.name}</h2><div class="sub"><b class="num">${us.length}</b> units · <b class="num" style="color:var(--ok)">${av.length}</b> available${av.length?` · from AED ${fmt(Math.min(...av.map(u=>u.op*.94)))}`:""}</div></div>
+    <div class="tl">${types.map(t=>{const all=us.filter(u=>u.type===t),a=all.filter(u=>u.avail);
+      return `<div><span><span class="dot" style="background:${COLORS[t]}"></span>${t}</span><span class="num">${a.length?`<b class="av">${a.length} available</b> · `:""}${all.length}</span></div>`}).join("")}</div>
+    <div class="offer"><span><b>6%</b> off on the 40/60 plan · <b>16%</b> off full cash · <b>7%</b> commission</span>
+      <span>Agency cash bonus: 2 BR <b>AED 25K</b> · 3 BR <b>AED 35K</b> · 4 BR <b>AED 50K</b></span></div>
+    <p class="hint">Tap a unit on the plan or in the table to open its floor plan${av.length?" and prices":""}.</p>
+    <a class="wa" href="${waHref(`Hi Sam, I'm looking at the ${f.name} of 113 Residences. Can you send me details?`)}" target="_blank" rel="noopener">Ask Sam on WhatsApp</a>`;
+}
+const COLS=[["no","UNIT"],["type","TYPE"],["floor","FLOOR"],["view","VIEW"],["suite","SUITE",1],["balcony","BALCONY",1],["total","TOTAL SQFT",1],["price","PRICE −6%",1],["status","STATUS"]];
+function drawTable(){
+  const list=(st.scope==="floor"?U.filter(u=>u.floor===st.floor):U).filter(shown);
+  const key={no:u=>(u.floor==="G"?0:+u.floor)*1000+parseInt(u.no.replace(/\D/g,"").slice(-2)),type:u=>TYPES.indexOf(u.type),floor:u=>u.floor==="G"?0:+u.floor,view:u=>u.view,suite:u=>u.suite,balcony:u=>u.balcony,total:u=>u.total,price:u=>u.avail?u.op:9e9,status:u=>u.avail?0:1}[st.sort];
+  list.sort((a,b)=>{const x=key(a),y=key(b);return (x>y?1:x<y?-1:0)*st.dir});
+  $("#th").textContent=st.scope==="floor"?`Units · ${D.floors.find(f=>f.id===st.floor).name}`:"Units · All floors";
+  const sc=$("#scope");sc.innerHTML="";sc.append(chip("This floor",st.scope==="floor",()=>{st.scope="floor";drawTable()}),chip("All floors",st.scope==="all",()=>{st.scope="all";drawTable()}));
+  $("#thead").innerHTML=COLS.map(([k,l,r])=>`<th class="${r?"r":""}" data-k="${k}">${l}${st.sort===k?(st.dir>0?" ▲":" ▼"):""}</th>`).join("");
+  $("#tbody").innerHTML=list.length?list.map(u=>`<tr class="u" data-no="${u.no}"><td><b>${u.no}</b></td><td><span class="dot" style="background:${COLORS[u.type]}"></span>${u.type}</td><td>${u.floor}</td><td>${esc(u.view||"–")}</td>
+    <td class="r num">${fmt(u.suite)}</td><td class="r num">${fmt(u.balcony)}</td><td class="r num">${fmt(u.total)}</td><td class="r num">${u.avail?"AED "+fmt(u.op*.94):"–"}</td>
+    <td><span class="st ${u.avail?"a":"s"}">${u.avail?"Available":"Sold"}</span></td></tr>`).join(""):`<tr><td colspan="9" class="hint">No unit matches these filters.</td></tr>`;
+}
+function openUnit(no){
+  const u=byNo[no];if(!u)return false;
+  $("#dt").textContent=`Unit ${u.no} · ${u.type}`;
+  const facts=[["FLOOR",u.floorName],["VIEW",u.view||"–"],["SUITE",fmt(u.suite)+" sq ft"],["BALCONY / TERRACE",fmt(u.balcony)+" sq ft"],["TOTAL",`${fmt(u.total)} sq ft · ${fmt(u.total*.092903)} m²`],["STATUS",u.avail?"Available":"Sold"]];
+  let money="";
+  if(u.avail){const o=u.op*.94,c=u.op*.84,b=bonusOf(u.type);
+    money=`<div class="price"><div class="k">40/60 PAYMENT PLAN · 6% OFF</div><div class="v num">AED ${fmt(o)}</div><s class="num">List price AED ${fmt(u.op)}</s>
+      <table class="sch"><tbody>${SCHED.map(([p,l])=>`<tr><td>${p}% · ${l}</td><td class="num">AED ${fmt(o*p/100)}</td></tr>`).join("")}</tbody></table></div>
+      <div class="price"><div class="k">FULL CASH · 16% OFF</div><div class="v num">AED ${fmt(c)}</div></div>
+      <div class="bon">Your 7% commission: <b class="num">AED ${fmt(o*.07)}</b>${b?`<br>+ Agency cash bonus: <b class="num">AED ${fmt(b)}</b>`:""}</div>
+      <p style="margin-top:12px"><a class="wa" href="${waHref(`Hi Sam, is unit ${u.no} at 113 Residences still available? I have a client for it.`)}" target="_blank" rel="noopener">Reserve unit ${u.no} with Sam</a></p>`}
+  else money=`<div class="soldbox">This unit is sold. <a href="${waHref("Hi Sam, which 113 Residences units are still available?")}" target="_blank" rel="noopener">Ask Sam about available units</a></div>`;
+  $("#dbody").innerHTML=`<div><img src="assets/fp113/${u.no}.webp" alt="Floor plan of unit ${u.no}"></div><div><dl class="facts">${facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>${money}</div>`;
+  $("#dlg").showModal();return true;
+}
+$("#svg").addEventListener("click",e=>{const p=e.target.closest("polygon");if(p)openUnit(p.dataset.no)});
+$("#tbody").addEventListener("click",e=>{const r=e.target.closest("tr[data-no]");if(r)openUnit(r.dataset.no)});
+$("#thead").addEventListener("click",e=>{const th=e.target.closest("th");if(!th)return;const k=th.dataset.k;st.dir=st.sort===k?-st.dir:1;st.sort=k;drawTable()});
+$("#dx").onclick=()=>$("#dlg").close();
+$("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
+$("#find").addEventListener("submit",e=>{e.preventDefault();const q=$("#q").value.trim().toUpperCase().replace(/\s/g,"");const u=byNo[q]||byNo[q.replace(/^G(\d)$/,"G0$1")];
+  if(!u){$("#q").value="";$("#q").placeholder="No unit "+q;return}st.floor=u.floor;render();openUnit(u.no)});
+render();
+</script>
