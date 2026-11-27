@@ -12,39 +12,39 @@ css = f"""
 @font-face{{font-family:Marcellus;src:url(file://{T}/marcellus.woff2)}}
 @font-face{{font-family:Figtree;src:url(file://{T}/figtree.woff2);font-weight:300 900}}
 *{{box-sizing:border-box;margin:0}}
-body{{width:var(--w);height:var(--h);background:#0d1830;color:#f5efe5;font-family:Figtree,sans-serif;overflow:hidden;display:flex;flex-direction:column}}
+body{{width:var(--w);height:var(--h);background:#16301f;color:#f2f5f0;font-family:Figtree,sans-serif;overflow:hidden;display:flex;flex-direction:column}}
 .hero{{flex:none;height:var(--img);position:relative;overflow:hidden}}
 .hero img{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}}
-.hero:after{{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,24,48,.6) 0%,rgba(13,24,48,0) 28%,rgba(13,24,48,0) 50%,#0d1830 100%)}}
-.pill{{position:absolute;z-index:1;left:var(--pad);top:var(--pad);display:flex;align-items:center;gap:12px;background:#d4b48a;color:#1a1208;border-radius:99px;padding:10px 22px;font-weight:900;letter-spacing:.2em;font-size:var(--sm)}}
+.hero:after{{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(22,48,31,.6) 0%,rgba(22,48,31,0) 28%,rgba(22,48,31,0) 50%,#16301f 100%)}}
+.pill{{position:absolute;z-index:1;left:var(--pad);top:var(--pad);display:flex;align-items:center;gap:12px;background:#d79e85;color:#1b120d;border-radius:99px;padding:10px 22px;font-weight:900;letter-spacing:.2em;font-size:var(--sm)}}
 .loc{{position:absolute;z-index:1;right:var(--pad);top:var(--pad);font-family:Marcellus,serif;font-size:var(--md);text-shadow:0 2px 10px rgba(0,0,0,.5)}}
 .panel{{flex:1;display:flex;flex-direction:column;padding:0 var(--pad) var(--pad);gap:var(--gap);margin-top:calc(var(--t1) * -0.6);position:relative}}
-.title small{{display:block;color:#d4b48a;font-weight:800;letter-spacing:.32em;font-size:var(--sm)}}
+.title small{{display:block;color:#d79e85;font-weight:800;letter-spacing:.32em;font-size:var(--sm)}}
 .title h1{{font-family:Marcellus,serif;font-weight:400;font-size:var(--t1);line-height:.95;letter-spacing:.04em}}
-.title h1 span{{color:#d4b48a}}
+.title h1 span{{color:#d79e85}}
 .stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}}
-.s{{border:1px solid #2c3b60;border-radius:16px;padding:16px 16px;background:#13213f}}
+.s{{border:1px solid #34573f;border-radius:16px;padding:16px 16px;background:#1f3e2b}}
 .s b{{display:block;font-family:Marcellus,serif;font-weight:400;font-size:var(--sv);line-height:1;color:#fff}}
 .s span{{display:block;margin-top:8px;font-size:var(--sl);font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85}}
-.s.gold{{background:linear-gradient(135deg,#e0c49b,#b8935f);border:0;color:#1a1208}} .s.gold b{{color:#1a1208}}
-.bonus{{background:#f3ece0;color:#1a1208;border-radius:18px;padding:var(--bp)}}
-.bonus .k{{font-size:var(--sl);font-weight:900;letter-spacing:.2em;color:#8a6a34;display:flex;justify-content:space-between;gap:10px}}
-.bonus .k em{{font-style:normal;letter-spacing:.06em;color:#6b5a40;font-weight:700}}
+.s.gold{{background:linear-gradient(135deg,#d79e85,#c0866d);border:0;color:#1b120d}} .s.gold b{{color:#1b120d}}
+.bonus{{background:#f2f5f0;color:#1b120d;border-radius:18px;padding:var(--bp)}}
+.bonus .k{{font-size:var(--sl);font-weight:900;letter-spacing:.2em;color:#9a5f48;display:flex;justify-content:space-between;gap:10px}}
+.bonus .k em{{font-style:normal;letter-spacing:.06em;color:#5b6b60;font-weight:700}}
 .bonus .row{{display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px}}
-.bonus .row div{{text-align:center;border-left:1px solid #d8ccb6}} .bonus .row div:first-child{{border:0}}
+.bonus .row div{{text-align:center;border-left:1px solid #dde4dc}} .bonus .row div:first-child{{border:0}}
 .bonus .row b{{display:block;font-family:Marcellus,serif;font-weight:400;font-size:var(--bv);line-height:1.05}}
-.bonus .row b small{{font-size:.45em;color:#8a6a34;margin-right:6px;vertical-align:.5em;font-family:Figtree;font-weight:800}}
-.bonus .row span{{display:block;font-size:var(--md2);font-weight:700;color:#4a3d2a;margin-top:4px}}
-.from .k{{font-size:var(--sl);font-weight:900;letter-spacing:.2em;color:#d4b48a;margin-bottom:10px}}
+.bonus .row b small{{font-size:.45em;color:#9a5f48;margin-right:6px;vertical-align:.5em;font-family:Figtree;font-weight:800}}
+.bonus .row span{{display:block;font-size:var(--md2);font-weight:700;color:#17251c;margin-top:4px}}
+.from .k{{font-size:var(--sl);font-weight:900;letter-spacing:.2em;color:#d79e85;margin-bottom:10px}}
 .fr{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}
-.fr div{{border-left:2px solid #d4b48a;padding-left:12px}} .fr span{{display:block;font-size:var(--md2);color:#a9b3cc}} .fr b{{font-size:var(--fb);font-weight:800}}
-.line{{display:flex;justify-content:space-between;gap:16px;font-size:var(--md2);color:#d9d2c4;border-top:1px solid #2c3b60;padding-top:var(--lp)}}
+.fr div{{border-left:2px solid #d79e85;padding-left:12px}} .fr span{{display:block;font-size:var(--md2);color:#b9c9bd}} .fr b{{font-size:var(--fb);font-weight:800}}
+.line{{display:flex;justify-content:space-between;gap:16px;font-size:var(--md2);color:#dfe7e0;border-top:1px solid #34573f;padding-top:var(--lp)}}
 .line b{{color:#fff}}
-.agent{{margin-top:auto;display:flex;align-items:center;gap:18px;border-top:1px solid #2c3b60;padding-top:var(--ap)}}
-.agent img{{width:var(--av);height:var(--av);border-radius:50%;object-fit:cover;object-position:50% 15%;border:2px solid #d4b48a}}
-.agent .n{{font-weight:800;font-size:var(--an)}} .agent .r{{color:#a9b3cc;font-size:var(--md2)}}
+.agent{{margin-top:auto;display:flex;align-items:center;gap:18px;border-top:1px solid #34573f;padding-top:var(--ap)}}
+.agent img{{width:var(--av);height:var(--av);border-radius:50%;object-fit:cover;object-position:50% 15%;border:2px solid #d79e85}}
+.agent .n{{font-weight:800;font-size:var(--an)}} .agent .r{{color:#b9c9bd;font-size:var(--md2)}}
 .agent .p{{margin-left:auto;text-align:right;white-space:nowrap}} .agent .p b{{font-size:var(--ph);font-weight:800}}
-.agent .p small{{display:block;color:#d4b48a;font-weight:800;letter-spacing:.14em;font-size:var(--sl)}}
+.agent .p small{{display:block;color:#d79e85;font-weight:800;letter-spacing:.14em;font-size:var(--sl)}}
 """
 body = f"""<div class=hero><img src="file://{IMG}" alt=""><div class=pill>NEW OFFER</div><div class=loc>Al Sufouh · Dubai</div></div>
 <div class=panel>
