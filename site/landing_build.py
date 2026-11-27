@@ -56,7 +56,7 @@ contact = lambda phone: " · ".join(x for x in [
 
 LANGS = {
  "ru": dict(dir="ltr",
-  desc="113 Residences от IMAN Developers в Аль-Суфух, Дубай: квартиры у парка и пляжа, рассрочка 40/60, скидка 14% при 100% оплате. Цены и планировки в WhatsApp.",
+  desc="113 Residences от IMAN Developers в Аль-Суфух, Дубай: квартиры у парка и пляжа, рассрочка 40/60, скидка 16% при 100% оплате. Цены и планировки в WhatsApp.",
   og="113 Residences · Дубай · IMAN Developers",
   privacy=lambda url: f"""<p><a href="./">← На главную</a></p>
 <h1>Политика конфиденциальности</h1>
@@ -82,7 +82,7 @@ LANGS = {
 <p>Сэм Джабр, IMAN Developers, Дубай, ОАЭ. {contact("тел.")}.</p>""",
   ptitle="Политика конфиденциальности · Сэм Джабр"),
  "en": dict(dir="ltr",
-  desc="113 Residences by IMAN Developers in Al Sufouh, Dubai: 2 and 3 bedroom apartments by the park and the beach, 40/60 payment plan, 14% off on full payment. Prices and floor plans on WhatsApp.",
+  desc="113 Residences by IMAN Developers in Al Sufouh, Dubai: 2 and 3 bedroom apartments by the park and the beach, 40/60 payment plan, 16% off on full payment. Prices and floor plans on WhatsApp.",
   og="113 Residences · Dubai · IMAN Developers",
   privacy=lambda url: f"""<p><a href="./">← Back to the page</a></p>
 <h1>Privacy policy</h1>
@@ -108,7 +108,7 @@ LANGS = {
 <p>Sam Jabr, IMAN Developers, Dubai, UAE. {contact("phone")}.</p>""",
   ptitle="Privacy policy · Sam Jabr"),
  "ar": dict(dir="rtl",
-  desc="113 Residences من إيمان للتطوير العقاري في الصفوح، دبي: شقق بغرفتين و3 غرف جنب الحديقة والبحر، خطة دفع 40/60، وخصم 14% عند الدفع الكامل. الأسعار والمخططات على واتساب.",
+  desc="113 Residences من إيمان للتطوير العقاري في الصفوح، دبي: شقق بغرفتين و3 غرف جنب الحديقة والبحر، خطة دفع 40/60، وخصم 16% عند الدفع الكامل. الأسعار والمخططات على واتساب.",
   og="113 Residences · دبي · إيمان للتطوير العقاري",
   privacy=lambda url: f"""<p><a href="./">→ العودة للصفحة</a></p>
 <h1>سياسة الخصوصية</h1>
@@ -134,7 +134,7 @@ LANGS = {
 <p>سام جبر، إيمان للتطوير العقاري، دبي، الإمارات. {contact("هاتف")}.</p>""",
   ptitle="سياسة الخصوصية · سام جبر"),
  "ja": dict(dir="ltr",
-  desc="IMAN Developersの113 Residences（ドバイ、アル・スフー）：公園とビーチのそばの2・3ベッドルーム、40/60の分割払い、一括払いで14%割引。価格と間取り図はWhatsAppで。",
+  desc="IMAN Developersの113 Residences（ドバイ、アル・スフー）：公園とビーチのそばの2・3ベッドルーム、40/60の分割払い、一括払いで16%割引。価格と間取り図はWhatsAppで。",
   og="113 Residences · ドバイ · IMAN Developers",
   privacy=lambda url: f"""<p><a href="./">← ページに戻る</a></p>
 <h1>プライバシーポリシー</h1>
